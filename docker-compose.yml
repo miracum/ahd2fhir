@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  ahd-to-fhir:
+    image: harbor.miracum.org/miracum-etl/ahd-to-fhir:${IMAGE_TAG:?}
+    ports:
+      - ${PORT:-8080}:8080
+    environment:
+      AHD_URL: ${AHD_URL:?}
+      AHD_API_TOKEN: ${AHD_API_TOKEN:?}
+      AHD_PROJECT: ${AHD_PROJECT:?}
+      AHD_PIPELINE: ${AHD_PIPELINE:?}

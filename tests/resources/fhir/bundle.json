@@ -1,0 +1,58 @@
+{
+  "resourceType": "Bundle",
+  "id": "copd",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "DocumentReference",
+        "id": "example",
+        "status": "current",
+        "subject": {
+          "reference": "Patient/123"
+        },
+        "content": [
+          {
+            "attachment": {
+              "data": "Q09QRCBHT0xEIElW"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "DocumentReference",
+        "id": "example2",
+        "status": "current",
+        "subject": {
+          "reference": "Patient/124"
+        },
+        "content": [
+          {
+            "attachment": {
+              "data": "QXBwZW5kaXppdGlz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "DocumentReference",
+        "id": "example3",
+        "status": "current",
+        "subject": {
+          "reference": "Patient/125"
+        },
+        "content": [
+          {
+            "attachment": {
+              "data": "U2NobGFnYW5mYWxs"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

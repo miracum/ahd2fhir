@@ -1,0 +1,137 @@
+[
+  {
+    "begin": 63,
+    "end": 82,
+    "type": "de.averbis.types.health.Diagnosis",
+    "coveredText": "Lymphadenitis colli",
+    "id": 9299,
+    "negatedBy": null,
+    "side": "RIGHT",
+    "matchedTerm": "Lymphadenitis colli",
+    "verificationStatus": null,
+    "kind": null,
+    "confidence": 0.0,
+    "onsetDate": null,
+    "source": "ICD10GM_2020",
+    "clinicalStatus": null,
+    "approach": "DictionaryLookup",
+    "laterality": "RIGHT",
+    "dictCanon": "Unspezifische Lymphadenitis",
+    "conceptId": "I88.9",
+    "belongsTo": null,
+    "uniqueId": "ICD10GM_2020:I88.9"
+  },
+  {
+    "begin": 140,
+    "end": 152,
+    "type": "de.averbis.types.health.Diagnosis",
+    "coveredText": "Granulopenie",
+    "id": 9321,
+    "negatedBy": null,
+    "side": null,
+    "matchedTerm": "Granulopenie",
+    "verificationStatus": null,
+    "kind": null,
+    "confidence": 0.0,
+    "onsetDate": null,
+    "source": "ICD10GM_2020",
+    "clinicalStatus": null,
+    "approach": "DictionaryLookup",
+    "laterality": null,
+    "dictCanon": "Neutropenie",
+    "conceptId": "D70.7",
+    "belongsTo": null,
+    "uniqueId": "ICD10GM_2020:D70.7"
+  },
+  {
+    "begin": 188,
+    "end": 197,
+    "type": "de.averbis.types.health.Medication",
+    "coveredText": "Cefuroxim",
+    "id": 11039,
+    "date": null,
+    "administrations": [],
+    "drugs": [
+      {
+        "begin": 188,
+        "end": 197,
+        "type": "de.averbis.types.health.Drug",
+        "coveredText": "Cefuroxim",
+        "id": 10296,
+        "ingredient": {
+          "begin": 188,
+          "end": 197,
+          "type": "de.averbis.types.health.IngredientConcept",
+          "coveredText": "Cefuroxim",
+          "id": 9593,
+          "matchedTerm": "Cefuroxim",
+          "dictCanon": "Cefuroxim",
+          "conceptId": "J01DC02-S01AA27",
+          "source": "Abdamed-Averbis_2017",
+          "uniqueId": "Abdamed-Averbis_2017:J01DC02-S01AA27"
+        }
+      }
+    ],
+    "termTypes": null,
+    "doseForm": null,
+    "rateQuantity": null,
+    "doseFrequency": null,
+    "status": null
+  },
+  {
+    "begin": 202,
+    "end": 213,
+    "type": "de.averbis.types.health.Medication",
+    "coveredText": "Clindamycin",
+    "id": 11065,
+    "date": null,
+    "administrations": [],
+    "drugs": [
+      {
+        "begin": 202,
+        "end": 213,
+        "type": "de.averbis.types.health.Drug",
+        "coveredText": "Clindamycin",
+        "id": 10247,
+        "ingredient": {
+          "begin": 202,
+          "end": 213,
+          "type": "de.averbis.types.health.IngredientConcept",
+          "coveredText": "Clindamycin",
+          "id": 9623,
+          "matchedTerm": "Clindamycin",
+          "dictCanon": "Clindamycin",
+          "conceptId": "D10AF01-G01AA10-J01FF01",
+          "source": "Abdamed-Averbis_2017",
+          "uniqueId": "Abdamed-Averbis_2017:D10AF01-G01AA10-J01FF01"
+        }
+      }
+    ],
+    "termTypes": null,
+    "doseForm": null,
+    "rateQuantity": null,
+    "doseFrequency": null,
+    "status": null
+  },
+  {
+    "begin": 0,
+    "end": 295,
+    "type": "de.averbis.types.health.PatientInformation",
+    "coveredText": "Anfang September 2020 war die Patientin 123 Tage stationär bei Lymphadenitis colli rechts mit V.a. abszedierender Einschmelzung, wobei eine Granulopenie auffiel. Es wurde über 12 Tage mit Cefuroxim und Clindamycin (8 Tage) intravenös behandelt, die Granulozytenwerte blieben hier unter der Norm.",
+    "id": 7281,
+    "firstName": null,
+    "lastName": null,
+    "deceased": false,
+    "gender": "female",
+    "deathDate": null
+  },
+  {
+    "begin": 0,
+    "end": 295,
+    "type": "de.averbis.types.health.DocumentAnnotation",
+    "coveredText": "Anfang September 2020 war die Patientin 123 Tage stationär bei Lymphadenitis colli rechts mit V.a. abszedierender Einschmelzung, wobei eine Granulopenie auffiel. Es wurde über 12 Tage mit Cefuroxim und Clindamycin (8 Tage) intravenös behandelt, die Granulozytenwerte blieben hier unter der Norm.",
+    "id": 8,
+    "language": "de",
+    "version": "5.35.1"
+  }
+]
