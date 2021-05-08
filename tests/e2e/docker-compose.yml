@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   ahd-to-fhir:
-    image: harbor.miracum.org/miracum-etl/ahd-to-fhir:$IMAGE_TAG
+    image: ghcr.io/miracum/ahd-to-fhir:$IMAGE_TAG
     environment:
       AHD_URL: http://example/
       AHD_API_TOKEN: 123
