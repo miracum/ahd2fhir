@@ -18,3 +18,4 @@ ENV APP_VERSION=${VERSION} \
     MODULE_NAME=ahd2fhir.main
 EXPOSE 8080
 USER 11111
+LABEL maintainer="miracum.org"
