@@ -20,7 +20,7 @@ log = get_logger()
 
 MEDICATION_STATEMENT_PROFILE = (
     "https://www.medizininformatik-initiative.de/"
-    + "fhir/core/StructureDefinition/MedicationStatement"
+    + "fhir/core/modul-medikation/StructureDefinition/MedicationStatement"
 )
 STATUS_MAPPING = {
     "null": "unknown",

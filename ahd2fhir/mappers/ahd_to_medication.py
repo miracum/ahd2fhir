@@ -13,7 +13,7 @@ log = get_logger()
 
 MEDICATION_PROFILE = (
     "https://www.medizininformatik-initiative.de/"
-    + "fhir/core/StructureDefinition/Medication"
+    + "fhir/core/modul-medikation/StructureDefinition/Medication"
 )
 
 
