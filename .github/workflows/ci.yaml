@@ -21,7 +21,7 @@ jobs:
       - name: Run pre-commit
         uses: pre-commit/action@v2.0.3
       - name: Lint code base
-        uses: github/super-linter@v3
+        uses: github/super-linter@v4
         env:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_DOCKERFILE: false
@@ -47,7 +47,7 @@ jobs:
     steps:
       - name: Docker meta
         id: docker_meta
-        uses: crazy-max/ghaction-docker-meta@v2
+        uses: crazy-max/ghaction-docker-meta@v3
         with:
           images: |
             ghcr.io/miracum/ahd-to-fhir
