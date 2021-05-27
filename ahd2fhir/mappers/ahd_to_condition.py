@@ -21,7 +21,8 @@ SIDE_MAPPING = {
     "BOTH": ("51440002", "Right and left"),
 }
 CONDITION_PROFILE = (
-    "https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/Diagnose"
+    "https://www.medizininformatik-initiative.de/"
+    + "fhir/core/modul-diagnose/StructureDefinition/Diagnose"
 )
 
 EXTRACT_YEAR_FROM_ICD_REGEX = r"ICD.*_(?P<version>\d{4})"
