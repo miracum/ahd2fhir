@@ -55,6 +55,7 @@ async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
         settings.kafka_input_topic,
         loop=loop,
         bootstrap_servers=settings.bootstrap_servers,
+        auto_offset_reset=settings.kafka_auto_offset_reset,
         group_id=group_id,
         max_poll_interval_ms=settings.kafka_max_poll_interval_ms,  # 600 s = 10 min
         max_poll_records=settings.kafka_max_poll_records,
