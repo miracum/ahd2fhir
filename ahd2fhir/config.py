@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     # Kafka-related settings
     bootstrap_servers: str = "localhost:9092"
     security_protocol: str = "PLAINTEXT"
-    group_id: str = "ahd-to-fhir"
+    group_id: str = "ahd2fhir"
 
     kafka_input_topic: str = "fhir.documents"
     kafka_output_topic: str = "fhir.nlp-results"

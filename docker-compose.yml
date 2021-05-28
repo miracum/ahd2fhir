@@ -1,8 +1,8 @@
 version: "3.7"
 
 services:
-  ahd-to-fhir:
-    image: ghcr.io/miracum/ahd-to-fhir:${IMAGE_TAG:?}
+  ahd2fhir:
+    image: ghcr.io/miracum/ahd2fhir:${IMAGE_TAG:?}
     ports:
       - ${PORT:-8080}:8080
     environment:

@@ -1,4 +1,4 @@
-# ahd-to-fhir
+# ahd2fhir
 
 Creates FHIR from Averbis Health Discovery NLP Annotations.
 
@@ -11,10 +11,10 @@ export AHD_URL=http://localhost:9999/health-discovery
 export AHD_API_TOKEN=1bbd10e7a18f01fd51d03cb81d505e0c6cfdcd73b0fc98e8300592afa4a90148
 export AHD_PROJECT=test
 export AHD_PIPELINE=discharge
-export IMAGE_TAG= # see https://gitlab.miracum.org/miracum/etl/ahd-to-fhir/-/releases for the latest tags
+export IMAGE_TAG=latest # see https://github.com/miracum/ahd2fhir/releases for immutable tags
 ```
 
-Launch the `ahd-to-fhir` service which is exposed on port `8080` by default:
+Launch the `ahd2fhir` service which is exposed on port `8080` by default:
 
 ```sh
 docker-compose up -d
@@ -53,7 +53,7 @@ Most relevant Kafka settings. See [config.py](ahd2fhir/config.py) for a complete
 | `KAFKA_ENABLED`      | Whether to enable support for reading resources from Apache Kafka. | `false`            |
 | `BOOTSTRAP_SERVERS`  | URL of the AHD installation. Should not end with a trailing '/'.   | `localhost:9092`   |
 | `SECURITY_PROTOCOL`  | An API token to access the ADH REST API.                           | `PLAINTEXT`        |
-| `GROUP_ID`           | Name of the project.                                               | `ahd-to-fhir`      |
+| `GROUP_ID`           | Name of the project.                                               | `ahd2fhir`      |
 | `KAFKA_INPUT_TOPIC`  | Name of the pipeline.                                              | `fhir.documents`   |
 | `KAFKA_OUTPUT_TOPIC` | Name of the pipeline.                                              | `fhir.nlp-results` |
 
@@ -95,13 +95,13 @@ Note the use of `host.docker.internal` so the running container can still access
 `docker-compose.dev.yml`.
 
 ```sh
-docker build -t ahd-to-fhir .
+docker build -t ahd2fhir .
 docker run --rm -it -p 8081:8080 \
     -e AHD_API_URL=http://host.docker.internal:9999/health-discovery \
     -e AHD_PROJECT=test \
     -e AHD_PIPELINE=discharge \
     -e AHD_API_TOKEN=$AHD_API_TOKEN \
-    ahd-to-fhir
+    ahd2fhir
 ```
 
 ### Test
@@ -122,7 +122,7 @@ pre-commit install --hook-type commit-msg
 ### Installation
 
 ```bash
-pip install git+https://gitlab.miracum.org/miracum/etl/ahd-to-fhir@master
+pip install git+https://github.com/miracum/ahd2fhir@master
 ```
 
 ### Usage

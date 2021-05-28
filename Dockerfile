@@ -1,5 +1,5 @@
 FROM winnerokay/uvicorn-gunicorn-fastapi:python3.9-alpine AS release
-WORKDIR /opt/ahd-to-fhir
+WORKDIR /opt/ahd2fhir
 COPY requirements.txt .
 RUN pip install --no-cache-dir  -r requirements.txt
 
