@@ -1,6 +1,6 @@
 # ahd2fhir
 
-Creates FHIR from Averbis Health Discovery NLP Annotations.
+Creates FHIR resources from [Averbis Health Discovery](https://averbis.com/health-discovery/) NLP Annotations.
 
 ## Run
 
