@@ -1,8 +1,8 @@
 version: "3.7"
 
 services:
-  ahd-to-fhir:
-    image: ghcr.io/miracum/ahd-to-fhir:$IMAGE_TAG
+  ahd2fhir:
+    image: ghcr.io/miracum/ahd2fhir:$IMAGE_TAG
     environment:
       AHD_URL: http://example/
       AHD_API_TOKEN: 123
@@ -19,6 +19,6 @@ services:
       --max-time 60
       --retry 5
       --retry-delay 10
-      http://ahd-to-fhir:8080/ready
+      http://ahd2fhir:8080/ready
     depends_on:
-      - ahd-to-fhir
+      - ahd2fhir

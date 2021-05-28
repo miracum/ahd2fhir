@@ -14,7 +14,7 @@ setup(
     name="ahd2fhir",
     description="Creates FHIR from text",
     version="0.0.1",
-    url="https://github.com/miracum/ahd-to-fhir",
+    url="https://github.com/miracum/ahd2fhir",
     # packages=["ahd2fhir", "."],
     package_dir={"ahd2fhir": "ahd2fhir"},
     packages=find_packages(exclude=["test*"]),
