@@ -38,3 +38,4 @@ class Settings(BaseSettings):
     # that value. It can be adjusted even lower to control
     # the expected time for normal rebalances.
     kafka_heartbeat_interval_ms: int = 3000
+    kafka_auto_offset_reset: str = "earliest"
