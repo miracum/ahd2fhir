@@ -12,7 +12,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: "ghcr.io/miracum/ahd-to-fhir:latest"
+          image-ref: "ghcr.io/miracum/ahd2fhir:latest"
           format: "template"
           template: "@/contrib/sarif.tpl"
           output: "trivy-results.sarif"
