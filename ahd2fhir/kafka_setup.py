@@ -132,8 +132,12 @@ async def send_consumer_message(consumer):  # pragma: no cover
                 failed_topic=failed_topic,
             )
 
+            headers = [("error", f"Mapping Error: {exc}".encode("utf8"))]
+
             try:
-                await producer.send_and_wait(failed_topic, msg.value)
+                await producer.send_and_wait(
+                    failed_topic, msg.value, key=msg.key, headers=headers
+                )
             except Exception as error_topic_exc:
                 logger.error(
                     f"Failed to send message to error topic: {error_topic_exc}"
