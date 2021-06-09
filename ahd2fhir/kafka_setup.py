@@ -1,4 +1,3 @@
-import asyncio
 import json
 
 import aiokafka
@@ -21,8 +20,6 @@ resource_handler: ResourceHandler = None
 
 
 async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
-    loop = asyncio.get_event_loop()
-
     settings = config.Settings()
 
     global resource_handler
@@ -53,7 +50,6 @@ async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
     #       turned into max_poll_records.
     consumer = aiokafka.AIOKafkaConsumer(
         settings.kafka_input_topic,
-        loop=loop,
         bootstrap_servers=settings.bootstrap_servers,
         auto_offset_reset=settings.kafka_auto_offset_reset,
         group_id=group_id,
@@ -69,7 +65,6 @@ async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
 
     global producer
     producer = aiokafka.AIOKafkaProducer(
-        loop=loop,
         bootstrap_servers=settings.bootstrap_servers,
         compression_type=settings.kafka_compression_type,
         security_protocol=settings.security_protocol,
@@ -80,11 +75,6 @@ async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
     # get cluster layout and join group
     await consumer.start()
     await producer.start()
-
-
-async def consume():  # pragma: no cover
-    global consumer_task
-    consumer_task = asyncio.create_task(send_consumer_message(consumer))
 
 
 async def send_consumer_message(consumer):  # pragma: no cover
@@ -147,10 +137,10 @@ async def send_consumer_message(consumer):  # pragma: no cover
 
 async def kafka_start_consuming(resource_handler: ResourceHandler):
     await initialize_kafka(resource_handler)
-    return await consume()
+    return await send_consumer_message(consumer)
 
 
 async def kafka_stop_consuming():
-    consumer_task.cancel()
+    logger.info("Stopping Kafka consumer")
     await consumer.stop()
     return await producer.stop()
