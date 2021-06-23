@@ -56,10 +56,10 @@ async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
     await producer.start()
 
 
-def process_batch(msgs):
+async def process_batch(msgs):
     results: list[Bundle] = []
     for msg in msgs:
-        result = process_message_from_batch(msg)
+        result = await process_message_from_batch(msg)
         results.append(result)
     return results
 
@@ -110,7 +110,7 @@ async def send_consumer_message(consumer):  # pragma: no cover
                     in_msgs.extend(msgs)
                     commit_offsets[tp] = msgs[-1].offset + 1
 
-                out_msgs = process_batch(in_msgs)
+                out_msgs = await process_batch(in_msgs)
 
                 for out_bundle in out_msgs:
                     await producer.send(
