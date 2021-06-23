@@ -22,6 +22,7 @@ class KafkaConsumerSettings(BaseSettings):
     # the expected time for normal rebalances.
     heartbeat_interval_ms: int = 3000
     auto_offset_reset: str = "earliest"
+    isolation_level: str = "read_committed"
 
     class Config:
         env_prefix = "kafka_consumer_"

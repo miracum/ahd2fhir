@@ -2,18 +2,25 @@ import json
 
 import aiokafka
 import structlog
-from aiokafka.structs import ConsumerRecord
+from aiokafka.consumer.consumer import AIOKafkaConsumer
+from aiokafka.producer.producer import AIOKafkaProducer
 from fhir.resources.bundle import Bundle
 from fhir.resources.documentreference import DocumentReference
 
 from ahd2fhir import config
 from ahd2fhir.utils.resource_handler import ResourceHandler, TransientError
 
+TRANSACTIONAL_ID = "ahd2fhir-txn-id"
+
 logger = structlog.get_logger()
 
-consumer: aiokafka.AIOKafkaConsumer = None
-producer: aiokafka.AIOKafkaProducer = None
+consumer_task = None
+consumer: AIOKafkaConsumer = None
+producer: AIOKafkaProducer = None
+
 resource_handler: ResourceHandler = None
+
+settings = config.Settings()
 
 
 async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
@@ -38,77 +45,95 @@ async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
         **settings.kafka.get_connection_context(),
         **settings.kafka.consumer.dict(),
     )
+    await consumer.start()
 
     global producer
     producer = aiokafka.AIOKafkaProducer(
         **settings.kafka.get_connection_context(),
-        max_request_size=settings.kafka.max_message_size_bytes,
         **settings.kafka.producer.dict(),
+        transactional_id=TRANSACTIONAL_ID,
     )
-
-    # get cluster layout and join group
-    await consumer.start()
     await producer.start()
 
 
-async def send_consumer_message(consumer):  # pragma: no cover
-    settings = config.Settings()
+def process_batch(msgs):
+    results: list[Bundle] = []
+    for msg in msgs:
+        result = process_message_from_batch(msg)
+        results.append(result)
+    return results
 
-    failed_topic = (
-        f"error.{settings.kafka.input_topic}.{settings.kafka.consumer.group_id}"
-    )
 
-    # consume messages
-    msg: ConsumerRecord
-    async for msg in consumer:
+async def process_message_from_batch(msg):
+    try:
+        resource_json = json.loads(msg.value)
+        if resource_json["resourceType"] == "DocumentReference":
+            resource = DocumentReference.parse_raw(msg.value)
+            return resource_handler.handle_documents([resource])
+        elif resource_json["resourceType"] == "Bundle":
+            resource = Bundle.parse_raw(msg.value)
+            return resource_handler.handle_bundle(resource)
+        else:
+            raise ValueError(
+                f"Unprocessable resource type '{resource_json['resourceType']}'"
+            )
+    except Exception as exc:
+        failed_topic = f"error.{settings.kafka_input_topic}.{settings.group_id}"
+        logger.exception(exc)
+        logger.error(
+            f"Mapping payload failed: {exc}. Storing in error topic",
+            failed_topic=failed_topic,
+        )
+
+        headers = [("error", f"Mapping Error: {exc}".encode("utf8"))]
+
         try:
-            resource_json = json.loads(msg.value)
-            resource = None
-            result: Bundle = None
-            if resource_json["resourceType"] == "DocumentReference":
-                resource = DocumentReference.parse_raw(msg.value)
-                result = resource_handler.handle_documents([resource])
-            elif resource_json["resourceType"] == "Bundle":
-                resource = Bundle.parse_raw(msg.value)
-                result = resource_handler.handle_bundle(resource)
-            else:
-                raise ValueError(
-                    f"Unprocessable resource type '{resource_json['resourceType']}'"
-                )
-
             await producer.send_and_wait(
-                settings.kafka.output_topic,
-                result.json().encode("utf8"),
-                result.id.encode("utf8"),
+                failed_topic, msg.value, key=msg.key, headers=headers
             )
-        except TransientError as exc:
-            logger.exception(exc)
-            logger.error(
-                "Message processing failed with a transient error. "
-                + "AHD is most likely down. Stopping consumer entirely."
-                + "Please restart it manually."
-            )
-            # will leave consumer group; perform autocommit if enabled
-            await consumer.stop()
-            return
-        except Exception as exc:
-            logger.exception(exc)
-            logger.error(
-                f"Mapping payload failed: {exc}. Storing in error topic",
-                failed_topic=failed_topic,
+        except Exception as error_topic_exc:
+            logger.error(f"Failed to send message to error topic: {error_topic_exc}")
+            logger.exception(error_topic_exc)
+
+
+async def send_consumer_message(consumer):  # pragma: no cover
+    try:
+        while True:
+            msg_batch = await consumer.getmany(
+                timeout_ms=settings.kafka_max_poll_interval_ms
             )
 
-            headers = [("error", f"Mapping Error: {exc}".encode("utf8"))]
+            async with producer.transaction():
+                commit_offsets = {}
+                in_msgs = []
+                for tp, msgs in msg_batch.items():
+                    in_msgs.extend(msgs)
+                    commit_offsets[tp] = msgs[-1].offset + 1
 
-            try:
-                await producer.send_and_wait(
-                    failed_topic, msg.value, key=msg.key, headers=headers
+                out_msgs = process_batch(in_msgs)
+
+                for out_bundle in out_msgs:
+                    await producer.send(
+                        settings.kafka_output_topic,
+                        value=out_bundle.json().encode("utf8"),
+                        key=out_bundle.id.encode("utf8"),
+                    )
+                # We commit through the producer because we want the commit
+                # to only succeed if the whole transaction is done
+                # successfully.
+                await producer.send_offsets_to_transaction(
+                    commit_offsets, settings.group_id
                 )
-            except Exception as error_topic_exc:
-                logger.error(
-                    f"Failed to send message to error topic: {error_topic_exc}"
-                )
-                logger.exception(error_topic_exc)
+    except TransientError as exc:
+        logger.exception(exc)
+        logger.error(
+            "Message processing failed with a transient error. "
+            + "AHD is most likely down. Stopping consumer entirely."
+            + "Please restart it manually."
+        )
+        # will leave consumer group; perform autocommit if enabled
+        await consumer.stop()
+        return
 
 
 async def kafka_start_consuming(resource_handler: ResourceHandler):
