@@ -138,7 +138,7 @@ async def send_consumer_message():  # pragma: no cover
 
 async def kafka_start_consuming(resource_handler: ResourceHandler):
     await initialize_kafka(resource_handler)
-    return await send_consumer_message(consumer)
+    return await send_consumer_message()
 
 
 async def kafka_stop_consuming():
