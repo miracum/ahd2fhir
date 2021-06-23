@@ -23,6 +23,7 @@ class KafkaConsumerSettings(BaseSettings):
     heartbeat_interval_ms: int = 3000
     auto_offset_reset: str = "earliest"
     isolation_level: str = "read_committed"
+    consumer_getmany_timeout_ms: int = 10_000
 
     class Config:
         env_prefix = "kafka_consumer_"

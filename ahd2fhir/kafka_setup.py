@@ -96,11 +96,11 @@ async def process_message_from_batch(msg):
             logger.exception(error_topic_exc)
 
 
-async def send_consumer_message(consumer):  # pragma: no cover
+async def send_consumer_message():  # pragma: no cover
     try:
         while True:
             msg_batch = await consumer.getmany(
-                timeout_ms=settings.kafka_max_poll_interval_ms
+                timeout_ms=settings.kafka_consumer_getmany_timeout_ms
             )
 
             async with producer.transaction():
