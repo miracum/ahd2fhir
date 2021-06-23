@@ -100,7 +100,8 @@ async def send_consumer_message():  # pragma: no cover
     try:
         while True:
             msg_batch = await consumer.getmany(
-                timeout_ms=settings.kafka_consumer_getmany_timeout_ms
+                timeout_ms=settings.kafka.consumer.consumer_getmany_timeout_ms,
+                max_records=settings.kafka.consumer.max_poll_records,
             )
 
             async with producer.transaction():
