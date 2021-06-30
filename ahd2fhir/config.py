@@ -39,3 +39,6 @@ class Settings(BaseSettings):
     # the expected time for normal rebalances.
     kafka_heartbeat_interval_ms: int = 3000
     kafka_auto_offset_reset: str = "earliest"
+
+    # Enable UKLFR Anntation mappers
+    custom_mappers_enabled: bool = False

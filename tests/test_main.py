@@ -34,6 +34,7 @@ def get_resource_handler():
 
 main.app.dependency_overrides[main.get_settings] = get_settings_override
 main.app.dependency_overrides[main.get_resource_handler] = get_resource_handler
+main.app.dependency_overrides[main.get_resource_handler] = get_resource_handler
 
 client = TestClient(main.app)
 

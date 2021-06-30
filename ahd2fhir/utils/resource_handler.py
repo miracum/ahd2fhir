@@ -21,6 +21,7 @@ from tenacity.after import after_log
 
 from ahd2fhir.mappers import ahd_to_condition, ahd_to_medication_statement
 from ahd2fhir.utils.bundle_builder import BundleBuilder
+from ahd2fhir.utils.custom_mappers import custom_mappers
 from ahd2fhir.utils.device_builder import build_device
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
@@ -237,6 +238,9 @@ class ResourceHandler:
                 )
                 if statement is not None:
                     medication_statement_lists.append(statement)
+
+            # if config.custom_mappers_enabled:
+            total_results.extend(custom_mappers(val, document_reference))
 
         medication_results = []
         medication_statement_results = []

@@ -1621,5 +1621,62 @@
   "language": "de",
   "type": "de.averbis.types.health.DocumentAnnotation",
   "version": "5.29.0"
+ },
+{
+  "begin": 17,
+  "end": 23,
+  "type": "de.medunifreiburg.imbi.mds.extraction.types.Smoking",
+  "coveredText": "trauch",
+  "id": 2907,
+  "qualifier": {
+    "begin": 13,
+    "end": 18,
+    "type": "de.medunifreiburg.imbi.mds.extraction.types.QualifierSmokingStatus",
+    "coveredText": "nicht",
+    "id": 2917,
+    "sctid": "260385009",
+    "value": "negative",
+    "preferred": "Negative (qualifier value)"
+  },
+  "smokingStatusProbability": "1.0000100135803223",
+  "packYears": null,
+  "sctid": "160618006",
+  "smokingStatus": "CURRENT-NON-SMOKER",
+  "preferred": "Finding of tobacco smoking behavior (finding)"
+ },
+ {
+  "begin": 2,
+  "end": 8,
+  "type": "de.medunifreiburg.imbi.mds.extraction.types.Smoking",
+  "coveredText": "ikotin",
+  "id": 3469,
+  "qualifier": {
+    "begin": 8,
+    "end": 14,
+    "type": "de.medunifreiburg.imbi.mds.extraction.types.QualifierSmokingStatus",
+    "coveredText": "abusus",
+    "id": 3479,
+    "sctid": "10828004",
+    "value": "positive",
+    "preferred": "Positive (qualifier value)"
+  },
+  "smokingStatusProbability": "1.0000100135803223",
+  "packYears": "200",
+  "sctid": "77176002",
+  "smokingStatus": "CURRENT-SMOKER",
+  "preferred": "Finding of tobacco smoking behavior (finding)"
+ },
+ {
+  "begin": 21,
+  "end": 26,
+  "type": "de.medunifreiburg.imbi.mds.extraction.types.Smoking",
+  "coveredText": "Rauch",
+  "id": 4365,
+  "qualifier": null,
+  "smokingStatusProbability": "0.9998363852500916",
+  "packYears": "1234",
+  "sctid": "77176002",
+  "smokingStatus": "CURRENT-SMOKER",
+  "preferred": "Finding of tobacco smoking behavior (finding)"
  }
 ]
