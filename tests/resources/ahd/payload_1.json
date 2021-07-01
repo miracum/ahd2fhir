@@ -1678,5 +1678,102 @@
   "sctid": "77176002",
   "smokingStatus": "CURRENT-SMOKER",
   "preferred": "Finding of tobacco smoking behavior (finding)"
+ },
+  {
+  "begin": 1,
+  "end": 12,
+  "type": "de.uklfr.KidneyStoneAnnotator.KidneyStoneInfo",
+  "coveredText": "Nierenstein",
+  "id": 3411,
+  "size": null,
+  "name": {
+    "begin": 1,
+    "end": 12,
+    "type": "de.uklfr.KidneyStoneAnnotator.KidneyStone",
+    "coveredText": "Nierenstein",
+    "id": 3247
+  },
+  "location": null
+ },
+ {
+  "begin": 0,
+  "end": 18,
+  "type": "de.uklfr.KidneyStoneAnnotator.KidneyStoneInfo",
+  "coveredText": "Nierenstein re 2mm",
+  "id": 4540,
+  "size": {
+    "begin": 15,
+    "end": 18,
+    "type": "de.uklfr.KidneyStoneAnnotator.Size",
+    "coveredText": "2mm",
+    "id": 4397,
+    "unit": {
+      "begin": 16,
+      "end": 18,
+      "type": "de.uklfr.KidneyStoneAnnotator.SizeUnit",
+      "coveredText": "mm",
+      "id": 4373
+    },
+    "value2": 0,
+    "value1": 2
+  }
+ },
+ {
+  "begin": 1,
+  "end": 50,
+  "type": "de.uklfr.KidneyStoneAnnotator.KidneyStoneInfo",
+  "coveredText": "Nierenstein im proximalen Ureter rechts 2,4x0,7mm",
+  "id": 7485,
+  "size": {
+    "begin": 41,
+    "end": 50,
+    "type": "de.uklfr.KidneyStoneAnnotator.Size",
+    "coveredText": "2,4x0,7mm",
+    "id": 6410,
+    "unit": {
+      "begin": 48,
+      "end": 50,
+      "type": "de.uklfr.KidneyStoneAnnotator.SizeUnit",
+      "coveredText": "mm",
+      "id": 6310
+    },
+    "value2": 0.7,
+    "value1": 2.4
+  },
+  "name": {
+    "begin": 1,
+    "end": 12,
+    "type": "de.uklfr.KidneyStoneAnnotator.KidneyStone",
+    "coveredText": "Nierenstein",
+    "id": 6086
+  },
+  "location": {
+    "begin": 16,
+    "end": 40,
+    "type": "de.uklfr.KidneyStoneAnnotator.LocationEnum",
+    "coveredText": "proximalen Ureter rechts",
+    "id": 7414,
+    "specification": {
+      "begin": 16,
+      "end": 26,
+      "type": "de.uklfr.KidneyStoneAnnotator.Specification",
+      "coveredText": "proximalen",
+      "id": 7318
+    },
+    "location": {
+      "begin": 27,
+      "end": 33,
+      "type": "de.uklfr.KidneyStoneAnnotator.Location",
+      "coveredText": "Ureter",
+      "id": 7226
+    },
+    "direction": {
+      "begin": 34,
+      "end": 40,
+      "type": "de.uklfr.KidneyStoneAnnotator.Direction",
+      "coveredText": "rechts",
+      "id": 7290
+    }
+  }
  }
 ]
