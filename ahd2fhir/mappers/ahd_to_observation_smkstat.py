@@ -1,5 +1,6 @@
 import datetime
 import uuid
+from typing import List
 
 from fhir.resources.codeableconcept import CodeableConcept
 from fhir.resources.coding import Coding
@@ -16,6 +17,7 @@ OBSERVATION_PROFILE = (
     + "fhir/core/StructureDefinition/Observation"
 )
 UKLFR_TYPE_SMKSTAT = "de.medunifreiburg.imbi.mds.extraction.types.Smoking"
+AHD_TYPE = UKLFR_TYPE_SMKSTAT
 
 OBSERVATION_CATEGORY_SYSTEM = (
     "http://terminology.hl7.org/CodeSystem/observation-category"
@@ -34,9 +36,9 @@ SNOMED_LOINC_MAPPING = {
 }
 
 
-def get_fhir_observation(
+def get_fhir_resources(
     ahd_response_entry, document_reference: DocumentReference
-) -> Observation:
+) -> List[Observation]:
     return get_smoking_status_observation_from_annotation(
         annotation=ahd_response_entry,
         date=document_reference.date,

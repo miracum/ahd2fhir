@@ -26,6 +26,7 @@ OBSERVATION_PROFILE = (
     + "fhir/core/StructureDefinition/Observation"
 )
 UKLFR_TYPE_KIDNEY_STONE = "de.uklfr.KidneyStoneAnnotator.KidneyStoneInfo"
+AHD_TYPE = UKLFR_TYPE_KIDNEY_STONE
 
 OBSERVATION_CATEGORY_SYSTEM = (
     "http://terminology.hl7.org/CodeSystem/observation-category"
@@ -45,7 +46,7 @@ STONE_DIMENSION_MAP = {
 }
 
 
-def get_fhir_kidney_stone_observations(
+def get_fhir_resources(
     ahd_response_entry, document_reference: DocumentReference
 ) -> List[Observation]:
     return get_kidney_stone_from_annotation(

@@ -22,7 +22,7 @@ from tenacity.after import after_log
 
 from ahd2fhir.mappers import ahd_to_condition, ahd_to_medication_statement
 from ahd2fhir.utils.bundle_builder import BundleBuilder
-from ahd2fhir.utils.custom_mappers import custom_mappers
+from ahd2fhir.utils.custom_mappers import custom_mappers, mapper_functions
 from ahd2fhir.utils.device_builder import build_device
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
@@ -51,6 +51,7 @@ DISCHARGE_SUMMARY_CONCEPT = CodeableConcept(
         "text": DISCHARGE_SUMMARY_CONCEPT_TEXT,
     }
 )
+
 
 AHD_TYPE_DOCUMENT_ANNOTATION = "de.averbis.types.health.DocumentAnnotation"
 AHD_TYPE_MEDICATION = "de.averbis.types.health.Medication"
@@ -261,6 +262,7 @@ class ResourceHandler:
 
         total_results.extend(medication_resources_unique)
         total_results.extend(medication_statements_unique)
+        log.error([type(r) for r in total_results])
 
         return total_results
 
@@ -305,10 +307,22 @@ class ResourceHandler:
     def _perform_text_analysis(
         self, text: str, mime_type: str = "text/plain", lang: str = None
     ):
+        types = ",".join(
+            [
+                AHD_TYPE_DIAGNOSIS,
+                AHD_TYPE_MEDICATION,
+                AHD_TYPE_DOCUMENT_ANNOTATION,
+                *mapper_functions.keys(),
+            ]
+        )
         if mime_type == "text/html":
-            return self.pipeline.analyse_html(text, language=lang)
+            return self.pipeline.analyse_html(
+                text, language=lang, annotation_types=types
+            )
         else:
-            return self.pipeline.analyse_text(text, language=lang)
+            return self.pipeline.analyse_text(
+                text, language=lang, annotation_types=types
+            )
 
     def _build_composition_identifier_from_documentreference(
         self,
