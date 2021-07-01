@@ -1,6 +1,7 @@
 import base64
 import datetime
 import logging
+import os
 import time
 from typing import List, Tuple
 
@@ -239,8 +240,9 @@ class ResourceHandler:
                 if statement is not None:
                     medication_statement_lists.append(statement)
 
-            # if config.custom_mappers_enabled:
-            total_results.extend(custom_mappers(val, document_reference))
+            # if custom_mappers_enabled
+            if os.getenv("CUSTOM_MAPPERS_ENABLED", "False").lower() in ["true", "1"]:
+                total_results.extend(custom_mappers(val, document_reference))
 
         medication_results = []
         medication_statement_results = []

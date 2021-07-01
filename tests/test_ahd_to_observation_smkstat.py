@@ -2,7 +2,6 @@ import json
 
 import pytest
 
-from ahd2fhir.config import Settings
 from ahd2fhir.mappers.ahd_to_observation_smkstat import (
     UKLFR_TYPE_SMKSTAT,
     get_fhir_observation,
@@ -13,15 +12,6 @@ AHD_PAYLOADS_EXPECTED_NUMBER_OF_CONDITIONS = [
     ("payload_1.json", 3),
     ("payload_2.json", 0),
 ]
-
-
-def get_settings_override():
-    return Settings(
-        ahd_url="localhost",
-        ahd_api_token="test",
-        ahd_project="test",
-        ahd_pipeline="test",
-    )
 
 
 @pytest.mark.parametrize(
