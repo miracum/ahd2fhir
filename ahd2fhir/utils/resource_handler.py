@@ -262,7 +262,6 @@ class ResourceHandler:
 
         total_results.extend(medication_resources_unique)
         total_results.extend(medication_statements_unique)
-        log.error([type(r) for r in total_results])
 
         return total_results
 
