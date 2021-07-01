@@ -4,7 +4,7 @@ import pytest
 
 from ahd2fhir.mappers.ahd_to_observation_kidney_stone import (
     UKLFR_TYPE_KIDNEY_STONE,
-    get_fhir_kidney_stone_observations,
+    get_fhir_resources,
 )
 from tests.utils import get_empty_document_reference
 
@@ -27,9 +27,7 @@ def test_maps_to_expected_number_of_condition_resources(
     observations = []
     for val in ahd_payload:
         if val["type"] == UKLFR_TYPE_KIDNEY_STONE:
-            mapped_observation = get_fhir_kidney_stone_observations(
-                val, get_empty_document_reference()
-            )
+            mapped_observation = get_fhir_resources(val, get_empty_document_reference())
             if mapped_observation is not None:
                 observations.append(mapped_observation)
     assert len(observations) == expected_number_of_observations
@@ -46,9 +44,7 @@ def test_mapped_observation_coding_should_set_userselected_to_false(ahd_json_pat
     observations = []
     for val in ahd_payload:
         if val["type"] == UKLFR_TYPE_KIDNEY_STONE:
-            mapped_observation = get_fhir_kidney_stone_observations(
-                val, get_empty_document_reference()
-            )
+            mapped_observation = get_fhir_resources(val, get_empty_document_reference())
             if mapped_observation is not None:
                 observations.append(mapped_observation)
 

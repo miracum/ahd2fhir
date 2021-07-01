@@ -4,7 +4,7 @@ import pytest
 
 from ahd2fhir.mappers.ahd_to_observation_smkstat import (
     UKLFR_TYPE_SMKSTAT,
-    get_fhir_observation,
+    get_fhir_resources,
 )
 from tests.utils import get_empty_document_reference
 
@@ -28,7 +28,7 @@ def test_maps_to_expected_number_of_condition_resources(
     conditions = []
     for val in ahd_payload:
         if val["type"] == UKLFR_TYPE_SMKSTAT:
-            mapped_condition = get_fhir_observation(val, get_empty_document_reference())
+            mapped_condition = get_fhir_resources(val, get_empty_document_reference())
             if mapped_condition is not None:
                 conditions.append(mapped_condition)
     assert len(conditions) == expected_number_of_conditions
@@ -45,7 +45,7 @@ def test_mapped_condition_coding_should_set_userselected_to_false(ahd_json_path,
     conditions = []
     for val in ahd_payload:
         if val["type"] == UKLFR_TYPE_SMKSTAT:
-            mapped_condition = get_fhir_observation(val, get_empty_document_reference())
+            mapped_condition = get_fhir_resources(val, get_empty_document_reference())
             if mapped_condition is not None:
                 conditions.append(mapped_condition)
 
@@ -64,7 +64,7 @@ def test_mapped_condition_coding_includes_snomed_and_loin(ahd_json_path, _):
     conditions = []
     for val in ahd_payload:
         if val["type"] == UKLFR_TYPE_SMKSTAT:
-            mapped_condition = get_fhir_observation(val, get_empty_document_reference())
+            mapped_condition = get_fhir_resources(val, get_empty_document_reference())
             if mapped_condition is not None:
                 conditions.append(mapped_condition)
 

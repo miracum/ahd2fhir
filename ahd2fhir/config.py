@@ -33,6 +33,10 @@ class Settings(BaseSettings):
     kafka_ssl_keyfile: str = path.join(TLS_ROOT_DIR, "user.key")
     kafka_auto_commit_interval_ms: int = 5000
     kafka_session_timeout_ms: int = 15000
+    # kafka_sasl_plain_username: str = None
+    # kafka_sasl_plain_password: str = None
+    # kafka_sasl_mechanism: str = None
+
     # The value must be set lower than session_timeout_ms,
     # but typically should be set no higher than 1/3 of
     # that value. It can be adjusted even lower to control
