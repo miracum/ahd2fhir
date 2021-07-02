@@ -47,15 +47,17 @@ You can also access the Swagger API documentation at <http://localhost:8080/docs
 #### Kafka Settings
 
 Most relevant Kafka settings. See [config.py](ahd2fhir/config.py) for a complete list.
+As the settings are composed of pydantic [settings](https://pydantic-docs.helpmanual.io/usage/settings/),
+use the corresponding `env_prefix` value to override defaults.
 
-| Environment variable | Description                                                        | Default            |
-| -------------------- | ------------------------------------------------------------------ | ------------------ |
-| `KAFKA_ENABLED`      | Whether to enable support for reading resources from Apache Kafka. | `false`            |
-| `BOOTSTRAP_SERVERS`  | URL of the AHD installation. Should not end with a trailing '/'.   | `localhost:9092`   |
-| `SECURITY_PROTOCOL`  | An API token to access the ADH REST API.                           | `PLAINTEXT`        |
-| `GROUP_ID`           | Name of the project.                                               | `ahd2fhir`      |
-| `KAFKA_INPUT_TOPIC`  | Name of the pipeline.                                              | `fhir.documents`   |
-| `KAFKA_OUTPUT_TOPIC` | Name of the pipeline.                                              | `fhir.nlp-results` |
+| Environment variable       | Description                                                        | Default            |
+| -------------------------- | ------------------------------------------------------------------ | ------------------ |
+| `KAFKA_ENABLED`            | Whether to enable support for reading resources from Apache Kafka. | `false`            |
+| `KAFKA_BOOTSTRAP_SERVERS`  | URL of the AHD installation. Should not end with a trailing '/'.   | `localhost:9092`   |
+| `KAFKA_SECURITY_PROTOCOL`  | An API token to access the ADH REST API.                           | `PLAINTEXT`        |
+| `KAFKA_CONSUMER_GROUP_ID`  | Name of the project.                                               | `ahd2fhir`         |
+| `KAFKA_INPUT_TOPIC`        | Name of the pipeline.                                              | `fhir.documents`   |
+| `KAFKA_OUTPUT_TOPIC`       | Name of the pipeline.                                              | `fhir.nlp-results` |
 
 ## Development
 

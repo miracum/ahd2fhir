@@ -22,14 +22,14 @@ class KafkaConsumerSettings(BaseSettings):
     auto_offset_reset: str = "earliest"
 
     class Config:
-        env_prefix = "consumer_"
+        env_prefix = "kafka_consumer_"
 
 
 class KafkaProducerSettings(BaseSettings):
     compression_type: str = "gzip"
 
     class Config:
-        env_prefix = "producer_"
+        env_prefix = "kafka_producer_"
 
 
 class KafkaSettings(BaseSettings):
