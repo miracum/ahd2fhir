@@ -2,7 +2,6 @@ import json
 
 import aiokafka
 import structlog
-from aiokafka.helpers import create_ssl_context
 from aiokafka.structs import ConsumerRecord
 from fhir.resources.bundle import Bundle
 from fhir.resources.documentreference import DocumentReference
@@ -12,10 +11,8 @@ from ahd2fhir.utils.resource_handler import ResourceHandler, TransientError
 
 logger = structlog.get_logger()
 
-consumer_task = None
-consumer = None
-producer = None
-
+consumer: aiokafka.AIOKafkaConsumer = None
+producer: aiokafka.AIOKafkaProducer = None
 resource_handler: ResourceHandler = None
 
 
@@ -25,23 +22,14 @@ async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
     global resource_handler
     resource_handler = handler
 
-    ssl_context = None
-    if settings.security_protocol != "PLAINTEXT":
-        ssl_context = create_ssl_context(
-            # CA used to sign certificate.
-            cafile=settings.kafka_ssl_cafile,
-            # Signed certificate
-            certfile=settings.kafka_ssl_certfile,
-            # Private Key file of `certfile` certificate
-            keyfile=settings.kafka_ssl_keyfile,
-        )
+    ssl_context = settings.kafka.get_ssl_context()
+    group_id = settings.kafka.consumer.group_id
 
-    group_id = settings.group_id
     logger.info(
         "Initializing Kafka",
-        input_topic=settings.kafka_input_topic,
+        input_topic=settings.kafka.input_topic,
         group_id=group_id,
-        bootstrap_servers=settings.bootstrap_servers,
+        bootstrap_servers=settings.kafka.bootstrap_servers,
     )
 
     global consumer
@@ -49,27 +37,20 @@ async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
     #       AIOKafkaConsumer's ctor args? So kafka_max_poll_records gets automatically
     #       turned into max_poll_records.
     consumer = aiokafka.AIOKafkaConsumer(
-        settings.kafka_input_topic,
-        bootstrap_servers=settings.bootstrap_servers,
-        auto_offset_reset=settings.kafka_auto_offset_reset,
-        group_id=group_id,
-        max_poll_interval_ms=settings.kafka_max_poll_interval_ms,  # 600 s = 10 min
-        max_poll_records=settings.kafka_max_poll_records,
-        security_protocol=settings.security_protocol,
+        settings.kafka.input_topic,
+        bootstrap_servers=settings.kafka.bootstrap_servers,
+        security_protocol=settings.kafka.security_protocol,
         ssl_context=ssl_context,
-        max_partition_fetch_bytes=settings.kafka_max_message_size_bytes,
-        auto_commit_interval_ms=settings.kafka_auto_commit_interval_ms,
-        session_timeout_ms=settings.kafka_session_timeout_ms,
-        heartbeat_interval_ms=settings.kafka_heartbeat_interval_ms,
+        **settings.kafka.consumer.dict(),
     )
 
     global producer
     producer = aiokafka.AIOKafkaProducer(
-        bootstrap_servers=settings.bootstrap_servers,
-        compression_type=settings.kafka_compression_type,
-        security_protocol=settings.security_protocol,
+        bootstrap_servers=settings.kafka.bootstrap_servers,
+        security_protocol=settings.kafka.security_protocol,
         ssl_context=ssl_context,
-        max_request_size=settings.kafka_max_message_size_bytes,
+        max_request_size=settings.kafka.max_message_size_bytes,
+        **settings.kafka.producer.dict(),
     )
 
     # get cluster layout and join group
@@ -80,7 +61,9 @@ async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
 async def send_consumer_message(consumer):  # pragma: no cover
     settings = config.Settings()
 
-    failed_topic = f"error.{settings.kafka_input_topic}.{settings.group_id}"
+    failed_topic = (
+        f"error.{settings.kafka.input_topic}.{settings.kafka.consumer.group_id}"
+    )
 
     # consume messages
     msg: ConsumerRecord
@@ -101,7 +84,7 @@ async def send_consumer_message(consumer):  # pragma: no cover
                 )
 
             await producer.send_and_wait(
-                settings.kafka_output_topic,
+                settings.kafka.output_topic,
                 result.json().encode("utf8"),
                 result.id.encode("utf8"),
             )
