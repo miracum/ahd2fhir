@@ -29,5 +29,5 @@ def test_maps_to_expected_number_of_condition_resources(
 )
 def test_mapped_observation_coding_should_set_userselected_to_false(ahd_json_path, _):
     observations = map_resources(ahd_json_path, AHD_TYPE, get_fhir_resources)
-    for c in observations:
-        assert all(coding.userSelected is False for coding in c[0].code.coding)
+    for o in observations:
+        assert all(coding.userSelected is False for coding in o[0].code.coding)

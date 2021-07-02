@@ -30,5 +30,5 @@ def map_resources(ahd_json_path: str, ahd_type: str, func: Callable) -> list:
         if val["type"] == ahd_type:
             resource = func(val, get_empty_document_reference())
             if resource is not None:
-                resources.append(resources)
+                resources.append(resource)
     return resources
