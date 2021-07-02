@@ -1,12 +1,10 @@
-import json
-
 import pytest
 
 from ahd2fhir.mappers.ahd_to_observation_kidney_stone import (
-    UKLFR_TYPE_KIDNEY_STONE,
+    AHD_TYPE,
     get_fhir_resources,
 )
-from tests.utils import get_empty_document_reference
+from tests.utils import map_resources
 
 AHD_PAYLOADS_EXPECTED_NUMBER_OF_OBSERVATIONS = [
     ("payload_1.json", 3),
@@ -21,15 +19,7 @@ AHD_PAYLOADS_EXPECTED_NUMBER_OF_OBSERVATIONS = [
 def test_maps_to_expected_number_of_condition_resources(
     ahd_json_path, expected_number_of_observations
 ):
-    with open(f"tests/resources/ahd/{ahd_json_path}") as file:
-        ahd_payload = json.load(file)
-
-    observations = []
-    for val in ahd_payload:
-        if val["type"] == UKLFR_TYPE_KIDNEY_STONE:
-            mapped_observation = get_fhir_resources(val, get_empty_document_reference())
-            if mapped_observation is not None:
-                observations.append(mapped_observation)
+    observations = map_resources(ahd_json_path, AHD_TYPE, get_fhir_resources)
     assert len(observations) == expected_number_of_observations
 
 
@@ -38,15 +28,6 @@ def test_maps_to_expected_number_of_condition_resources(
     AHD_PAYLOADS_EXPECTED_NUMBER_OF_OBSERVATIONS,
 )
 def test_mapped_observation_coding_should_set_userselected_to_false(ahd_json_path, _):
-    with open(f"tests/resources/ahd/{ahd_json_path}") as file:
-        ahd_payload = json.load(file)
-
-    observations = []
-    for val in ahd_payload:
-        if val["type"] == UKLFR_TYPE_KIDNEY_STONE:
-            mapped_observation = get_fhir_resources(val, get_empty_document_reference())
-            if mapped_observation is not None:
-                observations.append(mapped_observation)
-
+    observations = map_resources(ahd_json_path, AHD_TYPE, get_fhir_resources)
     for c in observations:
         assert all(coding.userSelected is False for coding in c[0].code.coding)

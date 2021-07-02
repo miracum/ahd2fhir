@@ -1,12 +1,7 @@
-import json
-
 import pytest
 
-from ahd2fhir.mappers.ahd_to_observation_smkstat import (
-    UKLFR_TYPE_SMKSTAT,
-    get_fhir_resources,
-)
-from tests.utils import get_empty_document_reference
+from ahd2fhir.mappers.ahd_to_observation_smkstat import AHD_TYPE, get_fhir_resources
+from tests.utils import map_resources
 
 AHD_PAYLOADS_EXPECTED_NUMBER_OF_CONDITIONS = [
     ("payload_1.json", 3),
@@ -22,16 +17,8 @@ def test_maps_to_expected_number_of_condition_resources(
     ahd_json_path, expected_number_of_conditions
 ):
 
-    with open(f"tests/resources/ahd/{ahd_json_path}") as file:
-        ahd_payload = json.load(file)
-
-    conditions = []
-    for val in ahd_payload:
-        if val["type"] == UKLFR_TYPE_SMKSTAT:
-            mapped_condition = get_fhir_resources(val, get_empty_document_reference())
-            if mapped_condition is not None:
-                conditions.append(mapped_condition)
-    assert len(conditions) == expected_number_of_conditions
+    observations = map_resources(ahd_json_path, AHD_TYPE, get_fhir_resources)
+    assert len(observations) == expected_number_of_conditions
 
 
 @pytest.mark.parametrize(
@@ -39,18 +26,9 @@ def test_maps_to_expected_number_of_condition_resources(
     AHD_PAYLOADS_EXPECTED_NUMBER_OF_CONDITIONS,
 )
 def test_mapped_condition_coding_should_set_userselected_to_false(ahd_json_path, _):
-    with open(f"tests/resources/ahd/{ahd_json_path}") as file:
-        ahd_payload = json.load(file)
-
-    conditions = []
-    for val in ahd_payload:
-        if val["type"] == UKLFR_TYPE_SMKSTAT:
-            mapped_condition = get_fhir_resources(val, get_empty_document_reference())
-            if mapped_condition is not None:
-                conditions.append(mapped_condition)
-
-    for c in conditions:
-        assert all(coding.userSelected is False for coding in c.code.coding)
+    observations = map_resources(ahd_json_path, AHD_TYPE, get_fhir_resources)
+    for o in observations:
+        assert all(coding.userSelected is False for coding in o.code.coding)
 
 
 @pytest.mark.parametrize(
@@ -58,16 +36,8 @@ def test_mapped_condition_coding_should_set_userselected_to_false(ahd_json_path,
     AHD_PAYLOADS_EXPECTED_NUMBER_OF_CONDITIONS,
 )
 def test_mapped_condition_coding_includes_snomed_and_loin(ahd_json_path, _):
-    with open(f"tests/resources/ahd/{ahd_json_path}") as file:
-        ahd_payload = json.load(file)
+    observations = map_resources(ahd_json_path, AHD_TYPE, get_fhir_resources)
 
-    conditions = []
-    for val in ahd_payload:
-        if val["type"] == UKLFR_TYPE_SMKSTAT:
-            mapped_condition = get_fhir_resources(val, get_empty_document_reference())
-            if mapped_condition is not None:
-                conditions.append(mapped_condition)
-
-    for c in conditions:
-        assert c.valueCodeableConcept.coding[0].system == "http://loinc.org"
-        assert c.valueCodeableConcept.coding[1].system == "http://snomed.info/sct"
+    for o in observations:
+        assert o.valueCodeableConcept.coding[0].system == "http://loinc.org"
+        assert o.valueCodeableConcept.coding[1].system == "http://snomed.info/sct"
