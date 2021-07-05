@@ -18,10 +18,10 @@ class MockPipeline:
         else:
             self.response = response
 
-    def analyse_text(self, text: str, language: str):
+    def analyse_text(self, text: str, language: str, annotation_types: str):
         return self.response
 
-    def analyse_html(self, text: str, language: str):
+    def analyse_html(self, text: str, language: str, annotation_types: str):
         return self.response
 
 
