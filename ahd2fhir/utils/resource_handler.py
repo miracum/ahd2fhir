@@ -2,6 +2,7 @@ import base64
 import datetime
 import logging
 import time
+import os
 from typing import List, Tuple
 
 import structlog
@@ -22,6 +23,7 @@ from tenacity.after import after_log
 from ahd2fhir.mappers import ahd_to_condition, ahd_to_medication_statement
 from ahd2fhir.utils.bundle_builder import BundleBuilder
 from ahd2fhir.utils.device_builder import build_device
+from ahd2fhir.utils.custom_mappers import custom_mappers, mapper_functions
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
 MAPPING_FAILURES_COUNTER = Counter("mapping_failures", "Exceptions during mapping")
@@ -237,6 +239,10 @@ class ResourceHandler:
                 )
                 if statement is not None:
                     medication_statement_lists.append(statement)
+
+            # if custom_mappers_enabled
+            if os.getenv("CUSTOM_MAPPERS_ENABLED", "False").lower() in ["true", "1"]:
+                total_results.extend(custom_mappers(val, document_reference))
 
         medication_results = []
         medication_statement_results = []
