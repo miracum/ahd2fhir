@@ -1,3 +1,6 @@
+import json
+from typing import Callable
+
 from fhir.resources.attachment import Attachment
 from fhir.resources.documentreference import DocumentReference, DocumentReferenceContent
 from fhir.resources.reference import Reference
@@ -16,3 +19,16 @@ def get_empty_document_reference():
     docref.id = "empty-document"
 
     return docref
+
+
+def map_resources(ahd_json_path: str, ahd_type: str, func: Callable) -> list:
+    with open(f"tests/resources/ahd/{ahd_json_path}") as file:
+        ahd_payload = json.load(file)
+
+    resources = []
+    for val in ahd_payload:
+        if val["type"] == ahd_type:
+            resource = func(val, get_empty_document_reference())
+            if resource is not None:
+                resources.append(resource)
+    return resources

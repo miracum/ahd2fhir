@@ -1,6 +1,7 @@
 import base64
 import datetime
 import logging
+import os
 import time
 from typing import List, Tuple
 
@@ -21,6 +22,7 @@ from tenacity.after import after_log
 
 from ahd2fhir.mappers import ahd_to_condition, ahd_to_medication_statement
 from ahd2fhir.utils.bundle_builder import BundleBuilder
+from ahd2fhir.utils.custom_mappers import custom_mappers, mapper_functions
 from ahd2fhir.utils.device_builder import build_device
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
@@ -238,6 +240,10 @@ class ResourceHandler:
                 if statement is not None:
                     medication_statement_lists.append(statement)
 
+            # if custom_mappers_enabled
+            if os.getenv("CUSTOM_MAPPERS_ENABLED", "False").lower() in ["true", "1"]:
+                total_results.extend(custom_mappers(val, document_reference))
+
         medication_results = []
         medication_statement_results = []
         for medication_statement_list in medication_statement_lists:
@@ -299,10 +305,22 @@ class ResourceHandler:
     def _perform_text_analysis(
         self, text: str, mime_type: str = "text/plain", lang: str = None
     ):
+        types = ",".join(
+            [
+                AHD_TYPE_DIAGNOSIS,
+                AHD_TYPE_MEDICATION,
+                AHD_TYPE_DOCUMENT_ANNOTATION,
+                *mapper_functions.keys(),
+            ]
+        )
         if mime_type == "text/html":
-            return self.pipeline.analyse_html(text, language=lang)
+            return self.pipeline.analyse_html(
+                text, language=lang, annotation_types=types
+            )
         else:
-            return self.pipeline.analyse_text(text, language=lang)
+            return self.pipeline.analyse_text(
+                text, language=lang, annotation_types=types
+            )
 
     def _build_composition_identifier_from_documentreference(
         self,
