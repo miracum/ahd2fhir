@@ -305,10 +305,22 @@ class ResourceHandler:
     def _perform_text_analysis(
         self, text: str, mime_type: str = "text/plain", lang: str = None
     ):
+        types = ",".join(
+            [
+                AHD_TYPE_DIAGNOSIS,
+                AHD_TYPE_MEDICATION,
+                AHD_TYPE_DOCUMENT_ANNOTATION,
+                *mapper_functions.keys(),
+            ]
+        )
         if mime_type == "text/html":
-            return self.pipeline.analyse_html(text, language=lang)
+            return self.pipeline.analyse_html(
+                text, language=lang, annotation_types=types
+            )
         else:
-            return self.pipeline.analyse_text(text, language=lang)
+            return self.pipeline.analyse_text(
+                text, language=lang, annotation_types=types
+            )
 
     def _build_composition_identifier_from_documentreference(
         self,
