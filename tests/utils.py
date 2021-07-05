@@ -1,8 +1,9 @@
+import json
+from typing import Callable
+
 from fhir.resources.attachment import Attachment
 from fhir.resources.documentreference import DocumentReference, DocumentReferenceContent
 from fhir.resources.reference import Reference
-from typing import Callable
-import json
 
 
 def get_empty_document_reference():
