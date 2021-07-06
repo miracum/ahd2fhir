@@ -22,7 +22,6 @@ async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
     global resource_handler
     resource_handler = handler
 
-    ssl_context = settings.kafka.get_ssl_context()
     group_id = settings.kafka.consumer.group_id
 
     logger.info(
@@ -33,22 +32,16 @@ async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
     )
 
     global consumer
-    # TODO: could this setup be made cleaner by binding the settings.kafka_* to
-    #       AIOKafkaConsumer's ctor args? So kafka_max_poll_records gets automatically
-    #       turned into max_poll_records.
+
     consumer = aiokafka.AIOKafkaConsumer(
         settings.kafka.input_topic,
-        bootstrap_servers=settings.kafka.bootstrap_servers,
-        security_protocol=settings.kafka.security_protocol,
-        ssl_context=ssl_context,
+        **settings.kafka.get_connection_context(),
         **settings.kafka.consumer.dict(),
     )
 
     global producer
     producer = aiokafka.AIOKafkaProducer(
-        bootstrap_servers=settings.kafka.bootstrap_servers,
-        security_protocol=settings.kafka.security_protocol,
-        ssl_context=ssl_context,
+        **settings.kafka.get_connection_context(),
         max_request_size=settings.kafka.max_message_size_bytes,
         **settings.kafka.producer.dict(),
     )

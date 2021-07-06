@@ -1,9 +1,11 @@
 from os import path
 
 from aiokafka.helpers import create_ssl_context
-from pydantic import BaseSettings
+from pydantic import BaseSettings, validator
 
 TLS_ROOT_DIR = "/opt/kafka-certs/"
+
+# pylint: disable=E0213
 
 
 class KafkaConsumerSettings(BaseSettings):
@@ -40,12 +42,34 @@ class KafkaSettings(BaseSettings):
 
     # Kafka-related settings
     bootstrap_servers: str = "localhost:9092"
-    security_protocol: str = "PLAINTEXT"
     max_message_size_bytes: int = 5242880  # 5 MiB
 
+    # SSL Settings
+    security_protocol: str = "PLAINTEXT"
     ssl_cafile: str = path.join(TLS_ROOT_DIR, "ca.crt")
     ssl_certfile: str = path.join(TLS_ROOT_DIR, "user.crt")
     ssl_keyfile: str = path.join(TLS_ROOT_DIR, "user.key")
+    # SASL Settings
+    sasl_mechanism: str = None
+    sasl_plain_username: str = None
+    sasl_plain_password: str = None
+
+    #  For using SASL without SSL certificates the *file args need to be None.
+    # Otherwise AIOKafkaClient will try to parse them even if they
+    # consist of an empty string.
+    @validator("ssl_cafile", "ssl_certfile", "ssl_keyfile")
+    def parse_to_none(cls, v):
+        return None if v in ["", "None", 0, False] else v
+
+    def get_connection_context(self):
+        return {
+            "ssl_context": self.get_ssl_context(),
+            "bootstrap_servers": self.bootstrap_servers,
+            "security_protocol": self.security_protocol,
+            "sasl_plain_username": self.sasl_plain_username,
+            "sasl_plain_password": self.sasl_plain_password,
+            "sasl_mechanism": self.sasl_mechanism,
+        }
 
     class Config:
         env_prefix = "kafka_"
