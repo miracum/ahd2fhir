@@ -5,6 +5,8 @@ from pydantic import BaseSettings, validator
 
 TLS_ROOT_DIR = "/opt/kafka-certs/"
 
+# pylint: disable=E0213
+
 
 class KafkaConsumerSettings(BaseSettings):
     group_id: str = "ahd2fhir"
@@ -56,7 +58,7 @@ class KafkaSettings(BaseSettings):
     # Otherwise AIOKafkaClient will try to parse them even if they
     # consist of an empty string.
     @validator("ssl_cafile", "ssl_certfile", "ssl_keyfile")
-    def parse_to_none(self, v):
+    def parse_to_none(cls, v):
         return None if v in ["", "None", 0, False] else v
 
     def get_connection_context(self):
