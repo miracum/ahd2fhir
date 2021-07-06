@@ -56,7 +56,7 @@ class KafkaSettings(BaseSettings):
     # Otherwise AIOKafkaClient will try to parse them even if they
     # consist of an empty string.
     @validator("ssl_cafile", "ssl_certfile", "ssl_keyfile")
-    def parse_to_none(cls, v):
+    def parse_to_none(self, v):
         return None if v in ["", "None", 0, False] else v
 
     def get_connection_context(self):
