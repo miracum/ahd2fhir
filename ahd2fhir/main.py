@@ -109,6 +109,7 @@ async def startup_event():
         logger.info("Initializing Kafka")
         resource_handler = get_resource_handler(get_averbis_pipeline(get_settings()))
         await kafka_start_consuming(resource_handler)
+    logger.info("Post-startup")
 
 
 @app.on_event("shutdown")
@@ -117,3 +118,4 @@ async def shutdown_event():
     if os.getenv("KAFKA_ENABLED", "False").lower() in ["true", "1"]:
         logger.info("Shutting down Kafka consumer")
         await kafka_stop_consuming()
+    logger.info("Post-shutdown")

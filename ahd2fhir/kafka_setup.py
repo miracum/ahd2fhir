@@ -20,8 +20,6 @@ producer: AIOKafkaProducer = None
 
 resource_handler: ResourceHandler = None
 
-settings = config.Settings()
-
 
 async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
     settings = config.Settings()
@@ -56,15 +54,15 @@ async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
     await producer.start()
 
 
-async def process_batch(msgs):
+async def process_batch(msgs, error_topic_name: str):
     results: list[Bundle] = []
     for msg in msgs:
-        result = await process_message_from_batch(msg)
+        result = await process_message_from_batch(msg, error_topic_name)
         results.append(result)
     return results
 
 
-async def process_message_from_batch(msg):
+async def process_message_from_batch(msg, error_topic_name: str):
     try:
         resource_json = json.loads(msg.value)
         if resource_json["resourceType"] == "DocumentReference":
@@ -78,18 +76,17 @@ async def process_message_from_batch(msg):
                 f"Unprocessable resource type '{resource_json['resourceType']}'"
             )
     except Exception as exc:
-        failed_topic = f"error.{settings.kafka_input_topic}.{settings.group_id}"
         logger.exception(exc)
         logger.error(
             f"Mapping payload failed: {exc}. Storing in error topic",
-            failed_topic=failed_topic,
+            error_topic_name=error_topic_name,
         )
 
         headers = [("error", f"Mapping Error: {exc}".encode("utf8"))]
 
         try:
             await producer.send_and_wait(
-                failed_topic, msg.value, key=msg.key, headers=headers
+                error_topic_name, msg.value, key=msg.key, headers=headers
             )
         except Exception as error_topic_exc:
             logger.error(f"Failed to send message to error topic: {error_topic_exc}")
@@ -97,12 +94,19 @@ async def process_message_from_batch(msg):
 
 
 async def send_consumer_message():  # pragma: no cover
+    settings = config.Settings()
+    error_topic_name = (
+        f"error.{settings.kafka.input_topic}.{settings.kafka.consumer.group_id}"
+    )
+
     try:
         while True:
             msg_batch = await consumer.getmany(
-                timeout_ms=settings.kafka.consumer.consumer_getmany_timeout_ms,
+                timeout_ms=settings.kafka.getmany_timeout_ms,
                 max_records=settings.kafka.consumer.max_poll_records,
             )
+
+            logger.debug("Consuming batch", batch_size=len(msg_batch))
 
             async with producer.transaction():
                 commit_offsets = {}
@@ -111,11 +115,12 @@ async def send_consumer_message():  # pragma: no cover
                     in_msgs.extend(msgs)
                     commit_offsets[tp] = msgs[-1].offset + 1
 
-                out_msgs = await process_batch(in_msgs)
+                out_msgs = await process_batch(in_msgs, error_topic_name)
 
                 for out_bundle in out_msgs:
+                    logger.debug("Writing output bundle", bundle_id=out_bundle.id)
                     await producer.send(
-                        settings.kafka_output_topic,
+                        settings.kafka.output_topic,
                         value=out_bundle.json().encode("utf8"),
                         key=out_bundle.id.encode("utf8"),
                     )
@@ -123,7 +128,7 @@ async def send_consumer_message():  # pragma: no cover
                 # to only succeed if the whole transaction is done
                 # successfully.
                 await producer.send_offsets_to_transaction(
-                    commit_offsets, settings.group_id
+                    commit_offsets, settings.kafka.consumer.group_id
                 )
     except TransientError as exc:
         logger.exception(exc)

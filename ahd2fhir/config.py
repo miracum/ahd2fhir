@@ -23,7 +23,6 @@ class KafkaConsumerSettings(BaseSettings):
     heartbeat_interval_ms: int = 3000
     auto_offset_reset: str = "earliest"
     isolation_level: str = "read_committed"
-    consumer_getmany_timeout_ms: int = 10_000
 
     class Config:
         env_prefix = "kafka_consumer_"
@@ -55,6 +54,8 @@ class KafkaSettings(BaseSettings):
     sasl_mechanism: str = None
     sasl_plain_username: str = None
     sasl_plain_password: str = None
+
+    getmany_timeout_ms: int = 10_000
 
     #  For using SASL without SSL certificates the *file args need to be None.
     # Otherwise AIOKafkaClient will try to parse them even if they
