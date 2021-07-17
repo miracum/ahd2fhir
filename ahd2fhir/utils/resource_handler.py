@@ -313,14 +313,18 @@ class ResourceHandler:
                 *mapper_functions.keys(),
             ]
         )
-        if mime_type == "text/html":
-            return self.pipeline.analyse_html(
-                text, language=lang, annotation_types=types
-            )
-        else:
-            return self.pipeline.analyse_text(
-                text, language=lang, annotation_types=types
-            )
+
+        analyse_args = {"language": lang, "annotation_types": types}
+
+        try:
+            if mime_type == "text/html":
+                return self.pipeline.analyse_html(text, **analyse_args)
+            else:
+                return self.pipeline.analyse_text(text, **analyse_args)
+        except Exception as exc:
+            log.exception(exc)
+            log.error("Text analysis failed")
+            raise exc
 
     def _build_composition_identifier_from_documentreference(
         self,
