@@ -1,3 +1,4 @@
+import asyncio
 import os
 from functools import lru_cache
 from typing import Union
@@ -10,34 +11,15 @@ from fhir.resources.bundle import Bundle
 from fhir.resources.documentreference import DocumentReference
 from prometheus_fastapi_instrumentator import Instrumentator
 from starlette.responses import JSONResponse
-from structlog.contextvars import merge_contextvars
 
 from ahd2fhir import config
 from ahd2fhir.kafka_setup import kafka_start_consuming, kafka_stop_consuming
+from ahd2fhir.logging_setup import setup_logging
 from ahd2fhir.utils.resource_handler import ResourceHandler
 
 app = FastAPI()
 
 Instrumentator().instrument(app).expose(app)
-
-
-timestamper = structlog.processors.TimeStamper(fmt="%Y-%m-%d %H:%M:%S")
-shared_processors = [
-    structlog.stdlib.add_log_level,
-    timestamper,
-]
-
-structlog.configure(
-    processors=shared_processors
-    + [
-        merge_contextvars,
-        structlog.processors.KeyValueRenderer(
-            key_order=["timestamp", "level", "event"]
-        ),
-    ],
-    context_class=structlog.threadlocal.wrap_dict(dict),
-    logger_factory=structlog.stdlib.LoggerFactory(),
-)
 
 logger = structlog.get_logger()
 
@@ -102,13 +84,20 @@ async def analyze_resource(
     return result
 
 
+kafka_consumer_task = None
+
+
 @app.on_event("startup")
 async def startup_event():
+    setup_logging()
     logger.info("Initializing API")
     if os.getenv("KAFKA_ENABLED", "False").lower() in ["true", "1"]:
         logger.info("Initializing Kafka")
         resource_handler = get_resource_handler(get_averbis_pipeline(get_settings()))
-        await kafka_start_consuming(resource_handler)
+        global kafka_consumer_task
+        kafka_consumer_task = asyncio.create_task(
+            kafka_start_consuming(resource_handler)
+        )
 
 
 @app.on_event("shutdown")
@@ -117,3 +106,4 @@ async def shutdown_event():
     if os.getenv("KAFKA_ENABLED", "False").lower() in ["true", "1"]:
         logger.info("Shutting down Kafka consumer")
         await kafka_stop_consuming()
+        kafka_consumer_task.cancel()
