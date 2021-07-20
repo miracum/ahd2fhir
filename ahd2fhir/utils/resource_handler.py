@@ -16,7 +16,7 @@ from fhir.resources.fhirtypes import DateTime
 from fhir.resources.identifier import Identifier
 from fhir.resources.reference import Reference
 from fhir.resources.resource import Resource
-from prometheus_client import Counter, Summary
+from prometheus_client import Counter, Histogram, Summary
 from tenacity import stop, wait
 from tenacity.after import after_log
 
@@ -27,7 +27,25 @@ from ahd2fhir.utils.device_builder import build_device
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
 MAPPING_FAILURES_COUNTER = Counter("mapping_failures", "Exceptions during mapping")
-MAPPING_DURATION_SUMMARY = Summary("map_duration_seconds", "Time spent mapping")
+MAPPING_DURATION_SUMMARY = Histogram(
+    "map_duration_seconds",
+    "Time spent mapping",
+    buckets=(
+        1.0,
+        2.0,
+        5.0,
+        8.0,
+        13.0,
+        21.0,
+        34.0,
+        55.0,
+        89.0,
+        144.0,
+        233.0,
+        377.0,
+        "inf",
+    ),
+)
 EXTRACTED_RESOURCES_COUNT_SUMMARY = Summary(
     "extracted_resources", "Number of extracted resources for each processed document"
 )
