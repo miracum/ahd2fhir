@@ -1,5 +1,5 @@
 fhir.resources==6.1.0
-fastapi==0.66.0
+fastapi==0.67.0
 prometheus-fastapi-instrumentator==5.7.1
 uvicorn[standard]==0.14.0
 structlog==21.1.0
