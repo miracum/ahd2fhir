@@ -165,7 +165,7 @@ def stone_dimension_observation(
     value_quantity["system"] = "http://unitsofmeasure.org"
     value_quantity["code"] = unit
     value_quantity["value"] = value
-    value_quantity["unit"] = {"mm": "Millimeter", "cm": "Centimeter"}[unit]
+    value_quantity["unit"] = unit
     observation.valueQuantity = value_quantity
 
     # Create Reference to Observation
