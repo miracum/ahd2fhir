@@ -116,4 +116,5 @@ def get_smoking_status_observation_from_annotation(
     # value_quantity.code = "401201003"
     # value_quantity.text = "401201003"
     # observation.valueQuantity = value_quantity
-    return [observation]
+
+    return observation
