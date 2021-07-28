@@ -17,7 +17,6 @@ from fhir.resources.identifier import Identifier
 from fhir.resources.reference import Reference
 from fhir.resources.resource import Resource
 from prometheus_client import Counter, Histogram, Summary
-from tenacity import stop, wait
 from tenacity.after import after_log
 
 from ahd2fhir.mappers import ahd_to_condition, ahd_to_medication_statement
@@ -31,18 +30,18 @@ MAPPING_DURATION_SUMMARY = Histogram(
     "map_duration_seconds",
     "Time spent mapping",
     buckets=(
+        0.05,
+        0.1,
+        0.5,
         1.0,
         2.0,
+        3.0,
         5.0,
         8.0,
         13.0,
         21.0,
         34.0,
         55.0,
-        89.0,
-        144.0,
-        233.0,
-        377.0,
         "inf",
     ),
 )
@@ -315,8 +314,9 @@ class ResourceHandler:
         )
 
     @tenacity.retry(
-        stop=stop.stop_after_attempt(10),
-        wait=wait.wait_fixed(5) + wait.wait_random_exponential(multiplier=1, max=30),
+        stop=tenacity.stop.stop_after_attempt(10),
+        wait=tenacity.wait.wait_fixed(5)
+        + tenacity.wait.wait_random_exponential(multiplier=1, max=30),
         after=after_log(logging.getLogger(), logging.WARNING),
         reraise=True,
     )
