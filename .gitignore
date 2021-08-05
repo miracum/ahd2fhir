@@ -141,3 +141,6 @@ dmypy.json
 # MACOSX
 .DS_Store
 .idea
+!.env.development
+*.env
+*.env[-._]*
