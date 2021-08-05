@@ -1,11 +1,12 @@
 import datetime
+import os
 import uuid
 from typing import List
 
 from fhir.resources.codeableconcept import CodeableConcept
 from fhir.resources.coding import Coding
 from fhir.resources.documentreference import DocumentReference
-from fhir.resources.fhirtypes import DateTime
+from fhir.resources.fhirtypes import DateTime, String
 from fhir.resources.meta import Meta
 from fhir.resources.observation import Observation
 from structlog import get_logger
@@ -88,28 +89,28 @@ def get_smoking_status_observation_from_annotation(
     observation.category = [category]
 
     smkstat = SNOMED_LOINC_MAPPING[annotation["smokingStatus"]]
-    # valueCodeableConcept
-    value_codeable_concept = CodeableConcept()
-    value_coding = Coding.construct()
-    value_coding.system = "http://loinc.org"
-    value_coding.code = smkstat["code"]
 
-    value_coding_snomed = Coding.construct()
-    value_coding_snomed.system = "http://snomed.info/sct"
-    value_coding_snomed.code = annotation["sctid"]
+    # If SMKSTAT_AS_VALUESTRING is set
+    if os.getenv("SMKSTAT_AS_VALUESTRING", "").lower() in ["true", 1, "yes"]:
+        # Code Resource as fhirTypes.valueString
+        observation.valueString = String(smkstat["text"])
+    else:
+        # Code Resource as valueCodeableConcept
+        codeable_concept = CodeableConcept()
 
-    value_codeable_concept.coding = [value_coding, value_coding_snomed]
-    value_codeable_concept.text = smkstat["text"]
-    observation.valueCodeableConcept = value_codeable_concept
+        # Create LOINC coding
+        coding_loinc = Coding.construct()
+        coding_loinc.system = "http://loinc.org"
+        coding_loinc.code = smkstat["code"]
 
-    # SNOMED concept
-    # value_codeable_concept = CodeableConcept()
-    # value_coding_snomed = Coding.construct()
-    # value_coding_snomed.system = "http://snomed.info/sct"
-    # value_coding_snomed.code = annotation["sctid"]
-    # value_codeable_concept.coding = [value_coding]
-    # value_codeable_concept.text = annotation["smokingStatus"]
-    # observation.valueCodeableConcept = value_codeable_concept
+        # Create snomed coding
+        coding_snomed = Coding.construct()
+        coding_snomed.system = "http://snomed.info/sct"
+        coding_snomed.code = annotation["sctid"]
+
+        codeable_concept.coding = [coding_loinc, coding_snomed]
+        codeable_concept.text = smkstat["text"]
+        observation.valueCodeableConcept = codeable_concept
 
     # if pack_years := annotation["packYears"] != "null":
     # valueCodeableConcept
