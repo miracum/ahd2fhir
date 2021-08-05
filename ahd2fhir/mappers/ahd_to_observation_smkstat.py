@@ -61,6 +61,9 @@ def get_smoking_status_observation_from_annotation(
     observation.subject = doc_ref.subject
     observation.effectiveDateTime = date or fhirdate_now()
     observation.id = str(uuid.uuid4())
+    observation.encounter = (
+        doc_ref.context.encounter[0] if doc_ref.context is not None else None
+    )
 
     # Coding
     observation_coding = Coding.construct()
