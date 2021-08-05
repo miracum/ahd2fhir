@@ -144,4 +144,3 @@ dmypy.json
 !.env.development
 *.env
 *.env[-._]*
-
