@@ -4,11 +4,15 @@ import structlog
 from fhir.resources.device import Device, DeviceDeviceName, DeviceVersion
 from fhir.resources.identifier import Identifier
 
+# from ahd2fhir.utils.custom_mappers import Mapper
+
 log = structlog.get_logger()
 
 AHD_DEVICE_IDENTIFIER_SYSTEM = (
     "https://fhir.miracum.org/nlp/identifiers/averbis-health-discovery-device-id"
 )
+
+AHD_TYPE_DOCUMENT_ANNOTATION = "de.averbis.types.health.DocumentAnnotation"
 
 
 def build_device(document_annotation) -> Device:

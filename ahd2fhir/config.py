@@ -3,6 +3,8 @@ from os import path
 from aiokafka.helpers import create_ssl_context
 from pydantic import BaseSettings, validator
 
+from ahd2fhir.utils.resource_handler import AHD_TYPE_DIAGNOSIS, AHD_TYPE_MEDICATION
+
 TLS_ROOT_DIR = "/opt/kafka-certs/"
 
 # pylint: disable=E0213
@@ -98,3 +100,4 @@ class Settings(BaseSettings):
     ahd_pipeline: str
     # Kafka Settings
     kafka: KafkaSettings = KafkaSettings()
+    mappers_enabled: list = [AHD_TYPE_DIAGNOSIS, AHD_TYPE_MEDICATION]

@@ -1,7 +1,6 @@
 import base64
 import datetime
 import logging
-import os
 import time
 from typing import List, Tuple
 
@@ -21,7 +20,6 @@ from tenacity.after import after_log
 
 from ahd2fhir.mappers import ahd_to_condition, ahd_to_medication_statement
 from ahd2fhir.utils.bundle_builder import BundleBuilder
-from ahd2fhir.utils.custom_mappers import custom_mappers, mapper_functions
 from ahd2fhir.utils.device_builder import build_device
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
@@ -81,9 +79,10 @@ class TransientError(Exception):
 
 
 class ResourceHandler:
-    def __init__(self, averbis_pipeline: Pipeline):
+    def __init__(self, averbis_pipeline: Pipeline, mapper_handler):
         self.pipeline = averbis_pipeline
         self.bundle_builder = BundleBuilder()
+        self.mapper_handler = mapper_handler
 
     @MAPPING_FAILURES_COUNTER.count_exceptions()
     @MAPPING_DURATION_SUMMARY.time()
@@ -235,8 +234,12 @@ class ResourceHandler:
         total_results = []
 
         # Building FHIR resources as results
-
         medication_statement_lists = []
+
+        mh_results = self.mapper_handler.get_mappings(
+            averbis_result, document_reference
+        )
+        print(mh_results)
         for val in averbis_result:
             if val["type"] == AHD_TYPE_DIAGNOSIS:
                 mapped_condition = ahd_to_condition.get_fhir_condition(
@@ -257,12 +260,9 @@ class ResourceHandler:
                 if statement is not None:
                     medication_statement_lists.append(statement)
 
-            # if custom_mappers_enabled
-            if os.getenv("CUSTOM_MAPPERS_ENABLED", "False").lower() in ["true", "1"]:
-                total_results.extend(custom_mappers(val, document_reference))
-
         medication_results = []
         medication_statement_results = []
+        # medication_statement_list = [[{medication: ..., statement: ...}],]
         for medication_statement_list in medication_statement_lists:
             for medication_statement_dict in medication_statement_list:
                 medication_results.append(medication_statement_dict["medication"])
@@ -328,7 +328,7 @@ class ResourceHandler:
                 AHD_TYPE_DIAGNOSIS,
                 AHD_TYPE_MEDICATION,
                 AHD_TYPE_DOCUMENT_ANNOTATION,
-                *mapper_functions.keys(),
+                *self.mapper_handler.get_ahd_types(),
             ]
         )
 
