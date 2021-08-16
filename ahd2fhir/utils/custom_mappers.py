@@ -5,23 +5,11 @@ from fhir.resources.documentreference import DocumentReference
 from fhir.resources.resource import Resource
 
 #
-# def custom_mappers(val: dict, document_reference: DocumentReference) -> list:
-#     results = []
-#     if (mappers := mapper_functions.get(val["type"], None)) is not None:
-#         for mapper in mappers:
-#             results.extend(mapper(val, document_reference))
-#     return results
 from ahd2fhir.mappers.ahd_to_observation_smkstat import (
     UKLFR_TYPE_SMKSTAT,
     get_fhir_resources,
 )
 from ahd2fhir.utils.device_builder import AHD_TYPE_DOCUMENT_ANNOTATION, build_device
-
-#
-# mapper_functions = {
-#     smk.AHD_TYPE: [smk.get_fhir_resources],
-#     ks.AHD_TYPE: [ks.get_fhir_resources],
-# }
 
 
 class Mapper(metaclass=ABCMeta):
@@ -37,7 +25,7 @@ class Mapper(metaclass=ABCMeta):
     @staticmethod
     @property
     @abstractmethod
-    def deduplicate_resource(resources: List[Resource]):
+    def deduplicate_resources(resources: List[Resource]):
         pass
 
     @property

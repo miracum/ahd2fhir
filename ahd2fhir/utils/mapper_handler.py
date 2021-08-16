@@ -16,9 +16,9 @@ class MapperHandler:
             print(mapper.ahd_type)
             for val in averbis_result:
                 if val["type"] == mapper.ahd_type:
-                    if results := mapper.get_resources(val, doc_ref) is not None:
+                    if (results := mapper.get_resources(val, doc_ref)) is not None:
                         mapper_results.append(results)
-
+            total_results.extend(*mapper_results)
         return total_results
 
     def get_ahd_types(self):

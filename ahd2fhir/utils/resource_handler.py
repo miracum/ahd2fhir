@@ -239,7 +239,7 @@ class ResourceHandler:
         mh_results = self.mapper_handler.get_mappings(
             averbis_result, document_reference
         )
-        print(mh_results)
+        total_results.extend(mh_results)
         for val in averbis_result:
             if val["type"] == AHD_TYPE_DIAGNOSIS:
                 mapped_condition = ahd_to_condition.get_fhir_condition(
