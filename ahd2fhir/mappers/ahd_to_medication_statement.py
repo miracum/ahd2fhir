@@ -18,6 +18,7 @@ from ahd2fhir.mappers.ahd_to_medication import get_medication_from_annotation
 
 log = get_logger()
 
+AHD_TYPE_MEDICATION = "de.averbis.types.health.Medication"
 MEDICATION_STATEMENT_PROFILE = (
     "https://www.medizininformatik-initiative.de/"
     + "fhir/core/modul-medikation/StructureDefinition/MedicationStatement"

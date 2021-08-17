@@ -18,9 +18,10 @@ from fhir.resources.resource import Resource
 from prometheus_client import Counter, Histogram, Summary
 from tenacity.after import after_log
 
-from ahd2fhir.mappers import ahd_to_condition, ahd_to_medication_statement
+# from ahd2fhir.mappers import ahd_to_condition, ahd_to_medication_statement
 from ahd2fhir.utils.bundle_builder import BundleBuilder
-from ahd2fhir.utils.device_builder import build_device
+
+# from ahd2fhir.utils.device_builder import build_device
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
 MAPPING_FAILURES_COUNTER = Counter("mapping_failures", "Exceptions during mapping")
@@ -234,50 +235,38 @@ class ResourceHandler:
         total_results = []
 
         # Building FHIR resources as results
-        medication_statement_lists = []
+        # medication_statement_lists = []
 
         mh_results = self.mapper_handler.get_mappings(
             averbis_result, document_reference
         )
         total_results.extend(mh_results)
-        for val in averbis_result:
-            if val["type"] == AHD_TYPE_DIAGNOSIS:
-                mapped_condition = ahd_to_condition.get_fhir_condition(
-                    val, document_reference
-                )
-                if mapped_condition is not None:
-                    total_results.append(mapped_condition)
+        # for val in averbis_result:
+        #     if val["type"] == AHD_TYPE_MEDICATION:
+        #         statement = ahd_to_medication_statement.get_fhir_medication_statement(
+        #             val, document_reference
+        #         )
+        #         if statement is not None:
+        #             medication_statement_lists.append(statement)
 
-            if val["type"] == AHD_TYPE_DOCUMENT_ANNOTATION:
-                device = build_device(val)
-                if device is not None:
-                    total_results.append(device)
-
-            if val["type"] == AHD_TYPE_MEDICATION:
-                statement = ahd_to_medication_statement.get_fhir_medication_statement(
-                    val, document_reference
-                )
-                if statement is not None:
-                    medication_statement_lists.append(statement)
-
-        medication_results = []
-        medication_statement_results = []
-        # medication_statement_list = [[{medication: ..., statement: ...}],]
-        for medication_statement_list in medication_statement_lists:
-            for medication_statement_dict in medication_statement_list:
-                medication_results.append(medication_statement_dict["medication"])
-                medication_statement_results.append(
-                    medication_statement_dict["statement"]
-                )
-
-        # de-duplicate any Medication and MedicationStatement resources
-        medication_resources_unique = {m.id: m for m in medication_results}.values()
-        medication_statements_unique = {
-            m.id: m for m in medication_statement_results
-        }.values()
-
-        total_results.extend(medication_resources_unique)
-        total_results.extend(medication_statements_unique)
+        # medication_results = []
+        # medication_statement_results = []
+        # # medication_statement_list = [[{medication: ..., statement: ...}],]
+        # for medication_statement_list in medication_statement_lists:
+        #     for medication_statement_dict in medication_statement_list:
+        #         medication_results.append(medication_statement_dict["medication"])
+        #         medication_statement_results.append(
+        #             medication_statement_dict["statement"]
+        #         )
+        #
+        # # de-duplicate any Medication and MedicationStatement resources
+        # medication_resources_unique = {m.id: m for m in medication_results}.values()
+        # medication_statements_unique = {
+        #     m.id: m for m in medication_statement_results
+        # }.values()
+        #
+        # total_results.extend(medication_resources_unique)
+        # total_results.extend(medication_statements_unique)
 
         return total_results
 
@@ -325,9 +314,9 @@ class ResourceHandler:
     ):
         types = ",".join(
             [
-                AHD_TYPE_DIAGNOSIS,
-                AHD_TYPE_MEDICATION,
-                AHD_TYPE_DOCUMENT_ANNOTATION,
+                # AHD_TYPE_DIAGNOSIS,
+                # AHD_TYPE_MEDICATION,
+                # AHD_TYPE_DOCUMENT_ANNOTATION,
                 *self.mapper_handler.get_ahd_types(),
             ]
         )

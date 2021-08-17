@@ -100,4 +100,12 @@ class Settings(BaseSettings):
     ahd_pipeline: str
     # Kafka Settings
     kafka: KafkaSettings = KafkaSettings()
-    mappers_enabled: list = [AHD_TYPE_DIAGNOSIS, AHD_TYPE_MEDICATION]
+    mappers_enabled: str = ",".join([AHD_TYPE_DIAGNOSIS, AHD_TYPE_MEDICATION])
+
+    @validator("mappers_enabled")
+    def parse_mappers_list(cls, v):
+        print(v, type(v))
+        if isinstance(v, str):
+            print(v.split(","))
+            return v.split(",")
+        raise ValueError(f"mappers_enabled is not a valid list ({v})")
