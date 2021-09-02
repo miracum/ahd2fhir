@@ -11,8 +11,8 @@ AHD_DEVICE_IDENTIFIER_SYSTEM = (
 )
 
 
-def build_device(document_annotation) -> Device:
-    ahd_version = document_annotation.get("version")
+def build_device(document_annotation, ahd_version) -> Device:
+    print(document_annotation)
 
     identifier = Identifier(
         **{

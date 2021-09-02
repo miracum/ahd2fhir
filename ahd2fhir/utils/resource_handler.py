@@ -219,6 +219,7 @@ class ResourceHandler:
             document_reference
         )
 
+        print(text)
         DOCUMENT_LENGTH_SUMMARY.observe(len(text))
 
         averbis_result = None
@@ -235,9 +236,11 @@ class ResourceHandler:
         total_results = []
 
         # Building FHIR resources as results
+        ahd_version = self.pipeline.project.client.get_spec_version()
 
         medication_statement_lists = []
         for val in averbis_result:
+            print("\n\n", val)
             if val["type"] == AHD_TYPE_DIAGNOSIS:
                 mapped_condition = ahd_to_condition.get_fhir_condition(
                     val, document_reference
@@ -246,7 +249,7 @@ class ResourceHandler:
                     total_results.append(mapped_condition)
 
             if val["type"] == AHD_TYPE_DOCUMENT_ANNOTATION:
-                device = build_device(val)
+                device = build_device(val, ahd_version)
                 if device is not None:
                     total_results.append(device)
 

@@ -83,8 +83,9 @@ def get_condition_from_annotation(annotation, date, doc_ref: DocumentReference):
     condition_coding = Coding.construct()
     condition_coding.system = system
     condition_coding.display = annotation.get("dictCanon")
-    condition_coding.code = annotation.get("conceptId")
+    condition_coding.code = annotation.get("conceptID", annotation.get("conceptId"))
     condition_coding.userSelected = False
+    print(condition_coding)
 
     if match := re.search(EXTRACT_YEAR_FROM_ICD_REGEX, annotation.get("source")):
         condition_coding.version = match.group("version")
