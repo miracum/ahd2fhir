@@ -1,5 +1,5 @@
 from hashlib import sha256
-from typing import Union
+from typing import List, Union
 
 from fhir.resources.documentreference import DocumentReference
 from fhir.resources.dosage import Dosage, DosageDoseAndRate
@@ -210,3 +210,25 @@ def get_medication_dosage_from_annotation(annotation) -> Dosage:
     dosage.timing = timing
 
     return dosage
+
+
+def deduplicate_resources(resources: List[dict]):
+    medication_results = []
+    medication_statement_results = []
+    medication_statement_lists = resources
+    # medication_statement_list = [[{medication: ..., statement: ...}],]
+    for medication_statement_dict in medication_statement_lists:
+        medication_results.append(medication_statement_dict["medication"])
+        medication_statement_results.append(medication_statement_dict["statement"])
+
+    # de-duplicate any Medication and MedicationStatement resources
+    medication_resources_unique = {m.id: m for m in medication_results}.values()
+    medication_statements_unique = {
+        m.id: m for m in medication_statement_results
+    }.values()
+    print(medication_statements_unique)
+    print(medication_resources_unique)
+    print(type(list(medication_statements_unique)))
+    result = [*medication_statements_unique, *medication_resources_unique]
+    print(result)
+    return result
