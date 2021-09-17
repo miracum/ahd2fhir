@@ -4,5 +4,5 @@ prometheus-fastapi-instrumentator==5.7.1
 uvicorn[standard]==0.14.0
 structlog==21.1.0
 averbis-python-api==0.3.0
-tenacity==7.0.0
+tenacity==8.0.1
 aiokafka==0.7.1
