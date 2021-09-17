@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   mysql-hd:
-    image: registry.averbis.com/mysql/mysql:1.17.0
+    image: registry.averbis.com/mysql/mysql:1.20.0
     environment:
       MYSQL_ROOT_PASSWORD: getaccess
       MYSQL_DATABASE: aif
@@ -15,7 +15,7 @@ services:
       - dbVol-hd:/var/lib/mysql
 
   gcm-hd:
-    image: registry.averbis.com/health-discovery/gcm-hd:${PRODUCT_VERSION:-5.35.1}
+    image: registry.averbis.com/health-discovery/gcm-hd:5.39.1
     environment:
       TOMCAT_XMS: 1g
       TOMCAT_XMX: 2g
@@ -33,7 +33,7 @@ services:
       start_period: 30s
 
   solr-hd:
-    image: registry.averbis.com/health-discovery/solr-hd:${PRODUCT_VERSION:-5.35.1}
+    image: registry.averbis.com/health-discovery/solr-hd:5.39.1
     environment:
       SOLR_HEAP_SIZE: 512m
     healthcheck:
@@ -44,7 +44,7 @@ services:
       start_period: 30s
 
   health-discovery:
-    image: registry.averbis.com/health-discovery/health-discovery:${PRODUCT_VERSION:-5.35.1}
+    image: registry.averbis.com/health-discovery/health-discovery:5.39.1
     ports:
       - 127.0.0.1:9999:8080
     environment:
