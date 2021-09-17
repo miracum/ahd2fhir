@@ -1,5 +1,5 @@
-FROM ghcr.io/br3ndonland/inboard:fastapi-python3.9 AS release
-WORKDIR /app/
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9-alpine3.14 AS release
+WORKDIR /opt/ahd2fhir
 COPY requirements.txt .
 RUN pip install --no-cache-dir  -r requirements.txt
 
@@ -11,11 +11,11 @@ RUN PYTHONPATH=${PWD}/ahd2fhir pytest --cov=ahd2fhir && \
     coverage report --fail-under=80
 
 FROM release
-COPY . .
+COPY . /app
 ARG VERSION=0.0.0
 ENV APP_VERSION=${VERSION} \
     PORT=8080 \
-    APP_MODULE=ahd2fhir.main:app
+    MODULE_NAME=ahd2fhir.main
 EXPOSE 8080
 USER 11111
 LABEL maintainer="miracum.org"
