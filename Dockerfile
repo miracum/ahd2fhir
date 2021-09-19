@@ -1,4 +1,4 @@
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9-alpine3.14 AS release
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim AS release
 WORKDIR /opt/ahd2fhir
 COPY requirements.txt .
 RUN pip install --no-cache-dir  -r requirements.txt
