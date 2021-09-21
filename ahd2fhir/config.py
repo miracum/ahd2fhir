@@ -104,8 +104,6 @@ class Settings(BaseSettings):
 
     @validator("mappers_enabled")
     def parse_mappers_list(cls, v):
-        print(v, type(v))
         if isinstance(v, str):
-            print(v.split(","))
             return v.split(",")
         raise ValueError(f"mappers_enabled is not a valid list ({v})")

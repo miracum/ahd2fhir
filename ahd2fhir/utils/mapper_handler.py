@@ -35,7 +35,7 @@ class MapperBase:
         return self.deduplicate_function(resources)
 
     def enabled(self) -> bool:
-        return True if self.ahd_type in self.config.mappers_enabled else False
+        return True if self.name in self.config.mappers_enabled else False
 
     def __repr__(self):
         return self.name
@@ -70,11 +70,12 @@ class MapperHandler:
                 deduplicate_function=deduplicate_resources,
             ),
         ]
-        log.info(f"Enabled mappers: {[m for m in self.mappers if m.enabled()]}")
+        self.enabled_mappers = [m for m in self.mappers if m.enabled()]
+        log.info(f"Enabled mappers: {self.enabled_mappers}")
 
     def get_mappings(self, averbis_result, doc_ref):
         total_results = []
-        for mapper in [m for m in self.mappers if m.enabled()]:
+        for mapper in self.enabled_mappers:
             mapper_results = []
             for val in averbis_result:
                 if val["type"] == mapper.ahd_type:
@@ -86,7 +87,6 @@ class MapperHandler:
 
             mapper_results = mapper.deduplicate_resources(mapper_results)
             total_results.extend(mapper_results)
-        print([[type(r)] for r in total_results])
         return total_results
 
     def get_ahd_types(self):

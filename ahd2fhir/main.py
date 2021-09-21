@@ -101,7 +101,9 @@ async def startup_event():
     logger.info("Initializing API")
     if os.getenv("KAFKA_ENABLED", "False").lower() in ["true", "1"]:
         logger.info("Initializing Kafka")
-        resource_handler = get_resource_handler(get_averbis_pipeline(get_settings()))
+        resource_handler = get_resource_handler(
+            get_averbis_pipeline(get_settings()), get_mapper_handler(get_settings())
+        )
         global kafka_consumer_task
         kafka_consumer_task = asyncio.create_task(
             kafka_start_consuming(resource_handler)

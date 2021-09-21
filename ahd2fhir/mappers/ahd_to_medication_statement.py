@@ -226,9 +226,5 @@ def deduplicate_resources(resources: List[dict]):
     medication_statements_unique = {
         m.id: m for m in medication_statement_results
     }.values()
-    print(medication_statements_unique)
-    print(medication_resources_unique)
-    print(type(list(medication_statements_unique)))
     result = [*medication_statements_unique, *medication_resources_unique]
-    print(result)
     return result

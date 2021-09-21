@@ -137,41 +137,10 @@ class ResourceHandler:
             raise TransientError(exc)
 
         total_results = []
-
-        # Building FHIR resources as results
-        # medication_statement_lists = []
-
         mh_results = self.mapper_handler.get_mappings(
             averbis_result, document_reference
         )
         total_results.extend(mh_results)
-        # for val in averbis_result:
-        #     if val["type"] == AHD_TYPE_MEDICATION:
-        #         statement = ahd_to_medication_statement.get_fhir_medication_statement(
-        #             val, document_reference
-        #         )
-        #         if statement is not None:
-        #             medication_statement_lists.append(statement)
-
-        # medication_results = []
-        # medication_statement_results = []
-        # # medication_statement_list = [[{medication: ..., statement: ...}],]
-        # for medication_statement_list in medication_statement_lists:
-        #     for medication_statement_dict in medication_statement_list:
-        #         medication_results.append(medication_statement_dict["medication"])
-        #         medication_statement_results.append(
-        #             medication_statement_dict["statement"]
-        #         )
-        #
-        # # de-duplicate any Medication and MedicationStatement resources
-        # medication_resources_unique = {m.id: m for m in medication_results}.values()
-        # medication_statements_unique = {
-        #     m.id: m for m in medication_statement_results
-        # }.values()
-        #
-        # total_results.extend(medication_resources_unique)
-        # total_results.extend(medication_statements_unique)
-
         return total_results
 
     @tenacity.retry(
