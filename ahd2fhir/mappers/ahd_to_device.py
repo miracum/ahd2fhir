@@ -4,8 +4,6 @@ import structlog
 from fhir.resources.device import Device, DeviceDeviceName, DeviceVersion
 from fhir.resources.identifier import Identifier
 
-# from ahd2fhir.utils.custom_mappers import Mapper
-
 log = structlog.get_logger()
 
 AHD_DEVICE_IDENTIFIER_SYSTEM = (
@@ -15,7 +13,8 @@ AHD_DEVICE_IDENTIFIER_SYSTEM = (
 AHD_TYPE_DOCUMENT_ANNOTATION = "de.averbis.types.health.DocumentAnnotation"
 
 
-def build_device(document_annotation) -> Device:
+def build_device(document_annotation, doc_ref) -> Device:
+    del doc_ref
     ahd_version = document_annotation.get("version")
 
     identifier = Identifier(

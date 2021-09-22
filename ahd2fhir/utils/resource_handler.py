@@ -5,7 +5,6 @@ import structlog
 import tenacity
 from averbis import Pipeline
 from fhir.resources.bundle import Bundle
-from fhir.resources.codeableconcept import CodeableConcept
 from fhir.resources.documentreference import DocumentReference
 from prometheus_client import Counter, Histogram, Summary
 from tenacity.after import after_log
@@ -40,26 +39,6 @@ DOCUMENT_LENGTH_SUMMARY = Summary(
     "document_length",
     "Length of each processed document's text in charactes",
 )
-
-DISCHARGE_SUMMARY_CONCEPT_TEXT = (
-    "Clinical document Kind of document from LOINC Document Ontology"
-)
-DISCHARGE_SUMMARY_CONCEPT = CodeableConcept(
-    **{
-        "coding": [
-            {
-                "system": "http://loinc.org",
-                "code": "74477-1",
-                "display": DISCHARGE_SUMMARY_CONCEPT_TEXT,
-            },
-        ],
-        "text": DISCHARGE_SUMMARY_CONCEPT_TEXT,
-    }
-)
-
-AHD_TYPE_DOCUMENT_ANNOTATION = "de.averbis.types.health.DocumentAnnotation"
-AHD_TYPE_MEDICATION = "de.averbis.types.health.Medication"
-AHD_TYPE_DIAGNOSIS = "de.averbis.types.health.Diagnosis"
 
 log = structlog.get_logger()
 

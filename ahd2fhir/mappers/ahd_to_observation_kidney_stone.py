@@ -46,7 +46,7 @@ STONE_DIMENSION_MAP = {
 }
 
 
-def get_fhir_resources(
+def get_fhir_kidney_stones(
     ahd_response_entry, document_reference: DocumentReference
 ) -> List[Observation]:
     return get_kidney_stone_from_annotation(

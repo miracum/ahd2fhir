@@ -1,6 +1,9 @@
 import pytest
 
-from ahd2fhir.mappers.ahd_to_observation_smkstat import AHD_TYPE, get_fhir_resources
+from ahd2fhir.mappers.ahd_to_observation_smkstat import (
+    AHD_TYPE,
+    get_fhir_smoking_status,
+)
 from tests.utils import map_resources
 
 AHD_PAYLOADS_EXPECTED_NUMBER_OF_CONDITIONS = [
@@ -17,7 +20,7 @@ def test_maps_to_expected_number_of_condition_resources(
     ahd_json_path, expected_number_of_conditions
 ):
 
-    observations = map_resources(ahd_json_path, AHD_TYPE, get_fhir_resources)
+    observations = map_resources(ahd_json_path, AHD_TYPE, get_fhir_smoking_status)
     assert len(observations) == expected_number_of_conditions
 
 
@@ -28,7 +31,7 @@ def test_maps_to_expected_number_of_condition_resources(
 def test_mapped_condition_coding_should_set_userselected_to_false(ahd_json_path, _):
     observations = [
         o
-        for obs in map_resources(ahd_json_path, AHD_TYPE, get_fhir_resources)
+        for obs in map_resources(ahd_json_path, AHD_TYPE, get_fhir_smoking_status)
         for o in obs
     ]
     for o in observations:
@@ -42,7 +45,7 @@ def test_mapped_condition_coding_should_set_userselected_to_false(ahd_json_path,
 def test_mapped_condition_coding_includes_snomed_and_loin(ahd_json_path, _):
     observations = [
         o
-        for obs in map_resources(ahd_json_path, AHD_TYPE, get_fhir_resources)
+        for obs in map_resources(ahd_json_path, AHD_TYPE, get_fhir_smoking_status)
         for o in obs
     ]
 

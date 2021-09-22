@@ -3,8 +3,7 @@ import json
 import pytest
 from fhir.resources.documentreference import DocumentReferenceContext
 
-from ahd2fhir.mappers.ahd_to_condition import get_fhir_condition
-from ahd2fhir.utils.resource_handler import AHD_TYPE_DIAGNOSIS
+from ahd2fhir.mappers.ahd_to_condition import AHD_TYPE_DIAGNOSIS, get_fhir_condition
 from tests.utils import get_empty_document_reference
 
 AHD_PAYLOADS_EXPECTED_NUMBER_OF_CONDITIONS = [

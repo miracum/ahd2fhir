@@ -37,7 +37,7 @@ SNOMED_LOINC_MAPPING = {
 }
 
 
-def get_fhir_resources(
+def get_fhir_smoking_status(
     ahd_response_entry, document_reference: DocumentReference
 ) -> List[Observation]:
     return get_smoking_status_observation_from_annotation(

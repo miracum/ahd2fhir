@@ -6,22 +6,26 @@ from fhir.resources.resource import Resource
 
 from ahd2fhir.config import Settings
 from ahd2fhir.mappers.ahd_to_condition import AHD_TYPE_DIAGNOSIS, get_fhir_condition
+from ahd2fhir.mappers.ahd_to_device import AHD_TYPE_DOCUMENT_ANNOTATION, build_device
 from ahd2fhir.mappers.ahd_to_medication_statement import (
     AHD_TYPE_MEDICATION,
     deduplicate_resources,
     get_fhir_medication_statement,
 )
+from ahd2fhir.mappers.ahd_to_observation_kidney_stone import (
+    UKLFR_TYPE_KIDNEY_STONE,
+    get_fhir_kidney_stones,
+)
 from ahd2fhir.mappers.ahd_to_observation_smkstat import (
     UKLFR_TYPE_SMKSTAT,
-    get_fhir_resources,
+    get_fhir_smoking_status,
 )
-from ahd2fhir.utils.device_builder import AHD_TYPE_DOCUMENT_ANNOTATION, build_device
 
 log = structlog.get_logger()
 
 
 @dataclasses.dataclass
-class MapperBase:
+class Mapper:
     name: str
     config: Settings
     ahd_type: str
@@ -34,43 +38,47 @@ class MapperBase:
     def deduplicate_resources(self, resources):
         return self.deduplicate_function(resources)
 
-    def enabled(self) -> bool:
-        return True if self.name in self.config.mappers_enabled else False
-
     def __repr__(self):
         return self.name
 
 
 class MapperHandler:
-    def __init__(self, config):
-        self.mappers = [
-            MapperBase(
-                name="SmokingStatus",
+    def __init__(self, config: Settings):
+        mappers = [
+            Mapper(
+                name="SmokingStatusMapper",
                 config=config,
                 ahd_type=UKLFR_TYPE_SMKSTAT,
-                mapper_function=get_fhir_resources,
+                mapper_function=get_fhir_smoking_status,
             ),
-            MapperBase(
+            Mapper(
                 name="DeviceMapper",
                 config=config,
                 ahd_type=AHD_TYPE_DOCUMENT_ANNOTATION,
                 mapper_function=build_device,
             ),
-            MapperBase(
+            Mapper(
                 name="ConditionMapper",
                 config=config,
                 ahd_type=AHD_TYPE_DIAGNOSIS,
                 mapper_function=get_fhir_condition,
             ),
-            MapperBase(
+            Mapper(
                 name="MedicationMapper",
                 config=config,
                 ahd_type=AHD_TYPE_MEDICATION,
                 mapper_function=get_fhir_medication_statement,
                 deduplicate_function=deduplicate_resources,
             ),
+            Mapper(
+                name="KidneyStoneMapper",
+                config=config,
+                ahd_type=UKLFR_TYPE_KIDNEY_STONE,
+                mapper_function=get_fhir_kidney_stones,
+                deduplicate_function=deduplicate_resources,
+            ),
         ]
-        self.enabled_mappers = [m for m in self.mappers if m.enabled()]
+        self.enabled_mappers = [m for m in mappers if m.name in config.enabled_mappers]
         log.info(f"Enabled mappers: {self.enabled_mappers}")
 
     def get_mappings(self, averbis_result, doc_ref):
@@ -90,4 +98,4 @@ class MapperHandler:
         return total_results
 
     def get_ahd_types(self):
-        return [m.ahd_type for m in self.mappers]
+        return [m.ahd_type for m in self.enabled_mappers]
