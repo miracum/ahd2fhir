@@ -44,7 +44,9 @@ def test_fhir_discharge_list():
     assert discharge_list is not None
     assert discharge_list.json()
     assert discharge_list.meta is not None
-    assert discharge_list.emptyReason is not None
+    assert (
+        discharge_list.emptyReason.display == "No discharge entries in document found."
+    )
 
     discharge_list = get_fhir_list(
         annotations_with_discharge, get_empty_document_reference()
@@ -52,4 +54,6 @@ def test_fhir_discharge_list():
     assert discharge_list is not None
     assert discharge_list.json()
     assert discharge_list.meta is not None
-    assert discharge_list.emptyReason is None
+    assert (
+        discharge_list.emptyReason.display != "No discharge entries in document found."
+    )
