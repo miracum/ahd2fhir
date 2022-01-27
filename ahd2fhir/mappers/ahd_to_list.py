@@ -1,18 +1,19 @@
 from hashlib import sha256
 
+from fhir.resources.codeableconcept import CodeableConcept
+from fhir.resources.coding import Coding
 from fhir.resources.documentreference import DocumentReference
 from fhir.resources.fhirprimitiveextension import FHIRPrimitiveExtension
 from fhir.resources.fhirtypes import DateTime
 from fhir.resources.identifier import Identifier
-from fhir.resources.coding import Coding
-from fhir.resources.codeableconcept import CodeableConcept
-from fhir.resources.reference import Reference
 from fhir.resources.list import List
 from fhir.resources.meta import Meta
+from fhir.resources.reference import Reference
 from structlog import get_logger
 
-from ahd2fhir.mappers.ahd_to_medication_statement import \
-    get_medication_statement_from_annotation
+from ahd2fhir.mappers.ahd_to_medication_statement import (
+    get_medication_statement_from_annotation,
+)
 from ahd2fhir.utils.resource_handler import AHD_TYPE_MEDICATION
 
 log = get_logger()
@@ -39,21 +40,19 @@ def get_fhir_list(annotation_results, document_reference: DocumentReference):
     Returns a list of {statement: ..., medication: ...} tuples
     """
     return get_medication_list_from_document_reference(
-        annotation_results=annotation_results,
-        document_reference=document_reference
+        annotation_results=annotation_results, document_reference=document_reference
     )
 
 
 def get_medication_list_from_document_reference(
-    annotation_results,
-    document_reference: DocumentReference
+    annotation_results, document_reference: DocumentReference
 ):
 
     discharge_list = List.construct(
         status="current",
         mode="snapshot",
         title="discharge",
-        subject=document_reference.subject
+        subject=document_reference.subject,
     )
 
     metadata = Meta.construct()
@@ -69,14 +68,11 @@ def get_medication_list_from_document_reference(
         else None
     )
     list_identifier = Identifier.construct()
-    list_identifier.system = (
-            "https://fhir.miracum.org/nlp/identifiers/discharge_list"
-    )
+    list_identifier.system = "https://fhir.miracum.org/nlp/identifiers/discharge_list"
     list_identifier.value = f"discharge_list_{document_identifier_value}"
 
     discharge_list.id = sha256(
-        f"{list_identifier.system}"
-        f"|{list_identifier.value}".encode("utf-8")
+        f"{list_identifier.system}" f"|{list_identifier.value}".encode("utf-8")
     ).hexdigest()
 
     if len(annotation_results) < 1:
@@ -98,12 +94,13 @@ def get_medication_list_from_document_reference(
         discharge_entry = {}
         medication_statement = get_medication_statement_from_annotation(
             annotation, document_reference
-        )[0]['statement']
+        )[0]["statement"]
         medication_reference = Reference.construct()
         medication_reference.type = f"{medication_statement.resource_type}"
         medication_reference.identifier = medication_statement.identifier[0]
-        medication_reference.reference = \
+        medication_reference.reference = (
             f"{medication_statement.resource_type}/{medication_statement.id}"
+        )
 
         discharge_entry["date"] = DateTime.now()
         discharge_entry["item"] = medication_reference
@@ -116,8 +113,7 @@ def get_medication_list_from_document_reference(
             display="No discharge entries in document found."
         )
         empty_reason = CodeableConcept.construct(
-            text="No discharge entries in document found.",
-            code=empty_reason_coding
+            text="No discharge entries in document found.", code=empty_reason_coding
         )
         discharge_list.emptyReason = empty_reason
 

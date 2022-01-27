@@ -19,7 +19,7 @@ from fhir.resources.resource import Resource
 from prometheus_client import Counter, Histogram, Summary
 from tenacity.after import after_log
 
-from ahd2fhir.mappers import ahd_to_condition, ahd_to_medication_statement, ahd_to_list
+from ahd2fhir.mappers import ahd_to_condition, ahd_to_list, ahd_to_medication_statement
 from ahd2fhir.utils.bundle_builder import BundleBuilder
 from ahd2fhir.utils.custom_mappers import custom_mappers, mapper_functions
 from ahd2fhir.utils.device_builder import build_device
@@ -237,8 +237,7 @@ class ResourceHandler:
         # Building FHIR resources as results
 
         discharge_list = ahd_to_list.get_fhir_list(
-            annotation_results=averbis_result,
-            document_reference=document_reference
+            annotation_results=averbis_result, document_reference=document_reference
         )
         if discharge_list is not None:
             total_results.append(discharge_list)
