@@ -35,7 +35,7 @@ def test_fhir_discharge_list():
         "tests/resources/ahd/payload_1.json"
     )
     annotations_with_discharge = get_example_payload(
-        "tests/resources/ahd/payload_1.json"
+        "tests/resources/ahd/payload_3.json"
     )
 
     discharge_list = get_fhir_list(
@@ -52,4 +52,4 @@ def test_fhir_discharge_list():
     assert discharge_list is not None
     assert discharge_list.json()
     assert discharge_list.meta is not None
-    assert discharge_list.emptyReason.text != "No discharge entries in document found."
+    assert discharge_list.emptyReason is None
