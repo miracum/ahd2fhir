@@ -14,7 +14,6 @@ from structlog import get_logger
 from ahd2fhir.mappers.ahd_to_medication_statement import (
     get_medication_statement_from_annotation,
 )
-from ahd2fhir.utils.resource_handler import AHD_TYPE_MEDICATION
 
 log = get_logger()
 
@@ -81,7 +80,7 @@ def get_medication_list_from_document_reference(
     discharge_entries = []
     num_entries = 0
     for annotation in annotation_results:
-        if annotation["type"] != AHD_TYPE_MEDICATION:
+        if annotation["type"] != "de.averbis.types.health.Medication":
             continue
 
         if annotation["status"] == "NEGATED" or annotation["status"] == "FAMILY":
