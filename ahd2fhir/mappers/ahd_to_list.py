@@ -11,7 +11,8 @@ from fhir.resources.list import List
 from fhir.resources.meta import Meta
 from structlog import get_logger
 
-from ahd2fhir.mappers.ahd_to_medication_statement import get_medication_statement_from_annotation
+from ahd2fhir.mappers.ahd_to_medication_statement import \
+    get_medication_statement_from_annotation
 from ahd2fhir.utils.resource_handler import AHD_TYPE_MEDICATION
 
 log = get_logger()
