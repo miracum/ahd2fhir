@@ -31,8 +31,12 @@ def get_empty_document_reference():
 
 
 def test_fhir_discharge_list():
-    annotations_without_discharge = get_example_payload("resources/ahd/payload_1.json")
-    annotations_with_discharge = get_example_payload("resources/ahd/payload_3.json")
+    annotations_without_discharge = get_example_payload(
+        "tests/resources/ahd/payload_1.json"
+    )
+    annotations_with_discharge = get_example_payload(
+        "tests/resources/ahd/payload_3.json"
+    )
 
     lists_without_discharge = get_fhir_list(
         annotations_without_discharge, get_empty_document_reference()
