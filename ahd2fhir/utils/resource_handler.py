@@ -236,11 +236,18 @@ class ResourceHandler:
 
         # Building FHIR resources as results
 
-        discharge_list = ahd_to_list.get_fhir_list(
+        lists = ahd_to_list.get_fhir_list(
             annotation_results=averbis_result, document_reference=document_reference
         )
+        discharge_list = lists["DISCHARGE"]
         if discharge_list is not None:
             total_results.append(discharge_list)
+        admission_list = lists["ADMISSION"]
+        if admission_list is not None:
+            total_results.append(admission_list)
+        inpatient_list = lists["INPATIENT"]
+        if inpatient_list is not None:
+            total_results.append(inpatient_list)
 
         medication_statement_lists = []
         for val in averbis_result:

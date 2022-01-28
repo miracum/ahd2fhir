@@ -33,6 +33,25 @@ DATA_ABSENT_EXTENSION_UNKNOWN = FHIRPrimitiveExtension(
     }
 )
 
+LIST_CODE_MAPPING = {"ADMISSION": "E210", "INPATIENT": "E200", "DISCHARGE": "E230"}
+LIST_CODE_SYSTEM = "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.16"
+
+LIST_MED_CODE = "medications"
+LIST_MED_CODE_SYSTEM = "http://terminology.hl7.org/CodeSystem/list-example-use-codes"
+
+
+def get_medication_statement_reference(annotation, document_reference):
+    medication_statement = get_medication_statement_from_annotation(
+        annotation, document_reference
+    )[0]["statement"]
+    medication_reference = Reference.construct()
+    medication_reference.type = f"{medication_statement.resource_type}"
+    medication_reference.identifier = medication_statement.identifier[0]
+    medication_reference.reference = (
+        f"{medication_statement.resource_type}/{medication_statement.id}"
+    )
+    return medication_reference
+
 
 def get_fhir_list(annotation_results, document_reference: DocumentReference):
     """
@@ -47,7 +66,7 @@ def get_medication_list_from_document_reference(
     annotation_results, document_reference: DocumentReference
 ):
 
-    discharge_list = List.construct(
+    base_list = List.construct(
         status="current",
         mode="snapshot",
         title="discharge",
@@ -56,10 +75,10 @@ def get_medication_list_from_document_reference(
 
     metadata = Meta.construct()
     metadata.profile = [LIST_PROFILE]
-    discharge_list.meta = metadata
+    base_list.meta = metadata
 
-    list_creation_date = DateTime.now()
-    discharge_list.date = list_creation_date
+    list_creation_date = document_reference.date
+    base_list.date = list_creation_date
 
     document_identifier_value = (
         document_reference.identifier[0].value
@@ -70,50 +89,58 @@ def get_medication_list_from_document_reference(
     list_identifier.system = "https://fhir.miracum.org/nlp/identifiers/discharge_list"
     list_identifier.value = f"discharge_list_{document_identifier_value}"
 
-    discharge_list.id = sha256(
+    base_list.id = sha256(
         f"{list_identifier.system}" f"|{list_identifier.value}".encode("utf-8")
     ).hexdigest()
 
     if len(annotation_results) < 1:
         return None
 
-    discharge_entries = []
+    med_entries = {"ADMISSION": [], "DISCHARGE": [], "INPATIENT": []}
+
     num_entries = 0
     for annotation in annotation_results:
         if annotation["type"] != "de.averbis.types.health.Medication":
             continue
-
         if annotation["status"] == "NEGATED" or annotation["status"] == "FAMILY":
             log.warning("annotation status is NEGATED or FAMILY. Ignoring.")
             continue
-        if annotation["status"] != "DISCHARGE":
-            log.warning("Annotation not part of discharge list. Ignoring.")
+        if med_entries.keys().__contains__(annotation["status"]) is False:
+            log.warning(
+                "Annotation not part of admission, inpatient or discharge list list. Ignoring."
+            )
             continue
         num_entries += 1
-        discharge_entry = {}
-        medication_statement = get_medication_statement_from_annotation(
-            annotation, document_reference
-        )[0]["statement"]
-        medication_reference = Reference.construct()
-        medication_reference.type = f"{medication_statement.resource_type}"
-        medication_reference.identifier = medication_statement.identifier[0]
-        medication_reference.reference = (
-            f"{medication_statement.resource_type}/{medication_statement.id}"
-        )
+        med_entry = {
+            "date": document_reference.date,
+            "item": get_medication_statement_reference(annotation, document_reference),
+        }
+        med_entries[annotation["status"]].append(med_entry)
 
-        discharge_entry["date"] = DateTime.now()
-        discharge_entry["item"] = medication_reference
-        discharge_entries.append(discharge_entry)
+    result = {}
 
-    discharge_list.entry = discharge_entries
-
-    if num_entries == 0:
+    for list_type in ["DISCHARGE", "ADMISSION", "INPATIENT"]:
+        result[list_type] = base_list.copy(deep=True)
+        result[list_type].entry = med_entries[list_type]
+        result[list_type].title = list_type.lower()
         empty_reason_coding = Coding.construct(
-            display="No discharge entries in document found."
+            display="No {} entries in document found.".format(list_type.lower())
         )
         empty_reason = CodeableConcept.construct(
-            text="No discharge entries in document found.", code=empty_reason_coding
+            text="No {} entries in document found.".format(list_type.lower()),
+            code=empty_reason_coding,
         )
-        discharge_list.emptyReason = empty_reason
+        if len(med_entries[list_type]) == 0:
+            result[list_type].emptyReason = empty_reason
 
-    return discharge_list
+        list_med_coding = Coding.construct(
+            system=LIST_MED_CODE_SYSTEM, code=LIST_MED_CODE
+        )
+        list_coding = Coding.construct(
+            system=LIST_CODE_SYSTEM, code=LIST_CODE_MAPPING[list_type]
+        )
+        list_code = CodeableConcept.construct(text="List Code", code=[])
+        list_code.code.append(list_med_coding)
+        list_code.code.append(list_coding)
+        result[list_type].code = list_code
+    return result
