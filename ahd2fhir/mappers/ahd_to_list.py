@@ -84,13 +84,6 @@ def get_medication_list_from_document_reference(
         if document_reference.identifier is not None
         else None
     )
-    list_identifier = Identifier.construct()
-    list_identifier.system = "https://fhir.miracum.org/nlp/identifiers/discharge_list"
-    list_identifier.value = f"discharge_list_{document_identifier_value}"
-
-    base_list.id = sha256(
-        f"{list_identifier.system}" f"|{list_identifier.value}".encode("utf-8")
-    ).hexdigest()
 
     if len(annotation_results) < 1:
         return None
@@ -142,4 +135,15 @@ def get_medication_list_from_document_reference(
         list_code.code.append(list_med_coding)
         list_code.code.append(list_coding)
         result[list_type].code = list_code
+
+        list_identifier = Identifier.construct()
+        list_identifier.system = (
+            "https://fhir.miracum.org/nlp/identifiers/discharge_list"
+        )
+        list_identifier.value = f"{list_type.lower()}_list_{document_identifier_value}"
+        result[list_type].identifier = list_identifier
+        result[list_type].id = sha256(
+            f"{list_identifier.system}" f"|{list_identifier.value}".encode("utf-8")
+        ).hexdigest()
+
     return result
