@@ -4,7 +4,6 @@ from fhir.resources.codeableconcept import CodeableConcept
 from fhir.resources.coding import Coding
 from fhir.resources.documentreference import DocumentReference
 from fhir.resources.fhirprimitiveextension import FHIRPrimitiveExtension
-from fhir.resources.fhirtypes import DateTime
 from fhir.resources.identifier import Identifier
 from fhir.resources.list import List
 from fhir.resources.meta import Meta
@@ -103,11 +102,11 @@ def get_medication_list_from_document_reference(
         if annotation["type"] != "de.averbis.types.health.Medication":
             continue
         if annotation["status"] == "NEGATED" or annotation["status"] == "FAMILY":
-            log.warning("annotation status is NEGATED or FAMILY. Ignoring.")
+            log.warning("annotation status is NEGATED or FAMILY.")
             continue
         if med_entries.keys().__contains__(annotation["status"]) is False:
             log.warning(
-                "Annotation not part of admission, inpatient or discharge list list. Ignoring."
+                "Annotation not part of admission, inpatient or discharge list."
             )
             continue
         num_entries += 1
