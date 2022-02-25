@@ -7,6 +7,7 @@ from fhir.resources.quantity import Quantity
 from fhir.resources.ratio import Ratio
 from structlog import get_logger
 
+from ahd2fhir.config import Settings
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
 log = get_logger()
@@ -30,14 +31,20 @@ def get_medication_from_annotation(annotation):
 
     # Medication Code
     codes = []
-    if "Abdamed-Averbis" in str(drug["ingredient"]["source"]):
+    if Settings.ahd_version.split(".")[0] == "5":
+        if "Abdamed-Averbis" in str(drug["ingredient"]["source"]):
+            system = "http://fhir.de/CodeSystem/dimdi/atc"
+            codes = str(drug["ingredient"]["conceptId"]).split("-")
+        elif "RxNorm" in str(drug["ingredient"]["source"]):
+            system = "http://www.nlm.nih.gov/research/umls/rxnorm"
+            codes.append(str(drug["ingredient"]["conceptId"]))
+        else:
+            system = ""
+    elif (
+        Settings.ahd_version.split(".")[0] == "6"
+    ):  # documentation: check if this changes in future
         system = "http://fhir.de/CodeSystem/dimdi/atc"
-        codes = str(drug["ingredient"]["conceptId"]).split("-")
-    elif "RxNorm" in str(drug["ingredient"]["source"]):
-        system = "http://www.nlm.nih.gov/research/umls/rxnorm"
-        codes.append(str(drug["ingredient"]["conceptId"]))
-    else:
-        system = ""
+        codes.append(annotation["atc"])
 
     med_code = CodeableConcept.construct()
     med_code.coding = []

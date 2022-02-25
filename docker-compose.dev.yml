@@ -1,72 +1,114 @@
-version: "3.7"
-
+version: '3.5'
 services:
-  mysql-hd:
-    image: registry.averbis.com/mysql/mysql:1.20.0
-    environment:
-      MYSQL_ROOT_PASSWORD: getaccess
-      MYSQL_DATABASE: aif
-      MYSQL_USER: aif
-      MYSQL_PASSWORD: getaccess
-      innodb_buffer_pool_size: 512m
-      innodb_log_file_size: 256m
-      innodb_log_buffer_size: 256m
-    volumes:
-      - dbVol-hd:/var/lib/mysql
-
-  gcm-hd:
-    image: registry.averbis.com/health-discovery/gcm-hd:5.39.1
-    environment:
-      TOMCAT_XMS: 1g
-      TOMCAT_XMX: 2g
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "curl",
-          "-f",
-          "http://localhost:8080/connector-manager/testConnectivity",
-        ]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 30s
-
-  solr-hd:
-    image: registry.averbis.com/health-discovery/solr-hd:5.39.1
-    environment:
-      SOLR_HEAP_SIZE: 512m
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8983/solr/terms/admin/ping"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 30s
-
-  health-discovery:
-    image: registry.averbis.com/health-discovery/health-discovery:5.39.1
+  health-discovery-hd:
+    image: registry.averbis.com/health-discovery/health-discovery:6.7.0
     ports:
-      - 127.0.0.1:9999:8080
+      - "${PRODUCT_BIND_ADDR:-0.0.0.0}:${PRODUCT_HTTP_PORT:-8080}:8080"
     environment:
-      TOMCAT_XMS: 7g
-      TOMCAT_XMX: 8g
-    volumes:
-      - sharedDirectoryDataVolume-hd:/usr/local/tomcat/shared/pipelines
-      - sharedDirectoryDownloads-hd:/usr/local/tomcat/shared/downloads
+      - PLATFORM_PORT=8080
+      - PLATFORM_MAX_MEM=${PRODUCT_MAX_MEM:-24g}
+      - DATABASE_DRIVER_CLASS=org.mariadb.jdbc.Driver
+      - DATABASE_URL=jdbc:mariadb://database:3306/aif?useMysqlMetadata=true
+      - DATABASE_USERNAME=aif
+      - DATABASE_PASSWORD=getaccess
     depends_on:
-      - mysql-hd
-      - solr-hd
+      - database
+      - solr
+      - gcm
+    volumes:
+      - resourceVolPlatform-hd:/opt/resources/platform
+    networks:
+      - product_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health-discovery"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/health-discovery" ]
       interval: 30s
       timeout: 5s
       retries: 3
       start_period: 1m
-
+  database:
+    image: mariadb:10.5
+    command: --max_allowed_packet=1g --innodb_buffer_pool_size=512m
+      --innodb_log_buffer_size=256m --innodb_log_file_size=256m
+    environment:
+      - MYSQL_ROOT_PASSWORD=getaccess
+      - MYSQL_DATABASE=aif
+      - MYSQL_USER=aif
+      - MYSQL_PASSWORD=getaccess
+    volumes:
+      - dbVol-hd:/var/lib/mysql
+    networks:
+      - product_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+  solr:
+    image: registry.averbis.com/solr/solr:6.15.0
+    environment:
+      - SOLR_MAX_MEM=512m
+      - TEXTANALYSIS_URL=http://${PLATFORM_HOSTNAME:-health-discovery-hd}:${PLATFORM_PORT:-8080}/health-discovery/rest
+    volumes:
+      - solrDataVol-hd:/opt/solr/server/solr/solrCores
+      - solrTermsVol-hd:/opt/solr/server/solr/terms
+      - solrLogVol-hd:/opt/solr/server/logs
+    networks:
+      - product_network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8983/solr/terms/admin/ping" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+  gcm:
+    image: registry.averbis.com/gcm/gcm:6.15.0
+    environment:
+      - JAVA_MAX_MEM=2g
+      - PLATFORM_HOSTNAME=${PLATFORM_HOSTNAME:-health-discovery-hd}
+      - PLATFORM_PORT=${PLATFORM_PORT:-8080}
+      - PLATFORM_URL_NAME=health-discovery
+      - GCM_HOSTNAME=gcm
+      - GCM_PORT=8181
+    volumes:
+      - gcmVol-hd:/opt/resources/connector-manager/home
+      - gcmvoljdbchd:/opt/apache-karaf/lib/ext
+    networks:
+      - product_network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8181/connector-manager/testConnectivity" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+networks:
+  product_network:
 volumes:
+  resourceVolPlatform-hd:
+    driver: "local"
   dbVol-hd:
     driver: "local"
-  sharedDirectoryDataVolume-hd:
+  solrDataVol-hd:
     driver: "local"
-  sharedDirectoryDownloads-hd:
+  solrLogVol-hd:
+    driver: "local"
+  solrTermsVol-hd:
+    driver: "local"
+  gcmVol-hd:
+    driver: "local"
+  gcmvoljdbchd:
     driver: "local"
