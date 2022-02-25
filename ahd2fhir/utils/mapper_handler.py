@@ -7,6 +7,7 @@ from fhir.resources.resource import Resource
 from ahd2fhir.config import Settings
 from ahd2fhir.mappers.ahd_to_condition import AHD_TYPE_DIAGNOSIS, get_fhir_condition
 from ahd2fhir.mappers.ahd_to_device import AHD_TYPE_DOCUMENT_ANNOTATION, build_device
+from ahd2fhir.mappers.ahd_to_list import get_fhir_list_resources
 from ahd2fhir.mappers.ahd_to_medication_statement import (
     AHD_TYPE_MEDICATION,
     deduplicate_resources,
@@ -31,6 +32,7 @@ class Mapper:
     ahd_type: str
     mapper_function: Callable
     deduplicate_function: Callable = lambda x: x
+    handle_all_annotations: bool = False
 
     def get_resources(self, ahd_response_entry, doc_ref):
         return self.mapper_function(ahd_response_entry, doc_ref)
@@ -45,12 +47,6 @@ class Mapper:
 class MapperHandler:
     def __init__(self, config: Settings):
         mappers = [
-            Mapper(
-                name="SmokingStatusMapper",
-                config=config,
-                ahd_type=UKLFR_TYPE_SMKSTAT,
-                mapper_function=get_fhir_smoking_status,
-            ),
             Mapper(
                 name="DeviceMapper",
                 config=config,
@@ -71,11 +67,23 @@ class MapperHandler:
                 deduplicate_function=deduplicate_resources,
             ),
             Mapper(
+                name="ListMapper",
+                config=config,
+                ahd_type=AHD_TYPE_MEDICATION,
+                mapper_function=get_fhir_list_resources,
+                handle_all_annotations=True,
+            ),
+            Mapper(
                 name="KidneyStoneMapper",
                 config=config,
                 ahd_type=UKLFR_TYPE_KIDNEY_STONE,
                 mapper_function=get_fhir_kidney_stones,
-                deduplicate_function=deduplicate_resources,
+            ),
+            Mapper(
+                name="SmokingStatusMapper",
+                config=config,
+                ahd_type=UKLFR_TYPE_SMKSTAT,
+                mapper_function=get_fhir_smoking_status,
             ),
         ]
         self.enabled_mappers = [m for m in mappers if m.name in config.enabled_mappers]
@@ -84,9 +92,13 @@ class MapperHandler:
     def get_mappings(self, averbis_result, doc_ref):
         total_results = []
         for mapper in self.enabled_mappers:
-            mapper_results = []
-            for val in averbis_result:
-                if val["type"] == mapper.ahd_type:
+            if mapper.handle_all_annotations:
+                mapper_results = mapper.get_resources(averbis_result, doc_ref)
+            else:
+                mapper_results = []
+                for val in averbis_result:
+                    if val["type"] != mapper.ahd_type:
+                        continue
                     if (results := mapper.get_resources(val, doc_ref)) is not None:
                         if isinstance(results, list):
                             mapper_results.extend(results)

@@ -115,12 +115,7 @@ class ResourceHandler:
             log.error("Failed to perform text analysis", error=exc)
             raise TransientError(exc)
 
-        total_results = []
-        mh_results = self.mapper_handler.get_mappings(
-            averbis_result, document_reference
-        )
-        total_results.extend(mh_results)
-        return total_results
+        return self.mapper_handler.get_mappings(averbis_result, document_reference)
 
     @tenacity.retry(
         stop=tenacity.stop.stop_after_attempt(10),
