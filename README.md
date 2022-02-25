@@ -72,6 +72,7 @@ pip install -r requirements-dev.txt
 Starts an AHD server:
 
 ```sh
+docker login registry.averbis.com "Username" "Password"
 docker-compose -f docker-compose.dev.yml up
 ```
 
