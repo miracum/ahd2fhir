@@ -1,7 +1,6 @@
 import json
 
-from ahd2fhir.utils.device_builder import build_device
-from ahd2fhir.utils.resource_handler import AHD_TYPE_DOCUMENT_ANNOTATION
+from ahd2fhir.mappers.ahd_to_device import AHD_TYPE_DOCUMENT_ANNOTATION, build_device
 
 
 def test_build_sets_version_identifier_and_id():
@@ -12,7 +11,7 @@ def test_build_sets_version_identifier_and_id():
         a for a in ahd_payload if a["type"] == AHD_TYPE_DOCUMENT_ANNOTATION
     ].pop()
 
-    device = build_device(annotation)
+    device = build_device(annotation, None)
 
     assert device.json()
 

@@ -8,10 +8,10 @@ from fhir.resources.period import Period
 from fhir.resources.reference import Reference
 
 from ahd2fhir.mappers.ahd_to_medication_statement import (
+    AHD_TYPE_MEDICATION,
     get_fhir_medication_statement,
     get_medication_interval_from_annotation,
 )
-from ahd2fhir.utils.resource_handler import AHD_TYPE_MEDICATION
 
 
 def get_example_payload():

@@ -1,3 +1,4 @@
+import typing
 from hashlib import sha256
 
 from fhir.resources.codeableconcept import CodeableConcept
@@ -50,6 +51,26 @@ def get_medication_statement_reference(annotation, document_reference):
         f"{medication_statement.resource_type}/{medication_statement.id}"
     )
     return medication_reference
+
+
+def get_fhir_list_resources(
+    annotation_results: typing.List[dict], document_reference: DocumentReference
+) -> typing.List[List]:
+    lists = get_medication_list_from_document_reference(
+        annotation_results=annotation_results, document_reference=document_reference
+    )
+    total_results = []
+    if lists is not None:
+        discharge_list = lists["DISCHARGE"]
+        if discharge_list is not None:
+            total_results.append(discharge_list)
+        admission_list = lists["ADMISSION"]
+        if admission_list is not None:
+            total_results.append(admission_list)
+        inpatient_list = lists["INPATIENT"]
+        if inpatient_list is not None:
+            total_results.append(inpatient_list)
+    return total_results
 
 
 def get_fhir_list(annotation_results, document_reference: DocumentReference):

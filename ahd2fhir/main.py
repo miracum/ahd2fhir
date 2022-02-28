@@ -15,6 +15,7 @@ from starlette.responses import JSONResponse
 from ahd2fhir import config
 from ahd2fhir.kafka_setup import kafka_start_consuming, kafka_stop_consuming
 from ahd2fhir.logging_setup import setup_logging
+from ahd2fhir.utils.mapper_handler import MapperHandler
 from ahd2fhir.utils.resource_handler import ResourceHandler
 
 app = FastAPI()
@@ -34,10 +35,17 @@ def get_averbis_pipeline(settings: config.Settings = Depends(get_settings)) -> P
     return client.get_project(settings.ahd_project).get_pipeline(settings.ahd_pipeline)
 
 
+def get_mapper_handler(
+    settings: config.Settings = Depends(get_settings),
+) -> MapperHandler:
+    return MapperHandler(settings)
+
+
 def get_resource_handler(
     averbis_pipeline: Pipeline = Depends(get_averbis_pipeline),
+    mapper_handler: MapperHandler = Depends(get_mapper_handler),
 ) -> ResourceHandler:
-    return ResourceHandler(averbis_pipeline)
+    return ResourceHandler(averbis_pipeline, mapper_handler)
 
 
 @app.get("/ready")
@@ -93,7 +101,9 @@ async def startup_event():
     logger.info("Initializing API")
     if os.getenv("KAFKA_ENABLED", "False").lower() in ["true", "1"]:
         logger.info("Initializing Kafka")
-        resource_handler = get_resource_handler(get_averbis_pipeline(get_settings()))
+        resource_handler = get_resource_handler(
+            get_averbis_pipeline(get_settings()), get_mapper_handler(get_settings())
+        )
         global kafka_consumer_task
         kafka_consumer_task = asyncio.create_task(
             kafka_start_consuming(resource_handler)

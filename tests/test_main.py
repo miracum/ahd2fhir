@@ -17,8 +17,9 @@ def get_settings_override():
 
 
 class MockResourceHandler:
-    def __init__(self, averbis_pipeline):
+    def __init__(self, averbis_pipeline, config):
         self.pipeline = averbis_pipeline
+        self.config = config
 
     def handle_documents(self, document_references) -> Bundle:
         bundle = Bundle.construct()
@@ -29,7 +30,7 @@ class MockResourceHandler:
 
 
 def get_resource_handler():
-    return MockResourceHandler(None)
+    return MockResourceHandler(None, None)
 
 
 main.app.dependency_overrides[main.get_settings] = get_settings_override

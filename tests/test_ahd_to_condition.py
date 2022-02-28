@@ -3,14 +3,23 @@ import json
 import pytest
 from fhir.resources.documentreference import DocumentReferenceContext
 
-from ahd2fhir.mappers.ahd_to_condition import get_fhir_condition
-from ahd2fhir.utils.resource_handler import AHD_TYPE_DIAGNOSIS
+from ahd2fhir.mappers.ahd_to_condition import AHD_TYPE_DIAGNOSIS, get_fhir_condition
 from tests.utils import get_empty_document_reference
 
 AHD_PAYLOADS_EXPECTED_NUMBER_OF_CONDITIONS = [
     ("payload_1.json", 13),
     ("payload_2.json", 7),
 ]
+
+
+def get_conditions_from_payload(ahd_payload):
+    conditions = []
+    for val in ahd_payload:
+        if val["type"] == AHD_TYPE_DIAGNOSIS:
+            mapped_condition = get_fhir_condition(val, get_empty_document_reference())
+            if mapped_condition is not None:
+                conditions.append(mapped_condition)
+    return conditions
 
 
 @pytest.mark.parametrize(
@@ -23,13 +32,7 @@ def test_maps_to_expected_number_of_condition_resources(
 
     with open(f"tests/resources/ahd/{ahd_json_path}") as file:
         ahd_payload = json.load(file)
-
-    conditions = []
-    for val in ahd_payload:
-        if val["type"] == AHD_TYPE_DIAGNOSIS:
-            mapped_condition = get_fhir_condition(val, get_empty_document_reference())
-            if mapped_condition is not None:
-                conditions.append(mapped_condition)
+    conditions = get_conditions_from_payload(ahd_payload)
 
     assert len(conditions) == expected_number_of_conditions
 
@@ -41,13 +44,7 @@ def test_maps_to_expected_number_of_condition_resources(
 def test_mapped_condition_coding_should_set_userselected_to_false(ahd_json_path, _):
     with open(f"tests/resources/ahd/{ahd_json_path}") as file:
         ahd_payload = json.load(file)
-
-    conditions = []
-    for val in ahd_payload:
-        if val["type"] == AHD_TYPE_DIAGNOSIS:
-            mapped_condition = get_fhir_condition(val, get_empty_document_reference())
-            if mapped_condition is not None:
-                conditions.append(mapped_condition)
+    conditions = get_conditions_from_payload(ahd_payload)
 
     for c in conditions:
         assert all(coding.userSelected is False for coding in c.code.coding)

@@ -14,6 +14,7 @@ from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
 log = get_logger()
 
+AHD_TYPE_DIAGNOSIS = "de.averbis.types.health.Diagnosis"
 CLINICAL_STATUS_MAPPING = {"ACTIVE": "active", "RESOLVED": "resolved"}
 SIDE_MAPPING = {
     "LEFT": ("7771000", "Left"),

@@ -11,6 +11,7 @@ from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
 log = get_logger()
 
+AHD_TYPE_MEDICATION = "de.averbis.types.health.Medication"
 MEDICATION_PROFILE = (
     "https://www.medizininformatik-initiative.de/"
     + "fhir/core/modul-medikation/StructureDefinition/Medication"

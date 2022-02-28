@@ -98,3 +98,10 @@ class Settings(BaseSettings):
     ahd_pipeline: str
     # Kafka Settings
     kafka: KafkaSettings = KafkaSettings()
+    enabled_mappers: str = "DeviceMapper,ConditionMapper,MedicationMapper"
+
+    @validator("enabled_mappers")
+    def parse_mappers_list(cls, v):
+        if isinstance(v, str):
+            return v.replace(" ", "").split(",")
+        raise ValueError(f"enabled_mappers is not a valid list ({v})")
