@@ -31,7 +31,7 @@ class Mapper:
     config: Settings
     ahd_type: str
     mapper_function: Callable
-    deduplicate_function: Callable = lambda x: x
+    deduplicate_function: Callable = None
     handle_all_annotations: bool = False
 
     def get_resources(self, ahd_response_entry, doc_ref):
@@ -105,7 +105,8 @@ class MapperHandler:
                         if isinstance(results, Resource):
                             mapper_results.append(results)
 
-            mapper_results = mapper.deduplicate_resources(mapper_results)
+            if mapper.deduplicate_function is not None:
+                mapper_results = mapper.deduplicate_resources(mapper_results)
             total_results.extend(mapper_results)
         return total_results
 
