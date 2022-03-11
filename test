@@ -1,0 +1,551 @@
+{
+    "id": "681e13fed3816277b48685c4f83fed7ee31e8bb5273d1037f934e4c2ad081023",
+    "entry": [
+        {
+            "fullUrl": "List/a2feec3355b648727296f702f024c8638823999cac994a1c9a0d58fa66ba0298",
+            "request": {
+                "method": "PUT",
+                "url": "List/a2feec3355b648727296f702f024c8638823999cac994a1c9a0d58fa66ba0298"
+            },
+            "resource": {
+                "id": "a2feec3355b648727296f702f024c8638823999cac994a1c9a0d58fa66ba0298",
+                "meta": {
+                    "profile": [
+                        "https://www.medizininformatik-initiative.de/fhir/core/modul-medikation/StructureDefinition/List"
+                    ]
+                },
+                "code": {
+                    "text": "List Code",
+                    "code": [
+                        {
+                            "code": "medications",
+                            "system": "http://terminology.hl7.org/CodeSystem/list-example-use-codes"
+                        },
+                        {
+                            "code": "E230",
+                            "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.16"
+                        }
+                    ]
+                },
+                "date": "2019-09-26T18:04:30+00:00",
+                "emptyReason": {
+                    "text": "No discharge entries in document found.",
+                    "code": {
+                        "display": "No discharge entries in document found."
+                    }
+                },
+                "entry": [],
+                "mode": "snapshot",
+                "status": "current",
+                "subject": {
+                    "reference": "Patient/p3480585566"
+                },
+                "title": "discharge",
+                "resourceType": "List"
+            }
+        },
+        {
+            "fullUrl": "List/6bb8ec2f5c0c9c86aa188c68cdaafa2a4dfc7883a576fbab80affdfdf1b3fb32",
+            "request": {
+                "method": "PUT",
+                "url": "List/6bb8ec2f5c0c9c86aa188c68cdaafa2a4dfc7883a576fbab80affdfdf1b3fb32"
+            },
+            "resource": {
+                "id": "6bb8ec2f5c0c9c86aa188c68cdaafa2a4dfc7883a576fbab80affdfdf1b3fb32",
+                "meta": {
+                    "profile": [
+                        "https://www.medizininformatik-initiative.de/fhir/core/modul-medikation/StructureDefinition/List"
+                    ]
+                },
+                "code": {
+                    "text": "List Code",
+                    "code": [
+                        {
+                            "code": "medications",
+                            "system": "http://terminology.hl7.org/CodeSystem/list-example-use-codes"
+                        },
+                        {
+                            "code": "E210",
+                            "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.16"
+                        }
+                    ]
+                },
+                "date": "2019-09-26T18:04:30+00:00",
+                "emptyReason": {
+                    "text": "No admission entries in document found.",
+                    "code": {
+                        "display": "No admission entries in document found."
+                    }
+                },
+                "entry": [],
+                "mode": "snapshot",
+                "status": "current",
+                "subject": {
+                    "reference": "Patient/p3480585566"
+                },
+                "title": "admission",
+                "resourceType": "List"
+            }
+        },
+        {
+            "fullUrl": "List/4b9b4bdca77dda9eab20ccf8c639703ee96ed0f28b60ed34f9de1a22f092ae52",
+            "request": {
+                "method": "PUT",
+                "url": "List/4b9b4bdca77dda9eab20ccf8c639703ee96ed0f28b60ed34f9de1a22f092ae52"
+            },
+            "resource": {
+                "id": "4b9b4bdca77dda9eab20ccf8c639703ee96ed0f28b60ed34f9de1a22f092ae52",
+                "meta": {
+                    "profile": [
+                        "https: //www.medizininformatik-initiative.de/fhir/core/modul-medikation/StructureDefinition/List"
+                    ]
+                },
+                "code": {
+                    "text": "List Code",
+                    "code": [
+                        {
+                            "code": "medications",
+                            "system": "http://terminology.hl7.org/CodeSystem/list-example-use-codes"
+                        },
+                        {
+                            "code": "E200",
+                            "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.16"
+                        }
+                    ]
+                },
+                "date": "2019-09-26T18:04:30+00:00",
+                "emptyReason": {
+                    "text": "No inpatient entries in document found.",
+                    "code": {
+                        "display": "No inpatient entries in document found."
+                    }
+                },
+                "entry": [],
+                "mode": "snapshot",
+                "status": "current",
+                "subject": {
+                    "reference": "Patient/p3480585566"
+                },
+                "title": "inpatient",
+                "resourceType": "List"
+            }
+        },
+        {
+            "fullUrl": "Condition/6b1c4348ed6a92c7871a6effbd636e55b91648632ac877e92b38338f094385b2",
+            "request": {
+                "method": "PUT",
+                "url": "Condition/6b1c4348ed6a92c7871a6effbd636e55b91648632ac877e92b38338f094385b2"
+            },
+            "resource": {
+                "id": "6b1c4348ed6a92c7871a6effbd636e55b91648632ac877e92b38338f094385b2",
+                "meta": {
+                    "profile": [
+                        "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
+                    ]
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "code": "R53",
+                            "display": "Unwohlsein und Ermüdung",
+                            "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+                            "userSelected": false,
+                            "version": "2021"
+                        }
+                    ]
+                },
+                "encounter": {
+                    "reference": "Encounter/e2216331600"
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
+                        "value": "DOC-NUM-1234567_70-98_ICD10GM_2021-R53"
+                    }
+                ],
+                "recordedDate": "2019-09-26T18:04:30+00:00",
+                "subject": {
+                    "reference": "Patient/p3480585566"
+                },
+                "resourceType": "Condition"
+            }
+        },
+        {
+            "fullUrl": "Condition/b69001670f6e8a49893d0edd59b2b5568dcdee91abcc25c9d05bd4e13715545c",
+            "request": {
+                "method": "PUT",
+                "url": "Condition/b69001670f6e8a49893d0edd59b2b5568dcdee91abcc25c9d05bd4e13715545c"
+            },
+            "resource": {
+                "id": "b69001670f6e8a49893d0edd59b2b5568dcdee91abcc25c9d05bd4e13715545c",
+                "meta": {
+                    "profile": [
+                        "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
+                    ]
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "code": "R05",
+                            "display": "Husten",
+                            "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+                            "userSelected": false,
+                            "version": "2021"
+                        }
+                    ]
+                },
+                "encounter": {
+                    "reference": "Encounter/e2216331600"
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
+                        "value": "DOC-NUM-1234567_165-171_ICD10GM_2021-R05"
+                    }
+                ],
+                "recordedDate": "2019-09-26T18:04:30+00:00",
+                "subject": {
+                    "reference": "Patient/p3480585566"
+                },
+                "resourceType": "Condition"
+            }
+        },
+        {
+            "fullUrl": "Condition/b7badf497b929ebd11a4499c453c6fbda4eb4f4bca8b4530f46812e917ccd017",
+            "request": {
+                "method": "PUT",
+                "url": "Condition/b7badf497b929ebd11a4499c453c6fbda4eb4f4bca8b4530f46812e917ccd017"
+            },
+            "resource": {
+                "id": "b7badf497b929ebd11a4499c453c6fbda4eb4f4bca8b4530f46812e917ccd017",
+                "meta": {
+                    "profile": [
+                        "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
+                    ]
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "code": "D72.8",
+                            "display": "Sonstige näher bezeichnete Krankheiten der Leukozyten",
+                            "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+                            "userSelected": false,
+                            "version": "2021"
+                        }
+                    ]
+                },
+                "encounter": {
+                    "reference": "Encounter/e2216331600"
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
+                        "value": "DOC-NUM-1234567_355-366_ICD10GM_2021-D72.8"
+                    }
+                ],
+                "recordedDate": "2019-09-26T18:04:30+00:00",
+                "subject": {
+                    "reference": "Patient/p3480585566"
+                },
+                "resourceType": "Condition"
+            }
+        },
+        {
+            "fullUrl": "Condition/bfa447e036e39c7f43b915356368b364293c4a6d54e7601979b79c7e3b02ee23",
+            "request": {
+                "method": "PUT",
+                "url": "Condition/bfa447e036e39c7f43b915356368b364293c4a6d54e7601979b79c7e3b02ee23"
+            },
+            "resource": {
+                "id": "bfa447e036e39c7f43b915356368b364293c4a6d54e7601979b79c7e3b02ee23",
+                "meta": {
+                    "profile": [
+                        "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
+                    ]
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "code": "D72.8",
+                            "display": "Sonstige näher bezeichnete Krankheiten der Leukozyten",
+                            "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+                            "userSelected": false,
+                            "version": "2021"
+                        }
+                    ]
+                },
+                "encounter": {
+                    "reference": "Encounter/e2216331600"
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
+                        "value": "DOC-NUM-1234567_637-648_ICD10GM_2021-D72.8"
+                    }
+                ],
+                "recordedDate": "2019-09-26T18:04:30+00:00",
+                "subject": {
+                    "reference": "Patient/p3480585566"
+                },
+                "resourceType": "Condition"
+            }
+        },
+        {
+            "fullUrl": "Condition/c0fe3bb3a85a0982f7d136548f0bb50947135c0451048b8b8e055d029c769545",
+            "request": {
+                "method": "PUT",
+                "url": "Condition/c0fe3bb3a85a0982f7d136548f0bb50947135c0451048b8b8e055d029c769545"
+            },
+            "resource": {
+                "id": "c0fe3bb3a85a0982f7d136548f0bb50947135c0451048b8b8e055d029c769545",
+                "meta": {
+                    "profile": [
+                        "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
+                    ]
+                },
+                "bodySite": [
+                    {
+                        "coding": [
+                            {
+                                "code": "24028007",
+                                "display": "Right",
+                                "system": "http://snomed.info/sct"
+                            }
+                        ]
+                    }
+                ],
+                "code": {
+                    "coding": [
+                        {
+                            "code": "N83.2",
+                            "display": "Sonstige Ovarialzyste",
+                            "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+                            "userSelected": false,
+                            "version": "2021"
+                        }
+                    ]
+                },
+                "encounter": {
+                    "reference": "Encounter/e2216331600"
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
+                        "value": "DOC-NUM-1234567_705-717_ICD10GM_2021-N83.2"
+                    }
+                ],
+                "recordedDate": "2019-09-26T18:04:30+00:00",
+                "subject": {
+                    "reference": "Patient/p3480585566"
+                },
+                "resourceType": "Condition"
+            }
+        },
+        {
+            "fullUrl": "Condition/fdd67f732b9ce4b238d0962a95f1bff6ba764d528d3afbed765e0e01773b85d9",
+            "request": {
+                "method": "PUT",
+                "url": "Condition/fdd67f732b9ce4b238d0962a95f1bff6ba764d528d3afbed765e0e01773b85d9"
+            },
+            "resource": {
+                "id": "fdd67f732b9ce4b238d0962a95f1bff6ba764d528d3afbed765e0e01773b85d9",
+                "meta": {
+                    "profile": [
+                        "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
+                    ]
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "code": "K81.0",
+                            "display": "Akute Cholezystitis",
+                            "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+                            "userSelected": false,
+                            "version": "2021"
+                        }
+                    ]
+                },
+                "encounter": {
+                    "reference": "Encounter/e2216331600"
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
+                        "value": "DOC-NUM-1234567_869-888_ICD10GM_2021-K81.0"
+                    }
+                ],
+                "recordedDate": "2019-09-26T18:04:30+00:00",
+                "subject": {
+                    "reference": "Patient/p3480585566"
+                },
+                "resourceType": "Condition"
+            }
+        },
+        {
+            "fullUrl": "Condition/41f77f2d5d89aff5a6cff6ce600b350a5c5b8cb2d5ccbe29dfce2ed71d31e5f4",
+            "request": {
+                "method": "PUT",
+                "url": "Condition/41f77f2d5d89aff5a6cff6ce600b350a5c5b8cb2d5ccbe29dfce2ed71d31e5f4"
+            },
+            "resource": {
+                "id": "41f77f2d5d89aff5a6cff6ce600b350a5c5b8cb2d5ccbe29dfce2ed71d31e5f4",
+                "meta": {
+                    "profile": [
+                        "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
+                    ]
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "code": "R06.0",
+                            "display": "Dyspnoe",
+                            "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+                            "userSelected": false,
+                            "version": "2021"
+                        }
+                    ]
+                },
+                "encounter": {
+                    "reference": "Encounter/e2216331600"
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
+                        "value": "DOC-NUM-1234567_1401-1408_ICD10GM_2021-R06.0"
+                    }
+                ],
+                "recordedDate": "2019-09-26T18:04:30+00:00",
+                "subject": {
+                    "reference": "Patient/p3480585566"
+                },
+                "resourceType": "Condition"
+            }
+        },
+        {
+            "fullUrl": "Device/45812c344a239ee4cbc4b243b49465e990223a6048219ac38fc2101a08a79860",
+            "request": {
+                "method": "PUT",
+                "url": "Device/45812c344a239ee4cbc4b243b49465e990223a6048219ac38fc2101a08a79860"
+            },
+            "resource": {
+                "id": "45812c344a239ee4cbc4b243b49465e990223a6048219ac38fc2101a08a79860",
+                "deviceName": [
+                    {
+                        "name": "Averbis Health Discovery",
+                        "type": "manufacturer-name"
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://fhir.miracum.org/nlp/identifiers/averbis-health-discovery-device-id",
+                        "value": "ahd-v5.40.0"
+                    }
+                ],
+                "manufacturer": "Averbis GmbH",
+                "status": "active",
+                "version": [
+                    {
+                        "value": "5.40.0"
+                    }
+                ],
+                "resourceType": "Device"
+            }
+        },
+        {
+            "fullUrl": "Composition/681e13fed3816277b48685c4f83fed7ee31e8bb5273d1037f934e4c2ad081023",
+            "request": {
+                "method": "PUT",
+                "url": "Composition/681e13fed3816277b48685c4f83fed7ee31e8bb5273d1037f934e4c2ad081023"
+            },
+            "resource": {
+                "id": "681e13fed3816277b48685c4f83fed7ee31e8bb5273d1037f934e4c2ad081023",
+                "author": [
+                    {
+                        "reference": "Device/45812c344a239ee4cbc4b243b49465e990223a6048219ac38fc2101a08a79860",
+                        "type": "Device"
+                    }
+                ],
+                "category": [
+                    {
+                        "coding": [
+                            {
+                                "code": "KI Kurzbrief",
+                                "display": "KI Kurzbrief",
+                                "system": "https: //fhir.example.com/CodeSystem/document-category"
+                            }
+                        ],
+                        "text": "KI Kurzbrief"
+                    }
+                ],
+                "date": "2022-02-25T13:43:41.778386+00:00",
+                "encounter": {
+                    "reference": "Encounter/e2216331600"
+                },
+                "identifier": {
+                    "system": "https://fhir.miracum.org/nlp/identifiers/ahd-analysis-result-composition",
+                    "value": "DOC-NUM-1234567_ahd-analysis-result"
+                },
+                "section": [
+                    {
+                        "entry": [
+                            {
+                                "reference": "List/a2feec3355b648727296f702f024c8638823999cac994a1c9a0d58fa66ba0298"
+                            },
+                            {
+                                "reference": "List/6bb8ec2f5c0c9c86aa188c68cdaafa2a4dfc7883a576fbab80affdfdf1b3fb32"
+                            },
+                            {
+                                "reference": "List/4b9b4bdca77dda9eab20ccf8c639703ee96ed0f28b60ed34f9de1a22f092ae52"
+                            }
+                        ],
+                        "title": "List"
+                    },
+                    {
+                        "entry": [
+                            {
+                                "reference": "Condition/6b1c4348ed6a92c7871a6effbd636e55b91648632ac877e92b38338f094385b2"
+                            },
+                            {
+                                "reference": "Condition/b69001670f6e8a49893d0edd59b2b5568dcdee91abcc25c9d05bd4e13715545c"
+                            },
+                            {
+                                "reference": "Condition/b7badf497b929ebd11a4499c453c6fbda4eb4f4bca8b4530f46812e917ccd017"
+                            },
+                            {
+                                "reference": "Condition/bfa447e036e39c7f43b915356368b364293c4a6d54e7601979b79c7e3b02ee23"
+                            },
+                            {
+                                "reference": "Condition/c0fe3bb3a85a0982f7d136548f0bb50947135c0451048b8b8e055d029c769545"
+                            },
+                            {
+                                "reference": "Condition/fdd67f732b9ce4b238d0962a95f1bff6ba764d528d3afbed765e0e01773b85d9"
+                            },
+                            {
+                                "reference": "Condition/41f77f2d5d89aff5a6cff6ce600b350a5c5b8cb2d5ccbe29dfce2ed71d31e5f4"
+                            }
+                        ],
+                        "title": "Condition"
+                    }
+                ],
+                "status": "final",
+                "subject": {
+                    "reference": "Patient/p3480585566"
+                },
+                "title": "NLP FHIR Results 2022-02-25T13:43",
+                "type": {
+                    "coding": [
+                        {
+                            "code": "18842-5",
+                            "display": "Discharge summary note",
+                            "system": "http://loinc.org"
+                        }
+                    ],
+                    "text": "Discharge summary note"
+                },
+                "resourceType": "Composition"
+            }
+        }
+    ],
+    "type": "transaction",
+    "resourceType": "Bundle"
+}

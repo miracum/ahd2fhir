@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+       <html>
+         <head>
+           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+         </head>
+         <body>
+
+             <p style="MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px">Sehr geehrte Frau Kollegin, </p> <p>Die Patientin stellte sich am 14.05. in reduziertem Allgemeinzustand mit
+einer Körpertemperatur (Ohrmessung) von 39,4°C und deutlichem Husten, jedoch ohne Dyspnoe in unserer zentralen Notaufnahme vor.</p>
+
+             <p style="MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px">Als Vorerkrankung wurde anamnestisch ein Typ-1-Diabetes mit Insulintherapie angegeben.</p> <p style="MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px">Im Aufnahmelabor fielen eine leichte Leukozytose (11,2/nl im maschinell bestimmten Blutbild), eine Erhöhung der CRP (1,2 mg/dl) und erh\u00f6hte Gamma-GT 45 U/l) auf.</p>
+
+             <p style="MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px"><font style="FONT-SIZE: 10pt; RIGHT: auto; ZOOM: normal; COLOR: black; LEFT: auto; TOP: auto; BOTTOM: auto">Im weiteren Verlauf wurde am 25.05. ein gespanntes Abdomen bei gleichzeitigem Anstieg der Gamma-GT auf 95 U/l, der Lipase auf 118 U/l und fortgesetzter Leukozytose von 16.2/nl festgestellt.</font></p>
+
+            <p style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px">08.05.2020 OP</p><table style="WIDTH: 100N; BORDER-COLLAPSE: collapse"><tbody><tr><td style="VERTICAL-ALIGN: top; WIDTH: 120px">5-651.92</td><td>Exzision Ovarialzyste Endoskopisch (laparoskopisch) rechts</td></tr><tr><td style="VERTICAL-ALIGN: top; WIDTH: 120px">5-469.21</td><td>Laparoskopische Adhäsiolyse am Darm</td></tr><tr><td style="VERTICAL-ALIGN: top; WIDTH: 120px">1-694</td><td>Diagnostische Laparoskopie [Peritoneoskopie]</td></tr></tbody></table>
+
+            <p style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px">Der Verdacht auf eine akute Cholezystitis wurde mittels Oberbauchsonographie best\u00e4tigt (gestaute Gallenblase, verdickte Gallenblasenwand, Verlegung des Gallengangs durch mehrere kleine Konkremente).</p>
+
+            <p style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px">Nieren beidseits nicht gestaut.</p>
+
+            <p style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px">PSN-DAT: Nasen(vorhof)abstrich</p><p style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px"><u>Kultureller Befund:</u> kein Nachweis von Methicillin-resistentem S. aureus (MRSA)</p><p style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px"><u>Nukleinsäureamplifikationstest (NAT):</u> MRSA (Schnelltest): negativ</p>
+
+            <p style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px">PSN-DAT: Hämoglobin 12,8 g/dl (12 - 15 g/dl)</p>
+
+            <p style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px">PSN-DAT: Der Patient erhielt 500mg Ibuprofen 5x täglich.</p>
+
+             <p style="MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px">Die Patienten konnte am 12.06. in gutem Allgemeinzustand, jedoch mit einer weiterhin bestehenden Dyspnoe bei
+leichter Belastung entlassen werden.</p>
+
+         </body>
+       </html>
