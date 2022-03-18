@@ -23,7 +23,9 @@ einer Körpertemperatur (Ohrmessung) von 39,4°C und deutlichem Husten, jedoch o
 
             <p style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px">PSN-DAT: Hämoglobin 12,8 g/dl (12 - 15 g/dl)</p>
 
-            <p style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px">PSN-DAT: Der Patient erhielt 500mg Ibuprofen 5x täglich.</p>
+            <p style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px">PSN-DAT: Der Patient erhielt während des Aufenthalts 500mg Ibuprofen 5x täglich.</p>
+
+            <p style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px">PSN-DAT: Entlassmedikation: Paracetamol 2000mg.</p>
 
              <p style="MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px">Die Patienten konnte am 12.06. in gutem Allgemeinzustand, jedoch mit einer weiterhin bestehenden Dyspnoe bei
 leichter Belastung entlassen werden.</p>
