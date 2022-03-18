@@ -31,7 +31,7 @@ def get_medication_from_annotation(annotation):
 
     # Medication Code
     codes = []
-    if Settings.ahd_version.split(".")[0] == "5":
+    if Settings().ahd_version.split(".")[0] == "5":
         if "Abdamed-Averbis" in str(drug["ingredient"]["source"]):
             system = "http://fhir.de/CodeSystem/dimdi/atc"
             codes = str(drug["ingredient"]["conceptId"]).split("-")
@@ -41,7 +41,7 @@ def get_medication_from_annotation(annotation):
         else:
             system = ""
     elif (
-        Settings.ahd_version.split(".")[0] == "6"
+        Settings().ahd_version.split(".")[0] == "6"
     ):  # documentation: check if this changes in future
         system = "http://fhir.de/CodeSystem/dimdi/atc"
         codes.append(annotation["atc"])
