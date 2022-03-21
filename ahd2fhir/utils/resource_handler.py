@@ -19,6 +19,7 @@ from fhir.resources.resource import Resource
 from prometheus_client import Counter, Histogram, Summary
 from tenacity.after import after_log
 
+from ahd2fhir.config import Settings
 from ahd2fhir.mappers import ahd_to_condition, ahd_to_list, ahd_to_medication_statement
 from ahd2fhir.utils.bundle_builder import BundleBuilder
 from ahd2fhir.utils.custom_mappers import custom_mappers, mapper_functions
@@ -87,7 +88,9 @@ class ResourceHandler:
 
     @MAPPING_FAILURES_COUNTER.count_exceptions()
     @MAPPING_DURATION_SUMMARY.time()
-    def handle_documents(self, document_references: List[DocumentReference]) -> Bundle:
+    def handle_documents(
+        self, settings, document_references: List[DocumentReference]
+    ) -> Bundle:
         """
         Process a list of DocumentReferences
         """
@@ -95,7 +98,7 @@ class ResourceHandler:
         bundle_id = None
         for document_reference in document_references:
             resources_from_document = self._process_documentreference(
-                document_reference
+                settings, document_reference
             )
             composition = self._build_composition(
                 document_reference, resources_from_document
@@ -123,7 +126,9 @@ class ResourceHandler:
             if entry.resource.resource_type == "DocumentReference":
                 document_references.append(entry.resource)
 
-        return self.handle_documents(document_references)
+        return self.handle_documents(
+            settings=Settings, document_references=document_references
+        )
 
     def _build_composition(
         self, document_reference: DocumentReference, all_resources: List[Resource]
@@ -208,7 +213,9 @@ class ResourceHandler:
         )
         return composition
 
-    def _process_documentreference(self, document_reference: DocumentReference):
+    def _process_documentreference(
+        self, settings, document_reference: DocumentReference
+    ):
         log = structlog.get_logger().bind(
             document_id=f"{document_reference.get_resource_type()}/"
             + f"{document_reference.id}"
@@ -237,7 +244,9 @@ class ResourceHandler:
         # Building FHIR resources as results
 
         lists = ahd_to_list.get_fhir_list(
-            annotation_results=averbis_result, document_reference=document_reference
+            annotation_results=averbis_result,
+            settings=settings,
+            document_reference=document_reference,
         )
         if lists is not None:
             discharge_list = lists["DISCHARGE"]
@@ -266,7 +275,7 @@ class ResourceHandler:
 
             if val["type"] == AHD_TYPE_MEDICATION:
                 statement = ahd_to_medication_statement.get_fhir_medication_statement(
-                    val, document_reference
+                    val, settings, document_reference
                 )
                 if statement is not None:
                     medication_statement_lists.append(statement)

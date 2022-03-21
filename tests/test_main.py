@@ -13,6 +13,7 @@ def get_settings_override():
         ahd_api_token="test",
         ahd_project="test",
         ahd_pipeline="test",
+        ahd_version="5.0",
     )
 
 

@@ -7,6 +7,7 @@ from fhir.resources.bundle import Bundle, BundleEntry
 from fhir.resources.composition import Composition
 from fhir.resources.documentreference import DocumentReferenceContent
 
+from ahd2fhir.config import Settings
 from ahd2fhir.utils.resource_handler import ResourceHandler
 from tests.utils import get_empty_document_reference
 
@@ -23,6 +24,16 @@ class MockPipeline:
 
     def analyse_html(self, text: str, language: str, annotation_types: str):
         return self.response
+
+
+def get_settings_override():
+    return Settings(
+        ahd_url="localhost",
+        ahd_api_token="test",
+        ahd_project="test",
+        ahd_pipeline="test",
+        ahd_version="5.0",
+    )
 
 
 def test_handle_bundle_with_empty_bundle_should_return_empty_result():
@@ -82,7 +93,9 @@ def test_get_fhir_medication_should_only_create_unique_bundle_entries():
         averbis_pipeline=MockPipeline(response=ahd_response)
     )
 
-    bundle = resource_handler.handle_documents([doc])
+    bundle = resource_handler.handle_documents(
+        settings=get_settings_override(), document_references=[doc]
+    )
 
     full_urls = [entry.fullUrl for entry in bundle.entry]
     unique_full_urls = set(full_urls)

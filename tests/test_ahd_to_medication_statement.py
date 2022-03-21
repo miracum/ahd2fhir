@@ -7,6 +7,7 @@ from fhir.resources.fhirtypes import DateTime
 from fhir.resources.period import Period
 from fhir.resources.reference import Reference
 
+from ahd2fhir.config import Settings
 from ahd2fhir.mappers.ahd_to_medication_statement import (
     get_fhir_medication_statement,
     get_medication_interval_from_annotation,
@@ -35,6 +36,16 @@ def get_empty_document_reference():
     return docref
 
 
+def get_settings_override():
+    return Settings(
+        ahd_url="localhost",
+        ahd_api_token="test",
+        ahd_project="test",
+        ahd_pipeline="test",
+        ahd_version="5.0",
+    )
+
+
 def test_get_medication_interval_from_annotation_for_date():
     annotation = {"date": {"kind": "DATE", "value": "2018-01-01"}}
     date = get_medication_interval_from_annotation(annotation)
@@ -57,7 +68,11 @@ def test_fhir_medication():
         0
     ]
 
-    result = get_fhir_medication_statement(annotation, get_empty_document_reference())
+    result = get_fhir_medication_statement(
+        annotation,
+        settings=get_settings_override(),
+        document_reference=get_empty_document_reference(),
+    )
 
     medication = result[0]["medication"]
     assert medication.json()

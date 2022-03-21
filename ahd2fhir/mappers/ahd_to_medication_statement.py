@@ -53,17 +53,17 @@ DATA_ABSENT_EXTENSION_UNKNOWN = FHIRPrimitiveExtension(
 )
 
 
-def get_fhir_medication_statement(val, document_reference: DocumentReference):
+def get_fhir_medication_statement(val, settings, document_reference: DocumentReference):
     """
     Returns a list of {statement: ..., medication: ...} tuples
     """
     return get_medication_statement_from_annotation(
-        annotation=val, document_reference=document_reference
+        annotation=val, settings=settings, document_reference=document_reference
     )
 
 
 def get_medication_statement_from_annotation(
-    annotation, document_reference: DocumentReference
+    annotation, settings, document_reference: DocumentReference
 ):
     results = []
     for drug in annotation["drugs"]:
@@ -77,7 +77,7 @@ def get_medication_statement_from_annotation(
             status=STATUS_MAPPING.get(annotation["status"], "unknown")
         )
 
-        medication = get_medication_from_annotation(annotation)
+        medication = get_medication_from_annotation(annotation, settings)
         medication_reference = Reference.construct()
         medication_reference.type = f"{medication.resource_type}"
         medication_reference.identifier = medication.identifier[0]
