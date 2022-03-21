@@ -17,7 +17,7 @@ MEDICATION_PROFILE = (
 )
 
 
-def get_medication_from_annotation(annotation):
+def get_medication_from_annotation(annotation, settings):
     medication = Medication.construct()
 
     drug = annotation["drugs"][0]
@@ -30,14 +30,20 @@ def get_medication_from_annotation(annotation):
 
     # Medication Code
     codes = []
-    if "Abdamed-Averbis" in str(drug["ingredient"]["source"]):
+    if settings.ahd_version.split(".")[0] == "5":
+        if "Abdamed-Averbis" in str(drug["ingredient"]["source"]):
+            system = "http://fhir.de/CodeSystem/dimdi/atc"
+            codes = str(drug["ingredient"]["conceptId"]).split("-")
+        elif "RxNorm" in str(drug["ingredient"]["source"]):
+            system = "http://www.nlm.nih.gov/research/umls/rxnorm"
+            codes.append(str(drug["ingredient"]["conceptId"]))
+        else:
+            system = ""
+    elif (
+        settings.ahd_version.split(".")[0] == "6"
+    ):  # documentation: check if this changes in future
         system = "http://fhir.de/CodeSystem/dimdi/atc"
-        codes = str(drug["ingredient"]["conceptId"]).split("-")
-    elif "RxNorm" in str(drug["ingredient"]["source"]):
-        system = "http://www.nlm.nih.gov/research/umls/rxnorm"
-        codes.append(str(drug["ingredient"]["conceptId"]))
-    else:
-        system = ""
+        codes.append(annotation["atc"])
 
     med_code = CodeableConcept.construct()
     med_code.coding = []

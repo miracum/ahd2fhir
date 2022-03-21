@@ -6,6 +6,7 @@ from fhir.resources.documentreference import DocumentReference, DocumentReferenc
 from fhir.resources.fhirtypes import DateTime
 from fhir.resources.reference import Reference
 
+from ahd2fhir.config import Settings
 from ahd2fhir.mappers.ahd_to_list import get_fhir_list
 
 
@@ -30,6 +31,16 @@ def get_empty_document_reference():
     return doc_ref
 
 
+def get_settings_override():
+    return Settings(
+        ahd_url="localhost",
+        ahd_api_token="test",
+        ahd_project="test",
+        ahd_pipeline="test",
+        ahd_version="5.0",
+    )
+
+
 def test_fhir_discharge_list():
     annotations_without_discharge = get_example_payload(
         "tests/resources/ahd/payload_1.json"
@@ -39,7 +50,9 @@ def test_fhir_discharge_list():
     )
 
     lists_without_discharge = get_fhir_list(
-        annotations_without_discharge, get_empty_document_reference()
+        annotation_results=annotations_without_discharge,
+        settings=get_settings_override(),
+        document_reference=get_empty_document_reference(),
     )
     discharge_list = lists_without_discharge["DISCHARGE"]
     assert discharge_list is not None
@@ -60,7 +73,9 @@ def test_fhir_discharge_list():
     assert inpatient_list.emptyReason.text == "No inpatient entries in document found."
 
     lists_with_discharge = get_fhir_list(
-        annotations_with_discharge, get_empty_document_reference()
+        annotation_results=annotations_with_discharge,
+        settings=get_settings_override(),
+        document_reference=get_empty_document_reference(),
     )
     discharge_list = lists_with_discharge["DISCHARGE"]
     assert discharge_list is not None

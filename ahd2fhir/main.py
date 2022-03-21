@@ -74,7 +74,7 @@ async def analyze_resource(
         result = resource_handler.handle_bundle(payload)
     elif isinstance(payload, DocumentReference):
         log.debug("Received single DocumentReference to process")
-        result = resource_handler.handle_documents([payload])
+        result = resource_handler.handle_documents([payload], settings=get_settings())
     else:
         raise ValueError(f"Unprocessable resource type={payload.resource_type}")
 

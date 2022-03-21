@@ -98,3 +98,5 @@ class Settings(BaseSettings):
     ahd_pipeline: str
     # Kafka Settings
     kafka: KafkaSettings = KafkaSettings()
+    # AHD version
+    ahd_version: str

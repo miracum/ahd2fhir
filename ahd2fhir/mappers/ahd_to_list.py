@@ -10,6 +10,7 @@ from fhir.resources.meta import Meta
 from fhir.resources.reference import Reference
 from structlog import get_logger
 
+from ahd2fhir.config import Settings
 from ahd2fhir.mappers.ahd_to_medication_statement import (
     get_medication_statement_from_annotation,
 )
@@ -39,9 +40,9 @@ LIST_MED_CODE = "medications"
 LIST_MED_CODE_SYSTEM = "http://terminology.hl7.org/CodeSystem/list-example-use-codes"
 
 
-def get_medication_statement_reference(annotation, document_reference):
+def get_medication_statement_reference(annotation, settings, document_reference):
     medication_statement = get_medication_statement_from_annotation(
-        annotation, document_reference
+        annotation, settings, document_reference
     )[0]["statement"]
     medication_reference = Reference.construct()
     medication_reference.type = f"{medication_statement.resource_type}"
@@ -52,17 +53,19 @@ def get_medication_statement_reference(annotation, document_reference):
     return medication_reference
 
 
-def get_fhir_list(annotation_results, document_reference: DocumentReference):
+def get_fhir_list(annotation_results, settings, document_reference: DocumentReference):
     """
     Returns a list of {statement: ..., medication: ...} tuples
     """
     return get_medication_list_from_document_reference(
-        annotation_results=annotation_results, document_reference=document_reference
+        annotation_results=annotation_results,
+        settings=settings,
+        document_reference=document_reference,
     )
 
 
 def get_medication_list_from_document_reference(
-    annotation_results, document_reference: DocumentReference
+    annotation_results, settings, document_reference: DocumentReference
 ):
 
     base_list = List.construct(
@@ -105,7 +108,11 @@ def get_medication_list_from_document_reference(
         num_entries += 1
         med_entry = {
             "date": document_reference.date,
-            "item": get_medication_statement_reference(annotation, document_reference),
+            "item": get_medication_statement_reference(
+                annotation=annotation,
+                settings=Settings,
+                document_reference=document_reference,
+            ),
         }
         med_entries[annotation["status"]].append(med_entry)
 
