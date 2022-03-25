@@ -1,5 +1,7 @@
 import datetime
 import json
+import os
+from unittest import mock
 
 from fhir.resources.attachment import Attachment
 from fhir.resources.documentreference import DocumentReference, DocumentReferenceContent
@@ -30,9 +32,10 @@ def get_empty_document_reference():
     return doc_ref
 
 
+@mock.patch.dict(os.environ, {"ahd_version": "5.0"})
 def test_fhir_discharge_list():
     annotations_without_discharge = get_example_payload(
-        "tests/resources/ahd/payload_1.json"
+        "tests/resources/ahd/payload_1_v5.json"
     )
     annotations_with_discharge = get_example_payload(
         "tests/resources/ahd/payload_3.json"

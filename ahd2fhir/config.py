@@ -89,12 +89,14 @@ class KafkaSettings(BaseSettings):
 
 class Settings(BaseSettings):
     # AHD URL. Should not end with a trailing '/'
-    ahd_url: str
+    ahd_url: str = ""
     # AHD API token
-    ahd_api_token: str
+    ahd_api_token: str = ""
     # name of the AHD project
-    ahd_project: str
+    ahd_project: str = ""
     # name of the pipeline
-    ahd_pipeline: str
+    ahd_pipeline: str = ""
     # Kafka Settings
     kafka: KafkaSettings = KafkaSettings()
+    # ahd_version
+    ahd_version: str = ""
