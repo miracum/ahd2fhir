@@ -9,7 +9,6 @@ from fhir.resources.fhirtypes import DateTime
 from fhir.resources.period import Period
 from fhir.resources.reference import Reference
 
-from ahd2fhir.config import Settings
 from ahd2fhir.mappers.ahd_to_medication_statement import (
     get_fhir_medication_statement,
     get_medication_interval_from_annotation,
@@ -81,19 +80,20 @@ def test_fhir_medication_v5():
 
 @mock.patch.dict(os.environ, {"ahd_version": "6.0"})
 def test_fhir_medication_v6():
-    print(Settings().ahd_version)
-    annotation = [
+    annotation_v6 = [
         a for a in get_example_payload_v6() if a["type"] == AHD_TYPE_MEDICATION
     ][0]
 
-    result = get_fhir_medication_statement(annotation, get_empty_document_reference())
+    result_v6 = get_fhir_medication_statement(
+        annotation_v6, get_empty_document_reference()
+    )
 
-    medication = result[0]["medication"]
-    assert medication.json()
-    assert medication.ingredient is not None
-    assert medication.meta is not None
+    medication_v6 = result_v6[0]["medication"]
+    assert medication_v6.json()
+    assert medication_v6.ingredient is not None
+    assert medication_v6.meta is not None
 
-    statement = result[0]["statement"]
-    assert statement.json()
-    assert statement.status is not None
-    assert statement.medicationReference is not None
+    statement_v6 = result_v6[0]["statement"]
+    assert statement_v6.json()
+    assert statement_v6.status is not None
+    assert statement_v6.medicationReference is not None
