@@ -5,7 +5,7 @@ from ahd2fhir.utils.resource_handler import AHD_TYPE_DOCUMENT_ANNOTATION
 
 
 def test_build_sets_version_identifier_and_id():
-    with open("tests/resources/ahd/payload_1.json") as file:
+    with open("tests/resources/ahd/payload_1_v5.json") as file:
         ahd_payload = json.load(file)
 
     annotation = [

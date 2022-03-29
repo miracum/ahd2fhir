@@ -8,7 +8,7 @@ from ahd2fhir.utils.resource_handler import AHD_TYPE_DIAGNOSIS
 from tests.utils import get_empty_document_reference
 
 AHD_PAYLOADS_EXPECTED_NUMBER_OF_CONDITIONS = [
-    ("payload_1.json", 13),
+    ("payload_1_v5.json", 13),
     ("payload_2.json", 7),
 ]
 
@@ -40,16 +40,16 @@ def test_maps_to_expected_number_of_condition_resources(
 )
 def test_mapped_condition_coding_should_set_userselected_to_false(ahd_json_path, _):
     with open(f"tests/resources/ahd/{ahd_json_path}") as file:
-        ahd_payload = json.load(file)
+        ahd_payload_2 = json.load(file)
 
-    conditions = []
-    for val in ahd_payload:
+    conditions_2 = []
+    for val in ahd_payload_2:
         if val["type"] == AHD_TYPE_DIAGNOSIS:
-            mapped_condition = get_fhir_condition(val, get_empty_document_reference())
-            if mapped_condition is not None:
-                conditions.append(mapped_condition)
+            mapped_condition_2 = get_fhir_condition(val, get_empty_document_reference())
+            if mapped_condition_2 is not None:
+                conditions_2.append(mapped_condition_2)
 
-    for c in conditions:
+    for c in conditions_2:
         assert all(coding.userSelected is False for coding in c.code.coding)
 
 
