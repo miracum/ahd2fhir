@@ -50,9 +50,9 @@ class KafkaSettings(BaseSettings):
     ssl_certfile: str = path.join(TLS_ROOT_DIR, "user.crt")
     ssl_keyfile: str = path.join(TLS_ROOT_DIR, "user.key")
     # SASL Settings
-    sasl_mechanism: str = None
-    sasl_plain_username: str = None
-    sasl_plain_password: str = None
+    sasl_mechanism: str = ""
+    sasl_plain_username: str = ""
+    sasl_plain_password: str = ""
 
     #  For using SASL without SSL certificates the *file args need to be None.
     # Otherwise AIOKafkaClient will try to parse them even if they

@@ -2,22 +2,27 @@ name: Trivy Weekly Scan
 
 on:
   schedule:
-    - cron: '35 6 * * 6'
+    - cron: "35 6 * * 6"
+
+permissions: read-all
 
 jobs:
   scan:
     name: Scan
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+    permissions:
+      security-events: write
     steps:
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@9ab158e8597f3b310480b9a69402b419bc03dbd5 # 0.8.0
         with:
           image-ref: "ghcr.io/miracum/ahd2fhir:latest"
           format: "template"
           template: "@/contrib/sarif.tpl"
           output: "trivy-results.sarif"
           severity: "CRITICAL,HIGH"
+
       - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@959cbb7472c4d4ad70cdfe6f4976053fe48ab394 # v2.1.37
         with:
           sarif_file: "trivy-results.sarif"

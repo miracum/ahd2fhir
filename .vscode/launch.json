@@ -6,11 +6,7 @@
       "type": "python",
       "request": "launch",
       "module": "uvicorn",
-      "args": [
-        "--env-file=.env.development",
-        "--app-dir=ahd2fhir",
-        "main:app"
-      ],
+      "args": ["--env-file=.env.development", "--app-dir=ahd2fhir", "main:app"],
       "jinja": true,
       "justMyCode": false
     }

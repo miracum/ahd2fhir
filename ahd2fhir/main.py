@@ -84,7 +84,7 @@ async def analyze_resource(
     return result
 
 
-kafka_consumer_task = None
+kafka_consumer_task : asyncio.Task = None
 
 
 @app.on_event("startup")

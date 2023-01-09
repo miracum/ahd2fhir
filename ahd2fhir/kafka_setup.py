@@ -13,7 +13,7 @@ logger = structlog.get_logger()
 
 consumer: aiokafka.AIOKafkaConsumer = None
 producer: aiokafka.AIOKafkaProducer = None
-resource_handler: ResourceHandler = None
+resource_handler: ResourceHandler | None = None
 
 
 async def initialize_kafka(handler: ResourceHandler):  # pragma: no cover
