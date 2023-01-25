@@ -2,6 +2,11 @@
 
 Creates FHIR resources from [Averbis Health Discovery](https://averbis.com/health-discovery/) NLP Annotations.
 
+![Latest Version](https://img.shields.io/github/v/release/miracum/ahd2fhir)
+![License](https://img.shields.io/github/license/miracum/ahd2fhir)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/miracum/ahd2fhir/badge)](https://api.securityscorecards.dev/projects/github.com/miracum/ahd2fhir)
+[![SLSA 3](https://slsa.dev/images/gh-badge-level3.svg)](https://slsa.dev)
+
 ## Run
 
 Set the required environment variables:
@@ -84,7 +89,15 @@ docker compose -f docker-compose.dev.yml -f docker-compose.dev-kafka.yml up
 
 ### Create an AHD project with the default pipeline and get an API token for development
 
-
+1. Open AHD on <http://localhost:9999/health-discovery/#/login> and login as `admin` with password `admin`.
+1. Click on `Project Administration` -> `Create Project`.
+1. Set `Name` to `test`.
+1. Click on the newly created project `test`
+1. Click on `Pipeline Configuration`
+1. Select the `discharge` pipeline and click on `Start Pipeline`
+1. In the top-right corner, click on `admin` -> `Manage API Token`
+1. Click on `Generate` followed by `Copy to clipboard`
+1. Paste the new API token in the [.env.development](.env.development) file as the value for the `AHD_API_TOKEN`
 
 ### Run using FastAPI live reload
 
@@ -104,7 +117,7 @@ Note the use of `host.docker.internal` so the running container can still access
 ```sh
 docker build -t ahd2fhir .
 docker run --rm -it -p 8081:8080 \
-    -e AHD_API_URL=http://host.docker.internal:9999/health-discovery \
+    -e AHD_URL=http://host.docker.internal:9999/health-discovery \
     -e AHD_PROJECT=test \
     -e AHD_PIPELINE=discharge \
     -e AHD_API_TOKEN=$AHD_API_TOKEN \
