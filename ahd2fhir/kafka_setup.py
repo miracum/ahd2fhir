@@ -58,6 +58,11 @@ async def send_consumer_message(consumer):  # pragma: no cover
         f"error.{settings.kafka.input_topic}.{settings.kafka.consumer.group_id}"
     )
 
+    if resource_handler is None:
+        raise ValueError(
+            "resource_handler is unset. Be sure to call initialize_kafka first."
+        )
+
     # consume messages
     msg: ConsumerRecord
     async for msg in consumer:

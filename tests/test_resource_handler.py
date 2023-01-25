@@ -50,7 +50,11 @@ def test_handle_bundle_with_content_should_create_composition():
     doc.content[0] = DocumentReferenceContent(
         **{
             "attachment": Attachment(
-                **{"data": base64.b64encode("Diabetes".encode("utf-8"))}
+                **{
+                    "data": base64.b64encode("Diabetes".encode("utf-8")),
+                    "contentType": "text/plain",
+                    "language": "en",
+                }
             )
         }
     )
@@ -69,7 +73,11 @@ def test_get_fhir_medication_should_only_create_unique_bundle_entries():
     doc.content[0] = DocumentReferenceContent(
         **{
             "attachment": Attachment(
-                **{"data": base64.b64encode("test".encode("utf-8"))}
+                **{
+                    "data": base64.b64encode("test".encode("utf-8")),
+                    "contentType": "text/plain",
+                    "language": "en",
+                }
             )
         }
     )

@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from pip._internal.req import parse_requirements
+import pathlib
+
+import pkg_resources
 from setuptools import find_packages, setup
 
-
-def load_requirements(fname):
-    """Turn requirements.txt into a list"""
-    reqs = parse_requirements(fname, session="test")
-    return [r.requirement for r in reqs]
-
+with pathlib.Path("requirements.txt").open() as requirements_txt:
+    install_requires = [
+        str(requirement)
+        for requirement in pkg_resources.parse_requirements(requirements_txt)
+    ]
 
 setup(
     name="ahd2fhir",
@@ -19,6 +20,6 @@ setup(
     package_dir={"ahd2fhir": "ahd2fhir"},
     packages=find_packages(exclude=["test*"]),
     include_package_data=True,
-    install_requires=load_requirements("requirements.txt"),
+    install_requires=install_requires,
     python_requires=">=3.9",
 )

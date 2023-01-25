@@ -7,7 +7,7 @@ Creates FHIR resources from [Averbis Health Discovery](https://averbis.com/healt
 Set the required environment variables:
 
 ```sh
-export AHD_URL=http://localhost:9999/health-discovery
+export AHD_URL=http://host.docker.internal:9999/health-discovery
 export AHD_API_TOKEN=1bbd10e7a18f01fd51d03cb81d505e0c6cfdcd73b0fc98e8300592afa4a90148
 export AHD_PROJECT=test
 export AHD_PIPELINE=discharge
@@ -17,7 +17,7 @@ export IMAGE_TAG=latest # see https://github.com/miracum/ahd2fhir/releases for i
 Launch the `ahd2fhir` service which is exposed on port `8080` by default:
 
 ```sh
-docker-compose up -d
+docker compose up -d
 ```
 
 Send a FHIR DocumentReference to the service and receive a bundle of FHIR resources back:
@@ -37,12 +37,12 @@ You can also access the Swagger API documentation at <http://localhost:8080/docs
 
 #### Required Settings
 
-| Environment variable | Description                                                      | Default |
-| -------------------- | ---------------------------------------------------------------- | ------- |
-| `AHD_URL`            | URL of the AHD installation. Should not end with a trailing '/'. | `""`    |
-| `AHD_API_TOKEN`      | An API token to access the AHD REST API.                         | `""`    |
-| `AHD_PROJECT`        | Name of the AHD project.                                         | `""`    |
-| `AHD_PIPELINE`       | Name of the AHD pipeline.                                        | `""`    |
+| Environment variable | Description                                                                    | Default |
+| -------------------- | ------------------------------------------------------------------------------ | ------- |
+| `AHD_URL`            | URL of the AHD installation. Should not end with a trailing '/'.               | `""`    |
+| `AHD_API_TOKEN`      | An API token to access the AHD REST API.                                       | `""`    |
+| `AHD_PROJECT`        | Name of the AHD project. This needs to be created before ahd2fhir is started.  | `""`    |
+| `AHD_PIPELINE`       | Name of the AHD pipeline. This needs to be created before ahd2fhir is started. | `""`    |
 
 #### Kafka Settings
 
@@ -50,14 +50,14 @@ Most relevant Kafka settings. See [config.py](ahd2fhir/config.py) for a complete
 As the settings are composed of pydantic [settings](https://pydantic-docs.helpmanual.io/usage/settings/),
 use the corresponding `env_prefix` value to override defaults.
 
-| Environment variable      | Description                                                        | Default            |
-| ------------------------- | ------------------------------------------------------------------ | ------------------ |
-| `KAFKA_ENABLED`           | Whether to enable support for reading resources from Apache Kafka. | `false`            |
-| `KAFKA_BOOTSTRAP_SERVERS` | URL of the AHD installation. Should not end with a trailing '/'.   | `localhost:9092`   |
-| `KAFKA_SECURITY_PROTOCOL` | An API token to access the ADH REST API.                           | `PLAINTEXT`        |
-| `KAFKA_CONSUMER_GROUP_ID` | Name of the project.                                               | `ahd2fhir`         |
-| `KAFKA_INPUT_TOPIC`       | Name of the pipeline.                                              | `fhir.documents`   |
-| `KAFKA_OUTPUT_TOPIC`      | Name of the pipeline.                                              | `fhir.nlp-results` |
+| Environment variable      | Description                                                              | Default            |
+| ------------------------- | ------------------------------------------------------------------------ | ------------------ |
+| `KAFKA_ENABLED`           | Whether to enable support for reading resources from Apache Kafka.       | `false`            |
+| `KAFKA_BOOTSTRAP_SERVERS` | Host and port of the Kafka bootstrap servers.                            | `localhost:9092`   |
+| `KAFKA_SECURITY_PROTOCOL` | The security protocol used to connect with the Kafka brokers.            | `PLAINTEXT`        |
+| `KAFKA_CONSUMER_GROUP_ID` | The Kafka consumer group id.                                             | `ahd2fhir`         |
+| `KAFKA_INPUT_TOPIC`       | The input topic to read FHIR DocumentReferences or Bundles thereof from. | `fhir.documents`   |
+| `KAFKA_OUTPUT_TOPIC`      | The output topic to write the extracted FHIR resources to.               | `fhir.nlp-results` |
 
 ## Development
 
@@ -73,14 +73,18 @@ Starts an AHD server:
 
 ```sh
 docker login registry.averbis.com "Username" "Password"
-docker-compose -f docker-compose.dev.yml up
+docker compose -f docker-compose.dev.yml up
 ```
 
 Starts both AHD and Kafka and starts constantly filling a `fhir.documents` topic with sample DocumentReference resources.
 
 ```sh
-docker-compose -f docker-compose.dev.yml -f docker-compose.dev-kafka.yml up
+docker compose -f docker-compose.dev.yml -f docker-compose.dev-kafka.yml up
 ```
+
+### Create an AHD project with the default pipeline and get an API token for development
+
+
 
 ### Run using FastAPI live reload
 

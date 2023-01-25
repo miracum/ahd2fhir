@@ -111,6 +111,13 @@ def get_condition_from_annotation(annotation, date, doc_ref: DocumentReference):
     if (side := annotation.get("side")) is not None:
         body_side_snomed = SIDE_MAPPING.get(side)
 
+        if body_side_snomed is None:
+            log.warning(
+                "Could not map body side from annotation to a SNOMED concept.",
+                annotation_side=side,
+            )
+            return condition
+
         body_side_code = CodeableConcept.construct()
         body_side_code.coding = []
 

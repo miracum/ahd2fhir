@@ -44,6 +44,9 @@ def test_fhir_discharge_list():
     lists_without_discharge = get_fhir_list(
         annotations_without_discharge, get_empty_document_reference()
     )
+
+    assert lists_without_discharge is not None
+
     discharge_list = lists_without_discharge["DISCHARGE"]
     assert discharge_list is not None
     assert discharge_list.json()
@@ -65,7 +68,11 @@ def test_fhir_discharge_list():
     lists_with_discharge = get_fhir_list(
         annotations_with_discharge, get_empty_document_reference()
     )
+
+    assert lists_with_discharge is not None
+
     discharge_list = lists_with_discharge["DISCHARGE"]
+
     assert discharge_list is not None
     assert discharge_list.json()
     assert discharge_list.meta is not None
