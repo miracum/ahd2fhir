@@ -1,7 +1,7 @@
 FROM docker.io/tiangolo/uvicorn-gunicorn-fastapi:python3.11-slim@sha256:28c98e009de153534ae557121a9c062d6edba9b5884381b7122162875a1d067a AS release
 WORKDIR /opt/ahd2fhir
 COPY requirements.txt .
-RUN pip install --no-cache-dir  -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 FROM release AS test
 COPY requirements-test.txt .

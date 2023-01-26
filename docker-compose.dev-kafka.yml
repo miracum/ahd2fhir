@@ -25,13 +25,17 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     depends_on:
       - zoo1
-
-  kafdrop:
-    image: obsidiandynamics/kafdrop:3.27.0
-    ports:
-      - "8090:9000"
+  akhq:
+    image: tchiotludo/akhq:0.23.0
     environment:
-      KAFKA_BROKERCONNECT: "kafka1:19092"
+      AKHQ_CONFIGURATION: |
+        akhq:
+          connections:
+            docker-kafka-server:
+              properties:
+                bootstrap.servers: "kafka1:19092"
+    ports:
+      - 8090:8080
     depends_on:
       - kafka1
 
