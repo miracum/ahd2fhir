@@ -1,7 +1,6 @@
-fhir.resources==6.1.0
-fastapi==0.68.1
+fhir.resources==6.5.0
+fastapi==0.89.0
 prometheus-fastapi-instrumentator==5.7.1
-uvicorn[standard]==0.15.0
 structlog==21.1.0
 averbis-python-api==0.4.0
 tenacity==8.0.1

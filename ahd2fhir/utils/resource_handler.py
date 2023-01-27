@@ -147,7 +147,7 @@ class ResourceHandler:
             composition_encounter = document_reference.context.encounter[0]
 
         composition_author = None
-        composition_sections = []
+        composition_sections: list[CompositionSection] = []
         for resource in all_resources:
             resource_type = resource.resource_type
 
@@ -298,7 +298,7 @@ class ResourceHandler:
     def _extract_text_from_resource(
         self,
         document_reference: DocumentReference,
-    ) -> Tuple[str, str]:
+    ) -> Tuple[str, str, str]:
         valid_content = [
             content
             for content in document_reference.content
@@ -317,14 +317,26 @@ class ResourceHandler:
 
         content = valid_content[0]
 
+        if content.attachment is None:
+            raise ValueError(
+                f"Document {document_reference.id} contains has no "
+                + "content.attachment specified"
+            )
+
+        if content.attachment.contentType is None:
+            raise ValueError(
+                f"Document {document_reference.id} contains has no "
+                + "content.attachment.contentType specified"
+            )
+
         language = None
         if content.attachment.language:
             language = content.attachment.language.lower().split("-")[0]
 
         return (
             base64.b64decode(content.attachment.data).decode("utf8"),
-            content.attachment.contentType,
-            language,
+            str(content.attachment.contentType),
+            str(language),
         )
 
     @tenacity.retry(
@@ -335,7 +347,7 @@ class ResourceHandler:
         reraise=True,
     )
     def _perform_text_analysis(
-        self, text: str, mime_type: str = "text/plain", lang: str = None
+        self, text: str, mime_type: str = "text/plain", lang: str | None = None
     ):
         types = ",".join(
             [

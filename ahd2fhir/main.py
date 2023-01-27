@@ -84,7 +84,7 @@ async def analyze_resource(
     return result
 
 
-kafka_consumer_task = None
+kafka_consumer_task: asyncio.Task
 
 
 @app.on_event("startup")
@@ -106,4 +106,5 @@ async def shutdown_event():
     if os.getenv("KAFKA_ENABLED", "False").lower() in ["true", "1"]:
         logger.info("Shutting down Kafka consumer")
         await kafka_stop_consuming()
+        global kafka_consumer_task
         kafka_consumer_task.cancel()

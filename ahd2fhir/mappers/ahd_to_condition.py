@@ -15,7 +15,7 @@ from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 log = get_logger()
 
 CLINICAL_STATUS_MAPPING = {"ACTIVE": "active", "RESOLVED": "resolved"}
-SIDE_MAPPING = {
+SIDE_MAPPING: dict[str, tuple[str, str]] = {
     "LEFT": ("7771000", "Left"),
     "RIGHT": ("24028007", "Right"),
     "BOTH": ("51440002", "Right and left"),
@@ -110,6 +110,13 @@ def get_condition_from_annotation(annotation, date, doc_ref: DocumentReference):
 
     if (side := annotation.get("side")) is not None:
         body_side_snomed = SIDE_MAPPING.get(side)
+
+        if body_side_snomed is None:
+            log.warning(
+                "Could not map body side from annotation to a SNOMED concept.",
+                annotation_side=side,
+            )
+            return condition
 
         body_side_code = CodeableConcept.construct()
         body_side_code.coding = []

@@ -78,6 +78,11 @@ def get_medication_statement_from_annotation(
         )
 
         medication = get_medication_from_annotation(annotation)
+
+        if not medication:
+            log.warning("Failed to resolve medication from annotation")
+            continue
+
         medication_reference = Reference.construct()
         medication_reference.type = f"{medication.resource_type}"
         medication_reference.identifier = medication.identifier[0]

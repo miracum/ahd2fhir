@@ -18,7 +18,7 @@ MEDICATION_PROFILE = (
 )
 
 
-def get_medication_from_annotation(annotation):
+def get_medication_from_annotation(annotation) -> Medication | None:
     medication = Medication.construct()
 
     drug = annotation["drugs"][0]

@@ -6,7 +6,7 @@ from fhir.resources.resource import Resource
 
 
 class BundleBuilder:
-    def build_from_resources(self, resources: List[Resource], id: str = None) -> Bundle:
+    def build_from_resources(self, resources: List[Resource], id: str | None) -> Bundle:
         bundle_id = id
         if bundle_id is None:
             bundle_id = str(uuid.uuid4())

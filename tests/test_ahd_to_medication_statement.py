@@ -45,6 +45,7 @@ def get_empty_document_reference():
 def test_get_medication_interval_from_annotation_for_date():
     annotation = {"date": {"kind": "DATE", "value": "2018-01-01"}}
     date = get_medication_interval_from_annotation(annotation)
+    assert date is not None
     assert date.isoformat() == DateTime.validate("2018-01-01").isoformat()
 
 
