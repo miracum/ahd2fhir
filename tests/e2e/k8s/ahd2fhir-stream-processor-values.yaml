@@ -17,10 +17,14 @@ processors:
       env:
         - name: AHD_URL
           value: http://ahd-health-discovery-health-discovery.default.svc:8080/health-discovery
-        - name: AHD_API_TOKEN
-          value: "04561db46cfd078c7848ea6d860e6533a6df3f66d93c524c88d027e6235c2ef7"
+        - name: AHD_USERNAME
+          value: "admin"
+        - name: AHD_PASSWORD
+          value: "admin"
         - name: AHD_PROJECT
           value: "test"
+        - name: AHD_ENSURE_PROJECT_IS_CREATED_AND_PIPELINE_IS_STARTED
+          value: "true"
         - name: AHD_PIPELINE
           value: "discharge"
         - name: WEB_CONCURRENCY
@@ -30,9 +34,9 @@ processors:
         - name: KAFKA_CONSUMER_GROUP_ID
           value: "ahd2fhir"
         - name: KAFKA_INPUT_TOPIC
-          value: "fhir.ahd2fhir.input"
+          value: "fhir.documents"
         - name: KAFKA_OUTPUT_TOPIC
-          value: "fhir.ahd2fhir.output"
+          value: "fhir.nlp-results"
       resources:
         requests:
           memory: "512Mi"
@@ -44,11 +48,11 @@ processors:
         httpGet:
           path: /live
           port: 8080
-        initialDelaySeconds: 3
-        periodSeconds: 3
+        initialDelaySeconds: 30
+        periodSeconds: 10
       readinessProbe:
         httpGet:
           path: /ready
           port: 8080
-        initialDelaySeconds: 3
-        periodSeconds: 3
+        initialDelaySeconds: 30
+        periodSeconds: 10

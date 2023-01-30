@@ -7,7 +7,6 @@ from fhir.resources.quantity import Quantity
 from fhir.resources.ratio import Ratio
 from structlog import get_logger
 
-from ahd2fhir.config import Settings
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
 log = get_logger()

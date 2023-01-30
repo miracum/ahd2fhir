@@ -16,6 +16,8 @@ DISABLE_LINTERS:
   - MARKDOWN_MARKDOWN_LINK_CHECK
   #  due to import-error
   - PYTHON_PYLINT
+  # due to "error - python package "--hash" is available for public registration."
+  - REPOSITORY_DUSTILOCK
 
 GROOVY_NPM_GROOVY_LINT_ARGUMENTS:
   - "--failon=warning"
