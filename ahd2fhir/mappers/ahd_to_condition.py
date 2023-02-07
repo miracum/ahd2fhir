@@ -14,7 +14,7 @@ from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
 log = get_logger()
 
-CLINICAL_STATUS_MAPPING = {"ACTIVE": "active", "RESOLVED": "resolved"}
+CLINICAL_STATUS_MAPPING = {"ACTIVE": "active", "RESOLVED": "resolved", "CHRONIC": "active"}
 SIDE_MAPPING: dict[str, tuple[str, str]] = {
     "LEFT": ("7771000", "Left"),
     "RIGHT": ("24028007", "Right"),
