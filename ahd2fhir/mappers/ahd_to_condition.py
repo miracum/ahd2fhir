@@ -83,7 +83,7 @@ def get_condition_from_annotation(annotation, date, doc_ref: DocumentReference):
     condition_coding = Coding.construct()
     condition_coding.system = system
     condition_coding.display = annotation.get("dictCanon")
-    condition_coding.code = annotation.get("conceptId")
+    condition_coding.code = annotation.get("conceptID", annotation.get("conceptId"))
     condition_coding.userSelected = False
 
     if match := re.search(EXTRACT_YEAR_FROM_ICD_REGEX, annotation.get("source")):
@@ -163,7 +163,7 @@ def build_identifier_from_annotation(annotation, doc_ref: DocumentReference):
     condition_identifier_value = (
         f"{doc_ref_identifier}_"
         + f"{annotation.get('begin')}-{annotation.get('end')}_"
-        + f"{annotation.get('uniqueId')}".replace(":", "-")
+        + f"{annotation.get('uniqueID', annotation.get('uniqueId'))}".replace(":", "-")
     )
 
     return Identifier(
