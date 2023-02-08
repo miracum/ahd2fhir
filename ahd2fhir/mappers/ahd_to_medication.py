@@ -31,13 +31,13 @@ def get_medication_from_annotation(annotation) -> Medication | None:
 
     # Medication Code
     codes = []
-    if Settings().ahd_version.split(".")[0] == "5":
+    if Settings().ahd_version.split(".")[0] == "5": # ahd v.5
         if "Abdamed-Averbis" in str(drug["ingredient"]["source"]):
             system = "http://fhir.de/CodeSystem/dimdi/atc"
-            codes.append(str(drug["ingredient"].get("conceptID", drug["ingredient"].get("conceptId"))))
+            codes = str(drug["ingredient"]["conceptId"]).split("-")                                            
         elif "RxNorm" in str(drug["ingredient"]["source"]):
             system = "http://www.nlm.nih.gov/research/umls/rxnorm"
-            codes.append(str(drug["ingredient"].get("conceptID", drug["ingredient"].get("conceptId"))))
+            codes.append(str(drug["ingredient"]["conceptId"]))                                                 
         else:
             system = ""
     elif Settings().ahd_version.split(".")[0] == "6":  # ahd v.6
