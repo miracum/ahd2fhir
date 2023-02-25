@@ -11,7 +11,7 @@ services:
       ZOO_SERVERS: server.1=zoo1:2888:3888;2181
 
   kafka1:
-    image: confluentinc/cp-kafka:6.2.0@sha256:97f572d93c6b2d388c5dadd644a90990ec29e42e5652c550c84d1a9be9d6dcbd
+    image: confluentinc/cp-kafka:7.3.2@sha256:23cb5f1371b783727c6082b3b766004907fbf97808a697c658d2f842a6f5865b
     hostname: kafka1
     ports:
       - "9092:9092"
