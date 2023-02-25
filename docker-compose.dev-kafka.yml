@@ -40,7 +40,7 @@ services:
       - kafka1
 
   kafka-data-loader:
-    image: confluentinc/cp-kafkacat:6.2.0@sha256:f8eb683c5f30586813301fbf30363838b7e638f41c47cb4170535c605f1c15c3
+    image: confluentinc/cp-kafkacat:7.1.6@sha256:1475b8c09caf62190b1dc1377c99c61be0ffb20cec664c6305e17f9d6c82a045
     entrypoint: ["/bin/bash", "-c"]
     command:
       [
