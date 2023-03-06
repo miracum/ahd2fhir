@@ -1,4 +1,4 @@
-FROM docker.io/tiangolo/uvicorn-gunicorn-fastapi:python3.11-slim@sha256:1568651cdf9489f60e017c16438a2695375d38d23821ec6e2f66705cc1747cbb AS release
+FROM docker.io/tiangolo/uvicorn-gunicorn-fastapi:python3.11-slim@sha256:d141ceb29f296716d5cc5b0b30378972cd47b04f016516bd99134fd10db16784 AS release
 WORKDIR /opt/ahd2fhir
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
