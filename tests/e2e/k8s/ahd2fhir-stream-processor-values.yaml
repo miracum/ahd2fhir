@@ -1,0 +1,58 @@
+strimziClusterName: my-cluster
+
+processors:
+  ahd2fhir:
+    replicaCount: 1
+    metrics:
+      enabled: false
+      serviceMonitor:
+        additionalLabels:
+          release: prom
+    container:
+      image:
+        registry: ghcr.io
+        repository: miracum/ahd2fhir
+        tag: master
+        pullPolicy: IfNotPresent
+      env:
+        - name: AHD_URL
+          value: http://ahd-health-discovery-health-discovery.default.svc:8080/health-discovery
+        - name: AHD_USERNAME
+          value: "admin"
+        - name: AHD_PASSWORD
+          value: "admin"
+        - name: AHD_PROJECT
+          value: "test"
+        - name: AHD_ENSURE_PROJECT_IS_CREATED_AND_PIPELINE_IS_STARTED
+          value: "true"
+        - name: AHD_PIPELINE
+          value: "discharge"
+        - name: WEB_CONCURRENCY
+          value: "2"
+        - name: KAFKA_ENABLED
+          value: "true"
+        - name: KAFKA_CONSUMER_GROUP_ID
+          value: "ahd2fhir"
+        - name: KAFKA_INPUT_TOPIC
+          value: "fhir.documents"
+        - name: KAFKA_OUTPUT_TOPIC
+          value: "fhir.nlp-results"
+      resources:
+        requests:
+          memory: "512Mi"
+          cpu: "250m"
+        limits:
+          memory: "768Mi"
+          cpu: "500m"
+      livenessProbe:
+        httpGet:
+          path: /live
+          port: 8080
+        initialDelaySeconds: 30
+        periodSeconds: 10
+      readinessProbe:
+        httpGet:
+          path: /ready
+          port: 8080
+        initialDelaySeconds: 30
+        periodSeconds: 10

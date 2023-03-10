@@ -29,15 +29,59 @@ def get_settings() -> config.Settings:
     return config.Settings()
 
 
-def get_averbis_pipeline(settings: config.Settings = Depends(get_settings)) -> Pipeline:
-    client = Client(settings.ahd_url, settings.ahd_api_token)
+def get_averbis_client(settings: config.Settings) -> Client:
+    api_token: str | None = None
+    if settings.ahd_api_token:
+        api_token = settings.ahd_api_token
+
+    client = Client(
+        url_or_id=settings.ahd_url,
+        api_token=api_token,
+        username=settings.ahd_username,
+        password=settings.ahd_password,
+    )
+
+    return client
+
+
+def get_averbis_pipeline(
+    settings: config.Settings,
+    client: Client,
+) -> Pipeline:
     return client.get_project(settings.ahd_project).get_pipeline(settings.ahd_pipeline)
 
 
 def get_resource_handler(
-    averbis_pipeline: Pipeline = Depends(get_averbis_pipeline),
+    settings: config.Settings = Depends(get_settings),
 ) -> ResourceHandler:
-    return ResourceHandler(averbis_pipeline)
+    client = get_averbis_client(settings)
+    pipeline = get_averbis_pipeline(settings, client)
+    return ResourceHandler(pipeline)
+
+
+def init_ahd_project_and_pipeline(
+    settings: config.Settings = Depends(get_settings),
+    client: Client = Depends(get_averbis_client),
+):
+    logger.info(f"Creating project {settings.ahd_project}")
+    project = client.create_project(
+        settings.ahd_project,
+        description=settings.ahd_project_description,
+        exist_ok=True,
+    )
+
+    logger.info(f"Getting pipeline {settings.ahd_pipeline}")
+    pipeline = project.get_pipeline(settings.ahd_pipeline)
+
+    try:
+        logger.info(f"Making sure pipeline {settings.ahd_pipeline} is started")
+        pipeline.ensure_started()
+    except Exception as exc:
+        # ensure_started seems to throw an 401 Server Error: 'Unauthorized' mostly
+        # on the first run but starts the pipeline nonetheless
+        logger.error(exc)
+
+    logger.info("Done initializing project and pipeline.")
 
 
 @app.get("/ready")
@@ -64,7 +108,6 @@ async def analyze_resource(
     payload: Union[Bundle, DocumentReference],
     resource_handler: ResourceHandler,
 ) -> Bundle:
-
     result: Bundle = None
 
     log = logger.bind(request_resource_id=f"{payload.get_resource_type()}/{payload.id}")
@@ -91,13 +134,22 @@ kafka_consumer_task: asyncio.Task
 async def startup_event():
     setup_logging()
     logger.info("Initializing API")
+
+    settings = get_settings()
     if os.getenv("KAFKA_ENABLED", "False").lower() in ["true", "1"]:
         logger.info("Initializing Kafka")
-        resource_handler = get_resource_handler(get_averbis_pipeline(get_settings()))
+        resource_handler = get_resource_handler(settings)
         global kafka_consumer_task
         kafka_consumer_task = asyncio.create_task(
             kafka_start_consuming(resource_handler)
         )
+
+    if settings.ahd_ensure_project_is_created_and_pipeline_is_started:
+        logger.info(
+            f"Making sure project {settings.ahd_project} exists "
+            + f"and {settings.ahd_pipeline} pipeline is started."
+        )
+        init_ahd_project_and_pipeline(settings, get_averbis_client(settings))
 
 
 @app.on_event("shutdown")

@@ -1,7 +1,7 @@
 from os import path
 
 from aiokafka.helpers import create_ssl_context
-from pydantic import BaseSettings, validator
+from pydantic import BaseSettings, root_validator, validator
 
 TLS_ROOT_DIR = "/opt/kafka-certs/"
 
@@ -54,7 +54,7 @@ class KafkaSettings(BaseSettings):
     sasl_plain_username: str = ""
     sasl_plain_password: str = ""
 
-    #  For using SASL without SSL certificates the *file args need to be None.
+    # For using SASL without SSL certificates the *file args need to be None.
     # Otherwise AIOKafkaClient will try to parse them even if they
     # consist of an empty string.
     @validator("ssl_cafile", "ssl_certfile", "ssl_keyfile")
@@ -89,14 +89,35 @@ class KafkaSettings(BaseSettings):
 
 class Settings(BaseSettings):
     # AHD URL. Should not end with a trailing '/'
-    ahd_url: str = ""
+    ahd_url: str
     # AHD API token
     ahd_api_token: str = ""
     # name of the AHD project
-    ahd_project: str = ""
+    ahd_project: str
+    # description of the project used if
+    # ahd_ensure_project_is_created_and_pipeline_is_started is set to true
+    ahd_project_description: str = "Auto-created by ahd2fhir"
     # name of the pipeline
-    ahd_pipeline: str = ""
+    ahd_pipeline: str
+    # ahd_version
+    ahd_version: str = "5"
+    # ahd username
+    ahd_username: str = ""
+    # ahd password
+    ahd_password: str = ""
+    # if set to true, create the specified project and make sure the pipeline is running
+    ahd_ensure_project_is_created_and_pipeline_is_started: bool = False
+
     # Kafka Settings
     kafka: KafkaSettings = KafkaSettings()
-    # ahd_version
-    ahd_version: str = ""
+
+    @root_validator(skip_on_failure=True)
+    @classmethod
+    def check_ahd_auth(cls, values):
+        if values["ahd_api_token"] == "":
+            if values["ahd_username"] == "" or values["ahd_password"] == "":
+                raise ValueError(
+                    "If ahd_api_token is unset, both ahd_username "
+                    + "and ahd_password need to be specified."
+                )
+        return values
