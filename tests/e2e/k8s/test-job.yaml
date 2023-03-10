@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: test
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: test
+          image: ghcr.io/miracum/ahd2fhir-e2e-test:v1
+          env:
+            - name: AHD2FHIR_API_BASE_URL
+              value: http://todo:8080
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: my-cluster-kafka-bootstrap:9092
