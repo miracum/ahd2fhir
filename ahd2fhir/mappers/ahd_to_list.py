@@ -83,7 +83,7 @@ def get_medication_list_from_document_reference(
     document_identifier_value = (
         document_reference.identifier[0].value
         if document_reference.identifier is not None
-        else None
+        else document_reference.id
     )
 
     if len(annotation_results) < 1:
@@ -113,7 +113,7 @@ def get_medication_list_from_document_reference(
     for list_type in ["DISCHARGE", "ADMISSION", "INPATIENT"]:
         result[list_type] = base_list.copy(deep=True)
         result[list_type].entry = med_entries[list_type]
-        result[list_type].title = list_type.lower()
+        result[list_type].title = f"List of {list_type.lower()} medication"
         empty_reason_coding = Coding.construct(
             display="No {} entries in document found.".format(list_type.lower())
         )
@@ -138,9 +138,12 @@ def get_medication_list_from_document_reference(
 
         list_identifier = Identifier.construct()
         list_identifier.system = (
-            f"https://fhir.miracum.org/nlp/identifiers/{list_type.lower()}-list"
+            "https://fhir.miracum.org/nlp/identifiers/"
+            + f"{list_type.lower()}-medication-list"
         )
         list_identifier.value = f"{list_type.lower()}_list_{document_identifier_value}"
+
+        result[list_type].identifier = [list_identifier]
         result[list_type].id = sha256(
             f"{list_identifier.system}" f"|{list_identifier.value}".encode("utf-8")
         ).hexdigest()
