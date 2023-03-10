@@ -6,16 +6,15 @@ import os
 
 import pytest
 import requests
-from fhirclient import server
-from fhir.resources.bundle import Bundle
+from confluent_kafka import Consumer, Producer
 from fhir.resources.attachment import Attachment
+from fhir.resources.bundle import Bundle
 from fhir.resources.documentreference import DocumentReference, DocumentReferenceContent
 from fhir.resources.fhirtypes import DateTime
 from fhir.resources.reference import Reference
+from fhirclient import server
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-from confluent_kafka import Producer
-from confluent_kafka import Consumer
 
 LOG = logging.getLogger(__name__)
 
