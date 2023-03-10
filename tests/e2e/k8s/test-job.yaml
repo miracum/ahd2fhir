@@ -25,8 +25,16 @@ spec:
             privileged: false
             runAsGroup: 65534
             runAsUser: 65534
+            readOnlyRootFilesystem: true
             seccompProfile:
               type: RuntimeDefault
+          resources:
+            limits:
+              memory: 512MiB
+              cpu: 1
+            requests:
+              memory: 512MiB
+              cpu: 1
           env:
             - name: AHD2FHIR_API_BASE_URL
               value: http://todo:8080

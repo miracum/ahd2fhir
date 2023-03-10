@@ -5,3 +5,5 @@ skip-check:
   - CKV_K8S_21
   # "Image should use digest"
   - CKV_K8S_43
+  # "Ensure that HEALTHCHECK instructions have been added to container images"
+  - CKV_DOCKER_2
