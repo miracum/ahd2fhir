@@ -144,3 +144,6 @@ dmypy.json
 !.env.development
 *.env
 *.env[-._]*
+
+*.tgz
+*.tar.gz

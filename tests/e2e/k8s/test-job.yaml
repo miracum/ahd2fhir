@@ -5,10 +5,28 @@ metadata:
 spec:
   template:
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsGroup: 65534
+        runAsUser: 65534
+        seccompProfile:
+          type: RuntimeDefault
       restartPolicy: Never
+      automountServiceAccountToken: false
       containers:
         - name: test
           image: ghcr.io/miracum/ahd2fhir-e2e-test:v1
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            runAsGroup: 65534
+            runAsUser: 65534
+            seccompProfile:
+              type: RuntimeDefault
           env:
             - name: AHD2FHIR_API_BASE_URL
               value: http://todo:8080

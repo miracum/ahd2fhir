@@ -14,6 +14,7 @@ FILEIO_REPORTER: false
 DISABLE_LINTERS:
   - REPOSITORY_DEVSKIM
   - MARKDOWN_MARKDOWN_LINK_CHECK
+  - MARKDOWN_MARKDOWN_TABLE_FORMATTER
   #  due to import-error
   - PYTHON_PYLINT
   # due to "error - python package "--hash" is available for public registration."
