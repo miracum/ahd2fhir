@@ -108,7 +108,6 @@ async def analyze_resource(
     payload: Union[Bundle, DocumentReference],
     resource_handler: ResourceHandler,
 ) -> Bundle:
-
     result: Bundle = None
 
     log = logger.bind(request_resource_id=f"{payload.get_resource_type()}/{payload.id}")

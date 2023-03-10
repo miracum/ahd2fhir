@@ -45,7 +45,6 @@ def fhir_server():
 
 
 def get_test_document_reference():
-
     text = "Diabetes"
 
     attachment = Attachment.construct()
