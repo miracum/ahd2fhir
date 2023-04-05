@@ -16,7 +16,6 @@ AHD_PAYLOADS_EXPECTED_NUMBER_OF_CONDITIONS = [
 def test_maps_to_expected_number_of_condition_resources(
     ahd_json_path, expected_number_of_conditions
 ):
-
     observations = map_resources(ahd_json_path, AHD_TYPE, get_fhir_resources)
     assert len(observations) == expected_number_of_conditions
 

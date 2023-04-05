@@ -52,6 +52,8 @@ def get_medication_statement_reference(annotation, document_reference):
     return medication_reference
 
 
+# TODO: could be refactored to just return the list of List resources.
+#       We simply append them to the final Bundle without any more logic anyways.
 def get_fhir_list(annotation_results, document_reference: DocumentReference):
     """
     Returns a list of {statement: ..., medication: ...} tuples
@@ -64,7 +66,6 @@ def get_fhir_list(annotation_results, document_reference: DocumentReference):
 def get_medication_list_from_document_reference(
     annotation_results, document_reference: DocumentReference
 ):
-
     base_list = List.construct(
         status="current",
         mode="snapshot",
@@ -82,15 +83,14 @@ def get_medication_list_from_document_reference(
     document_identifier_value = (
         document_reference.identifier[0].value
         if document_reference.identifier is not None
-        else None
+        else document_reference.id
     )
 
     if len(annotation_results) < 1:
         return None
 
-    med_entries = {"ADMISSION": [], "DISCHARGE": [], "INPATIENT": []}
+    med_entries: dict[str, list] = {"ADMISSION": [], "DISCHARGE": [], "INPATIENT": []}
 
-    num_entries = 0
     for annotation in annotation_results:
         if annotation["type"] != "de.averbis.types.health.Medication":
             continue
@@ -102,7 +102,6 @@ def get_medication_list_from_document_reference(
                 "Annotation not part of admission, inpatient or discharge list."
             )
             continue
-        num_entries += 1
         med_entry = {
             "date": document_reference.date,
             "item": get_medication_statement_reference(annotation, document_reference),
@@ -114,7 +113,7 @@ def get_medication_list_from_document_reference(
     for list_type in ["DISCHARGE", "ADMISSION", "INPATIENT"]:
         result[list_type] = base_list.copy(deep=True)
         result[list_type].entry = med_entries[list_type]
-        result[list_type].title = list_type.lower()
+        result[list_type].title = f"List of {list_type.lower()} medication"
         empty_reason_coding = Coding.construct(
             display="No {} entries in document found.".format(list_type.lower())
         )
@@ -131,16 +130,20 @@ def get_medication_list_from_document_reference(
         list_coding = Coding.construct(
             system=LIST_CODE_SYSTEM, code=LIST_CODE_MAPPING[list_type]
         )
-        list_code = CodeableConcept.construct(text="List Code", code=[])
-        list_code.code.append(list_med_coding)
-        list_code.code.append(list_coding)
+        list_code = CodeableConcept.construct()
+        list_code.text = "List Code"
+        list_code.coding = [list_med_coding, list_coding]
+
         result[list_type].code = list_code
 
         list_identifier = Identifier.construct()
         list_identifier.system = (
-            "https://fhir.miracum.org/nlp/identifiers/discharge_list"
+            "https://fhir.miracum.org/nlp/identifiers/"
+            + f"{list_type.lower()}-medication-list"
         )
         list_identifier.value = f"{list_type.lower()}_list_{document_identifier_value}"
+
+        result[list_type].identifier = [list_identifier]
         result[list_type].id = sha256(
             f"{list_identifier.system}" f"|{list_identifier.value}".encode("utf-8")
         ).hexdigest()

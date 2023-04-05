@@ -42,12 +42,15 @@ You can also access the Swagger API documentation at <http://localhost:8080/docs
 
 #### Required Settings
 
-| Environment variable | Description                                                                    | Default |
-| -------------------- | ------------------------------------------------------------------------------ | ------- |
-| `AHD_URL`            | URL of the AHD installation. Should not end with a trailing '/'.               | `""`    |
-| `AHD_API_TOKEN`      | An API token to access the AHD REST API.                                       | `""`    |
-| `AHD_PROJECT`        | Name of the AHD project. This needs to be created before ahd2fhir is started.  | `""`    |
-| `AHD_PIPELINE`       | Name of the AHD pipeline. This needs to be created before ahd2fhir is started. | `""`    |
+| Environment variable                                    | Description                                                                                                                 | Default |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `AHD_URL`                                               | URL of the AHD installation. Should not end with a trailing '/'.                                                            | `""`    |
+| `AHD_API_TOKEN`                                         | An API token to access the AHD REST API.                                                                                    | `""`    |
+| `AHD_USERNAME`                                          | Username for username+password based authentication against the API                                                         | `""`    |
+| `AHD_PASSWORD`                                          | Password for username+password based authentication against the API                                                         | `""`    |
+| `AHD_ENSURE_PROJECT_IS_CREATED_AND_PIPELINE_IS_STARTED` | If enabled, attempt to create the specified project and start the pipeline. Requires the use of username+password for auth. | `false` |
+| `AHD_PROJECT`                                           | Name of the AHD project. This needs to be created before ahd2fhir is started.                                               | `""`    |
+| `AHD_PIPELINE`                                          | Name of the AHD pipeline. This needs to be created before ahd2fhir is started.                                              | `""`    |
 
 #### Kafka Settings
 
@@ -87,7 +90,11 @@ Starts both AHD and Kafka and starts constantly filling a `fhir.documents` topic
 docker compose -f docker-compose.dev.yml -f docker-compose.dev-kafka.yml up
 ```
 
-### Create an AHD project with the default pipeline and get an API token for development
+### Manually create an AHD project with the default pipeline and get an API token for development
+
+> **Note**
+> If you set `AHD_ENSURE_PROJECT_IS_CREATED_AND_PIPELINE_IS_STARTED=true`, ahd2fhir will attempt to create
+> the necessary project and run the pipeline on startup. You won't need to manually do the steps below.
 
 1. Open AHD on <http://localhost:9999/health-discovery/#/login> and login as `admin` with password `admin`.
 1. Click on `Project Administration` -> `Create Project`.
@@ -115,13 +122,16 @@ Note the use of `host.docker.internal` so the running container can still access
 `docker-compose.dev.yml`.
 
 ```sh
-docker build -t ahd2fhir .
+docker build -t ahd2fhir:local .
 docker run --rm -it -p 8081:8080 \
     -e AHD_URL=http://host.docker.internal:9999/health-discovery \
     -e AHD_PROJECT=test \
     -e AHD_PIPELINE=discharge \
-    -e AHD_API_TOKEN=$AHD_API_TOKEN \
-    ahd2fhir
+    -e AHD_USERNAME=admin \
+    -e AHD_PASSWORD=admin \
+    -e WEB_CONCURRENCY=2 \
+    -e AHD_ENSURE_PROJECT_IS_CREATED_AND_PIPELINE_IS_STARTED=true \
+    ahd2fhir:local
 ```
 
 ### Test

@@ -99,14 +99,16 @@ def get_condition_from_annotation(annotation, date, doc_ref: DocumentReference):
     condition.code = condition_code
 
     if clinical_status := annotation.get("clinicalStatus"):
-        clinical_status_coding = Coding.construct()
-        clinical_status_coding.system = (
-            "http://terminology.hl7.org/CodeSystem/condition-clinical"
-        )
-        clinical_status_coding.code = CLINICAL_STATUS_MAPPING[clinical_status]
-        clinical_status_code = CodeableConcept.construct()
-        clinical_status_code.coding = [clinical_status_coding]
-        condition.clinicalStatus = clinical_status_code
+        status_code = CLINICAL_STATUS_MAPPING.get(clinical_status)
+        if status_code is not None:
+            clinical_status_coding = Coding.construct()
+            clinical_status_coding.system = (
+                "http://terminology.hl7.org/CodeSystem/condition-clinical"
+            )
+            clinical_status_coding.code = status_code
+            clinical_status_code = CodeableConcept.construct()
+            clinical_status_code.coding = [clinical_status_coding]
+            condition.clinicalStatus = clinical_status_code
 
     if (side := annotation.get("side")) is not None:
         body_side_snomed = SIDE_MAPPING.get(side)
