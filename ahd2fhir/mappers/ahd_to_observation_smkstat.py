@@ -11,7 +11,11 @@ from fhir.resources.meta import Meta
 from fhir.resources.observation import Observation
 from structlog import get_logger
 
+from ahd2fhir import config
+
 log = get_logger()
+
+FHIR_SYSTEMS = config.FhirSystemSettings()
 
 OBSERVATION_PROFILE = (
     "https://www.medizininformatik-initiative.de/"
@@ -68,7 +72,7 @@ def get_smoking_status_observation_from_annotation(
 
     # Coding
     observation_coding = Coding.construct()
-    observation_coding.system = "http://loinc.org"
+    observation_coding.system = FHIR_SYSTEMS.loinc
     observation_coding.code = "72166-2"
     observation_coding.display = "Tobacco smoking status"
     observation_coding.userSelected = False
@@ -100,12 +104,12 @@ def get_smoking_status_observation_from_annotation(
 
         # Create LOINC coding
         coding_loinc = Coding.construct()
-        coding_loinc.system = "http://loinc.org"
+        coding_loinc.system = FHIR_SYSTEMS.loinc
         coding_loinc.code = smkstat["code"]
 
         # Create snomed coding
         coding_snomed = Coding.construct()
-        coding_snomed.system = "http://snomed.info/sct"
+        coding_snomed.system = FHIR_SYSTEMS.snomed_ct
         coding_snomed.code = annotation["sctid"]
 
         codeable_concept.coding = [coding_loinc, coding_snomed]
@@ -116,7 +120,7 @@ def get_smoking_status_observation_from_annotation(
     # valueCodeableConcept
     # value_quantity = QuantityType()
     # value_quantity["value"] = pack_years
-    # value_quantity.system = "http://snomed.info/sct"
+    # value_quantity.system = FHIR_SYSTEMS.snomed_ct
     # value_quantity.code = "401201003"
     # value_quantity.text = "401201003"
     # observation.valueQuantity = value_quantity

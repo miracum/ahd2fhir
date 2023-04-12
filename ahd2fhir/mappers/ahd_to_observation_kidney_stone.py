@@ -10,7 +10,11 @@ from fhir.resources.meta import Meta
 from fhir.resources.observation import Observation
 from structlog import get_logger
 
+from ahd2fhir import config
+
 log = get_logger()
+
+FHIR_SYSTEMS = config.FhirSystemSettings()
 
 CLINICAL_STATUS_MAPPING = {"ACTIVE": "active", "RESOLVED": "resolved"}
 SIDE_MAPPING = {
@@ -77,7 +81,7 @@ def get_kidney_stone_from_annotation(
 
     # Coding + Code
     observation_coding = Coding.construct()
-    observation_coding.system = "http://snomed.info/sct"
+    observation_coding.system = FHIR_SYSTEMS.snomed_ct
     observation_coding.code = "95570007"
     observation_coding.display = "Kidney stone (disorder)"
     observation_coding.userSelected = False
@@ -97,7 +101,7 @@ def get_kidney_stone_from_annotation(
 
     # Method
     observation_method = Coding.construct()
-    observation_method.system = "http://snomed.info/sct"
+    observation_method.system = FHIR_SYSTEMS.snomed_ct
     observation_method.code = "363680008"
     observation_method.display = " Radiographic imaging procedure"
     method = CodeableConcept.construct()
@@ -107,7 +111,7 @@ def get_kidney_stone_from_annotation(
     # valueCodeableConcept
     value_codeable_concept = CodeableConcept()
     value_coding = Coding.construct()
-    value_coding.system = "http://snomed.info/sct"
+    value_coding.system = FHIR_SYSTEMS.snomed_ct
     value_coding.code = "56381008"
     value_codeable_concept.coding = [value_coding]
     value_codeable_concept.text = "Calculus (morphologic abnormality)"
@@ -153,7 +157,7 @@ def stone_dimension_observation(
 
     # Coding
     observation_coding = Coding.construct()
-    observation_coding.system = "http://loinc.org"
+    observation_coding.system = FHIR_SYSTEMS.loinc
     observation_coding.code = dimension_type["code"]
     observation_coding.display = dimension_type["display"]
     observation_coding.userSelected = False
@@ -165,7 +169,7 @@ def stone_dimension_observation(
 
     # valueCodeableConcept
     value_quantity = QuantityType()
-    value_quantity["system"] = "http://unitsofmeasure.org"
+    value_quantity["system"] = FHIR_SYSTEMS.ucum
     value_quantity["code"] = unit
     value_quantity["value"] = value
     value_quantity["unit"] = unit

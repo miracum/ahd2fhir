@@ -124,6 +124,7 @@ Note the use of `host.docker.internal` so the running container can still access
 ```sh
 docker build -t ahd2fhir:local .
 docker run --rm -it -p 8081:8080 \
+    --add-host=host.docker.internal:host-gateway \
     -e AHD_URL=http://host.docker.internal:9999/health-discovery \
     -e AHD_PROJECT=test \
     -e AHD_PIPELINE=discharge \

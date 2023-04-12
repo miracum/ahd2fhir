@@ -7,6 +7,7 @@ from fhir.resources.quantity import Quantity
 from fhir.resources.ratio import Ratio
 from structlog import get_logger
 
+from ahd2fhir import config
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
 log = get_logger()
@@ -15,6 +16,8 @@ MEDICATION_PROFILE = (
     "https://www.medizininformatik-initiative.de/"
     + "fhir/core/modul-medikation/StructureDefinition/Medication"
 )
+
+FHIR_SYSTEMS = config.FhirSystemSettings()
 
 
 def get_medication_from_annotation(annotation) -> Medication | None:
@@ -31,10 +34,10 @@ def get_medication_from_annotation(annotation) -> Medication | None:
     # Medication Code
     codes = []
     if "Abdamed-Averbis" in str(drug["ingredient"]["source"]):
-        system = "http://fhir.de/CodeSystem/dimdi/atc"
+        system = FHIR_SYSTEMS.atc
         codes = str(drug["ingredient"]["conceptId"]).split("-")
     elif "RxNorm" in str(drug["ingredient"]["source"]):
-        system = "http://www.nlm.nih.gov/research/umls/rxnorm"
+        system = FHIR_SYSTEMS.rxnorm
         codes.append(str(drug["ingredient"]["conceptId"]))
     else:
         system = ""

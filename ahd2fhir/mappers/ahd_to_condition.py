@@ -10,9 +10,12 @@ from fhir.resources.identifier import Identifier
 from fhir.resources.meta import Meta
 from structlog import get_logger
 
+from ahd2fhir import config
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
 log = get_logger()
+
+FHIR_SYSTEMS = config.FhirSystemSettings()
 
 CLINICAL_STATUS_MAPPING = {"ACTIVE": "active", "RESOLVED": "resolved"}
 SIDE_MAPPING: dict[str, tuple[str, str]] = {
@@ -38,7 +41,9 @@ def get_fhir_condition(
     )
 
 
-def get_condition_from_annotation(annotation, date, doc_ref: DocumentReference):
+def get_condition_from_annotation(
+    annotation, date, doc_ref: DocumentReference
+) -> Condition | None:
     condition = Condition.construct()
 
     condition.subject = doc_ref.subject
@@ -74,12 +79,11 @@ def get_condition_from_annotation(annotation, date, doc_ref: DocumentReference):
 
     # Terminologie
     if "ICD10GM" in str(annotation.get("source")):
-        system = "http://fhir.de/CodeSystem/dimdi/icd-10-gm"
+        system = FHIR_SYSTEMS.icd_10_gm
     else:
-        log.warning("Unknown coding system. Ignoring.", system=annotation.get("source"))
+        log.warning("Unknown coding source. Ignoring.", source=annotation.get("source"))
         return None
 
-    condition_code = CodeableConcept.construct()
     condition_coding = Coding.construct()
     condition_coding.system = system
     condition_coding.display = annotation.get("dictCanon")
@@ -95,16 +99,16 @@ def get_condition_from_annotation(annotation, date, doc_ref: DocumentReference):
         )
         condition_coding.version = "2020"
 
+    condition_code = CodeableConcept.construct()
     condition_code.coding = [condition_coding]
+
     condition.code = condition_code
 
     if clinical_status := annotation.get("clinicalStatus"):
         status_code = CLINICAL_STATUS_MAPPING.get(clinical_status)
         if status_code is not None:
             clinical_status_coding = Coding.construct()
-            clinical_status_coding.system = (
-                "http://terminology.hl7.org/CodeSystem/condition-clinical"
-            )
+            clinical_status_coding.system = FHIR_SYSTEMS.condition_clinical_status
             clinical_status_coding.code = status_code
             clinical_status_code = CodeableConcept.construct()
             clinical_status_code.coding = [clinical_status_coding]
@@ -124,7 +128,7 @@ def get_condition_from_annotation(annotation, date, doc_ref: DocumentReference):
         body_side_code.coding = []
 
         body_side_coding = Coding.construct()
-        body_side_coding.system = "http://snomed.info/sct"
+        body_side_coding.system = FHIR_SYSTEMS.snomed_ct
         body_side_coding.code = body_side_snomed[0]
         body_side_coding.display = body_side_snomed[1]
 

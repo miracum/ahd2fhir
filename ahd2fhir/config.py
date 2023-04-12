@@ -87,6 +87,21 @@ class KafkaSettings(BaseSettings):
         return None
 
 
+class FhirSystemSettings(BaseSettings):
+    icd_10_gm: str = "http://fhir.de/CodeSystem/dimdi/icd-10-gm"
+    snomed_ct: str = "http://snomed.info/sct"
+    condition_clinical_status: str = (
+        "http://terminology.hl7.org/CodeSystem/condition-clinical"
+    )
+    ucum: str = "http://unitsofmeasure.org"
+    atc: str = "http://fhir.de/CodeSystem/dimdi/atc"
+    rxnorm: str = "http://www.nlm.nih.gov/research/umls/rxnorm"
+    loinc: str = "http://loinc.org"
+
+    class Config:
+        env_prefix = "fhir_systems_"
+
+
 class Settings(BaseSettings):
     # AHD URL. Should not end with a trailing '/'
     ahd_url: str
@@ -110,6 +125,9 @@ class Settings(BaseSettings):
 
     # Kafka Settings
     kafka: KafkaSettings = KafkaSettings()
+
+    # FHIR systems
+    fhir_systems: FhirSystemSettings = FhirSystemSettings()
 
     @root_validator(skip_on_failure=True)
     @classmethod
