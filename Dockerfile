@@ -7,7 +7,7 @@ FROM release AS test
 COPY requirements-test.txt .
 RUN pip3 install --no-cache-dir -r requirements-test.txt
 COPY . .
-RUN PYTHONPATH=${PWD}/ahd2fhir pytest --cov=ahd2fhir && \
+RUN PYTHONPATH=${PWD}/ahd2fhir pytest -vv --cov=ahd2fhir && \
     coverage report --fail-under=80
 
 FROM release

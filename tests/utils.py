@@ -6,7 +6,7 @@ from fhir.resources.documentreference import DocumentReference, DocumentReferenc
 from fhir.resources.reference import Reference
 
 
-def get_empty_document_reference():
+def get_empty_document_reference() -> DocumentReference:
     docref = DocumentReference.construct()
     docref.status = "current"
     cnt = DocumentReferenceContent.construct()

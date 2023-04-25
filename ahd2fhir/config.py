@@ -97,6 +97,14 @@ class FhirSystemSettings(BaseSettings):
     atc: str = "http://fhir.de/CodeSystem/dimdi/atc"
     rxnorm: str = "http://www.nlm.nih.gov/research/umls/rxnorm"
     loinc: str = "http://loinc.org"
+    condition_profile: str = (
+        "https://www.medizininformatik-initiative.de/fhir/core/"
+        + "modul-diagnose/StructureDefinition/Diagnose"
+    )
+    medication_list_profile: str = (
+        "https://www.medizininformatik-initiative.de/fhir/core/"
+        + "modul-medikation/StructureDefinition/medikationsliste"
+    )
 
     class Config:
         env_prefix = "fhir_systems_"

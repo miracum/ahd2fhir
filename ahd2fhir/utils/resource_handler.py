@@ -1,8 +1,7 @@
 import base64
-import datetime
 import logging
 import os
-import time
+from datetime import datetime
 from typing import List, Tuple
 
 import structlog
@@ -81,9 +80,14 @@ class TransientError(Exception):
 
 
 class ResourceHandler:
-    def __init__(self, averbis_pipeline: Pipeline):
+    def __init__(
+        self,
+        averbis_pipeline: Pipeline,
+        fixed_composition_datetime: datetime | None = None,
+    ):
         self.pipeline = averbis_pipeline
         self.bundle_builder = BundleBuilder()
+        self.fixed_composition_datetime = fixed_composition_datetime
 
     @MAPPING_FAILURES_COUNTER.count_exceptions()
     @MAPPING_DURATION_SUMMARY.time()
@@ -191,11 +195,16 @@ class ResourceHandler:
             )
         )
 
+        composition_datetime: datetime = datetime.utcnow()
+        if self.fixed_composition_datetime:
+            composition_datetime = self.fixed_composition_datetime
+
         composition = Composition(
             **{
-                "title": "NLP FHIR Results " + time.strftime("%Y-%m-%dT%H:%M"),
+                "title": "AHD2FHIR NLP Processing Results "
+                + composition_datetime.isoformat(),
                 "status": "final",
-                "date": DateTime.validate(datetime.datetime.now(datetime.timezone.utc)),
+                "date": DateTime.validate(composition_datetime),
                 "type": composition_type,
                 "identifier": composition_identifier,
                 "id": sha256_of_identifier(composition_identifier),
