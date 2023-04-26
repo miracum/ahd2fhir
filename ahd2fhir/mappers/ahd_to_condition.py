@@ -23,10 +23,8 @@ SIDE_MAPPING: dict[str, tuple[str, str]] = {
     "RIGHT": ("24028007", "Right"),
     "BOTH": ("51440002", "Right and left"),
 }
-CONDITION_PROFILE = (
-    "https://www.medizininformatik-initiative.de/"
-    + "fhir/core/modul-diagnose/StructureDefinition/Diagnose"
-)
+
+FHIR_SYSTEMS = config.FhirSystemSettings()
 
 EXTRACT_YEAR_FROM_ICD_REGEX = r"ICD.*_(?P<version>\d{4})"
 
@@ -36,19 +34,18 @@ def get_fhir_condition(
 ) -> Condition:
     return get_condition_from_annotation(
         annotation=ahd_response_entry,
-        date=document_reference.date,
         doc_ref=document_reference,
     )
 
 
 def get_condition_from_annotation(
-    annotation, date, doc_ref: DocumentReference
+    annotation, doc_ref: DocumentReference
 ) -> Condition | None:
     condition = Condition.construct()
 
     condition.subject = doc_ref.subject
-    if date is not None:
-        condition.recordedDate = date
+    if doc_ref.date is not None:
+        condition.recordedDate = doc_ref.date
     else:
         condition.recordedDate = DateTime.validate(
             datetime.datetime.now(datetime.timezone.utc)
@@ -67,7 +64,7 @@ def get_condition_from_annotation(
     condition.id = sha256_of_identifier(condition_identifier)
 
     condition.meta = Meta.construct()
-    condition.meta.profile = [CONDITION_PROFILE]
+    condition.meta.profile = [FHIR_SYSTEMS.condition_profile]
 
     if annotation.get("belongsTo") in ["FAMILY", "OTHER"]:
         log.warning("Dropped condition result because it refers to family history")

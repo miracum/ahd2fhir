@@ -48,7 +48,7 @@ def test_health_probes(endpoint: str):
     assert response.json() == {"status": "healthy"}
 
 
-def test_analysze_empty_document_should_return_unprocessable_entity_status():
+def test_analyze_empty_document_should_return_unprocessable_entity_status():
     doc = get_empty_document_reference()
     response = client.post("/fhir/$analyze-document", json=doc.dict())
 
