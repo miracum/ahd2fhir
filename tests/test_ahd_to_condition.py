@@ -1,11 +1,12 @@
 import json
-
 import pytest
+from pathlib import Path
+
 from fhir.resources.documentreference import DocumentReferenceContext
 
 from ahd2fhir.mappers.ahd_to_condition import get_fhir_condition
 from ahd2fhir.utils.resource_handler import AHD_TYPE_DIAGNOSIS
-from tests.utils import get_empty_document_reference
+from tests.utils import get_empty_document_reference, map_resources
 
 AHD_PAYLOADS_EXPECTED_NUMBER_OF_CONDITIONS = [
     ("payload_1_v5.json", 13),
@@ -81,3 +82,19 @@ def test_sets_the_condition_encounter_to_the_context_from_the_documentreference(
     condition = get_fhir_condition(ahd_response, doc_ref)
 
     assert condition.encounter.reference == "Encounter/e2216331600"
+
+@pytest.mark.parametrize('case_dir', list(Path('tests/test_cases').iterdir()))
+def test_snapshot(case_dir, snapshot):
+
+    ahd_json_path = "\\payload.json"
+
+    resources = []
+
+    for res in map_resources(ahd_json_path, AHD_TYPE_DIAGNOSIS, get_fhir_condition, ahd_folder_path=case_dir):
+        res.id = 'test'
+        resources.append(res.json())    
+
+    snapshot.snapshot_dir = case_dir
+    # for i in len(resources):
+    #     snapshot.assert_match(resources[i], 'output_condition_[i].txt')
+    snapshot.assert_match(resources[0], 'output_condition.json')

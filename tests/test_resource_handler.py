@@ -1,7 +1,9 @@
 import base64
 import json
-
 import pytest
+from datetime import datetime, timezone
+from pathlib import Path
+
 from fhir.resources.attachment import Attachment
 from fhir.resources.bundle import Bundle, BundleEntry
 from fhir.resources.composition import Composition
@@ -98,3 +100,39 @@ def test_get_fhir_medication_should_only_create_unique_bundle_entries():
     # if the number of fullUrls in the original list is the same as the one in the
     # set of urls, then the full_urls list only contains distinct items
     assert len(full_urls) == len(unique_full_urls)
+
+@pytest.mark.parametrize('case_dir', list(Path('tests/test_cases').iterdir()))
+def test_snapshot(case_dir, snapshot):
+
+    ahd_json_path = "\\payload.json"
+
+    doc = get_empty_document_reference(datetime(2023, 1, 1, tzinfo=timezone.utc))
+    doc.content[0] = DocumentReferenceContent(
+        **{
+            "attachment": Attachment(
+                **{
+                    "data": base64.b64encode("test".encode("utf-8")),
+                    "contentType": "text/plain",
+                    "language": "en",
+                }
+            )
+        }
+    )
+
+    with open(f'{case_dir}{ahd_json_path}') as file:
+        ahd_payload = json.load(file)
+
+    resource_handler = ResourceHandler(
+        averbis_pipeline=MockPipeline(response=ahd_payload)
+    )
+    
+    bundle = resource_handler.handle_documents([doc])
+
+    composition = bundle.entry[len(bundle.entry)-1]
+    composition.resource.date = datetime(2023, 1, 1, tzinfo=timezone.utc)
+    composition.resource.title = 'test'
+
+    result = bundle.json()
+
+    snapshot.snapshot_dir = case_dir
+    snapshot.assert_match(result, 'output_bundle.json')

@@ -1,6 +1,8 @@
 import json
 import os
+import pytest
 from datetime import datetime, timezone
+from pathlib import Path
 from unittest import mock
 
 from fhir.resources.fhirtypes import DateTime
@@ -78,3 +80,37 @@ def test_fhir_medication_v6():
     assert statement_v6.json()
     assert statement_v6.status is not None
     assert statement_v6.medicationReference is not None
+
+@pytest.mark.parametrize('case_dir', list(Path('tests/test_cases').iterdir()))
+def test_snapshot(case_dir, snapshot):
+
+    ahd_json_path = "\\payload.json"
+
+    with open(f'{case_dir}{ahd_json_path}') as file:
+        ahd_payload = json.load(file)
+
+    medications = []
+    statements = []
+
+    annotation= [
+        a for a in ahd_payload if a["type"] == AHD_TYPE_MEDICATION
+    ]
+
+    for an in annotation:
+        resource = get_fhir_medication_statement(an, get_empty_document_reference(datetime(2023, 1, 1, tzinfo=timezone.utc)))
+        med = resource[0]["medication"]
+        medications.append(med.json())
+        stat = resource[0]["statement"]
+        stat.id = 'test'
+        statements.append(stat.json())
+
+    print(medications[0])
+    print(statements[0])
+ 
+    snapshot.snapshot_dir = case_dir
+    # for i in len(resources):
+    #     snapshot.assert_match(medications[i], 'output_medication_[i].txt')
+    snapshot.assert_match(medications[0], 'output_medication.json')
+    # for i in len(resources):
+    #     snapshot.assert_match(statements[i], 'output_medication_statement_[i].txt')
+    snapshot.assert_match(statements[0], 'output_medication_statement.json')

@@ -1,9 +1,7 @@
 import pytest
+from pathlib import Path
 
-from ahd2fhir.mappers.ahd_to_observation_kidney_stone import (
-    AHD_TYPE,
-    get_fhir_resources,
-)
+from ahd2fhir.mappers.ahd_to_observation_kidney_stone import AHD_TYPE, get_fhir_resources
 from tests.utils import map_resources
 
 AHD_PAYLOADS_EXPECTED_NUMBER_OF_OBSERVATIONS = [
@@ -31,3 +29,20 @@ def test_mapped_observation_coding_should_set_userselected_to_false(ahd_json_pat
     observations = map_resources(ahd_json_path, AHD_TYPE, get_fhir_resources)
     for o in observations:
         assert all(coding.userSelected is False for coding in o[0].code.coding)
+
+@pytest.mark.parametrize('case_dir', list(Path('tests/test_cases').iterdir()))
+def test_snapshot(case_dir, snapshot):
+
+    ahd_json_path = "\\payload.json"
+
+    resources = []
+
+    for res in map_resources(ahd_json_path, AHD_TYPE, get_fhir_resources, ahd_folder_path=case_dir):
+        for r in res:
+            r.id = 'test'
+            resources.append(r.json())    
+
+    snapshot.snapshot_dir = case_dir
+    # for i in len(resources):
+    #     snapshot.assert_match(resources[i], 'output_observation_kidney_stone_[i].txt')
+    snapshot.assert_match(resources[0], 'output_observation_kidney_stone.json')
