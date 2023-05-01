@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   zoo1:
-    image: zookeeper:3.8.1@sha256:bf742c6e9df263e2245d6a8a487c43bf43d9cd1f685caa07ddecd760f3a21950
+    image: zookeeper:3.8.1@sha256:1bcf8e8fdbac2065131b0da25c5a4a1dd7c4961c4031fb3bd1414ebf0a9ef322
     restart: unless-stopped
     hostname: zoo1
     environment:
