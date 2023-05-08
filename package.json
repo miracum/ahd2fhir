@@ -1,0 +1,13 @@
+{
+  "name": "ahd2fhir",
+  "version": "0.0.0",
+  "description": "Creates FHIR resources from Averbis Health Discovery NLP Annotations.",
+  "dependencies": {
+    "hl7.fhir.r4.core": "4.0.1",
+    "de.medizininformatikinitiative.kerndatensatz.medikation": "2.0.0-ballot1",
+    "de.medizininformatikinitiative.kerndatensatz.diagnose": "2.0.0-alpha3"
+  },
+  "fhirVersions": [
+    "4.0.1"
+  ]
+}

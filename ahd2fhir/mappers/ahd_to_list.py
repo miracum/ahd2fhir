@@ -10,16 +10,14 @@ from fhir.resources.meta import Meta
 from fhir.resources.reference import Reference
 from structlog import get_logger
 
+from ahd2fhir import config
 from ahd2fhir.mappers.ahd_to_medication_statement import (
     get_medication_statement_from_annotation,
 )
 
 log = get_logger()
 
-LIST_PROFILE = (
-    "https://www.medizininformatik-initiative.de/"
-    + "fhir/core/modul-medikation/StructureDefinition/List"
-)
+FHIR_SYSTEMS = config.FhirSystemSettings()
 
 DATA_ABSENT_EXTENSION_UNKNOWN = FHIRPrimitiveExtension(
     **{
@@ -74,7 +72,7 @@ def get_medication_list_from_document_reference(
     )
 
     metadata = Meta.construct()
-    metadata.profile = [LIST_PROFILE]
+    metadata.profile = [FHIR_SYSTEMS.medication_list_profile]
     base_list.meta = metadata
 
     list_creation_date = document_reference.date
@@ -94,26 +92,40 @@ def get_medication_list_from_document_reference(
     for annotation in annotation_results:
         if annotation["type"] != "de.averbis.types.health.Medication":
             continue
-        if annotation["status"] == "NEGATED" or annotation["status"] == "FAMILY":
+
+        status = annotation.get("status")
+        if status == "NEGATED" or status == "FAMILY":
             log.warning("annotation status is NEGATED or FAMILY.")
             continue
-        if med_entries.keys().__contains__(annotation["status"]) is False:
+        if med_entries.keys().__contains__(status) is False:
             log.warning(
                 "Annotation not part of admission, inpatient or discharge list."
             )
             continue
+
         med_entry = {
-            "date": document_reference.date,
             "item": get_medication_statement_reference(annotation, document_reference),
         }
-        med_entries[annotation["status"]].append(med_entry)
+
+        # lst-3 "An entry date can only be used if the mode of the list is "working""
+        if status == "INPATIENT":
+            med_entry["date"] = document_reference.date
+
+        med_entries[status].append(med_entry)
 
     result = {}
 
+    # TODO: refactor to turn list_type into an enum for enhanced type safety
     for list_type in ["DISCHARGE", "ADMISSION", "INPATIENT"]:
         result[list_type] = base_list.copy(deep=True)
         result[list_type].entry = med_entries[list_type]
         result[list_type].title = f"List of {list_type.lower()} medication"
+
+        # medication-list-context-2: Wenn der Kontext stationärer Aufenthalt ist,
+        # soll der mode 'working' sein.
+        if list_type == "INPATIENT":
+            result[list_type].mode = "working"
+
         empty_reason_coding = Coding.construct(
             display="No {} entries in document found.".format(list_type.lower())
         )

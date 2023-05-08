@@ -180,6 +180,7 @@ def get_medication_dosage_from_annotation(annotation) -> Dosage:
 
     quantity.value = drug["strength"]["value"]
     quantity.unit = drug["strength"]["unit"]
+    quantity.code = drug["strength"]["unit"]
     quantity.system = "http://unitsofmeasure.org"
 
     dose_and_rate.doseQuantity = quantity

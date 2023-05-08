@@ -10,9 +10,12 @@ from fhir.resources.identifier import Identifier
 from fhir.resources.meta import Meta
 from structlog import get_logger
 
+from ahd2fhir import config
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
 log = get_logger()
+
+FHIR_SYSTEMS = config.FhirSystemSettings()
 
 CLINICAL_STATUS_MAPPING = {"ACTIVE": "active", "RESOLVED": "resolved", "CHRONIC": "active"}
 SIDE_MAPPING: dict[str, tuple[str, str]] = {
@@ -20,10 +23,8 @@ SIDE_MAPPING: dict[str, tuple[str, str]] = {
     "RIGHT": ("24028007", "Right"),
     "BOTH": ("51440002", "Right and left"),
 }
-CONDITION_PROFILE = (
-    "https://www.medizininformatik-initiative.de/"
-    + "fhir/core/modul-diagnose/StructureDefinition/Diagnose"
-)
+
+FHIR_SYSTEMS = config.FhirSystemSettings()
 
 EXTRACT_YEAR_FROM_ICD_REGEX = r"ICD.*_(?P<version>\d{4})"
 
@@ -33,17 +34,18 @@ def get_fhir_condition(
 ) -> Condition:
     return get_condition_from_annotation(
         annotation=ahd_response_entry,
-        date=document_reference.date,
         doc_ref=document_reference,
     )
 
 
-def get_condition_from_annotation(annotation, date, doc_ref: DocumentReference):
+def get_condition_from_annotation(
+    annotation, doc_ref: DocumentReference
+) -> Condition | None:
     condition = Condition.construct()
 
     condition.subject = doc_ref.subject
-    if date is not None:
-        condition.recordedDate = date
+    if doc_ref.date is not None:
+        condition.recordedDate = doc_ref.date
     else:
         condition.recordedDate = DateTime.validate(
             datetime.datetime.now(datetime.timezone.utc)
@@ -62,7 +64,7 @@ def get_condition_from_annotation(annotation, date, doc_ref: DocumentReference):
     condition.id = sha256_of_identifier(condition_identifier)
 
     condition.meta = Meta.construct()
-    condition.meta.profile = [CONDITION_PROFILE]
+    condition.meta.profile = [FHIR_SYSTEMS.condition_profile]
 
     if annotation.get("belongsTo") in ["FAMILY", "OTHER"]:
         log.warning("Dropped condition result because it refers to family history")
@@ -74,12 +76,11 @@ def get_condition_from_annotation(annotation, date, doc_ref: DocumentReference):
 
     # Terminologie
     if "ICD10GM" in str(annotation.get("source")):
-        system = "http://fhir.de/CodeSystem/dimdi/icd-10-gm"
+        system = FHIR_SYSTEMS.icd_10_gm
     else:
-        log.warning("Unknown coding system. Ignoring.", system=annotation.get("source"))
+        log.warning("Unknown coding source. Ignoring.", source=annotation.get("source"))
         return None
 
-    condition_code = CodeableConcept.construct()
     condition_coding = Coding.construct()
     condition_coding.system = system
     condition_coding.display = annotation.get("dictCanon")
@@ -95,16 +96,16 @@ def get_condition_from_annotation(annotation, date, doc_ref: DocumentReference):
         )
         condition_coding.version = "2020"
 
+    condition_code = CodeableConcept.construct()
     condition_code.coding = [condition_coding]
+
     condition.code = condition_code
 
     if clinical_status := annotation.get("clinicalStatus"):
         status_code = CLINICAL_STATUS_MAPPING.get(clinical_status)
         if status_code is not None:
             clinical_status_coding = Coding.construct()
-            clinical_status_coding.system = (
-                "http://terminology.hl7.org/CodeSystem/condition-clinical"
-            )
+            clinical_status_coding.system = FHIR_SYSTEMS.condition_clinical_status
             clinical_status_coding.code = status_code
             clinical_status_code = CodeableConcept.construct()
             clinical_status_code.coding = [clinical_status_coding]
@@ -124,7 +125,7 @@ def get_condition_from_annotation(annotation, date, doc_ref: DocumentReference):
         body_side_code.coding = []
 
         body_side_coding = Coding.construct()
-        body_side_coding.system = "http://snomed.info/sct"
+        body_side_coding.system = FHIR_SYSTEMS.snomed_ct
         body_side_coding.code = body_side_snomed[0]
         body_side_coding.display = body_side_snomed[1]
 
