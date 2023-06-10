@@ -22,7 +22,7 @@ services:
       start_period: 1m
 
   database:
-    image: docker.io/library/mariadb:10.11.2@sha256:9ff479f244cc596aed9794d035a9f352662f2caed933238c533024df64569853
+    image: docker.io/library/mariadb:10.11.4@sha256:0dd97d82bb0a39720cea837f7034378ba8f95cedd39f69bd8bff78856ceeb3e1
     command: --max_allowed_packet=1g --innodb_buffer_pool_size=512m --innodb_log_buffer_size=256m --innodb_log_file_size=256m
     environment:
       - MYSQL_ROOT_PASSWORD=getaccess
