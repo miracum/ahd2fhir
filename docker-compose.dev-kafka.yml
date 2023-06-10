@@ -11,7 +11,7 @@ services:
       ZOO_SERVERS: server.1=zoo1:2888:3888;2181
 
   kafka1:
-    image: confluentinc/cp-kafka:6.2.10@sha256:dd232a61a7ac08ff2fc3ecff6b7f1d43b19856839b9acde67c92a5bf52a86c64
+    image: confluentinc/cp-kafka:7.4.0@sha256:9080235b1e58a57ca16d480cba6c9cbde72619f2bd43b77d70bada5aecf7811a
     hostname: kafka1
     ports:
       - "9092:9092"
@@ -40,7 +40,7 @@ services:
       - kafka1
 
   kafka-data-loader:
-    image: confluentinc/cp-kafkacat:6.2.10@sha256:c0ff554d4c51f46b64b8bf437a2852137542a06bbaa578a694c7cabe00ab72b6
+    image: confluentinc/cp-kafkacat:7.1.7@sha256:e500d5fcad83bfe689941cd676a8191773f17d49267f8de207d8fbc617f6bd24
     entrypoint: ["/bin/bash", "-c"]
     command:
       [
