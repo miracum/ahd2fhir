@@ -1,5 +1,3 @@
-version: "3.7"
-
 services:
   ahd2fhir:
     image: ghcr.io/miracum/ahd2fhir:${IMAGE_TAG:?}
