@@ -41,7 +41,7 @@ class KafkaSettings(BaseSettings):
     producer = KafkaProducerSettings()
 
     # Kafka-related settings
-    bootstrap_servers: str = "localhost:9092"
+    bootstrap_servers: str = "localhost:9094"
     max_message_size_bytes: int = 5242880  # 5 MiB
 
     # SSL Settings
