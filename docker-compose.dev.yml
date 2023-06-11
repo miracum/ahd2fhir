@@ -1,59 +1,19 @@
 services:
-  mysql-hd:
-    image: registry.averbis.com/mysql/mysql:1.20.0
-    environment:
-      MYSQL_ROOT_PASSWORD: getaccess
-      MYSQL_DATABASE: aif
-      MYSQL_USER: aif
-      MYSQL_PASSWORD: getaccess
-      innodb_buffer_pool_size: 512m
-      innodb_log_file_size: 256m
-      innodb_log_buffer_size: 256m
-    volumes:
-      - dbVol-hd:/var/lib/mysql
-
-  gcm-hd:
-    image: registry.averbis.com/health-discovery/gcm-hd:5.39.1
-    environment:
-      TOMCAT_XMS: 1g
-      TOMCAT_XMX: 2g
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "curl",
-          "-f",
-          "http://localhost:8080/connector-manager/testConnectivity",
-        ]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 30s
-
-  solr-hd:
-    image: registry.averbis.com/health-discovery/solr-hd:5.39.1
-    environment:
-      SOLR_HEAP_SIZE: 512m
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8983/solr/terms/admin/ping"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 30s
-
-  health-discovery:
-    image: registry.averbis.com/health-discovery/health-discovery:5.39.1
+  health-discovery-hd:
+    image: registry.averbis.com/health-discovery/health-discovery:6.14.0@sha256:a0335e64890e6858727f25fd3230a5ae05bf3d3fc142d1377ec3e5449df29d47
     ports:
-      - 127.0.0.1:9999:8080
+      - "9999:8080"
     environment:
-      TOMCAT_XMS: 7g
-      TOMCAT_XMX: 8g
-    volumes:
-      - sharedDirectoryDataVolume-hd:/usr/local/tomcat/shared/pipelines
-      - sharedDirectoryDownloads-hd:/usr/local/tomcat/shared/downloads
+      - PLATFORM_PORT=8080
+      - PLATFORM_MAX_MEM=${PRODUCT_MAX_MEM:-24g}
+      - DATABASE_DRIVER_CLASS=org.mariadb.jdbc.Driver
+      - DATABASE_URL=jdbc:mariadb://database:3306/aif?useMysqlMetadata=true
+      - DATABASE_USERNAME=aif
+      - DATABASE_PASSWORD=getaccess
     depends_on:
-      - mysql-hd
-      - solr-hd
+      - database
+      - solr
+      - gcm
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health-discovery"]
       interval: 30s
@@ -61,10 +21,45 @@ services:
       retries: 3
       start_period: 1m
 
-volumes:
-  dbVol-hd:
-    driver: "local"
-  sharedDirectoryDataVolume-hd:
-    driver: "local"
-  sharedDirectoryDownloads-hd:
-    driver: "local"
+  database:
+    image: docker.io/library/mariadb:11.0.2@sha256:b85481f8f2a65c10dec198e562a751676e926da83018e5590d00be86e5c9f635
+    command: --max_allowed_packet=1g --innodb_buffer_pool_size=512m --innodb_log_buffer_size=256m --innodb_log_file_size=256m
+    environment:
+      - MYSQL_ROOT_PASSWORD=getaccess
+      - MYSQL_DATABASE=aif
+      - MYSQL_USER=aif
+      - MYSQL_PASSWORD=getaccess
+
+  solr:
+    image: registry.averbis.com/solr/solr:7.2.0@sha256:fb70c6ae154fefe7ca32ba96ee15d4fec20daec880dfe8c3e1ca3eefeae1aeaa
+    environment:
+      - SOLR_MAX_MEM=512m
+      - TEXTANALYSIS_URL=http://${PLATFORM_HOSTNAME:-health-discovery-hd}:${PLATFORM_PORT:-8080}/health-discovery/rest
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8983/solr/terms/admin/ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  gcm:
+    image: registry.averbis.com/gcm/gcm:7.2.0@sha256:9364cc06cd5b226ac573e3d492c01830e5342c9dfd9caa0cec9b1eb46785e90d
+    environment:
+      - JAVA_MAX_MEM=2g
+      - PLATFORM_HOSTNAME=${PLATFORM_HOSTNAME:-health-discovery-hd}
+      - PLATFORM_PORT=${PLATFORM_PORT:-8080}
+      - PLATFORM_URL_NAME=health-discovery
+      - GCM_HOSTNAME=gcm
+      - GCM_PORT=8181
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:8181/connector-manager/testConnectivity",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
