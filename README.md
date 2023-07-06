@@ -55,7 +55,7 @@ You can also access the Swagger API documentation at <http://localhost:8080/docs
 #### Kafka Settings
 
 Most relevant Kafka settings. See [config.py](ahd2fhir/config.py) for a complete list.
-As the settings are composed of pydantic [settings](https://pydantic-docs.helpmanual.io/usage/settings/),
+As the settings are composed of pydantic [settings](https://docs.pydantic.dev/latest/api/pydantic_settings/),
 use the corresponding `env_prefix` value to override defaults.
 
 | Environment variable      | Description                                                              | Default            |
