@@ -61,7 +61,7 @@ use the corresponding `env_prefix` value to override defaults.
 | Environment variable      | Description                                                              | Default            |
 | ------------------------- | ------------------------------------------------------------------------ | ------------------ |
 | `KAFKA_ENABLED`           | Whether to enable support for reading resources from Apache Kafka.       | `false`            |
-| `KAFKA_BOOTSTRAP_SERVERS` | Host and port of the Kafka bootstrap servers.                            | `localhost:9092`   |
+| `KAFKA_BOOTSTRAP_SERVERS` | Host and port of the Kafka bootstrap servers.                            | `localhost:9094`   |
 | `KAFKA_SECURITY_PROTOCOL` | The security protocol used to connect with the Kafka brokers.            | `PLAINTEXT`        |
 | `KAFKA_CONSUMER_GROUP_ID` | The Kafka consumer group id.                                             | `ahd2fhir`         |
 | `KAFKA_INPUT_TOPIC`       | The input topic to read FHIR DocumentReferences or Bundles thereof from. | `fhir.documents`   |
@@ -80,7 +80,7 @@ pip install -r requirements-dev.txt
 Starts an AHD server:
 
 ```sh
-docker login registry.averbis.com "Username" "Password"
+docker login registry.averbis.com -u "Username" -p "Password"
 docker compose -f docker-compose.dev.yml up
 ```
 

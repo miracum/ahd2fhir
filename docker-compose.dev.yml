@@ -1,6 +1,6 @@
 services:
   health-discovery-hd:
-    image: registry.averbis.com/health-discovery/health-discovery:6.14.0@sha256:a0335e64890e6858727f25fd3230a5ae05bf3d3fc142d1377ec3e5449df29d47
+    image: registry.averbis.com/health-discovery/health-discovery:6.18.1@sha256:d95b5cc112b7f617d6071af6b05163c1df00476bc4cbc75e8dc44e26d196c2c3
     ports:
       - "9999:8080"
     environment:
@@ -10,6 +10,10 @@ services:
       - DATABASE_URL=jdbc:mariadb://database:3306/aif?useMysqlMetadata=true
       - DATABASE_USERNAME=aif
       - DATABASE_PASSWORD=getaccess
+      - GCM_HOSTNAME=gcm
+      - GCM_PORT=8181
+      - SOLR_HOSTNAME=solr
+      - SOLR_PORT=8983
     depends_on:
       - database
       - solr
@@ -31,7 +35,7 @@ services:
       - MYSQL_PASSWORD=getaccess
 
   solr:
-    image: registry.averbis.com/solr/solr:7.2.0@sha256:fb70c6ae154fefe7ca32ba96ee15d4fec20daec880dfe8c3e1ca3eefeae1aeaa
+    image: registry.averbis.com/solr/solr:7.6.0@sha256:cc0658c36605248aa059c401b4303f9059280ed3fb248ab6a6d9513b4ca21d6e
     environment:
       - SOLR_MAX_MEM=512m
       - TEXTANALYSIS_URL=http://${PLATFORM_HOSTNAME:-health-discovery-hd}:${PLATFORM_PORT:-8080}/health-discovery/rest
@@ -43,7 +47,7 @@ services:
       start_period: 30s
 
   gcm:
-    image: registry.averbis.com/gcm/gcm:7.2.0@sha256:9364cc06cd5b226ac573e3d492c01830e5342c9dfd9caa0cec9b1eb46785e90d
+    image: registry.averbis.com/gcm/gcm:7.6.0@sha256:5adbe4a364a9c7c1deaa2e2f34959367fbeed3c2ccc1d4d6f60d86e39344e06b
     environment:
       - JAVA_MAX_MEM=2g
       - PLATFORM_HOSTNAME=${PLATFORM_HOSTNAME:-health-discovery-hd}
