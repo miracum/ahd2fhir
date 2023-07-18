@@ -1,6 +1,6 @@
 services:
   health-discovery-hd:
-    image: registry.averbis.com/health-discovery/health-discovery:6.18.1@sha256:d95b5cc112b7f617d6071af6b05163c1df00476bc4cbc75e8dc44e26d196c2c3
+    image: registry.averbis.com/health-discovery/health-discovery:6.19.0@sha256:796fc716e8d4c75c7a9a3e91f2978a441d2197838942df9403445fb7c34b1e83
     ports:
       - "9999:8080"
     environment:

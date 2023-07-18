@@ -24,6 +24,8 @@ from ahd2fhir.utils.custom_mappers import custom_mappers, mapper_functions
 from ahd2fhir.utils.device_builder import build_device
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
+from bs4 import BeautifulSoup
+
 MAPPING_FAILURES_COUNTER = Counter("mapping_failures", "Exceptions during mapping")
 MAPPING_DURATION_SUMMARY = Histogram(
     "map_duration_seconds",
@@ -371,9 +373,9 @@ class ResourceHandler:
 
         try:
             if mime_type == "text/html":
-                return self.pipeline.analyse_html(text, **analyse_args)
-            else:
-                return self.pipeline.analyse_text(text, **analyse_args)
+                soup = BeautifulSoup(text, 'html.parser')
+                text = soup.get_text()
+            return self.pipeline.analyse_text(text, **analyse_args)
         except Exception as exc:
             log.exception(exc)
             log.error("Text analysis failed")

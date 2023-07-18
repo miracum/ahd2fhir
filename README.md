@@ -120,18 +120,20 @@ your local deployment.
 
 Note the use of `host.docker.internal` so the running container can still access the version of AHD launched via
 `docker-compose.dev.yml`.
+Also use your own manually created API-TOKEN below.
 
 ```sh
 docker build -t ahd2fhir:local .
-docker run --rm -it -p 8081:8080 \
-    --add-host=host.docker.internal:host-gateway \
-    -e AHD_URL=http://host.docker.internal:9999/health-discovery \
+docker run \
+    --rm -it -p 8081:8080 \
+    --network=ahd2fhir_default \
+    -e AHD_URL=http://health-discovery-hd:8080/health-discovery \
+    -e AHD_API_TOKEN=074ba31571b056fd5023185e3a86e0f341dc0562e1905d081e3287838350cbef \
     -e AHD_PROJECT=test \
     -e AHD_PIPELINE=discharge \
-    -e AHD_USERNAME=admin \
-    -e AHD_PASSWORD=admin \
-    -e WEB_CONCURRENCY=2 \
     -e AHD_ENSURE_PROJECT_IS_CREATED_AND_PIPELINE_IS_STARTED=true \
+    -e KAFKA_ENABLED=true \
+    -e KAFKA_BOOTSTRAP_SERVERS=kafka:9092 \
     ahd2fhir:local
 ```
 
