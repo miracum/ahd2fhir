@@ -128,7 +128,7 @@ docker run \
     --rm -it -p 8081:8080 \
     --network=ahd2fhir_default \
     -e AHD_URL=http://health-discovery-hd:8080/health-discovery \
-    -e AHD_API_TOKEN=074ba31571b056fd5023185e3a86e0f341dc0562e1905d081e3287838350cbef \
+    -e AHD_API_TOKEN=<insert API-TOKEN here> \
     -e AHD_PROJECT=test \
     -e AHD_PIPELINE=discharge \
     -e AHD_ENSURE_PROJECT_IS_CREATED_AND_PIPELINE_IS_STARTED=true \
