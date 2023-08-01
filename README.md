@@ -87,7 +87,7 @@ docker compose -f docker-compose.dev.yml up
 Starts both AHD and Kafka and starts constantly filling a `fhir.documents` topic with sample DocumentReference resources.
 
 ```sh
-docker compose -f docker-compose.dev.yml -f docker-compose.dev-kafka.yml up
+docker compose -f docker-compose.dev.yml --profile=kafka up
 ```
 
 ### Manually create an AHD project with the default pipeline and get an API token for development

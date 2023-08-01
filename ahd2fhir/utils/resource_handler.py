@@ -7,6 +7,7 @@ from typing import List, Tuple
 import structlog
 import tenacity
 from averbis import Pipeline
+from bs4 import BeautifulSoup
 from fhir.resources.bundle import Bundle
 from fhir.resources.codeableconcept import CodeableConcept
 from fhir.resources.composition import Composition, CompositionSection
@@ -23,8 +24,6 @@ from ahd2fhir.utils.bundle_builder import BundleBuilder
 from ahd2fhir.utils.custom_mappers import custom_mappers, mapper_functions
 from ahd2fhir.utils.device_builder import build_device
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
-
-from bs4 import BeautifulSoup
 
 MAPPING_FAILURES_COUNTER = Counter("mapping_failures", "Exceptions during mapping")
 MAPPING_DURATION_SUMMARY = Histogram(
@@ -373,7 +372,7 @@ class ResourceHandler:
 
         try:
             if mime_type == "text/html":
-                soup = BeautifulSoup(text, 'html.parser')
+                soup = BeautifulSoup(text, "html.parser")
                 text = soup.get_text()
             return self.pipeline.analyse_text(text, **analyse_args)
         except Exception as exc:
