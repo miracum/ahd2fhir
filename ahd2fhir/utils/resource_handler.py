@@ -7,6 +7,7 @@ from typing import List, Tuple
 import structlog
 import tenacity
 from averbis import Pipeline
+from bs4 import BeautifulSoup
 from fhir.resources.bundle import Bundle
 from fhir.resources.codeableconcept import CodeableConcept
 from fhir.resources.composition import Composition, CompositionSection
@@ -371,9 +372,9 @@ class ResourceHandler:
 
         try:
             if mime_type == "text/html":
-                return self.pipeline.analyse_html(text, **analyse_args)
-            else:
-                return self.pipeline.analyse_text(text, **analyse_args)
+                soup = BeautifulSoup(text, "html.parser")
+                text = soup.get_text()
+            return self.pipeline.analyse_text(text, **analyse_args)
         except Exception as exc:
             log.exception(exc)
             log.error("Text analysis failed")

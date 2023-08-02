@@ -55,13 +55,13 @@ You can also access the Swagger API documentation at <http://localhost:8080/docs
 #### Kafka Settings
 
 Most relevant Kafka settings. See [config.py](ahd2fhir/config.py) for a complete list.
-As the settings are composed of pydantic [settings](https://pydantic-docs.helpmanual.io/usage/settings/),
+As the settings are composed of pydantic [settings](https://docs.pydantic.dev/latest/api/pydantic_settings/),
 use the corresponding `env_prefix` value to override defaults.
 
 | Environment variable      | Description                                                              | Default            |
 | ------------------------- | ------------------------------------------------------------------------ | ------------------ |
 | `KAFKA_ENABLED`           | Whether to enable support for reading resources from Apache Kafka.       | `false`            |
-| `KAFKA_BOOTSTRAP_SERVERS` | Host and port of the Kafka bootstrap servers.                            | `localhost:9092`   |
+| `KAFKA_BOOTSTRAP_SERVERS` | Host and port of the Kafka bootstrap servers.                            | `localhost:9094`   |
 | `KAFKA_SECURITY_PROTOCOL` | The security protocol used to connect with the Kafka brokers.            | `PLAINTEXT`        |
 | `KAFKA_CONSUMER_GROUP_ID` | The Kafka consumer group id.                                             | `ahd2fhir`         |
 | `KAFKA_INPUT_TOPIC`       | The input topic to read FHIR DocumentReferences or Bundles thereof from. | `fhir.documents`   |
@@ -80,14 +80,14 @@ pip install -r requirements-dev.txt
 Starts an AHD server:
 
 ```sh
-docker login registry.averbis.com "Username" "Password"
+docker login registry.averbis.com -u "Username" -p "Password"
 docker compose -f docker-compose.dev.yml up
 ```
 
 Starts both AHD and Kafka and starts constantly filling a `fhir.documents` topic with sample DocumentReference resources.
 
 ```sh
-docker compose -f docker-compose.dev.yml -f docker-compose.dev-kafka.yml up
+docker compose -f docker-compose.dev.yml --profile=kafka up
 ```
 
 ### Manually create an AHD project with the default pipeline and get an API token for development
@@ -120,18 +120,20 @@ your local deployment.
 
 Note the use of `host.docker.internal` so the running container can still access the version of AHD launched via
 `docker-compose.dev.yml`.
+Also use your own manually created API-TOKEN below.
 
 ```sh
 docker build -t ahd2fhir:local .
-docker run --rm -it -p 8081:8080 \
-    --add-host=host.docker.internal:host-gateway \
-    -e AHD_URL=http://host.docker.internal:9999/health-discovery \
+docker run \
+    --rm -it -p 8081:8080 \
+    --network=ahd2fhir_default \
+    -e AHD_URL=http://health-discovery-hd:8080/health-discovery \
+    -e AHD_API_TOKEN=<insert API-TOKEN here> \
     -e AHD_PROJECT=test \
     -e AHD_PIPELINE=discharge \
-    -e AHD_USERNAME=admin \
-    -e AHD_PASSWORD=admin \
-    -e WEB_CONCURRENCY=2 \
     -e AHD_ENSURE_PROJECT_IS_CREATED_AND_PIPELINE_IS_STARTED=true \
+    -e KAFKA_ENABLED=true \
+    -e KAFKA_BOOTSTRAP_SERVERS=kafka:9092 \
     ahd2fhir:local
 ```
 
