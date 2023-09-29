@@ -143,6 +143,18 @@ docker run \
 pytest --cov=ahd2fhir
 ```
 
+If the snapshot tests fail, you may need to update them using:
+
+```sh
+pytest --snapshot-update
+```
+
+but make sure the changed snapshots are actually still valid! You can use the [Firely Terminal](https://simplifier.net/downloads/firely-terminal) to do so:
+
+```sh
+
+```
+
 ### Setup pre-commit hooks
 
 ```sh

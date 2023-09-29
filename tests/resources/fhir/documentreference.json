@@ -1,1 +1,66 @@
-{ "entry": [ { "fullUrl": "DocumentReference/DOC-NUM-1234567", "request": { "method": "PUT", "url": "DocumentReference/DOC-NUM-1234567" }, "resource": { "id": "DOC-NUM-1234567", "category": [ { "coding": [ { "code": "KI Kurzbrief", "display": "KI Kurzbrief", "system": "https://fhir.example.com/CodeSystem/document-category" } ], "text": "KI Kurzbrief" } ], "content": [ { "attachment": { "contentType": "text/html", "data": "PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAgICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KICAgICAgIDxodG1sPgogICAgICAgICA8aGVhZD4KICAgICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQvaHRtbDsgY2hhcnNldD1VVEYtOCIvPgogICAgICAgICA8L2hlYWQ+CiAgICAgICAgIDxib2R5PgogICAgICAgICAgCiAgICAgICAgICAgICA8cCBzdHlsZT0iTUFSR0lOLUJPVFRPTTogMHB4OyBNQVJHSU4tVE9QOiAwcHgiPlNlaHIgZ2VlaHJ0ZSBGcmF1IEtvbGxlZ2luLCA8L3A+IDxwPkRpZSBQYXRpZW50aW4gc3RlbGx0ZSBzaWNoIGFtIDE0LjA1LiBpbiByZWR1emllcnRlbSBBbGxnZW1laW56dXN0YW5kIG1pdCBlaW5lciBLw7ZycGVydGVtcGVyYXR1ciAoT2hybWVzc3VuZykgdm9uIDM5LDTCsEMgdW5kIGRldXRsaWNoZW0gSHVzdGVuLCBqZWRvY2ggb2huZSBEeXNwbm9lIGluIHVuc2VyZXIgemVudHJhbGVuIE5vdGF1Zm5haG1lIHZvci48L3A+CiAgICAgICAgICAKICAgICAgICAgICAgIDxwIHN0eWxlPSJNQVJHSU4tQk9UVE9NOiAwcHg7IE1BUkdJTi1UT1A6IDBweCI+QWxzIFZvcmVya3Jhbmt1bmcgd3VyZGUgYW5hbW5lc3Rpc2NoIGVpbiBUeXAtMS1EaWFiZXRlcyBtaXQgSW5zdWxpbnRoZXJhcGllIGFuZ2VnZWJlbi48L3A+IDxwIHN0eWxlPSJNQVJHSU4tQk9UVE9NOiAwcHg7IE1BUkdJTi1UT1A6IDBweCI+SW0gQXVmbmFobWVsYWJvciBmaWVsZW4gZWluZSBsZWljaHRlIExldWtvenl0b3NlICgxMSwyL25sIGltIG1hc2NoaW5lbGwgYmVzdGltbXRlbiBCbHV0YmlsZCksIGVpbmUgRXJow7ZodW5nIGRlciBDUlAgKDEsMiBtZy9kbCkgdW5kIGVyaFx1MDBmNmh0ZSBHYW1tYS1HVCA0NSBVL2wpIGF1Zi48L3A+CiAgICAgICAgICAKICAgICAgICAgICAgIDxwIHN0eWxlPSJNQVJHSU4tQk9UVE9NOiAwcHg7IE1BUkdJTi1UT1A6IDBweCI+PGZvbnQgc3R5bGU9IkZPTlQtU0laRTogMTBwdDsgUklHSFQ6IGF1dG87IFpPT006IG5vcm1hbDsgQ09MT1I6IGJsYWNrOyBMRUZUOiBhdXRvOyBUT1A6IGF1dG87IEJPVFRPTTogYXV0byI+SW0gd2VpdGVyZW4gVmVybGF1ZiB3dXJkZSBhbSAyNS4wNS4gZWluIGdlc3Bhbm50ZXMgQWJkb21lbiBiZWkgZ2xlaWNoemVpdGlnZW0gQW5zdGllZyBkZXIgR2FtbWEtR1QgYXVmIDk1IFUvbCwgZGVyIExpcGFzZSBhdWYgMTE4IFUvbCB1bmQgZm9ydGdlc2V0enRlciBMZXVrb3p5dG9zZSB2b24gMTYuMi9ubCBmZXN0Z2VzdGVsbHQuPC9mb250PjwvcD4KICAgICAgICAgIAogICAgICAgICAgICA8cCBzdHlsZT0iTUFSR0lOLVRPUDogMHB4OyBNQVJHSU4tQk9UVE9NOiAwcHgiPjA4LjA1LjIwMjAgT1A8L3A+PHRhYmxlIHN0eWxlPSJXSURUSDogMTAwTjsgQk9SREVSLUNPTExBUFNFOiBjb2xsYXBzZSI+PHRib2R5Pjx0cj48dGQgc3R5bGU9IlZFUlRJQ0FMLUFMSUdOOiB0b3A7IFdJRFRIOiAxMjBweCI+NS02NTEuOTI8L3RkPjx0ZD5FeHppc2lvbiBPdmFyaWFsenlzdGUgRW5kb3Nrb3Bpc2NoIChsYXBhcm9za29waXNjaCkgcmVjaHRzPC90ZD48L3RyPjx0cj48dGQgc3R5bGU9IlZFUlRJQ0FMLUFMSUdOOiB0b3A7IFdJRFRIOiAxMjBweCI+NS00NjkuMjE8L3RkPjx0ZD5MYXBhcm9za29waXNjaGUgQWRow6RzaW9seXNlIGFtIERhcm08L3RkPjwvdHI+PHRyPjx0ZCBzdHlsZT0iVkVSVElDQUwtQUxJR046IHRvcDsgV0lEVEg6IDEyMHB4Ij4xLTY5NDwvdGQ+PHRkPkRpYWdub3N0aXNjaGUgTGFwYXJvc2tvcGllIFtQZXJpdG9uZW9za29waWVdPC90ZD48L3RyPjwvdGJvZHk+PC90YWJsZT4KICAgICAgICAgIAogICAgICAgICAgICA8cCBzdHlsZT0iTUFSR0lOLVRPUDogMHB4OyBNQVJHSU4tQk9UVE9NOiAwcHgiPkRlciBWZXJkYWNodCBhdWYgZWluZSBha3V0ZSBDaG9sZXp5c3RpdGlzIHd1cmRlIG1pdHRlbHMgT2JlcmJhdWNoc29ub2dyYXBoaWUgYmVzdFx1MDBlNHRpZ3QgKGdlc3RhdXRlIEdhbGxlbmJsYXNlLCB2ZXJkaWNrdGUgR2FsbGVuYmxhc2Vud2FuZCwgVmVybGVndW5nIGRlcyBHYWxsZW5nYW5ncyBkdXJjaCBtZWhyZXJlIGtsZWluZSBLb25rcmVtZW50ZSkuPC9wPgogICAgICAgICAgCiAgICAgICAgICAgIDxwIHN0eWxlPSJNQVJHSU4tVE9QOiAwcHg7IE1BUkdJTi1CT1RUT006IDBweCI+TmllcmVuIGJlaWRzZWl0cyBuaWNodCBnZXN0YXV0LjwvcD4KICAgICAgICAgIAogICAgICAgICAgICA8cCBzdHlsZT0iTUFSR0lOLVRPUDogMHB4OyBNQVJHSU4tQk9UVE9NOiAwcHgiPlBTTi1EQVQ6IE5hc2VuKHZvcmhvZilhYnN0cmljaDwvcD48cCBzdHlsZT0iTUFSR0lOLVRPUDogMHB4OyBNQVJHSU4tQk9UVE9NOiAwcHgiPjx1Pkt1bHR1cmVsbGVyIEJlZnVuZDo8L3U+IGtlaW4gTmFjaHdlaXMgdm9uIE1ldGhpY2lsbGluLXJlc2lzdGVudGVtIFMuIGF1cmV1cyAoTVJTQSk8L3A+PHAgc3R5bGU9Ik1BUkdJTi1UT1A6IDBweDsgTUFSR0lOLUJPVFRPTTogMHB4Ij48dT5OdWtsZWluc8OkdXJlYW1wbGlmaWthdGlvbnN0ZXN0IChOQVQpOjwvdT4gTVJTQSAoU2NobmVsbHRlc3QpOiBuZWdhdGl2PC9wPgogICAgICAgICAgCiAgICAgICAgICAgIDxwIHN0eWxlPSJNQVJHSU4tVE9QOiAwcHg7IE1BUkdJTi1CT1RUT006IDBweCI+UFNOLURBVDogSMOkbW9nbG9iaW4gMTIsOCBnL2RsICgxMiAtIDE1IGcvZGwpPC9wPgogICAgICAgICAgCiAgICAgICAgICAgICA8cCBzdHlsZT0iTUFSR0lOLUJPVFRPTTogMHB4OyBNQVJHSU4tVE9QOiAwcHgiPkRpZSBQYXRpZW50ZW4ga29ubnRlIGFtIDEyLjA2LiBpbiBndXRlbSBBbGxnZW1laW56dXN0YW5kLCBqZWRvY2ggbWl0IGVpbmVyIHdlaXRlcmhpbiBiZXN0ZWhlbmRlbiBEeXNwbm9lIGJlaSBsZWljaHRlciBCZWxhc3R1bmcgZW50bGFzc2VuIHdlcmRlbi48L3A+CiAgICAgICAgICAKICAgICAgICAgPC9ib2R5PgogICAgICAgPC9odG1sPg==", "hash": "WKd2uIVfsOh6JQ8wG0qHNL/icmI=", "language": "de-DE" }, "format": { "code": "urn:ihe:iti:xds:2017:mimeTypeSufficient", "display": "mimeType Sufficient", "system": "http://ihe.net/fhir/ValueSet/IHE.FormatCode.codesystem" } } ], "context": { "encounter": [ { "reference": "Encounter/e2216331600" } ], "period": { "end": "2020-03-18T00:55:09+00:00", "start": "2019-02-23T09:39:31+00:00" }, "sourcePatientInfo": { "reference": "Patient/p3480585566" } }, "date": "2019-09-26T18:04:30+00:00", "docStatus": "final", "status": "current", "subject": { "reference": "Patient/p3480585566" }, "type": { "coding": [ { "code": "18842-5", "display": "Discharge summary note", "system": "http://loinc.org" } ], "text": "Discharge summary note" }, "resourceType": "DocumentReference" } } ], "type": "transaction", "resourceType": "Bundle" }
+{
+  "entry": [
+    {
+      "fullUrl": "DocumentReference/DOC-NUM-1234567",
+      "request": {
+        "method": "PUT",
+        "url": "DocumentReference/DOC-NUM-1234567"
+      },
+      "resource": {
+        "id": "DOC-NUM-1234567",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "KI Kurzbrief",
+                "display": "KI Kurzbrief",
+                "system": "https://fhir.example.com/CodeSystem/document-category"
+              }
+            ],
+            "text": "KI Kurzbrief"
+          }
+        ],
+        "content": [
+          {
+            "attachment": {
+              "contentType": "text/html",
+              "data": "PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAgICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KICAgICAgIDxodG1sPgogICAgICAgICA8aGVhZD4KICAgICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQvaHRtbDsgY2hhcnNldD1VVEYtOCIvPgogICAgICAgICA8L2hlYWQ+CiAgICAgICAgIDxib2R5PgogICAgICAgICAgCiAgICAgICAgICAgICA8cCBzdHlsZT0iTUFSR0lOLUJPVFRPTTogMHB4OyBNQVJHSU4tVE9QOiAwcHgiPlNlaHIgZ2VlaHJ0ZSBGcmF1IEtvbGxlZ2luLCA8L3A+IDxwPkRpZSBQYXRpZW50aW4gc3RlbGx0ZSBzaWNoIGFtIDE0LjA1LiBpbiByZWR1emllcnRlbSBBbGxnZW1laW56dXN0YW5kIG1pdCBlaW5lciBLw7ZycGVydGVtcGVyYXR1ciAoT2hybWVzc3VuZykgdm9uIDM5LDTCsEMgdW5kIGRldXRsaWNoZW0gSHVzdGVuLCBqZWRvY2ggb2huZSBEeXNwbm9lIGluIHVuc2VyZXIgemVudHJhbGVuIE5vdGF1Zm5haG1lIHZvci48L3A+CiAgICAgICAgICAKICAgICAgICAgICAgIDxwIHN0eWxlPSJNQVJHSU4tQk9UVE9NOiAwcHg7IE1BUkdJTi1UT1A6IDBweCI+QWxzIFZvcmVya3Jhbmt1bmcgd3VyZGUgYW5hbW5lc3Rpc2NoIGVpbiBUeXAtMS1EaWFiZXRlcyBtaXQgSW5zdWxpbnRoZXJhcGllIGFuZ2VnZWJlbi48L3A+IDxwIHN0eWxlPSJNQVJHSU4tQk9UVE9NOiAwcHg7IE1BUkdJTi1UT1A6IDBweCI+SW0gQXVmbmFobWVsYWJvciBmaWVsZW4gZWluZSBsZWljaHRlIExldWtvenl0b3NlICgxMSwyL25sIGltIG1hc2NoaW5lbGwgYmVzdGltbXRlbiBCbHV0YmlsZCksIGVpbmUgRXJow7ZodW5nIGRlciBDUlAgKDEsMiBtZy9kbCkgdW5kIGVyaFx1MDBmNmh0ZSBHYW1tYS1HVCA0NSBVL2wpIGF1Zi48L3A+CiAgICAgICAgICAKICAgICAgICAgICAgIDxwIHN0eWxlPSJNQVJHSU4tQk9UVE9NOiAwcHg7IE1BUkdJTi1UT1A6IDBweCI+PGZvbnQgc3R5bGU9IkZPTlQtU0laRTogMTBwdDsgUklHSFQ6IGF1dG87IFpPT006IG5vcm1hbDsgQ09MT1I6IGJsYWNrOyBMRUZUOiBhdXRvOyBUT1A6IGF1dG87IEJPVFRPTTogYXV0byI+SW0gd2VpdGVyZW4gVmVybGF1ZiB3dXJkZSBhbSAyNS4wNS4gZWluIGdlc3Bhbm50ZXMgQWJkb21lbiBiZWkgZ2xlaWNoemVpdGlnZW0gQW5zdGllZyBkZXIgR2FtbWEtR1QgYXVmIDk1IFUvbCwgZGVyIExpcGFzZSBhdWYgMTE4IFUvbCB1bmQgZm9ydGdlc2V0enRlciBMZXVrb3p5dG9zZSB2b24gMTYuMi9ubCBmZXN0Z2VzdGVsbHQuPC9mb250PjwvcD4KICAgICAgICAgIAogICAgICAgICAgICA8cCBzdHlsZT0iTUFSR0lOLVRPUDogMHB4OyBNQVJHSU4tQk9UVE9NOiAwcHgiPjA4LjA1LjIwMjAgT1A8L3A+PHRhYmxlIHN0eWxlPSJXSURUSDogMTAwTjsgQk9SREVSLUNPTExBUFNFOiBjb2xsYXBzZSI+PHRib2R5Pjx0cj48dGQgc3R5bGU9IlZFUlRJQ0FMLUFMSUdOOiB0b3A7IFdJRFRIOiAxMjBweCI+NS02NTEuOTI8L3RkPjx0ZD5FeHppc2lvbiBPdmFyaWFsenlzdGUgRW5kb3Nrb3Bpc2NoIChsYXBhcm9za29waXNjaCkgcmVjaHRzPC90ZD48L3RyPjx0cj48dGQgc3R5bGU9IlZFUlRJQ0FMLUFMSUdOOiB0b3A7IFdJRFRIOiAxMjBweCI+NS00NjkuMjE8L3RkPjx0ZD5MYXBhcm9za29waXNjaGUgQWRow6RzaW9seXNlIGFtIERhcm08L3RkPjwvdHI+PHRyPjx0ZCBzdHlsZT0iVkVSVElDQUwtQUxJR046IHRvcDsgV0lEVEg6IDEyMHB4Ij4xLTY5NDwvdGQ+PHRkPkRpYWdub3N0aXNjaGUgTGFwYXJvc2tvcGllIFtQZXJpdG9uZW9za29waWVdPC90ZD48L3RyPjwvdGJvZHk+PC90YWJsZT4KICAgICAgICAgIAogICAgICAgICAgICA8cCBzdHlsZT0iTUFSR0lOLVRPUDogMHB4OyBNQVJHSU4tQk9UVE9NOiAwcHgiPkRlciBWZXJkYWNodCBhdWYgZWluZSBha3V0ZSBDaG9sZXp5c3RpdGlzIHd1cmRlIG1pdHRlbHMgT2JlcmJhdWNoc29ub2dyYXBoaWUgYmVzdFx1MDBlNHRpZ3QgKGdlc3RhdXRlIEdhbGxlbmJsYXNlLCB2ZXJkaWNrdGUgR2FsbGVuYmxhc2Vud2FuZCwgVmVybGVndW5nIGRlcyBHYWxsZW5nYW5ncyBkdXJjaCBtZWhyZXJlIGtsZWluZSBLb25rcmVtZW50ZSkuPC9wPgogICAgICAgICAgCiAgICAgICAgICAgIDxwIHN0eWxlPSJNQVJHSU4tVE9QOiAwcHg7IE1BUkdJTi1CT1RUT006IDBweCI+TmllcmVuIGJlaWRzZWl0cyBuaWNodCBnZXN0YXV0LjwvcD4KICAgICAgICAgIAogICAgICAgICAgICA8cCBzdHlsZT0iTUFSR0lOLVRPUDogMHB4OyBNQVJHSU4tQk9UVE9NOiAwcHgiPlBTTi1EQVQ6IE5hc2VuKHZvcmhvZilhYnN0cmljaDwvcD48cCBzdHlsZT0iTUFSR0lOLVRPUDogMHB4OyBNQVJHSU4tQk9UVE9NOiAwcHgiPjx1Pkt1bHR1cmVsbGVyIEJlZnVuZDo8L3U+IGtlaW4gTmFjaHdlaXMgdm9uIE1ldGhpY2lsbGluLXJlc2lzdGVudGVtIFMuIGF1cmV1cyAoTVJTQSk8L3A+PHAgc3R5bGU9Ik1BUkdJTi1UT1A6IDBweDsgTUFSR0lOLUJPVFRPTTogMHB4Ij48dT5OdWtsZWluc8OkdXJlYW1wbGlmaWthdGlvbnN0ZXN0IChOQVQpOjwvdT4gTVJTQSAoU2NobmVsbHRlc3QpOiBuZWdhdGl2PC9wPgogICAgICAgICAgCiAgICAgICAgICAgIDxwIHN0eWxlPSJNQVJHSU4tVE9QOiAwcHg7IE1BUkdJTi1CT1RUT006IDBweCI+UFNOLURBVDogSMOkbW9nbG9iaW4gMTIsOCBnL2RsICgxMiAtIDE1IGcvZGwpPC9wPgogICAgICAgICAgCiAgICAgICAgICAgICA8cCBzdHlsZT0iTUFSR0lOLUJPVFRPTTogMHB4OyBNQVJHSU4tVE9QOiAwcHgiPkRpZSBQYXRpZW50ZW4ga29ubnRlIGFtIDEyLjA2LiBpbiBndXRlbSBBbGxnZW1laW56dXN0YW5kLCBqZWRvY2ggbWl0IGVpbmVyIHdlaXRlcmhpbiBiZXN0ZWhlbmRlbiBEeXNwbm9lIGJlaSBsZWljaHRlciBCZWxhc3R1bmcgZW50bGFzc2VuIHdlcmRlbi48L3A+CiAgICAgICAgICAKICAgICAgICAgPC9ib2R5PgogICAgICAgPC9odG1sPg==",
+              "hash": "WKd2uIVfsOh6JQ8wG0qHNL/icmI=",
+              "language": "de-DE"
+            },
+            "format": {
+              "code": "urn:ihe:iti:xds:2017:mimeTypeSufficient",
+              "display": "mimeType Sufficient",
+              "system": "http://ihe.net/fhir/ValueSet/IHE.FormatCode.codesystem"
+            }
+          }
+        ],
+        "context": {
+          "encounter": [{ "reference": "Encounter/e2216331600" }],
+          "period": {
+            "end": "2020-03-18T00:55:09+00:00",
+            "start": "2019-02-23T09:39:31+00:00"
+          },
+          "sourcePatientInfo": { "reference": "Patient/p3480585566" }
+        },
+        "date": "2019-09-26T18:04:30+00:00",
+        "docStatus": "final",
+        "status": "current",
+        "subject": { "reference": "Patient/p3480585566" },
+        "type": {
+          "coding": [
+            {
+              "code": "18842-5",
+              "display": "Discharge summary note",
+              "system": "http://loinc.org"
+            }
+          ],
+          "text": "Discharge summary note"
+        },
+        "resourceType": "DocumentReference"
+      }
+    }
+  ],
+  "type": "transaction",
+  "resourceType": "Bundle"
+}

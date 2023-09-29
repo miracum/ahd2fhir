@@ -30,8 +30,14 @@ DATA_ABSENT_EXTENSION_UNKNOWN = FHIRPrimitiveExtension(
     }
 )
 
-LIST_CODE_MAPPING = {"ADMISSION": "E210", "INPATIENT": "E200", "DISCHARGE": "E230"}
-LIST_CODE_SYSTEM = "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.16"
+LIST_CONTEXT_CODE_MAPPING = {
+    "ADMISSION": "E210",
+    "INPATIENT": "E200",
+    "DISCHARGE": "E230",
+}
+LIST_CONTEXT_CODE_SYSTEM = (
+    "http://ihe-d.de/CodeSystems/FallkontextBeiDokumentenerstellung"
+)
 
 LIST_MED_CODE = "medications"
 LIST_MED_CODE_SYSTEM = "http://terminology.hl7.org/CodeSystem/list-example-use-codes"
@@ -140,7 +146,7 @@ def get_medication_list_from_document_reference(
             system=LIST_MED_CODE_SYSTEM, code=LIST_MED_CODE
         )
         list_coding = Coding.construct(
-            system=LIST_CODE_SYSTEM, code=LIST_CODE_MAPPING[list_type]
+            system=LIST_CONTEXT_CODE_SYSTEM, code=LIST_CONTEXT_CODE_MAPPING[list_type]
         )
         list_code = CodeableConcept.construct()
         list_code.text = "List Code"

@@ -29,7 +29,7 @@
               "code": "medications"
             },
             {
-              "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.16",
+              "system": "http://ihe-d.de/CodeSystems/FallkontextBeiDokumentenerstellung",
               "code": "E230"
             }
           ],
@@ -75,7 +75,7 @@
               "code": "medications"
             },
             {
-              "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.16",
+              "system": "http://ihe-d.de/CodeSystems/FallkontextBeiDokumentenerstellung",
               "code": "E210"
             }
           ],
@@ -121,7 +121,7 @@
               "code": "medications"
             },
             {
-              "system": "urn:oid:1.3.6.1.4.1.19376.3.276.1.5.16",
+              "system": "http://ihe-d.de/CodeSystems/FallkontextBeiDokumentenerstellung",
               "code": "E200"
             }
           ],
