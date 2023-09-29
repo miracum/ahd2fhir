@@ -9,6 +9,7 @@ services:
       - DATABASE_DRIVER_CLASS=org.mariadb.jdbc.Driver
       - DATABASE_URL=jdbc:mariadb://database:3306/aif?useMysqlMetadata=true
       - DATABASE_USERNAME=aif
+      # kics-scan ignore-line
       - DATABASE_PASSWORD=getaccess
       - GCM_HOSTNAME=gcm
       - GCM_PORT=8181
@@ -29,9 +30,11 @@ services:
     image: docker.io/library/mariadb:11.0.2@sha256:228396b810760b959bc99fd03d2a5fec0b056ceaef9e525a12e9b3c4b883a3af
     command: --max_allowed_packet=1g --innodb_buffer_pool_size=512m --innodb_log_buffer_size=256m --innodb_log_file_size=256m
     environment:
+      # kics-scan ignore-line
       - MYSQL_ROOT_PASSWORD=getaccess
       - MYSQL_DATABASE=aif
       - MYSQL_USER=aif
+      # kics-scan ignore-line
       - MYSQL_PASSWORD=getaccess
 
   solr:
