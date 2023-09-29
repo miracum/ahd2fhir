@@ -1,4 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>miracum/.github//renovate/default"]
+  "extends": ["github>miracum/.github//renovate/default"],
+  "ignoreDeps": [
+    "registry.averbis.com/health-discovery/health-discovery",
+    "registry.averbis.com/gcm/gcm"
+  ]
 }
