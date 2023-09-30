@@ -1,0 +1,443 @@
+{
+  "resourceType": "Bundle",
+  "id": "297c21306d5ed77ccb098b91f92361b328e6806b0aa85aef7e2a3546dd625110",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "List/5c0f40028e0309d147cac0d68ca7829d57162f08a570c73dcae0a460c6085d5b",
+      "resource": {
+        "resourceType": "List",
+        "id": "5c0f40028e0309d147cac0d68ca7829d57162f08a570c73dcae0a460c6085d5b",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-medikation/StructureDefinition/medikationsliste"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.miracum.org/nlp/identifiers/discharge-medication-list",
+            "value": "discharge_list_empty-document"
+          }
+        ],
+        "status": "current",
+        "mode": "snapshot",
+        "title": "List of discharge medication",
+        "code": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/list-example-use-codes",
+              "code": "medications"
+            },
+            {
+              "system": "http://ihe-d.de/CodeSystems/FallkontextBeiDokumentenerstellung",
+              "code": "E230"
+            }
+          ],
+          "text": "List Code"
+        },
+        "subject": {
+          "reference": "Patient/Test",
+          "type": "Patient"
+        },
+        "date": "2000-01-01T00:00:00+00:00",
+        "emptyReason": {
+          "text": "No discharge entries in document found."
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "List/5c0f40028e0309d147cac0d68ca7829d57162f08a570c73dcae0a460c6085d5b"
+      }
+    },
+    {
+      "fullUrl": "List/8704d9a2465b3acf09870d9536949691115a47eefbfdc1d471522a7bec677b99",
+      "resource": {
+        "resourceType": "List",
+        "id": "8704d9a2465b3acf09870d9536949691115a47eefbfdc1d471522a7bec677b99",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-medikation/StructureDefinition/medikationsliste"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.miracum.org/nlp/identifiers/admission-medication-list",
+            "value": "admission_list_empty-document"
+          }
+        ],
+        "status": "current",
+        "mode": "snapshot",
+        "title": "List of admission medication",
+        "code": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/list-example-use-codes",
+              "code": "medications"
+            },
+            {
+              "system": "http://ihe-d.de/CodeSystems/FallkontextBeiDokumentenerstellung",
+              "code": "E210"
+            }
+          ],
+          "text": "List Code"
+        },
+        "subject": {
+          "reference": "Patient/Test",
+          "type": "Patient"
+        },
+        "date": "2000-01-01T00:00:00+00:00",
+        "emptyReason": {
+          "text": "No admission entries in document found."
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "List/8704d9a2465b3acf09870d9536949691115a47eefbfdc1d471522a7bec677b99"
+      }
+    },
+    {
+      "fullUrl": "List/92501bc0575c774db6de289a0cb84715dfe4ef168d9fdb7ebd31a0988e1274a2",
+      "resource": {
+        "resourceType": "List",
+        "id": "92501bc0575c774db6de289a0cb84715dfe4ef168d9fdb7ebd31a0988e1274a2",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-medikation/StructureDefinition/medikationsliste"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.miracum.org/nlp/identifiers/inpatient-medication-list",
+            "value": "inpatient_list_empty-document"
+          }
+        ],
+        "status": "current",
+        "mode": "working",
+        "title": "List of inpatient medication",
+        "code": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/list-example-use-codes",
+              "code": "medications"
+            },
+            {
+              "system": "http://ihe-d.de/CodeSystems/FallkontextBeiDokumentenerstellung",
+              "code": "E200"
+            }
+          ],
+          "text": "List Code"
+        },
+        "subject": {
+          "reference": "Patient/Test",
+          "type": "Patient"
+        },
+        "date": "2000-01-01T00:00:00+00:00",
+        "emptyReason": {
+          "text": "No inpatient entries in document found."
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "List/92501bc0575c774db6de289a0cb84715dfe4ef168d9fdb7ebd31a0988e1274a2"
+      }
+    },
+    {
+      "fullUrl": "Condition/3f44478409636c82429a4fbd262e4795e9168828637387e0ddbb2f824c562103",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "3f44478409636c82429a4fbd262e4795e9168828637387e0ddbb2f824c562103",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
+            "value": "empty-document_7-16_ICD10GM_2023-R52.9"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "version": "2023",
+              "code": "R52.9",
+              "display": "Schmerz, nicht näher bezeichnet",
+              "userSelected": false
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/Test",
+          "type": "Patient"
+        },
+        "recordedDate": "2000-01-01T00:00:00+00:00"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/3f44478409636c82429a4fbd262e4795e9168828637387e0ddbb2f824c562103"
+      }
+    },
+    {
+      "fullUrl": "Condition/76475ba97badabdfaee4f61e15d1ee8df120ecd79ee40d052ad8981b80821e20",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "76475ba97badabdfaee4f61e15d1ee8df120ecd79ee40d052ad8981b80821e20",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
+            "value": "empty-document_33-41_ICD10GM_2023-E14.90"
+          }
+        ],
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "version": "2023",
+              "code": "E14.90",
+              "display": "Nicht näher bezeichneter Diabetes mellitus: Ohne Komplikationen: Nicht als entgleist bezeichnet",
+              "userSelected": false
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/Test",
+          "type": "Patient"
+        },
+        "recordedDate": "2000-01-01T00:00:00+00:00"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/76475ba97badabdfaee4f61e15d1ee8df120ecd79ee40d052ad8981b80821e20"
+      }
+    },
+    {
+      "fullUrl": "Device/e3747a0df03c110d3ac4cd424f3a912172c176e0d9aeece83f751ceec28ab38c",
+      "resource": {
+        "resourceType": "Device",
+        "id": "e3747a0df03c110d3ac4cd424f3a912172c176e0d9aeece83f751ceec28ab38c",
+        "identifier": [
+          {
+            "system": "https://fhir.miracum.org/nlp/identifiers/averbis-health-discovery-device-id",
+            "value": "ahd-v6.20.0"
+          }
+        ],
+        "status": "active",
+        "manufacturer": "Averbis GmbH",
+        "deviceName": [
+          {
+            "name": "Averbis Health Discovery",
+            "type": "manufacturer-name"
+          }
+        ],
+        "version": [
+          {
+            "value": "6.20.0"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/e3747a0df03c110d3ac4cd424f3a912172c176e0d9aeece83f751ceec28ab38c"
+      }
+    },
+    {
+      "fullUrl": "Medication/2d4345ad749eccd23ce60d2a7757d247547c47db96953c163cb37f07a9d41aea",
+      "resource": {
+        "resourceType": "Medication",
+        "id": "2d4345ad749eccd23ce60d2a7757d247547c47db96953c163cb37f07a9d41aea",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-medikation/StructureDefinition/Medication"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-medication",
+            "value": "Acetylsalicylsäure_20.0mg"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://fhir.de/CodeSystem/dimdi/atc",
+              "code": "104201",
+              "display": "Acetylsalicylsäure"
+            }
+          ]
+        },
+        "ingredient": [
+          {
+            "itemCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://fhir.de/CodeSystem/dimdi/atc",
+                  "display": "Acetylsalicylsäure"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Medication/2d4345ad749eccd23ce60d2a7757d247547c47db96953c163cb37f07a9d41aea"
+      }
+    },
+    {
+      "fullUrl": "MedicationStatement/ae67cb92966045e4f61037cdfb96d5930c52ac909df9753ea6c834bec2003b89",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "id": "ae67cb92966045e4f61037cdfb96d5930c52ac909df9753ea6c834bec2003b89",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-medikation/StructureDefinition/MedicationStatement"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-medication",
+            "value": "Acetylsalicylsäure_20.0mg_None_2218"
+          }
+        ],
+        "status": "unknown",
+        "medicationReference": {
+          "reference": "Medication/2d4345ad749eccd23ce60d2a7757d247547c47db96953c163cb37f07a9d41aea",
+          "type": "Medication",
+          "identifier": {
+            "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-medication",
+            "value": "Acetylsalicylsäure_20.0mg"
+          }
+        },
+        "subject": {
+          "reference": "Patient/Test",
+          "type": "Patient"
+        },
+        "_effectiveDateTime": {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+              "valueCode": "unknown"
+            }
+          ]
+        },
+        "dateAsserted": "2000-01-01T00:00:00+00:00",
+        "dosage": [
+          {
+            "text": "20mg Aspirin",
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 20.0,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MedicationStatement/ae67cb92966045e4f61037cdfb96d5930c52ac909df9753ea6c834bec2003b89"
+      }
+    },
+    {
+      "fullUrl": "Composition/297c21306d5ed77ccb098b91f92361b328e6806b0aa85aef7e2a3546dd625110",
+      "resource": {
+        "resourceType": "Composition",
+        "id": "297c21306d5ed77ccb098b91f92361b328e6806b0aa85aef7e2a3546dd625110",
+        "identifier": {
+          "system": "https://fhir.miracum.org/nlp/identifiers/ahd-analysis-result-composition",
+          "value": "empty-document_ahd-analysis-result"
+        },
+        "status": "final",
+        "type": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "18842-5",
+              "display": "Discharge summary"
+            }
+          ],
+          "text": "Discharge summary"
+        },
+        "subject": {
+          "reference": "Patient/Test",
+          "type": "Patient"
+        },
+        "date": "2000-01-01T00:00:00+00:00",
+        "author": [
+          {
+            "reference": "Device/e3747a0df03c110d3ac4cd424f3a912172c176e0d9aeece83f751ceec28ab38c",
+            "type": "Device"
+          }
+        ],
+        "title": "AHD2FHIR NLP Processing Results 2000-01-01T00:00:00+00:00",
+        "section": [
+          {
+            "title": "List",
+            "entry": [
+              {
+                "reference": "List/5c0f40028e0309d147cac0d68ca7829d57162f08a570c73dcae0a460c6085d5b"
+              },
+              {
+                "reference": "List/8704d9a2465b3acf09870d9536949691115a47eefbfdc1d471522a7bec677b99"
+              },
+              {
+                "reference": "List/92501bc0575c774db6de289a0cb84715dfe4ef168d9fdb7ebd31a0988e1274a2"
+              }
+            ]
+          },
+          {
+            "title": "Condition",
+            "entry": [
+              {
+                "reference": "Condition/3f44478409636c82429a4fbd262e4795e9168828637387e0ddbb2f824c562103"
+              },
+              {
+                "reference": "Condition/76475ba97badabdfaee4f61e15d1ee8df120ecd79ee40d052ad8981b80821e20"
+              }
+            ]
+          },
+          {
+            "title": "Medication",
+            "entry": [
+              {
+                "reference": "Medication/2d4345ad749eccd23ce60d2a7757d247547c47db96953c163cb37f07a9d41aea"
+              }
+            ]
+          },
+          {
+            "title": "MedicationStatement",
+            "entry": [
+              {
+                "reference": "MedicationStatement/ae67cb92966045e4f61037cdfb96d5930c52ac909df9753ea6c834bec2003b89"
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Composition/297c21306d5ed77ccb098b91f92361b328e6806b0aa85aef7e2a3546dd625110"
+      }
+    }
+  ]
+}

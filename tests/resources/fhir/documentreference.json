@@ -51,7 +51,7 @@
           "coding": [
             {
               "code": "18842-5",
-              "display": "Discharge summary note",
+              "display": "Discharge summary",
               "system": "http://loinc.org"
             }
           ],

@@ -142,10 +142,10 @@
       }
     },
     {
-      "fullUrl": "Condition/6a715e944f2d9ba39d112d9ecf8943ec039f3afd72765b251bf7ea26524cc0c3",
+      "fullUrl": "Condition/9acc37c5320c2b504aa7d2f5ad5796af6fcb6e02fd6d589fceace74b0d715602",
       "resource": {
         "resourceType": "Condition",
-        "id": "6a715e944f2d9ba39d112d9ecf8943ec039f3afd72765b251bf7ea26524cc0c3",
+        "id": "9acc37c5320c2b504aa7d2f5ad5796af6fcb6e02fd6d589fceace74b0d715602",
         "meta": {
           "profile": [
             "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
@@ -154,16 +154,16 @@
         "identifier": [
           {
             "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
-            "value": "empty-document_70-98_ICD10GM_2020-R53"
+            "value": "empty-document_69-97_ICD10GM_2023-R53"
           }
         ],
         "code": {
           "coding": [
             {
               "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
-              "version": "2020",
+              "version": "2023",
               "code": "R53",
-              "display": "Asthenie",
+              "display": "Unwohlsein und Ermüdung",
               "userSelected": false
             }
           ]
@@ -176,14 +176,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Condition/6a715e944f2d9ba39d112d9ecf8943ec039f3afd72765b251bf7ea26524cc0c3"
+        "url": "Condition/9acc37c5320c2b504aa7d2f5ad5796af6fcb6e02fd6d589fceace74b0d715602"
       }
     },
     {
-      "fullUrl": "Condition/d9930a3da12e94fa3b2d11fa6d78133fddcef2eedd758c8ddcdbacb2fcacba0d",
+      "fullUrl": "Condition/1ce43c2b9ac954dd7b6e938f189fbc4719eafcd71702cef4e8f155c77cb117ca",
       "resource": {
         "resourceType": "Condition",
-        "id": "d9930a3da12e94fa3b2d11fa6d78133fddcef2eedd758c8ddcdbacb2fcacba0d",
+        "id": "1ce43c2b9ac954dd7b6e938f189fbc4719eafcd71702cef4e8f155c77cb117ca",
         "meta": {
           "profile": [
             "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
@@ -192,14 +192,14 @@
         "identifier": [
           {
             "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
-            "value": "empty-document_165-171_ICD10GM_2020-R05"
+            "value": "empty-document_164-170_ICD10GM_2023-R05"
           }
         ],
         "code": {
           "coding": [
             {
               "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
-              "version": "2020",
+              "version": "2023",
               "code": "R05",
               "display": "Husten",
               "userSelected": false
@@ -214,14 +214,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Condition/d9930a3da12e94fa3b2d11fa6d78133fddcef2eedd758c8ddcdbacb2fcacba0d"
+        "url": "Condition/1ce43c2b9ac954dd7b6e938f189fbc4719eafcd71702cef4e8f155c77cb117ca"
       }
     },
     {
-      "fullUrl": "Condition/afca6d73c793a4a42bfe0a78a600d4f68662e9e844a3089c45a9581839fe632d",
+      "fullUrl": "Condition/19626b476203c7eb484a09ae1fb854053c40f0e7986a4ba305169797b18b5730",
       "resource": {
         "resourceType": "Condition",
-        "id": "afca6d73c793a4a42bfe0a78a600d4f68662e9e844a3089c45a9581839fe632d",
+        "id": "19626b476203c7eb484a09ae1fb854053c40f0e7986a4ba305169797b18b5730",
         "meta": {
           "profile": [
             "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
@@ -230,16 +230,24 @@
         "identifier": [
           {
             "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
-            "value": "empty-document_355-366_ICD10GM_2020-D72.8"
+            "value": "empty-document_295-309_ICD10GM_2023-E10.90"
           }
         ],
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
         "code": {
           "coding": [
             {
               "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
-              "version": "2020",
-              "code": "D72.8",
-              "display": "Leukozytose",
+              "version": "2023",
+              "code": "E10.90",
+              "display": "Diabetes mellitus, Typ 1: Ohne Komplikationen: Nicht als entgleist bezeichnet",
               "userSelected": false
             }
           ]
@@ -252,14 +260,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Condition/afca6d73c793a4a42bfe0a78a600d4f68662e9e844a3089c45a9581839fe632d"
+        "url": "Condition/19626b476203c7eb484a09ae1fb854053c40f0e7986a4ba305169797b18b5730"
       }
     },
     {
-      "fullUrl": "Condition/9b65d4791d0f4d6d0a9ca9ce5f860c026d9d436b54157e5359a977f2fca8f940",
+      "fullUrl": "Condition/e64f5b47eafa468cd4e56d6c1334079f43de7b9bab09d209f00eab2427748ab6",
       "resource": {
         "resourceType": "Condition",
-        "id": "9b65d4791d0f4d6d0a9ca9ce5f860c026d9d436b54157e5359a977f2fca8f940",
+        "id": "e64f5b47eafa468cd4e56d6c1334079f43de7b9bab09d209f00eab2427748ab6",
         "meta": {
           "profile": [
             "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
@@ -268,16 +276,16 @@
         "identifier": [
           {
             "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
-            "value": "empty-document_637-648_ICD10GM_2020-D72.8"
+            "value": "empty-document_378-389_ICD10GM_2023-D72.8"
           }
         ],
         "code": {
           "coding": [
             {
               "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
-              "version": "2020",
+              "version": "2023",
               "code": "D72.8",
-              "display": "Leukozytose",
+              "display": "Sonstige näher bezeichnete Krankheiten der Leukozyten",
               "userSelected": false
             }
           ]
@@ -290,14 +298,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Condition/9b65d4791d0f4d6d0a9ca9ce5f860c026d9d436b54157e5359a977f2fca8f940"
+        "url": "Condition/e64f5b47eafa468cd4e56d6c1334079f43de7b9bab09d209f00eab2427748ab6"
       }
     },
     {
-      "fullUrl": "Condition/fb38d2dae243a9a1143103d8416db22c355fef39ce89b7bac1b5ef7a5faba464",
+      "fullUrl": "Condition/fd212221e730bb0810b5eb830a7a13617b658344f59274539f71ca4c48a2c1dd",
       "resource": {
         "resourceType": "Condition",
-        "id": "fb38d2dae243a9a1143103d8416db22c355fef39ce89b7bac1b5ef7a5faba464",
+        "id": "fd212221e730bb0810b5eb830a7a13617b658344f59274539f71ca4c48a2c1dd",
         "meta": {
           "profile": [
             "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
@@ -306,31 +314,58 @@
         "identifier": [
           {
             "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
-            "value": "empty-document_705-717_ICD10GM_2020-N83.2"
+            "value": "empty-document_684-695_ICD10GM_2023-D72.8"
           }
         ],
         "code": {
           "coding": [
             {
               "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
-              "version": "2020",
+              "version": "2023",
+              "code": "D72.8",
+              "display": "Sonstige näher bezeichnete Krankheiten der Leukozyten",
+              "userSelected": false
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/Test",
+          "type": "Patient"
+        },
+        "recordedDate": "2000-01-01T00:00:00+00:00"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/fd212221e730bb0810b5eb830a7a13617b658344f59274539f71ca4c48a2c1dd"
+      }
+    },
+    {
+      "fullUrl": "Condition/31bd943a419712a7246f0e55ca729223436cb22376327be595e07108d4fe8841",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "31bd943a419712a7246f0e55ca729223436cb22376327be595e07108d4fe8841",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
+            "value": "empty-document_775-787_ICD10GM_2023-N83.2"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "version": "2023",
               "code": "N83.2",
-              "display": "Sonstige Ovarialzyste",
+              "display": "Sonstige und nicht näher bezeichnete Ovarialzysten",
               "userSelected": false
             }
           ]
         },
-        "bodySite": [
-          {
-            "coding": [
-              {
-                "system": "http://snomed.info/sct",
-                "code": "24028007",
-                "display": "Right"
-              }
-            ]
-          }
-        ],
         "subject": {
           "reference": "Patient/Test",
           "type": "Patient"
@@ -339,14 +374,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Condition/fb38d2dae243a9a1143103d8416db22c355fef39ce89b7bac1b5ef7a5faba464"
+        "url": "Condition/31bd943a419712a7246f0e55ca729223436cb22376327be595e07108d4fe8841"
       }
     },
     {
-      "fullUrl": "Condition/9d4ac0d506ab8b88200c857943e0dc708bce67115cebbc38bdab7c40b600b3cd",
+      "fullUrl": "Condition/efa133b30d6098fdb6d0f375d38c70d80867f38a64fe2335176413671040e98a",
       "resource": {
         "resourceType": "Condition",
-        "id": "9d4ac0d506ab8b88200c857943e0dc708bce67115cebbc38bdab7c40b600b3cd",
+        "id": "efa133b30d6098fdb6d0f375d38c70d80867f38a64fe2335176413671040e98a",
         "meta": {
           "profile": [
             "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
@@ -355,14 +390,52 @@
         "identifier": [
           {
             "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
-            "value": "empty-document_869-888_ICD10GM_2020-K81.0"
+            "value": "empty-document_848-867_ICD10GM_2023-K66.0"
           }
         ],
         "code": {
           "coding": [
             {
               "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
-              "version": "2020",
+              "version": "2023",
+              "code": "K66.0",
+              "display": "Peritoneale Adhäsionen",
+              "userSelected": false
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/Test",
+          "type": "Patient"
+        },
+        "recordedDate": "2000-01-01T00:00:00+00:00"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/efa133b30d6098fdb6d0f375d38c70d80867f38a64fe2335176413671040e98a"
+      }
+    },
+    {
+      "fullUrl": "Condition/4c0cee15c2beebefda5345ef683c3edc289e7ba32a1a38802d240ed966846866",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "4c0cee15c2beebefda5345ef683c3edc289e7ba32a1a38802d240ed966846866",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
+            "value": "empty-document_962-981_ICD10GM_2023-K81.0"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "version": "2023",
               "code": "K81.0",
               "display": "Akute Cholezystitis",
               "userSelected": false
@@ -377,14 +450,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Condition/9d4ac0d506ab8b88200c857943e0dc708bce67115cebbc38bdab7c40b600b3cd"
+        "url": "Condition/4c0cee15c2beebefda5345ef683c3edc289e7ba32a1a38802d240ed966846866"
       }
     },
     {
-      "fullUrl": "Condition/21ee9731b5180018a02572608d36aacafa48e0595170ecb4cbbdc5575bde2f6c",
+      "fullUrl": "Condition/1e865a5033ea271998ad95a7223ca627a7734702b05233adccfba815c078a48e",
       "resource": {
         "resourceType": "Condition",
-        "id": "21ee9731b5180018a02572608d36aacafa48e0595170ecb4cbbdc5575bde2f6c",
+        "id": "1e865a5033ea271998ad95a7223ca627a7734702b05233adccfba815c078a48e",
         "meta": {
           "profile": [
             "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
@@ -393,14 +466,98 @@
         "identifier": [
           {
             "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
-            "value": "empty-document_1401-1408_ICD10GM_2020-R06.0"
+            "value": "empty-document_1033-1053_ICD10GM_2023-K82.1"
           }
         ],
         "code": {
           "coding": [
             {
               "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
-              "version": "2020",
+              "version": "2023",
+              "code": "K82.1",
+              "display": "Hydrops der Gallenblase",
+              "userSelected": false
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/Test",
+          "type": "Patient"
+        },
+        "recordedDate": "2000-01-01T00:00:00+00:00"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/1e865a5033ea271998ad95a7223ca627a7734702b05233adccfba815c078a48e"
+      }
+    },
+    {
+      "fullUrl": "Condition/e850aa3b789f1d4ab1c257cd09963826d3ca2bb70ebe588e1942e486b1b9332d",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "e850aa3b789f1d4ab1c257cd09963826d3ca2bb70ebe588e1942e486b1b9332d",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
+            "value": "empty-document_1097-1141_ICD10GM_2023-K80.50"
+          }
+        ],
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "version": "2023",
+              "code": "K80.50",
+              "display": "Gallengangsstein ohne Cholangitis oder Cholezystitis: Ohne Angabe einer Gallenwegsobstruktion",
+              "userSelected": false
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/Test",
+          "type": "Patient"
+        },
+        "recordedDate": "2000-01-01T00:00:00+00:00"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/e850aa3b789f1d4ab1c257cd09963826d3ca2bb70ebe588e1942e486b1b9332d"
+      }
+    },
+    {
+      "fullUrl": "Condition/225a9d14f6a641def5b8cecf6cca696f28b65aa86a7f19af446e42deb1b1c14e",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "225a9d14f6a641def5b8cecf6cca696f28b65aa86a7f19af446e42deb1b1c14e",
+        "meta": {
+          "profile": [
+            "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
+            "value": "empty-document_1585-1615_ICD10GM_2023-R06.0"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "version": "2023",
               "code": "R06.0",
               "display": "Dyspnoe",
               "userSelected": false
@@ -415,18 +572,18 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Condition/21ee9731b5180018a02572608d36aacafa48e0595170ecb4cbbdc5575bde2f6c"
+        "url": "Condition/225a9d14f6a641def5b8cecf6cca696f28b65aa86a7f19af446e42deb1b1c14e"
       }
     },
     {
-      "fullUrl": "Device/736bdfe5961ada6638f52f50fea85213bc6e08bac3c5594b249223df9b90b1e6",
+      "fullUrl": "Device/e3747a0df03c110d3ac4cd424f3a912172c176e0d9aeece83f751ceec28ab38c",
       "resource": {
         "resourceType": "Device",
-        "id": "736bdfe5961ada6638f52f50fea85213bc6e08bac3c5594b249223df9b90b1e6",
+        "id": "e3747a0df03c110d3ac4cd424f3a912172c176e0d9aeece83f751ceec28ab38c",
         "identifier": [
           {
             "system": "https://fhir.miracum.org/nlp/identifiers/averbis-health-discovery-device-id",
-            "value": "ahd-v5.35.1"
+            "value": "ahd-v6.20.0"
           }
         ],
         "status": "active",
@@ -439,13 +596,13 @@
         ],
         "version": [
           {
-            "value": "5.35.1"
+            "value": "6.20.0"
           }
         ]
       },
       "request": {
         "method": "PUT",
-        "url": "Device/736bdfe5961ada6638f52f50fea85213bc6e08bac3c5594b249223df9b90b1e6"
+        "url": "Device/e3747a0df03c110d3ac4cd424f3a912172c176e0d9aeece83f751ceec28ab38c"
       }
     },
     {
@@ -462,11 +619,11 @@
           "coding": [
             {
               "system": "http://loinc.org",
-              "code": "74477-1",
-              "display": "Clinical document Kind of document from LOINC Document Ontology"
+              "code": "18842-5",
+              "display": "Discharge summary"
             }
           ],
-          "text": "Clinical document Kind of document from LOINC Document Ontology"
+          "text": "Discharge summary"
         },
         "subject": {
           "reference": "Patient/Test",
@@ -475,7 +632,7 @@
         "date": "2000-01-01T00:00:00+00:00",
         "author": [
           {
-            "reference": "Device/736bdfe5961ada6638f52f50fea85213bc6e08bac3c5594b249223df9b90b1e6",
+            "reference": "Device/e3747a0df03c110d3ac4cd424f3a912172c176e0d9aeece83f751ceec28ab38c",
             "type": "Device"
           }
         ],
@@ -499,25 +656,37 @@
             "title": "Condition",
             "entry": [
               {
-                "reference": "Condition/6a715e944f2d9ba39d112d9ecf8943ec039f3afd72765b251bf7ea26524cc0c3"
+                "reference": "Condition/9acc37c5320c2b504aa7d2f5ad5796af6fcb6e02fd6d589fceace74b0d715602"
               },
               {
-                "reference": "Condition/d9930a3da12e94fa3b2d11fa6d78133fddcef2eedd758c8ddcdbacb2fcacba0d"
+                "reference": "Condition/1ce43c2b9ac954dd7b6e938f189fbc4719eafcd71702cef4e8f155c77cb117ca"
               },
               {
-                "reference": "Condition/afca6d73c793a4a42bfe0a78a600d4f68662e9e844a3089c45a9581839fe632d"
+                "reference": "Condition/19626b476203c7eb484a09ae1fb854053c40f0e7986a4ba305169797b18b5730"
               },
               {
-                "reference": "Condition/9b65d4791d0f4d6d0a9ca9ce5f860c026d9d436b54157e5359a977f2fca8f940"
+                "reference": "Condition/e64f5b47eafa468cd4e56d6c1334079f43de7b9bab09d209f00eab2427748ab6"
               },
               {
-                "reference": "Condition/fb38d2dae243a9a1143103d8416db22c355fef39ce89b7bac1b5ef7a5faba464"
+                "reference": "Condition/fd212221e730bb0810b5eb830a7a13617b658344f59274539f71ca4c48a2c1dd"
               },
               {
-                "reference": "Condition/9d4ac0d506ab8b88200c857943e0dc708bce67115cebbc38bdab7c40b600b3cd"
+                "reference": "Condition/31bd943a419712a7246f0e55ca729223436cb22376327be595e07108d4fe8841"
               },
               {
-                "reference": "Condition/21ee9731b5180018a02572608d36aacafa48e0595170ecb4cbbdc5575bde2f6c"
+                "reference": "Condition/efa133b30d6098fdb6d0f375d38c70d80867f38a64fe2335176413671040e98a"
+              },
+              {
+                "reference": "Condition/4c0cee15c2beebefda5345ef683c3edc289e7ba32a1a38802d240ed966846866"
+              },
+              {
+                "reference": "Condition/1e865a5033ea271998ad95a7223ca627a7734702b05233adccfba815c078a48e"
+              },
+              {
+                "reference": "Condition/e850aa3b789f1d4ab1c257cd09963826d3ca2bb70ebe588e1942e486b1b9332d"
+              },
+              {
+                "reference": "Condition/225a9d14f6a641def5b8cecf6cca696f28b65aa86a7f19af446e42deb1b1c14e"
               }
             ]
           }

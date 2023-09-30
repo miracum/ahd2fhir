@@ -17,9 +17,9 @@
     "approach": "DictionaryLookup",
     "laterality": "RIGHT",
     "dictCanon": "Unspezifische Lymphadenitis",
-    "conceptId": "I88.9",
+    "conceptID": "I88.9",
     "belongsTo": null,
-    "uniqueId": "ICD10GM_2020:I88.9"
+    "uniqueID": "ICD10GM_2020:I88.9"
   },
   {
     "begin": 140,
@@ -39,9 +39,9 @@
     "approach": "DictionaryLookup",
     "laterality": null,
     "dictCanon": "Neutropenie",
-    "conceptId": "D70.7",
+    "conceptID": "D70.7",
     "belongsTo": null,
-    "uniqueId": "ICD10GM_2020:D70.7"
+    "uniqueID": "ICD10GM_2020:D70.7"
   },
   {
     "begin": 188,
@@ -66,9 +66,9 @@
           "id": 9593,
           "matchedTerm": "Cefuroxim",
           "dictCanon": "Cefuroxim",
-          "conceptId": "J01DC02-S01AA27",
+          "conceptID": "J01DC02-S01AA27",
           "source": "Abdamed-Averbis_2017",
-          "uniqueId": "Abdamed-Averbis_2017:J01DC02-S01AA27"
+          "uniqueID": "Abdamed-Averbis_2017:J01DC02-S01AA27"
         }
       }
     ],
@@ -101,9 +101,9 @@
           "id": 9623,
           "matchedTerm": "Clindamycin",
           "dictCanon": "Clindamycin",
-          "conceptId": "D10AF01-G01AA10-J01FF01",
+          "conceptID": "D10AF01-G01AA10-J01FF01",
           "source": "Abdamed-Averbis_2017",
-          "uniqueId": "Abdamed-Averbis_2017:D10AF01-G01AA10-J01FF01"
+          "uniqueID": "Abdamed-Averbis_2017:D10AF01-G01AA10-J01FF01"
         }
       }
     ],

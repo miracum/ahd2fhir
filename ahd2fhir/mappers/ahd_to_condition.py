@@ -17,7 +17,11 @@ log = get_logger()
 
 FHIR_SYSTEMS = config.FhirSystemSettings()
 
-CLINICAL_STATUS_MAPPING = {"ACTIVE": "active", "RESOLVED": "resolved"}
+CLINICAL_STATUS_MAPPING = {
+    "ACTIVE": "active",
+    "RESOLVED": "resolved",
+    "CHRONIC": "active",
+}
 SIDE_MAPPING: dict[str, tuple[str, str]] = {
     "LEFT": ("7771000", "Left"),
     "RIGHT": ("24028007", "Right"),
@@ -84,17 +88,13 @@ def get_condition_from_annotation(
     condition_coding = Coding.construct()
     condition_coding.system = system
     condition_coding.display = annotation.get("dictCanon")
-    condition_coding.code = annotation.get("conceptId")
+    condition_coding.code = annotation.get("conceptID")
     condition_coding.userSelected = False
 
     if match := re.search(EXTRACT_YEAR_FROM_ICD_REGEX, annotation.get("source")):
         condition_coding.version = match.group("version")
     else:
-        log.warning(
-            "Could not extract version from ICD system. Defaulting to '2020'",
-            source=annotation.get("source"),
-        )
-        condition_coding.version = "2020"
+        log.warning("Could not extract version from ICD system. Not setting it.")
 
     condition_code = CodeableConcept.construct()
     condition_code.coding = [condition_coding]
@@ -166,7 +166,7 @@ def build_identifier_from_annotation(annotation, doc_ref: DocumentReference):
     condition_identifier_value = (
         f"{doc_ref_identifier}_"
         + f"{annotation.get('begin')}-{annotation.get('end')}_"
-        + f"{annotation.get('uniqueId')}".replace(":", "-")
+        + f"{annotation.get('uniqueID')}".replace(":", "-")
     )
 
     return Identifier(

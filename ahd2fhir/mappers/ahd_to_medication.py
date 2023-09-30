@@ -23,8 +23,16 @@ FHIR_SYSTEMS = config.FhirSystemSettings()
 def get_medication_from_annotation(annotation) -> Medication | None:
     medication = Medication.construct()
 
-    drug = annotation["drugs"][0]
+    drugs = annotation["drugs"]
+
+    if len(drugs) > 1:
+        log.warning(
+            "More than one drugs entry found. Defaulting to only the first entry."
+        )
+
+    drug = drugs[0]
     if drug.get("ingredient") is None:
+        log.error("No ingredient set for the drug annotation")
         return None
 
     # Medication Meta
@@ -33,21 +41,23 @@ def get_medication_from_annotation(annotation) -> Medication | None:
 
     # Medication Code
     codes = []
-    if "Abdamed-Averbis" in str(drug["ingredient"]["source"]):
+    if "abdamed" in str(drug["ingredient"]["source"]).lower():
         system = FHIR_SYSTEMS.atc
-        codes = str(drug["ingredient"]["conceptId"]).split("-")
-    elif "RxNorm" in str(drug["ingredient"]["source"]):
+        codes = str(drug["ingredient"]["conceptID"]).split("-")
+    elif "rxnorm" in str(drug["ingredient"]["source"]).lower():
         system = FHIR_SYSTEMS.rxnorm
-        codes.append(str(drug["ingredient"]["conceptId"]))
+        codes.append(str(drug["ingredient"]["conceptID"]))
     else:
         system = ""
+
+    drug_display = drug["ingredient"]["dictCanon"]
 
     med_code = CodeableConcept.construct()
     med_code.coding = []
     for code in codes:
         med_coding = Coding.construct()
         med_coding.system = system
-        med_coding.display = drug["ingredient"]["dictCanon"]
+        med_coding.display = drug_display
         med_coding.code = code
         med_code.coding.append(med_coding)
 
@@ -59,7 +69,7 @@ def get_medication_from_annotation(annotation) -> Medication | None:
 
     ingredient.itemCodeableConcept = CodeableConcept.construct()
     ingredient.itemCodeableConcept.coding = [Coding()]
-    ingredient.itemCodeableConcept.coding[0].display = drug["ingredient"]["dictCanon"]
+    ingredient.itemCodeableConcept.coding[0].display = drug_display
     ingredient.itemCodeableConcept.coding[0].system = system
 
     medication_identifier_system = (
@@ -67,7 +77,7 @@ def get_medication_from_annotation(annotation) -> Medication | None:
         + f"{annotation['type'].replace('.', '-').lower()}"
     )
     medication.identifier = [Identifier()]
-    medication.identifier[0].value = drug["ingredient"]["dictCanon"]
+    medication.identifier[0].value = drug_display
     medication.identifier[0].system = medication_identifier_system
 
     medication.id = sha256_of_identifier(medication.identifier[0])

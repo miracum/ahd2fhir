@@ -1,7 +1,7 @@
 [
   {
     "begin": 498,
-    "conceptId": "10210-3",
+    "conceptID": "10210-3",
     "coveredText": "Die Patientin stellte sich am 14.05. in reduziertem Allgemeinzustand mit einer K\u00f6rpertemperatur (Ohrmessung) von 39,4\u00b0C und deutlichem Husten, jedoch ohne Dyspnoe in unserer zentralen Notaufnahme vor.",
     "dictCanon": "Allgemeinzustand",
     "end": 698,
@@ -10,11 +10,11 @@
     "matchedTerm": "Allgemeinzustand",
     "source": "clinical_sections_de",
     "type": "de.averbis.types.health.ClinicalSection",
-    "uniqueId": "clinical_sections_de:10210-3"
+    "uniqueID": "clinical_sections_de:10210-3"
   },
   {
     "begin": 801,
-    "conceptId": "11329-0",
+    "conceptID": "11329-0",
     "coveredText": "Als Vorerkrankung wurde anamnestisch ein Typ-1-Diabetes mit Insulintherapie angegeben.",
     "dictCanon": "Anamnese",
     "end": 887,
@@ -23,11 +23,11 @@
     "matchedTerm": "Vorerkrankung",
     "source": "clinical_sections_de",
     "type": "de.averbis.types.health.ClinicalSection",
-    "uniqueId": "clinical_sections_de:11329-0"
+    "uniqueID": "clinical_sections_de:11329-0"
   },
   {
     "begin": 1309,
-    "conceptId": "30954-2",
+    "conceptID": "30954-2",
     "coveredText": "Im Aufnahmelabor fielen eine leichte Leukozytose (11,2/nl im maschinell bestimmten Blutbild), eine Erh\u00f6hung der CRP (1,2 mg/dl) und erh\u00f6hte Gamma-GT 45 U/l) auf.",
     "dictCanon": "Labor",
     "end": 1470,
@@ -36,11 +36,11 @@
     "matchedTerm": "Labor",
     "source": "clinical_sections_de",
     "type": "de.averbis.types.health.ClinicalSection",
-    "uniqueId": "clinical_sections_de:30954-2"
+    "uniqueID": "clinical_sections_de:30954-2"
   },
   {
     "begin": 3209,
-    "conceptId": "51848-0",
+    "conceptID": "51848-0",
     "coveredText": "Im weiteren Verlauf wurde am 25.05. ein gespanntes Abdomen bei gleichzeitigem Anstieg der Gamma-GT auf 95 U/l, der Lipase auf 118 U/l und fortgesetzter Leukozytose von 16.2/nl festgestellt.",
     "dictCanon": "Epikrise",
     "end": 3398,
@@ -49,11 +49,11 @@
     "matchedTerm": "Verlauf",
     "source": "clinical_sections_de",
     "type": "de.averbis.types.health.ClinicalSection",
-    "uniqueId": "clinical_sections_de:51848-0"
+    "uniqueID": "clinical_sections_de:51848-0"
   },
   {
     "begin": 3399,
-    "conceptId": "Sec_Sonography",
+    "conceptID": "Sec_Sonography",
     "coveredText": "Der Verdacht auf eine akute Cholezystitis wurde mittels Oberbauchsonographie best\u00e4tigt (gestaute Gallenblase, verdickte Gallenblasenwand, Verlegung des Gallengangs durch mehrere kleine Konkremente).",
     "dictCanon": "Sonographie",
     "end": 3597,
@@ -62,11 +62,11 @@
     "matchedTerm": "Oberbauchsonographie",
     "source": "clinical_sections_de",
     "type": "de.averbis.types.health.ClinicalSection",
-    "uniqueId": "clinical_sections_de:Sec_Sonography"
+    "uniqueID": "clinical_sections_de:Sec_Sonography"
   },
   {
     "begin": 4574,
-    "conceptId": "10210-3",
+    "conceptID": "10210-3",
     "coveredText": "Die Patientin konnte daraufhin in weiterhin reduziertem Allgemeinzustand, aber respiratorisch- und kreislaufstabil auf die Normalstation der Abteilung f\u00fcr Pulmonologie verlegt werden.",
     "dictCanon": "Allgemeinzustand",
     "end": 4757,
@@ -75,11 +75,11 @@
     "matchedTerm": "Allgemeinzustand",
     "source": "clinical_sections_de",
     "type": "de.averbis.types.health.ClinicalSection",
-    "uniqueId": "clinical_sections_de:10210-3"
+    "uniqueID": "clinical_sections_de:10210-3"
   },
   {
     "begin": 4822,
-    "conceptId": "10210-3",
+    "conceptID": "10210-3",
     "coveredText": "Die Patienten konnte am 12.06. in gutem Allgemeinzustand, jedoch mit einer weiterhin bestehenden Dyspnoe bei leichter Belastung entlassen werden.",
     "dictCanon": "Allgemeinzustand",
     "end": 4967,
@@ -88,11 +88,11 @@
     "matchedTerm": "Allgemeinzustand",
     "source": "clinical_sections_de",
     "type": "de.averbis.types.health.ClinicalSection",
-    "uniqueId": "clinical_sections_de:10210-3"
+    "uniqueID": "clinical_sections_de:10210-3"
   },
   {
     "begin": 4968,
-    "conceptId": "51848-0",
+    "conceptID": "51848-0",
     "coveredText": "Wir haben der Patientin eine Wiedervorstellung in Ihrer Praxis innerhalb der Folgewoche empfohlen, um das weitere Vorgehen abzustimmen.",
     "dictCanon": "Epikrise",
     "end": 5103,
@@ -101,11 +101,11 @@
     "matchedTerm": "Weiteres Vorgehen",
     "source": "clinical_sections_de",
     "type": "de.averbis.types.health.ClinicalSection",
-    "uniqueId": "clinical_sections_de:51848-0"
+    "uniqueID": "clinical_sections_de:51848-0"
   },
   {
     "begin": 5175,
-    "conceptId": "Sec_DocumentFooter",
+    "conceptID": "Sec_DocumentFooter",
     "coveredText": "Mit freundlichen kollegialen Gr\u00fc\u00dfen,",
     "dictCanon": "Mit freundlichen Gr\u00fc\u00dfen",
     "end": 5211,
@@ -114,14 +114,14 @@
     "matchedTerm": "Mit freundlichen kollegialen Gr\u00fc\u00dfen",
     "source": "clinical_sections_de",
     "type": "de.averbis.types.health.ClinicalSection",
-    "uniqueId": "clinical_sections_de:Sec_DocumentFooter"
+    "uniqueID": "clinical_sections_de:Sec_DocumentFooter"
   },
   {
     "approach": "DictionaryLookup",
     "begin": 538,
     "belongsTo": null,
     "clinicalStatus": null,
-    "conceptId": "R53",
+    "conceptID": "R53",
     "confidence": 0.0,
     "coveredText": "reduziertem Allgemeinzustand",
     "dictCanon": "Asthenie",
@@ -135,7 +135,7 @@
     "side": null,
     "source": "ICD10GM_2020",
     "type": "de.averbis.types.health.Diagnosis",
-    "uniqueId": "ICD10GM_2020:R53",
+    "uniqueID": "ICD10GM_2020:R53",
     "verificationStatus": null
   },
   {
@@ -143,7 +143,7 @@
     "begin": 633,
     "belongsTo": null,
     "clinicalStatus": null,
-    "conceptId": "R05",
+    "conceptID": "R05",
     "confidence": 0.0,
     "coveredText": "Husten",
     "dictCanon": "Husten",
@@ -157,7 +157,7 @@
     "side": null,
     "source": "ICD10GM_2020",
     "type": "de.averbis.types.health.Diagnosis",
-    "uniqueId": "ICD10GM_2020:R05",
+    "uniqueID": "ICD10GM_2020:R05",
     "verificationStatus": null
   },
   {
@@ -165,7 +165,7 @@
     "begin": 653,
     "belongsTo": null,
     "clinicalStatus": null,
-    "conceptId": "R06.0",
+    "conceptID": "R06.0",
     "confidence": 0.0,
     "coveredText": "Dyspnoe",
     "dictCanon": "Dyspnoe",
@@ -179,7 +179,7 @@
     "side": null,
     "source": "ICD10GM_2020",
     "type": "de.averbis.types.health.Diagnosis",
-    "uniqueId": "ICD10GM_2020:R06.0",
+    "uniqueID": "ICD10GM_2020:R06.0",
     "verificationStatus": "NEGATED"
   },
   {
@@ -187,7 +187,7 @@
     "begin": 1346,
     "belongsTo": null,
     "clinicalStatus": null,
-    "conceptId": "D72.8",
+    "conceptID": "D72.8",
     "confidence": 0.0,
     "coveredText": "Leukozytose",
     "dictCanon": "Leukozytose",
@@ -201,7 +201,7 @@
     "side": null,
     "source": "ICD10GM_2020",
     "type": "de.averbis.types.health.Diagnosis",
-    "uniqueId": "ICD10GM_2020:D72.8",
+    "uniqueID": "ICD10GM_2020:D72.8",
     "verificationStatus": null
   },
   {
@@ -209,7 +209,7 @@
     "begin": 1615,
     "belongsTo": null,
     "clinicalStatus": null,
-    "conceptId": "R06.0",
+    "conceptID": "R06.0",
     "confidence": 0.0,
     "coveredText": "Dyspnoe",
     "dictCanon": "Dyspnoe",
@@ -223,7 +223,7 @@
     "side": null,
     "source": "ICD10GM_2020",
     "type": "de.averbis.types.health.Diagnosis",
-    "uniqueId": "ICD10GM_2020:R06.0",
+    "uniqueID": "ICD10GM_2020:R06.0",
     "verificationStatus": null
   },
   {
@@ -231,7 +231,7 @@
     "begin": 2085,
     "belongsTo": null,
     "clinicalStatus": null,
-    "conceptId": "J98.8",
+    "conceptID": "J98.8",
     "confidence": 0.0,
     "coveredText": "respiratorischen Dekompensation",
     "dictCanon": "Sonstige n\u00e4her bezeichnete Krankheiten der Atemwege",
@@ -245,7 +245,7 @@
     "side": null,
     "source": "ICD10GM_2020",
     "type": "de.averbis.types.health.Diagnosis",
-    "uniqueId": "ICD10GM_2020:J98.8",
+    "uniqueID": "ICD10GM_2020:J98.8",
     "verificationStatus": null
   },
   {
@@ -253,7 +253,7 @@
     "begin": 2696,
     "belongsTo": null,
     "clinicalStatus": null,
-    "conceptId": "D72.8",
+    "conceptID": "D72.8",
     "confidence": 0.0,
     "coveredText": "Leukozytose",
     "dictCanon": "Leukozytose",
@@ -267,7 +267,7 @@
     "side": null,
     "source": "ICD10GM_2020",
     "type": "de.averbis.types.health.Diagnosis",
-    "uniqueId": "ICD10GM_2020:D72.8",
+    "uniqueID": "ICD10GM_2020:D72.8",
     "verificationStatus": null
   },
   {
@@ -275,7 +275,7 @@
     "begin": 2813,
     "belongsTo": null,
     "clinicalStatus": null,
-    "conceptId": "A41.9",
+    "conceptID": "A41.9",
     "confidence": 0.0,
     "coveredText": "Sepsis",
     "dictCanon": "Sepsis",
@@ -289,7 +289,7 @@
     "side": null,
     "source": "ICD10GM_2020",
     "type": "de.averbis.types.health.Diagnosis",
-    "uniqueId": "ICD10GM_2020:A41.9",
+    "uniqueID": "ICD10GM_2020:A41.9",
     "verificationStatus": null
   },
   {
@@ -297,7 +297,7 @@
     "begin": 3025,
     "belongsTo": null,
     "clinicalStatus": null,
-    "conceptId": "A49.8",
+    "conceptID": "A49.8",
     "confidence": 0.0,
     "coveredText": "Infektion mit Pseudomonas aeruginosa",
     "dictCanon": "Sonstige bakterielle Infektion, o.n.A.",
@@ -311,7 +311,7 @@
     "side": null,
     "source": "ICD10GM_2020",
     "type": "de.averbis.types.health.Diagnosis",
-    "uniqueId": "ICD10GM_2020:A49.8",
+    "uniqueID": "ICD10GM_2020:A49.8",
     "verificationStatus": null
   },
   {
@@ -319,7 +319,7 @@
     "begin": 3361,
     "belongsTo": null,
     "clinicalStatus": null,
-    "conceptId": "D72.8",
+    "conceptID": "D72.8",
     "confidence": 0.0,
     "coveredText": "Leukozytose",
     "dictCanon": "Leukozytose",
@@ -333,7 +333,7 @@
     "side": null,
     "source": "ICD10GM_2020",
     "type": "de.averbis.types.health.Diagnosis",
-    "uniqueId": "ICD10GM_2020:D72.8",
+    "uniqueID": "ICD10GM_2020:D72.8",
     "verificationStatus": null
   },
   {
@@ -341,7 +341,7 @@
     "begin": 3421,
     "belongsTo": null,
     "clinicalStatus": null,
-    "conceptId": "K81.0",
+    "conceptID": "K81.0",
     "confidence": 0.0,
     "coveredText": "akute Cholezystitis",
     "dictCanon": "Akute Cholezystitis",
@@ -355,7 +355,7 @@
     "side": null,
     "source": "ICD10GM_2020",
     "type": "de.averbis.types.health.Diagnosis",
-    "uniqueId": "ICD10GM_2020:K81.0",
+    "uniqueID": "ICD10GM_2020:K81.0",
     "verificationStatus": "SUSPECTED"
   },
   {
@@ -363,7 +363,7 @@
     "begin": 3997,
     "belongsTo": null,
     "clinicalStatus": null,
-    "conceptId": "N17.99",
+    "conceptID": "N17.99",
     "confidence": 0.0,
     "coveredText": "akuten Nierenversagens",
     "dictCanon": "Akutes Nierenversagen",
@@ -377,7 +377,7 @@
     "side": null,
     "source": "ICD10GM_2020",
     "type": "de.averbis.types.health.Diagnosis",
-    "uniqueId": "ICD10GM_2020:N17.99",
+    "uniqueID": "ICD10GM_2020:N17.99",
     "verificationStatus": null
   },
   {
@@ -385,7 +385,7 @@
     "begin": 4618,
     "belongsTo": null,
     "clinicalStatus": null,
-    "conceptId": "R53",
+    "conceptID": "R53",
     "confidence": 0.0,
     "coveredText": "reduziertem Allgemeinzustand",
     "dictCanon": "Asthenie",
@@ -399,7 +399,7 @@
     "side": null,
     "source": "ICD10GM_2020",
     "type": "de.averbis.types.health.Diagnosis",
-    "uniqueId": "ICD10GM_2020:R53",
+    "uniqueID": "ICD10GM_2020:R53",
     "verificationStatus": null
   },
   {
@@ -407,7 +407,7 @@
     "begin": 4919,
     "belongsTo": null,
     "clinicalStatus": null,
-    "conceptId": "R06.0",
+    "conceptID": "R06.0",
     "confidence": 0.0,
     "coveredText": "Dyspnoe",
     "dictCanon": "Dyspnoe",
@@ -421,7 +421,7 @@
     "side": null,
     "source": "ICD10GM_2020",
     "type": "de.averbis.types.health.Diagnosis",
-    "uniqueId": "ICD10GM_2020:R06.0",
+    "uniqueID": "ICD10GM_2020:R06.0",
     "verificationStatus": null
   },
   {
@@ -444,7 +444,7 @@
   },
   {
     "begin": 577,
-    "conceptId": "LP65487-8",
+    "conceptID": "LP65487-8",
     "coveredText": "K\u00f6rpertemperatur",
     "dictCanon": "K\u00f6rpertemperatur",
     "end": 593,
@@ -453,11 +453,11 @@
     "negatedBy": null,
     "source": "Averbis-Lab-Terminology_2.0",
     "type": "de.averbis.types.health.LaboratoryConcept",
-    "uniqueId": "Averbis-Lab-Terminology_2.0:LP65487-8"
+    "uniqueID": "Averbis-Lab-Terminology_2.0:LP65487-8"
   },
   {
     "begin": 1421,
-    "conceptId": "LP15023-2",
+    "conceptID": "LP15023-2",
     "coveredText": "CRP",
     "dictCanon": "CRP",
     "end": 1424,
@@ -466,11 +466,11 @@
     "negatedBy": null,
     "source": "Averbis-Lab-Terminology_2.0",
     "type": "de.averbis.types.health.LaboratoryConcept",
-    "uniqueId": "Averbis-Lab-Terminology_2.0:LP15023-2"
+    "uniqueID": "Averbis-Lab-Terminology_2.0:LP15023-2"
   },
   {
     "begin": 1449,
-    "conceptId": "LP15590-0",
+    "conceptID": "LP15590-0",
     "coveredText": "Gamma-GT",
     "dictCanon": "Gamma-GT",
     "end": 1457,
@@ -479,11 +479,11 @@
     "negatedBy": null,
     "source": "Averbis-Lab-Terminology_2.0",
     "type": "de.averbis.types.health.LaboratoryConcept",
-    "uniqueId": "Averbis-Lab-Terminology_2.0:LP15590-0"
+    "uniqueID": "Averbis-Lab-Terminology_2.0:LP15590-0"
   },
   {
     "begin": 1510,
-    "conceptId": "LP14635-4",
+    "conceptID": "LP14635-4",
     "coveredText": "Blutglukose",
     "dictCanon": "Glukose im Serum",
     "end": 1521,
@@ -492,11 +492,11 @@
     "negatedBy": null,
     "source": "Averbis-Lab-Terminology_2.0",
     "type": "de.averbis.types.health.LaboratoryConcept",
-    "uniqueId": "Averbis-Lab-Terminology_2.0:LP14635-4"
+    "uniqueID": "Averbis-Lab-Terminology_2.0:LP14635-4"
   },
   {
     "begin": 2180,
-    "conceptId": "LP21258-6",
+    "conceptID": "LP21258-6",
     "coveredText": "Sauerstoffs\u00e4ttigung",
     "dictCanon": "Sauerstoffs\u00e4ttigung",
     "end": 2199,
@@ -505,11 +505,11 @@
     "negatedBy": null,
     "source": "Averbis-Lab-Terminology_2.0",
     "type": "de.averbis.types.health.LaboratoryConcept",
-    "uniqueId": "Averbis-Lab-Terminology_2.0:LP21258-6"
+    "uniqueID": "Averbis-Lab-Terminology_2.0:LP21258-6"
   },
   {
     "begin": 2350,
-    "conceptId": "LP21258-6",
+    "conceptID": "LP21258-6",
     "coveredText": "Sauerstoffs\u00e4ttigung",
     "dictCanon": "Sauerstoffs\u00e4ttigung",
     "end": 2369,
@@ -518,11 +518,11 @@
     "negatedBy": null,
     "source": "Averbis-Lab-Terminology_2.0",
     "type": "de.averbis.types.health.LaboratoryConcept",
-    "uniqueId": "Averbis-Lab-Terminology_2.0:LP21258-6"
+    "uniqueID": "Averbis-Lab-Terminology_2.0:LP21258-6"
   },
   {
     "begin": 2658,
-    "conceptId": "LP65487-8",
+    "conceptID": "LP65487-8",
     "coveredText": "K\u00f6rpertemperatur",
     "dictCanon": "K\u00f6rpertemperatur",
     "end": 2674,
@@ -531,11 +531,11 @@
     "negatedBy": null,
     "source": "Averbis-Lab-Terminology_2.0",
     "type": "de.averbis.types.health.LaboratoryConcept",
-    "uniqueId": "Averbis-Lab-Terminology_2.0:LP65487-8"
+    "uniqueID": "Averbis-Lab-Terminology_2.0:LP65487-8"
   },
   {
     "begin": 3299,
-    "conceptId": "LP15590-0",
+    "conceptID": "LP15590-0",
     "coveredText": "Gamma-GT",
     "dictCanon": "Gamma-GT",
     "end": 3307,
@@ -544,11 +544,11 @@
     "negatedBy": null,
     "source": "Averbis-Lab-Terminology_2.0",
     "type": "de.averbis.types.health.LaboratoryConcept",
-    "uniqueId": "Averbis-Lab-Terminology_2.0:LP15590-0"
+    "uniqueID": "Averbis-Lab-Terminology_2.0:LP15590-0"
   },
   {
     "begin": 3324,
-    "conceptId": "LP14915-0",
+    "conceptID": "LP14915-0",
     "coveredText": "Lipase",
     "dictCanon": "Lipase",
     "end": 3330,
@@ -557,11 +557,11 @@
     "negatedBy": null,
     "source": "Averbis-Lab-Terminology_2.0",
     "type": "de.averbis.types.health.LaboratoryConcept",
-    "uniqueId": "Averbis-Lab-Terminology_2.0:LP14915-0"
+    "uniqueID": "Averbis-Lab-Terminology_2.0:LP14915-0"
   },
   {
     "begin": 3915,
-    "conceptId": "LP15090-1",
+    "conceptID": "LP15090-1",
     "coveredText": "Katecholamine",
     "dictCanon": "Katecholamine",
     "end": 3928,
@@ -570,11 +570,11 @@
     "negatedBy": null,
     "source": "Averbis-Lab-Terminology_2.0",
     "type": "de.averbis.types.health.LaboratoryConcept",
-    "uniqueId": "Averbis-Lab-Terminology_2.0:LP15090-1"
+    "uniqueID": "Averbis-Lab-Terminology_2.0:LP15090-1"
   },
   {
     "begin": 4440,
-    "conceptId": "LP21258-6",
+    "conceptID": "LP21258-6",
     "coveredText": "Sauerstoffs\u00e4ttigung",
     "dictCanon": "Sauerstoffs\u00e4ttigung",
     "end": 4459,
@@ -583,7 +583,7 @@
     "negatedBy": null,
     "source": "Averbis-Lab-Terminology_2.0",
     "type": "de.averbis.types.health.LaboratoryConcept",
-    "uniqueId": "Averbis-Lab-Terminology_2.0:LP21258-6"
+    "uniqueID": "Averbis-Lab-Terminology_2.0:LP21258-6"
   },
   {
     "begin": 577,
@@ -608,7 +608,7 @@
     "lowerLimit": null,
     "parameter": {
       "begin": 577,
-      "conceptId": "LP65487-8",
+      "conceptID": "LP65487-8",
       "coveredText": "K\u00f6rpertemperatur",
       "dictCanon": "K\u00f6rpertemperatur",
       "end": 593,
@@ -616,7 +616,7 @@
       "matchedTerm": "K\u00f6rpertemperatur",
       "source": "Averbis-Lab-Terminology_2.0",
       "type": "de.averbis.types.health.LaboratoryConcept",
-      "uniqueId": "Averbis-Lab-Terminology_2.0:LP65487-8"
+      "uniqueID": "Averbis-Lab-Terminology_2.0:LP65487-8"
     },
     "qualitativeValue": null,
     "type": "de.averbis.types.health.LaboratoryValue",
@@ -645,7 +645,7 @@
     "lowerLimit": null,
     "parameter": {
       "begin": 1421,
-      "conceptId": "LP15023-2",
+      "conceptID": "LP15023-2",
       "coveredText": "CRP",
       "dictCanon": "CRP",
       "end": 1424,
@@ -653,7 +653,7 @@
       "matchedTerm": "CRP",
       "source": "Averbis-Lab-Terminology_2.0",
       "type": "de.averbis.types.health.LaboratoryConcept",
-      "uniqueId": "Averbis-Lab-Terminology_2.0:LP15023-2"
+      "uniqueID": "Averbis-Lab-Terminology_2.0:LP15023-2"
     },
     "qualitativeValue": null,
     "type": "de.averbis.types.health.LaboratoryValue",
@@ -682,7 +682,7 @@
     "lowerLimit": null,
     "parameter": {
       "begin": 1449,
-      "conceptId": "LP15590-0",
+      "conceptID": "LP15590-0",
       "coveredText": "Gamma-GT",
       "dictCanon": "Gamma-GT",
       "end": 1457,
@@ -690,7 +690,7 @@
       "matchedTerm": "Gamma-GT",
       "source": "Averbis-Lab-Terminology_2.0",
       "type": "de.averbis.types.health.LaboratoryConcept",
-      "uniqueId": "Averbis-Lab-Terminology_2.0:LP15590-0"
+      "uniqueID": "Averbis-Lab-Terminology_2.0:LP15590-0"
     },
     "qualitativeValue": null,
     "type": "de.averbis.types.health.LaboratoryValue",
@@ -719,7 +719,7 @@
     "lowerLimit": null,
     "parameter": {
       "begin": 1510,
-      "conceptId": "LP14635-4",
+      "conceptID": "LP14635-4",
       "coveredText": "Blutglukose",
       "dictCanon": "Glukose im Serum",
       "end": 1521,
@@ -727,7 +727,7 @@
       "matchedTerm": "Blutglukose",
       "source": "Averbis-Lab-Terminology_2.0",
       "type": "de.averbis.types.health.LaboratoryConcept",
-      "uniqueId": "Averbis-Lab-Terminology_2.0:LP14635-4"
+      "uniqueID": "Averbis-Lab-Terminology_2.0:LP14635-4"
     },
     "qualitativeValue": null,
     "type": "de.averbis.types.health.LaboratoryValue",
@@ -767,7 +767,7 @@
     },
     "parameter": {
       "begin": 2180,
-      "conceptId": "LP21258-6",
+      "conceptID": "LP21258-6",
       "coveredText": "Sauerstoffs\u00e4ttigung",
       "dictCanon": "Sauerstoffs\u00e4ttigung",
       "end": 2199,
@@ -775,7 +775,7 @@
       "matchedTerm": "Sauerstoffs\u00e4ttigung",
       "source": "Averbis-Lab-Terminology_2.0",
       "type": "de.averbis.types.health.LaboratoryConcept",
-      "uniqueId": "Averbis-Lab-Terminology_2.0:LP21258-6"
+      "uniqueID": "Averbis-Lab-Terminology_2.0:LP21258-6"
     },
     "qualitativeValue": null,
     "type": "de.averbis.types.health.LaboratoryValue",
@@ -826,7 +826,7 @@
     },
     "parameter": {
       "begin": 2350,
-      "conceptId": "LP21258-6",
+      "conceptID": "LP21258-6",
       "coveredText": "Sauerstoffs\u00e4ttigung",
       "dictCanon": "Sauerstoffs\u00e4ttigung",
       "end": 2369,
@@ -834,7 +834,7 @@
       "matchedTerm": "Sauerstoffs\u00e4ttigung",
       "source": "Averbis-Lab-Terminology_2.0",
       "type": "de.averbis.types.health.LaboratoryConcept",
-      "uniqueId": "Averbis-Lab-Terminology_2.0:LP21258-6"
+      "uniqueID": "Averbis-Lab-Terminology_2.0:LP21258-6"
     },
     "qualitativeValue": null,
     "type": "de.averbis.types.health.LaboratoryValue",
@@ -874,7 +874,7 @@
     "lowerLimit": null,
     "parameter": {
       "begin": 2658,
-      "conceptId": "LP65487-8",
+      "conceptID": "LP65487-8",
       "coveredText": "K\u00f6rpertemperatur",
       "dictCanon": "K\u00f6rpertemperatur",
       "end": 2674,
@@ -882,7 +882,7 @@
       "matchedTerm": "K\u00f6rpertemperatur",
       "source": "Averbis-Lab-Terminology_2.0",
       "type": "de.averbis.types.health.LaboratoryConcept",
-      "uniqueId": "Averbis-Lab-Terminology_2.0:LP65487-8"
+      "uniqueID": "Averbis-Lab-Terminology_2.0:LP65487-8"
     },
     "qualitativeValue": null,
     "type": "de.averbis.types.health.LaboratoryValue",
@@ -922,7 +922,7 @@
     },
     "parameter": {
       "begin": 3299,
-      "conceptId": "LP15590-0",
+      "conceptID": "LP15590-0",
       "coveredText": "Gamma-GT",
       "dictCanon": "Gamma-GT",
       "end": 3307,
@@ -930,7 +930,7 @@
       "matchedTerm": "Gamma-GT",
       "source": "Averbis-Lab-Terminology_2.0",
       "type": "de.averbis.types.health.LaboratoryConcept",
-      "uniqueId": "Averbis-Lab-Terminology_2.0:LP15590-0"
+      "uniqueID": "Averbis-Lab-Terminology_2.0:LP15590-0"
     },
     "qualitativeValue": null,
     "type": "de.averbis.types.health.LaboratoryValue",
@@ -981,7 +981,7 @@
     },
     "parameter": {
       "begin": 3324,
-      "conceptId": "LP14915-0",
+      "conceptID": "LP14915-0",
       "coveredText": "Lipase",
       "dictCanon": "Lipase",
       "end": 3330,
@@ -989,7 +989,7 @@
       "matchedTerm": "Lipase",
       "source": "Averbis-Lab-Terminology_2.0",
       "type": "de.averbis.types.health.LaboratoryConcept",
-      "uniqueId": "Averbis-Lab-Terminology_2.0:LP14915-0"
+      "uniqueID": "Averbis-Lab-Terminology_2.0:LP14915-0"
     },
     "qualitativeValue": null,
     "type": "de.averbis.types.health.LaboratoryValue",
@@ -1029,7 +1029,7 @@
     "lowerLimit": null,
     "parameter": {
       "begin": 3915,
-      "conceptId": "LP15090-1",
+      "conceptID": "LP15090-1",
       "coveredText": "Katecholamine",
       "dictCanon": "Katecholamine",
       "end": 3928,
@@ -1037,7 +1037,7 @@
       "matchedTerm": "Katecholamine",
       "source": "Averbis-Lab-Terminology_2.0",
       "type": "de.averbis.types.health.LaboratoryConcept",
-      "uniqueId": "Averbis-Lab-Terminology_2.0:LP15090-1"
+      "uniqueID": "Averbis-Lab-Terminology_2.0:LP15090-1"
     },
     "qualitativeValue": null,
     "type": "de.averbis.types.health.LaboratoryValue",
@@ -1077,7 +1077,7 @@
     },
     "parameter": {
       "begin": 4440,
-      "conceptId": "LP21258-6",
+      "conceptID": "LP21258-6",
       "coveredText": "Sauerstoffs\u00e4ttigung",
       "dictCanon": "Sauerstoffs\u00e4ttigung",
       "end": 4459,
@@ -1085,7 +1085,7 @@
       "matchedTerm": "Sauerstoffs\u00e4ttigung",
       "source": "Averbis-Lab-Terminology_2.0",
       "type": "de.averbis.types.health.LaboratoryConcept",
-      "uniqueId": "Averbis-Lab-Terminology_2.0:LP21258-6"
+      "uniqueID": "Averbis-Lab-Terminology_2.0:LP21258-6"
     },
     "qualitativeValue": null,
     "type": "de.averbis.types.health.LaboratoryValue",
@@ -1117,7 +1117,7 @@
         "id": 151212,
         "ingredient": {
           "begin": 1668,
-          "conceptId": "V03AN01",
+          "conceptID": "V03AN01",
           "coveredText": "Sauerstoff",
           "dictCanon": "Sauerstoff",
           "end": 1678,
@@ -1125,7 +1125,7 @@
           "matchedTerm": "Sauerstoff",
           "source": "Abdamed-Averbis_2017",
           "type": "de.averbis.types.health.IngredientConcept",
-          "uniqueId": "Abdamed-Averbis_2017:V03AN01"
+          "uniqueID": "Abdamed-Averbis_2017:V03AN01"
         },
         "type": "de.averbis.types.health.Drug"
       }
@@ -1152,7 +1152,7 @@
         "id": 151163,
         "ingredient": {
           "begin": 1988,
-          "conceptId": "V08",
+          "conceptID": "V08",
           "coveredText": "Kontrastmittel",
           "dictCanon": "KONTRASTMITTEL",
           "end": 2002,
@@ -1160,7 +1160,7 @@
           "matchedTerm": "KONTRASTMITTEL",
           "source": "Abdamed-Averbis_2017",
           "type": "de.averbis.types.health.IngredientConcept",
-          "uniqueId": "Abdamed-Averbis_2017:V08"
+          "uniqueID": "Abdamed-Averbis_2017:V08"
         },
         "type": "de.averbis.types.health.Drug"
       }
@@ -1180,7 +1180,7 @@
     "doseForm": null,
     "doseFrequency": {
       "begin": 2911,
-      "conceptId": null,
+      "conceptID": null,
       "coveredText": "4x500",
       "dictCanon": null,
       "end": 2916,
@@ -1202,7 +1202,7 @@
         "value": 0.0
       },
       "type": "de.averbis.types.health.DoseFrequency",
-      "uniqueId": null
+      "uniqueID": null
     },
     "drugs": [
       {
@@ -1212,7 +1212,7 @@
         "id": 145668,
         "ingredient": {
           "begin": 2882,
-          "conceptId": "J01CA12",
+          "conceptID": "J01CA12",
           "coveredText": "Piperacillin",
           "dictCanon": "Piperacillin",
           "end": 2894,
@@ -1220,7 +1220,7 @@
           "matchedTerm": "Piperacillin",
           "source": "Abdamed-Averbis_2017",
           "type": "de.averbis.types.health.IngredientConcept",
-          "uniqueId": "Abdamed-Averbis_2017:J01CA12"
+          "uniqueID": "Abdamed-Averbis_2017:J01CA12"
         },
         "type": "de.averbis.types.health.Drug"
       },
@@ -1231,7 +1231,7 @@
         "id": 145677,
         "ingredient": {
           "begin": 2882,
-          "conceptId": "J01CR25",
+          "conceptID": "J01CR25",
           "coveredText": "Piperacillin",
           "dictCanon": "Piperacillin und Tazobactam",
           "end": 2894,
@@ -1239,7 +1239,7 @@
           "matchedTerm": "Piperacillin",
           "source": "Abdamed-Averbis_2017",
           "type": "de.averbis.types.health.IngredientConcept",
-          "uniqueId": "Abdamed-Averbis_2017:J01CR25"
+          "uniqueID": "Abdamed-Averbis_2017:J01CR25"
         },
         "type": "de.averbis.types.health.Drug"
       }
@@ -1266,7 +1266,7 @@
         "id": 151114,
         "ingredient": {
           "begin": 2919,
-          "conceptId": "J01CG02",
+          "conceptID": "J01CG02",
           "coveredText": "Tazobactam",
           "dictCanon": "Tazobactam",
           "end": 2929,
@@ -1274,7 +1274,7 @@
           "matchedTerm": "Tazobactam",
           "source": "Abdamed-Averbis_2017",
           "type": "de.averbis.types.health.IngredientConcept",
-          "uniqueId": "Abdamed-Averbis_2017:J01CG02"
+          "uniqueID": "Abdamed-Averbis_2017:J01CG02"
         },
         "type": "de.averbis.types.health.Drug"
       }
@@ -1313,9 +1313,9 @@
           "id": 4221,
           "matchedTerm": "Aspirin",
           "dictCanon": "Acetylsalicylsäure",
-          "conceptId": "A01AD05-B01AC06-N02BA01",
+          "conceptID": "A01AD05-B01AC06-N02BA01",
           "source": "Abdamed-Averbis_2017",
-          "uniqueId": "Abdamed-Averbis_2017:A01AD05-B01AC06-N02BA01"
+          "uniqueID": "Abdamed-Averbis_2017:A01AD05-B01AC06-N02BA01"
         },
         "strength": {
           "begin": 8,
@@ -1326,13 +1326,13 @@
           "unit": "mg",
           "matchedTerm": null,
           "dictCanon": null,
-          "conceptId": null,
+          "conceptID": null,
           "normalizedUnit": "kg",
           "source": null,
           "normalizedValue": 0.0001,
           "value": 100,
           "dimension": "[M]",
-          "uniqueId": null
+          "uniqueID": null
         }
       }
     ],
@@ -1344,9 +1344,9 @@
       "id": 4254,
       "matchedTerm": "TAB",
       "dictCanon": "Tablette",
-      "conceptId": "SCT385055001",
+      "conceptID": "SCT385055001",
       "source": "Averbis-Dose-Form_1.0",
-      "uniqueId": "Averbis-Dose-Form_1.0:SCT385055001"
+      "uniqueID": "Averbis-Dose-Form_1.0:SCT385055001"
     },
     "doseFrequency": {
       "begin": 15,
@@ -1394,7 +1394,7 @@
         "id": 151065,
         "ingredient": {
           "begin": 3116,
-          "conceptId": "A07AA-C05AB-D01AA-G01AA-J02AA-J04AB-R02AB-S01AA",
+          "conceptID": "A07AA-C05AB-D01AA-G01AA-J02AA-J04AB-R02AB-S01AA",
           "coveredText": "Antibiotika",
           "dictCanon": "Antibiotika",
           "end": 3127,
@@ -1402,7 +1402,7 @@
           "matchedTerm": "Antibiotika",
           "source": "Abdamed-Averbis_2017",
           "type": "de.averbis.types.health.IngredientConcept",
-          "uniqueId": "Abdamed-Averbis_2017:A07AA-C05AB-D01AA-G01AA-J02AA-J04AB-R02AB-S01AA"
+          "uniqueID": "Abdamed-Averbis_2017:A07AA-C05AB-D01AA-G01AA-J02AA-J04AB-R02AB-S01AA"
         },
         "type": "de.averbis.types.health.Drug"
       }
@@ -1423,7 +1423,7 @@
     "doseFrequency": {
       "atNight": null,
       "begin": 4269,
-      "conceptId": null,
+      "conceptID": null,
       "coveredText": "morgens",
       "dictCanon": null,
       "end": 4276,
@@ -1448,7 +1448,7 @@
         "value": 6.0
       },
       "type": "de.averbis.types.health.DayTimeDoseFrequency",
-      "uniqueId": null
+      "uniqueID": null
     },
     "drugs": [
       {
@@ -1458,7 +1458,7 @@
         "id": 150967,
         "ingredient": {
           "begin": 4246,
-          "conceptId": "A01AC02-C05AA09-D07AB19-D07XB05-D10AA03-H02AB02-R01AD03-R03BA19-S01BA01-S01CB01-S02BA06-S03BA01",
+          "conceptID": "A01AC02-C05AA09-D07AB19-D07XB05-D10AA03-H02AB02-R01AD03-R03BA19-S01BA01-S01CB01-S02BA06-S03BA01",
           "coveredText": "Dexamethason",
           "dictCanon": "Dexamethason",
           "end": 4258,
@@ -1466,11 +1466,11 @@
           "matchedTerm": "Dexamethason",
           "source": "Abdamed-Averbis_2017",
           "type": "de.averbis.types.health.IngredientConcept",
-          "uniqueId": "Abdamed-Averbis_2017:A01AC02-C05AA09-D07AB19-D07XB05-D10AA03-H02AB02-R01AD03-R03BA19-S01BA01-S01CB01-S02BA06-S03BA01"
+          "uniqueID": "Abdamed-Averbis_2017:A01AC02-C05AA09-D07AB19-D07XB05-D10AA03-H02AB02-R01AD03-R03BA19-S01BA01-S01CB01-S02BA06-S03BA01"
         },
         "strength": {
           "begin": 4260,
-          "conceptId": null,
+          "conceptID": null,
           "coveredText": "6mg",
           "dictCanon": null,
           "dimension": "[M]",
@@ -1481,7 +1481,7 @@
           "normalizedValue": 6e-6,
           "source": null,
           "type": "de.averbis.types.health.Measurement",
-          "uniqueId": null,
+          "uniqueID": null,
           "unit": "mg",
           "value": 6.0
         },
@@ -1502,7 +1502,7 @@
     "date": null,
     "doseForm": {
       "begin": 5163,
-      "conceptId": "SCT385055001",
+      "conceptID": "SCT385055001",
       "coveredText": "Tabletten",
       "dictCanon": "Tablette",
       "end": 5172,
@@ -1510,7 +1510,7 @@
       "matchedTerm": "Tabletten",
       "source": "AverbisDoseForm_1.0",
       "type": "de.averbis.types.health.DoseFormConcept",
-      "uniqueId": "AverbisDoseForm_1.0:SCT385055001"
+      "uniqueID": "AverbisDoseForm_1.0:SCT385055001"
     },
     "doseFrequency": null,
     "drugs": [
@@ -1521,7 +1521,7 @@
         "id": 150914,
         "ingredient": {
           "begin": 5153,
-          "conceptId": "C01EB16-G02CC01-M01AE01-M02AA13-R01AX28-R02AX02-R02AX09-R04AX01-R05CA22",
+          "conceptID": "C01EB16-G02CC01-M01AE01-M02AA13-R01AX28-R02AX02-R02AX09-R04AX01-R05CA22",
           "coveredText": "Ibuprofen",
           "dictCanon": "Ibuprofen",
           "end": 5162,
@@ -1529,11 +1529,11 @@
           "matchedTerm": "Ibuprofen",
           "source": "Abdamed-Averbis_2017",
           "type": "de.averbis.types.health.IngredientConcept",
-          "uniqueId": "Abdamed-Averbis_2017:C01EB16-G02CC01-M01AE01-M02AA13-R01AX28-R02AX02-R02AX09-R04AX01-R05CA22"
+          "uniqueID": "Abdamed-Averbis_2017:C01EB16-G02CC01-M01AE01-M02AA13-R01AX28-R02AX02-R02AX09-R04AX01-R05CA22"
         },
         "strength": {
           "begin": 5146,
-          "conceptId": null,
+          "conceptID": null,
           "coveredText": "500 mg",
           "dictCanon": null,
           "dimension": "[M]",
@@ -1544,7 +1544,7 @@
           "normalizedValue": 0.0005,
           "source": null,
           "type": "de.averbis.types.health.Measurement",
-          "uniqueId": null,
+          "uniqueID": null,
           "unit": "mg",
           "value": 500.0
         },
@@ -1572,7 +1572,7 @@
   },
   {
     "begin": 1219,
-    "conceptId": "419192003",
+    "conceptID": "419192003",
     "coveredText": "Innere Medizin",
     "departmentType": null,
     "dictCanon": "Innere Medizin",
@@ -1581,11 +1581,11 @@
     "matchedTerm": "Innere Medizin",
     "source": "SpecialistDepartment_1.0",
     "type": "de.averbis.types.health.Department",
-    "uniqueId": "SpecialistDepartment_1.0:419192003"
+    "uniqueID": "SpecialistDepartment_1.0:419192003"
   },
   {
     "begin": 1252,
-    "conceptId": "394807007",
+    "conceptID": "394807007",
     "coveredText": "Infektiologie",
     "departmentType": null,
     "dictCanon": "Infektiologie",
@@ -1594,11 +1594,11 @@
     "matchedTerm": "Infektiologie",
     "source": "SpecialistDepartment_1.0",
     "type": "de.averbis.types.health.Department",
-    "uniqueId": "SpecialistDepartment_1.0:394807007"
+    "uniqueID": "SpecialistDepartment_1.0:394807007"
   },
   {
     "begin": 3662,
-    "conceptId": "394609007",
+    "conceptID": "394609007",
     "coveredText": "Abteilung f\u00fcr Viszeralchirurgie",
     "departmentType": null,
     "dictCanon": "Allgemeine Chirurgie",
@@ -1607,7 +1607,7 @@
     "matchedTerm": "Viszeralchirurgie",
     "source": "SpecialistDepartment_1.0",
     "type": "de.averbis.types.health.Department",
-    "uniqueId": "SpecialistDepartment_1.0:394609007"
+    "uniqueID": "SpecialistDepartment_1.0:394609007"
   },
   {
     "begin": 1,

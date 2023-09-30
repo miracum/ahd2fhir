@@ -1,6 +1,6 @@
 services:
   health-discovery-hd:
-    image: registry.averbis.com/health-discovery/health-discovery:6.19.0@sha256:796fc716e8d4c75c7a9a3e91f2978a441d2197838942df9403445fb7c34b1e83
+    image: registry.averbis.com/health-discovery/health-discovery:6.20.0@sha256:c6763264a9a5dfe77dccb5be5134ac3e93d08243c879c0c1fe726547965c6189
     ports:
       - "9999:8080"
     environment:
@@ -38,7 +38,7 @@ services:
       - MYSQL_PASSWORD=getaccess
 
   solr:
-    image: registry.averbis.com/solr/solr:7.6.0@sha256:cc0658c36605248aa059c401b4303f9059280ed3fb248ab6a6d9513b4ca21d6e
+    image: registry.averbis.com/solr/solr:9.1.0@sha256:6ae6584f07d8c9f68a0fe3773bd6c081c37e0c2029313c21163f21654250eeeb
     environment:
       - SOLR_MAX_MEM=512m
       - TEXTANALYSIS_URL=http://${PLATFORM_HOSTNAME:-health-discovery-hd}:${PLATFORM_PORT:-8080}/health-discovery/rest
@@ -83,11 +83,17 @@ services:
     security_opt:
       - "no-new-privileges:true"
     environment:
+      KAFKA_CFG_NODE_ID: "0"
+      KAFKA_RAFT_CLUSTER_ID: "diz-in-a-box"
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: "0@kafka:9093"
+      KAFKA_CFG_PROCESS_ROLES: "controller,broker"
       ALLOW_PLAINTEXT_LISTENER: "yes"
       KAFKA_CFG_MESSAGE_MAX_BYTES: "31457280"
       KAFKA_CFG_LISTENERS: "PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094"
       KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094"
       KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: "CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT"
+      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CFG_INTER_BROKER_LISTENER_NAME: PLAINTEXT
     ports:
       - 9094:9094
 
@@ -99,7 +105,7 @@ services:
       AKHQ_CONFIGURATION: |
         akhq:
           connections:
-            docker-kafka-server:
+            kafka-compose:
               properties:
                 bootstrap.servers: "kafka:9092"
     ports:
@@ -114,7 +120,7 @@ services:
     entrypoint: ["/bin/bash", "-c"]
     command:
       [
-        "while true; do kafkacat -b kafka:9092 -t fhir.documents -P -l /data/documentreference.json; sleep 5; done",
+        "while true; do kafkacat -b kafka:9092 -t fhir.documents -P -p 0 /data/documentreference.json; sleep 10; done",
       ]
     volumes:
       - ./tests/resources/fhir:/data:ro

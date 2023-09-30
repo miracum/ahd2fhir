@@ -1,7 +1,7 @@
 import base64
 import logging
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Tuple
 
 import structlog
@@ -53,15 +53,13 @@ DOCUMENT_LENGTH_SUMMARY = Summary(
     "Length of each processed document's text in charactes",
 )
 
-DISCHARGE_SUMMARY_CONCEPT_TEXT = (
-    "Clinical document Kind of document from LOINC Document Ontology"
-)
+DISCHARGE_SUMMARY_CONCEPT_TEXT = "Discharge summary"
 DISCHARGE_SUMMARY_CONCEPT = CodeableConcept(
     **{
         "coding": [
             {
                 "system": "http://loinc.org",
-                "code": "74477-1",
+                "code": "18842-5",
                 "display": DISCHARGE_SUMMARY_CONCEPT_TEXT,
             },
         ],
@@ -196,7 +194,7 @@ class ResourceHandler:
             )
         )
 
-        composition_datetime: datetime = datetime.utcnow()
+        composition_datetime: datetime = datetime.now(tz=timezone.utc)
         if self.fixed_composition_datetime:
             composition_datetime = self.fixed_composition_datetime
 
@@ -216,6 +214,7 @@ class ResourceHandler:
                 "section": composition_sections,
             }
         )
+
         return composition
 
     def _process_documentreference(self, document_reference: DocumentReference):
