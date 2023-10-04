@@ -63,7 +63,7 @@ def test_annotations_belonging_to_family_history_are_ignored():
 def test_sets_the_condition_encounter_to_the_context_from_the_documentreference():
     ahd_response = {
         "type": "de.averbis.types.health.Diagnosis",
-        "conceptId": "R53",
+        "conceptID": "R53",
         "source": "ICD10GM_2020",
     }
     doc_ref = get_empty_document_reference()
@@ -81,3 +81,32 @@ def test_sets_the_condition_encounter_to_the_context_from_the_documentreference(
     condition = get_fhir_condition(ahd_response, doc_ref)
 
     assert condition.encounter.reference == "Encounter/e2216331600"
+
+
+def test_sets_the_condition_coding_version_if_it_is_known():
+    ahd_response = {
+        "type": "de.averbis.types.health.Diagnosis",
+        "conceptID": "R53",
+        "source": "ICD10GM_2020",
+    }
+    doc_ref = get_empty_document_reference()
+
+    condition = get_fhir_condition(ahd_response, doc_ref)
+
+    assert len(condition.code.coding) == 1
+    assert condition.code.coding[0].code == "R53"
+    assert condition.code.coding[0].version == "2020"
+
+
+def test_does_not_set_the_condition_coding_version_if_it_is_unknown():
+    ahd_response = {
+        "type": "de.averbis.types.health.Diagnosis",
+        "conceptID": "R53",
+        "source": "ICD10GM",
+    }
+    doc_ref = get_empty_document_reference()
+
+    condition = get_fhir_condition(ahd_response, doc_ref)
+
+    assert condition.code.coding[0].code == "R53"
+    assert condition.code.coding[0].version is None

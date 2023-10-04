@@ -7,7 +7,6 @@ from fhir.resources.bundle import Bundle, BundleEntry
 from fhir.resources.composition import Composition
 from fhir.resources.documentreference import DocumentReferenceContent
 from fhir.resources.fhirtypes import DateTime
-from slugify import slugify
 from syrupy.extensions.single_file import SingleFileSnapshotExtension, WriteMode
 
 from ahd2fhir.utils.resource_handler import ResourceHandler
@@ -23,7 +22,7 @@ class FHIRExtension(SingleFileSnapshotExtension):
         original_name = SingleFileSnapshotExtension.get_snapshot_name(
             test_location=test_location, index=index
         )
-        return slugify(original_name)
+        return original_name
 
 
 @pytest.fixture
@@ -121,7 +120,7 @@ def test_get_fhir_medication_should_only_create_unique_bundle_entries():
 
 
 @pytest.mark.parametrize(
-    "ahd_payload_filename", ["payload_3.json", "payload_1_v5.json", "payload_2.json"]
+    "ahd_payload_filename", ["complex-payload.json", "simple-payload.json"]
 )
 def test_handle_documents_from_ahd_payloads_snapshots(
     ahd_payload_filename, snapshot_fhir
@@ -143,11 +142,13 @@ def test_handle_documents_from_ahd_payloads_snapshots(
     doc.date = DateTime.validate("2000-01-01T00:00:00+00:00")
 
     ahd_response = []
-    with open(f"tests/resources/ahd/{ahd_payload_filename}") as file:
+    with open(f"tests/resources/ahd/v6/{ahd_payload_filename}") as file:
         ahd_response = json.load(file)
 
+    payload = ahd_response["payload"]
+
     resource_handler = ResourceHandler(
-        averbis_pipeline=MockPipeline(response=ahd_response),
+        averbis_pipeline=MockPipeline(response=payload),
         fixed_composition_datetime=doc.date,
     )
 

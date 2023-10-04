@@ -81,13 +81,13 @@ Starts an AHD server:
 
 ```sh
 docker login registry.averbis.com -u "Username" -p "Password"
-docker compose -f docker-compose.dev.yml up
+docker compose -f compose.dev.yml up
 ```
 
 Starts both AHD and Kafka and starts constantly filling a `fhir.documents` topic with sample DocumentReference resources.
 
 ```sh
-docker compose -f docker-compose.dev.yml --profile=kafka up
+docker compose -f compose.dev.yml --profile=kafka up
 ```
 
 ### Manually create an AHD project with the default pipeline and get an API token for development
@@ -113,13 +113,17 @@ export PYTHONPATH=${PWD}
 uvicorn --env-file=.env.development --app-dir=ahd2fhir main:app --reload --log-level=debug
 ```
 
+> **Note**
+> To enable reading FHIR DocumentReferences from a Kafka topic during development,
+> make sure to set the env var `KAFKA_ENABLED=true`
+
 Uses the environment configuration from the `.env.development` file. You will need to modify the `AHD_` env vars for
 your local deployment.
 
 ### Build and run using a locally-build image
 
 Note the use of `host.docker.internal` so the running container can still access the version of AHD launched via
-`docker-compose.dev.yml`.
+`compose.dev.yml`.
 Also use your own manually created API-TOKEN below.
 
 ```sh

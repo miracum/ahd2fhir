@@ -1,0 +1,170 @@
+{
+  "payload": [
+    {
+      "begin": 48,
+      "end": 68,
+      "type": "de.averbis.types.health.Medication",
+      "coveredText": "20mg Aspirin täglich",
+      "id": 2218,
+      "date": null,
+      "dosage": [
+        {
+          "begin": 48,
+          "end": 52,
+          "type": "de.averbis.types.health.Dosage",
+          "coveredText": "20mg",
+          "id": 2225
+        },
+        {
+          "begin": 61,
+          "end": 68,
+          "type": "de.averbis.types.health.Dosage",
+          "coveredText": "täglich",
+          "id": 2226
+        }
+      ],
+      "administrations": [],
+      "brandName": "Aspirin",
+      "drugs": [
+        {
+          "begin": 48,
+          "end": 60,
+          "type": "de.averbis.types.health.Drug",
+          "coveredText": "20mg Aspirin",
+          "id": 2219,
+          "ingredient": {
+            "begin": 53,
+            "end": 60,
+            "type": "de.averbis.types.health.Ingredient",
+            "coveredText": "Aspirin",
+            "id": 2220,
+            "negatedBy": null,
+            "matchedTerm": "Aspirin",
+            "dictCanon": "Acetylsalicylsäure",
+            "conceptID": "104201",
+            "source": "ABDAMED_202307",
+            "uniqueID": "ABDAMED_202307:104201"
+          },
+          "strength": {
+            "begin": 48,
+            "end": 52,
+            "type": "de.averbis.types.health.Strength",
+            "coveredText": "20mg",
+            "id": 2221,
+            "negatedBy": null,
+            "unit": "mg",
+            "matchedTerm": null,
+            "dictCanon": null,
+            "conceptID": null,
+            "normalizedUnit": "kg",
+            "source": null,
+            "normalizedValue": 2.0e-5,
+            "value": 20.0,
+            "dimension": "[M]",
+            "uniqueID": null
+          }
+        }
+      ],
+      "rateQuantity": "NaN",
+      "atcCodes": [
+        {
+          "begin": 48,
+          "end": 60,
+          "type": "de.averbis.types.health.ATCCode",
+          "coveredText": "20mg Aspirin",
+          "id": 2232,
+          "negatedBy": null,
+          "matchedTerm": null,
+          "dictCanon": "Acetylsalicylsäure",
+          "conceptID": "N02BA01",
+          "source": "ATCA_2023",
+          "uniqueID": null
+        }
+      ],
+      "doseFrequency": {
+        "begin": 61,
+        "end": 68,
+        "type": "de.averbis.types.health.TimeMeasurementDoseFrequency",
+        "coveredText": "täglich",
+        "id": 2227,
+        "negatedBy": null,
+        "totalDose": {
+          "begin": 61,
+          "end": 68,
+          "type": "de.averbis.types.health.Measurement",
+          "coveredText": "täglich",
+          "id": 2228,
+          "unit": "mg",
+          "normalizedUnit": null,
+          "normalizedValue": "NaN",
+          "value": 20.0,
+          "dimension": "[M]"
+        },
+        "matchedTerm": null,
+        "dictCanon": null,
+        "conceptID": null,
+        "interval": "1/day",
+        "source": null,
+        "totalCount": 1.0,
+        "uniqueID": null
+      },
+      "atc": "N02BA01",
+      "termTypes": null,
+      "doseForm": null,
+      "category": null,
+      "status": null
+    },
+    {
+      "begin": 7,
+      "end": 16,
+      "type": "de.averbis.types.health.Diagnosis",
+      "coveredText": "schmerzen",
+      "id": 2216,
+      "negatedBy": null,
+      "matchedTerm": "Schmerzen",
+      "verificationStatus": null,
+      "kind": null,
+      "confidence": 0.0,
+      "onsetDate": null,
+      "source": "ICD10GM_2023",
+      "clinicalStatus": null,
+      "approach": "DictionaryLookup",
+      "laterality": null,
+      "dictCanon": "Schmerz, nicht näher bezeichnet",
+      "conceptID": "R52.9",
+      "belongsTo": null,
+      "uniqueID": "ICD10GM_2023:R52.9"
+    },
+    {
+      "begin": 33,
+      "end": 41,
+      "type": "de.averbis.types.health.Diagnosis",
+      "coveredText": "Diabetes",
+      "id": 2217,
+      "negatedBy": null,
+      "matchedTerm": "Diabetes",
+      "verificationStatus": null,
+      "kind": null,
+      "confidence": 0.0,
+      "onsetDate": null,
+      "source": "ICD10GM_2023",
+      "clinicalStatus": "CHRONIC",
+      "approach": "DictionaryLookup",
+      "laterality": null,
+      "dictCanon": "Nicht näher bezeichneter Diabetes mellitus: Ohne Komplikationen: Nicht als entgleist bezeichnet",
+      "conceptID": "E14.90",
+      "belongsTo": null,
+      "uniqueID": "ICD10GM_2023:E14.90"
+    },
+    {
+      "begin": 0,
+      "end": 68,
+      "type": "de.averbis.types.health.DocumentAnnotation",
+      "coveredText": "Starke schmerzen bei anhaltender Diabetes\n\nnahm 20mg Aspirin täglich",
+      "id": 2215,
+      "language": "de",
+      "version": "6.20.0"
+    }
+  ],
+  "errorMessages": []
+}

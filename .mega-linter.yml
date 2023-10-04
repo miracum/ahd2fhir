@@ -19,6 +19,8 @@ DISABLE_LINTERS:
   - PYTHON_PYLINT
   # due to "error - python package "--hash" is available for public registration."
   - REPOSITORY_DUSTILOCK
+  - JSON_V8R
+  - YAML_V8R
 
 GROOVY_NPM_GROOVY_LINT_ARGUMENTS:
   - "--failon=warning"
