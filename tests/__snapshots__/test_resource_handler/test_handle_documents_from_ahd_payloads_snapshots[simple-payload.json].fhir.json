@@ -160,7 +160,7 @@
         "code": {
           "coding": [
             {
-              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
               "version": "2023",
               "code": "R52.9",
               "display": "Schmerz, nicht näher bezeichnet",
@@ -206,7 +206,7 @@
         "code": {
           "coding": [
             {
-              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
               "version": "2023",
               "code": "E14.90",
               "display": "Nicht näher bezeichneter Diabetes mellitus: Ohne Komplikationen: Nicht als entgleist bezeichnet",

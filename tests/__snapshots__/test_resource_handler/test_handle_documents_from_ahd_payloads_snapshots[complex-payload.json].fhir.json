@@ -160,7 +160,7 @@
         "code": {
           "coding": [
             {
-              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
               "version": "2023",
               "code": "R53",
               "display": "Unwohlsein und Ermüdung",
@@ -198,7 +198,7 @@
         "code": {
           "coding": [
             {
-              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
               "version": "2023",
               "code": "R05",
               "display": "Husten",
@@ -244,7 +244,7 @@
         "code": {
           "coding": [
             {
-              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
               "version": "2023",
               "code": "E10.90",
               "display": "Diabetes mellitus, Typ 1: Ohne Komplikationen: Nicht als entgleist bezeichnet",
@@ -282,7 +282,7 @@
         "code": {
           "coding": [
             {
-              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
               "version": "2023",
               "code": "D72.8",
               "display": "Sonstige näher bezeichnete Krankheiten der Leukozyten",
@@ -320,7 +320,7 @@
         "code": {
           "coding": [
             {
-              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
               "version": "2023",
               "code": "D72.8",
               "display": "Sonstige näher bezeichnete Krankheiten der Leukozyten",
@@ -358,7 +358,7 @@
         "code": {
           "coding": [
             {
-              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
               "version": "2023",
               "code": "N83.2",
               "display": "Sonstige und nicht näher bezeichnete Ovarialzysten",
@@ -396,7 +396,7 @@
         "code": {
           "coding": [
             {
-              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
               "version": "2023",
               "code": "K66.0",
               "display": "Peritoneale Adhäsionen",
@@ -434,7 +434,7 @@
         "code": {
           "coding": [
             {
-              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
               "version": "2023",
               "code": "K81.0",
               "display": "Akute Cholezystitis",
@@ -472,7 +472,7 @@
         "code": {
           "coding": [
             {
-              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
               "version": "2023",
               "code": "K82.1",
               "display": "Hydrops der Gallenblase",
@@ -518,7 +518,7 @@
         "code": {
           "coding": [
             {
-              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
               "version": "2023",
               "code": "K80.50",
               "display": "Gallengangsstein ohne Cholangitis oder Cholezystitis: Ohne Angabe einer Gallenwegsobstruktion",
@@ -556,7 +556,7 @@
         "code": {
           "coding": [
             {
-              "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+              "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
               "version": "2023",
               "code": "R06.0",
               "display": "Dyspnoe",
