@@ -274,7 +274,7 @@
         "code": {
           "coding": [
             {
-              "system": "http://fhir.de/CodeSystem/dimdi/atc",
+              "system": "http://fhir.de/CodeSystem/bfarm/atc",
               "code": "104201",
               "display": "Acetylsalicylsäure"
             }
@@ -285,7 +285,7 @@
             "itemCodeableConcept": {
               "coding": [
                 {
-                  "system": "http://fhir.de/CodeSystem/dimdi/atc",
+                  "system": "http://fhir.de/CodeSystem/bfarm/atc",
                   "display": "Acetylsalicylsäure"
                 }
               ]
