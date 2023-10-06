@@ -88,13 +88,13 @@ class KafkaSettings(BaseSettings):
 
 
 class FhirSystemSettings(BaseSettings):
-    icd_10_gm: str = "http://fhir.de/CodeSystem/dimdi/icd-10-gm"
+    icd_10_gm: str = "http://fhir.de/CodeSystem/bfarm/icd-10-gm"
     snomed_ct: str = "http://snomed.info/sct"
     condition_clinical_status: str = (
         "http://terminology.hl7.org/CodeSystem/condition-clinical"
     )
     ucum: str = "http://unitsofmeasure.org"
-    atc: str = "http://fhir.de/CodeSystem/dimdi/atc"
+    atc: str = "http://fhir.de/CodeSystem/bfarm/atc"
     rxnorm: str = "http://www.nlm.nih.gov/research/umls/rxnorm"
     loinc: str = "http://loinc.org"
     condition_profile: str = (
