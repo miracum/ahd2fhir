@@ -6,5 +6,8 @@
     "registry.averbis.com/health-discovery/health-discovery",
     "registry.averbis.com/gcm/gcm",
     "registry.averbis.com/solr/solr"
-  ]
+  ],
+  "pip-compile": {
+    "fileMatch": ["^requirements-?.*\\.in$"]
+  }
 }
