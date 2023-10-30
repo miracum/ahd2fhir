@@ -372,7 +372,7 @@ class ResourceHandler:
         try:
             if mime_type == "text/html":
                 soup = BeautifulSoup(text, "html.parser")
-                text = soup.get_text().encode("utf-8")
+                text = soup.get_text().encode("utf-8", errors="replace").decode("utf-8")
             return self.pipeline.analyse_text(text, **analyse_args)
         except Exception as exc:
             log.exception(exc)
