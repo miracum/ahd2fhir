@@ -27,7 +27,7 @@ services:
       start_period: 1m
 
   database:
-    image: docker.io/library/mariadb:11.1.2@sha256:5d851e999b84625ef9810589e832686cae58453452698ee69e2980041e626eb2
+    image: docker.io/library/mariadb:11.1.2@sha256:2403cc521634162f743b5179ff5b35520daf72df5d9e7e397192af685d9148fd
     command: --max_allowed_packet=1g --innodb_buffer_pool_size=512m --innodb_log_buffer_size=256m --innodb_log_file_size=256m
     environment:
       # kics-scan ignore-line
@@ -72,7 +72,7 @@ services:
       start_period: 30s
 
   kafka:
-    image: docker.io/bitnami/kafka:3.5.1@sha256:2a7a99f58cda458bc07b0c6aaac7ce86861155ea41593d6527038bb35fa5b612
+    image: docker.io/bitnami/kafka:3.6.0@sha256:2d065103d482dd0b985e15e39eaf17dc7627a755321952be807335d7ae67533c
     profiles:
       - kafka
     restart: unless-stopped
