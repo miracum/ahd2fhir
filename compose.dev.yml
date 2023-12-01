@@ -72,7 +72,7 @@ services:
       start_period: 30s
 
   kafka:
-    image: docker.io/bitnami/kafka:3.5.1@sha256:2a7a99f58cda458bc07b0c6aaac7ce86861155ea41593d6527038bb35fa5b612
+    image: docker.io/bitnami/kafka:3.5.1@sha256:4ceeb22cd8f1d61e0d61e80d11640ca4daf0c51cafeaeeb084da71e46127fd49
     profiles:
       - kafka
     restart: unless-stopped
