@@ -16,7 +16,7 @@ COPY . .
 RUN PYTHONPATH=${PWD}/ahd2fhir pytest -vv --cov=ahd2fhir && \
     coverage report --fail-under=80
 
-FROM gcr.io/distroless/python3-debian12:nonroot@sha256:39cc901d176eee5ebd44a047cd195acd907d57baee66f67236d08fdc8da6703b
+FROM gcr.io/distroless/python3-debian12:nonroot@sha256:27d2d6afcfb109e4c147449d4af957f71cb770196527d0da1d1d92b9680b0daa
 WORKDIR /opt/ahd2fhir
 EXPOSE 8080/tcp
 ENV PYTHONPATH=/usr/local/lib/python3.11/site-packages
