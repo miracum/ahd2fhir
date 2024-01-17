@@ -1,8 +1,8 @@
 services:
   health-discovery-hd:
-    image: registry.averbis.com/health-discovery/health-discovery:6.20.0@sha256:c6763264a9a5dfe77dccb5be5134ac3e93d08243c879c0c1fe726547965c6189
+    image: registry.averbis.com/health-discovery/health-discovery:7.0.0-beta-4@sha256:221fd45d6a0daefede6af7853fb831c0636c8edac069fac9bd3c78f3fcc1ba1b
     ports:
-      - "9999:8080"
+      - "${PRODUCT_BIND_ADDR:-0.0.0.0}:${PRODUCT_HTTP_PORT:-9999}:8080"
     environment:
       - PLATFORM_PORT=8080
       - PLATFORM_MAX_MEM=${PRODUCT_MAX_MEM:-24g}
@@ -11,14 +11,18 @@ services:
       - DATABASE_USERNAME=aif
       # kics-scan ignore-line
       - DATABASE_PASSWORD=getaccess
-      - GCM_HOSTNAME=gcm
-      - GCM_PORT=8181
       - SOLR_HOSTNAME=solr
       - SOLR_PORT=8983
     depends_on:
       - database
       - solr
-      - gcm
+    volumes:
+      - resourceVolPlatform-hd:/opt/resources/platform
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health-discovery"]
       interval: 30s
@@ -38,38 +42,25 @@ services:
       - MYSQL_PASSWORD=getaccess
 
   solr:
-    image: registry.averbis.com/solr/solr:7.6.0@sha256:cc0658c36605248aa059c401b4303f9059280ed3fb248ab6a6d9513b4ca21d6e
+    image: registry.averbis.com/solr/solr:9.2.0@sha256:8e0853306e72697252c6ee7190e04629b52860da5ea257314036f0197cce1277
     environment:
       - SOLR_MAX_MEM=512m
       - TEXTANALYSIS_URL=http://${PLATFORM_HOSTNAME:-health-discovery-hd}:${PLATFORM_PORT:-8080}/health-discovery/rest
+    volumes:
+      - solrDataVol-hd:/opt/solr/server/solr/solrCores
+      - solrTermsVol-hd:/opt/solr/server/solr/terms
+      - solrLogVol-hd:/opt/solr/server/logs
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8983/solr/terms/admin/ping"]
       interval: 30s
       timeout: 5s
       retries: 3
       start_period: 30s
-
-  gcm:
-    image: registry.averbis.com/gcm/gcm:7.6.0@sha256:5adbe4a364a9c7c1deaa2e2f34959367fbeed3c2ccc1d4d6f60d86e39344e06b
-    environment:
-      - JAVA_MAX_MEM=2g
-      - PLATFORM_HOSTNAME=${PLATFORM_HOSTNAME:-health-discovery-hd}
-      - PLATFORM_PORT=${PLATFORM_PORT:-8080}
-      - PLATFORM_URL_NAME=health-discovery
-      - GCM_HOSTNAME=gcm
-      - GCM_PORT=8181
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "curl",
-          "-f",
-          "http://localhost:8181/connector-manager/testConnectivity",
-        ]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
 
   kafka:
     image: docker.io/bitnami/kafka:3.6.1@sha256:ba72423025b923b366219dacd95a16c8eacc2d1d488bc7bd00ac877638f2da98
@@ -126,3 +117,15 @@ services:
       - ./tests/resources/fhir:/data:ro
     depends_on:
       - kafka
+
+volumes:
+  resourceVolPlatform-hd:
+    driver: "local"
+  dbVol-hd:
+    driver: "local"
+  solrDataVol-hd:
+    driver: "local"
+  solrLogVol-hd:
+    driver: "local"
+  solrTermsVol-hd:
+    driver: "local"

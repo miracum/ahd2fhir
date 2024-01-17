@@ -1,11 +1,11 @@
 # ahd2fhir
 
-Creates FHIR resources from [Averbis Health Discovery](https://averbis.com/health-discovery/) NLP Annotations.
-
 ![Latest Version](https://img.shields.io/github/v/release/miracum/ahd2fhir)
 ![License](https://img.shields.io/github/license/miracum/ahd2fhir)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/miracum/ahd2fhir/badge)](https://api.securityscorecards.dev/projects/github.com/miracum/ahd2fhir)
 [![SLSA 3](https://slsa.dev/images/gh-badge-level3.svg)](https://slsa.dev)
+
+Creates FHIR resources from [Averbis Health Discovery](https://averbis.com/health-discovery/) NLP Annotations.
 
 ## Run
 
