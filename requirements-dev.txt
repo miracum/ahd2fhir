@@ -666,9 +666,9 @@ soupsieve==2.5 \
     # via
     #   -r requirements.txt
     #   beautifulsoup4
-starlette==0.33.0 \
-    --hash=sha256:6d492f0f7dfb2dd646ac7d80444af4989cd5c5c78f622fac99e39a66c3e01f06 \
-    --hash=sha256:8c21f9592451b2016300c5bbc54b181063367b62720a4048656c070319238897
+starlette==0.36.2 \
+    --hash=sha256:4134757b950f027c8f16028ec81787751bb44145df17c8b0fa84087b9851b42d \
+    --hash=sha256:e53e086e620ba715f0c187daca92927b722484d148e70921f0de075936119536
     # via
     #   -r requirements.txt
     #   fastapi
