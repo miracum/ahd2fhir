@@ -169,9 +169,9 @@ email-validator==2.1.0.post1 \
     --hash=sha256:a4b0bd1cf55f073b924258d19321b1f3aa74b4b5a71a42c305575dba920e1a44 \
     --hash=sha256:c973053efbeddfef924dc0bd93f6e77a1ea7ee0fce935aea7103c7a3d6d2d637
     # via pydantic
-fastapi==0.105.0 \
-    --hash=sha256:4d12838819aa52af244580675825e750ad67c9df4614f557a769606af902cf22 \
-    --hash=sha256:f19ebf6fdc82a3281d10f2cb4774bdfa90238e3b40af3525a0c09fd08ad1c480
+fastapi==0.109.1 \
+    --hash=sha256:510042044906b17b6d9149135d90886ade170bf615efcfb5533f568ae6d88534 \
+    --hash=sha256:5402389843a3561918634eb327e86b9ae98645a9e7696bede9074449c48d610a
     # via
     #   -r requirements.in
     #   prometheus-fastapi-instrumentator
