@@ -63,7 +63,7 @@ services:
         max-file: "3"
 
   kafka:
-    image: docker.io/bitnami/kafka:3.6.1@sha256:ba72423025b923b366219dacd95a16c8eacc2d1d488bc7bd00ac877638f2da98
+    image: docker.io/bitnami/kafka:3.6.1@sha256:86b67e37b3d2acf2b2b7fe6e0e73cc5ac560f20627d7e2e6b3ab5eb79c7f5c0b
     profiles:
       - kafka
     restart: unless-stopped
