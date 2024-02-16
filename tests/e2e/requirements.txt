@@ -178,9 +178,9 @@ idna==3.6 \
     # via
     #   email-validator
     #   requests
-importlib-resources==5.13.0 \
-    --hash=sha256:82d5c6cca930697dbbd86c93333bb2c2e72861d4789a11c2662b933e5ad2b528 \
-    --hash=sha256:9f7bd0c97b79972a6cce36a366356d16d5e13b09679c11a58f1014bfdf8e64b2
+importlib-resources==6.1.1 \
+    --hash=sha256:3893a00122eafde6894c59914446a512f728a0c1a45f9bb9b63721b6bacf0b4a \
+    --hash=sha256:e8bf90d8213b486f428c9c39714b920041cb02c184686a3dee24905aaa8105d6
     # via dkpro-cassis
 iniconfig==2.0.0 \
     --hash=sha256:2d91e135bf72d31a410b17c16da610a82cb55f6b0477d1a902134b24a455b8b3 \
