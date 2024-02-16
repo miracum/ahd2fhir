@@ -323,9 +323,9 @@ h11==0.14.0 \
     #   -r requirements.txt
     #   httpcore
     #   uvicorn
-httpcore==0.18.0 \
-    --hash=sha256:13b5e5cd1dca1a6636a6aaea212b19f4f85cd88c366a2b82304181b769aab3c9 \
-    --hash=sha256:adc5398ee0a476567bf87467063ee63584a8bce86078bf748e48754f60202ced
+httpcore==1.0.3 \
+    --hash=sha256:5c0f9546ad17dac4d0772b0808856eb616eb8b48ce94f49ed819fd6982a8a544 \
+    --hash=sha256:9a6a501c3099307d9fd76ac244e08503427679b1e81ceb1d922485e2f2462ad2
     # via
     #   -r requirements-test.txt
     #   httpx
