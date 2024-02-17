@@ -31,7 +31,7 @@ services:
       start_period: 1m
 
   database:
-    image: docker.io/library/mariadb:11.2.3@sha256:4d17158efa6f92bb9894c048c87d784758e20b9a3c1956ad3a1f1f2292d2b7c3
+    image: docker.io/library/mariadb:11.2.3@sha256:b078d32834d211dfdbc4e71ee8339c03a185a708d9d1955350dc51365f24f962
     command: --max_allowed_packet=1g --innodb_buffer_pool_size=512m --innodb_log_buffer_size=256m --innodb_log_file_size=256m
     environment:
       # kics-scan ignore-line
