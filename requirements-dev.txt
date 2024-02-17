@@ -302,9 +302,9 @@ flake8==6.1.0 \
     # via
     #   -r requirements-dev.in
     #   flake8-bugbear
-flake8-bugbear==23.12.2 \
-    --hash=sha256:32b2903e22331ae04885dae25756a32a8c666c85142e933f43512a70f342052a \
-    --hash=sha256:83324bad4d90fee4bf64dd69c61aff94debf8073fbd807c8b6a36eec7a2f0719
+flake8-bugbear==24.2.6 \
+    --hash=sha256:663ef5de80cd32aacd39d362212983bc4636435a6f83700b4ed35acbd0b7d1b8 \
+    --hash=sha256:f9cb5f2a9e792dd80ff68e89a14c12eed8620af8b41a49d823b7a33064ac9658
     # via -r requirements-dev.in
 h11==0.14.0 \
     --hash=sha256:8f19fbbe99e72420ff35c00b27a34cb9937e902a8b810e2c88300c6f0a3b699d \
