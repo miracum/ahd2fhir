@@ -635,9 +635,9 @@ starlette==0.36.3 \
     # via
     #   -r requirements.txt
     #   fastapi
-structlog==21.5.0 \
-    --hash=sha256:68c4c29c003714fe86834f347cb107452847ba52414390a7ee583472bde00fc9 \
-    --hash=sha256:fd7922e195262b337da85c2a91c84be94ccab1f8fd1957bd6986f6904e3761c8
+structlog==24.1.0 \
+    --hash=sha256:3f6efe7d25fab6e86f277713c218044669906537bb717c1807a09d46bca0714d \
+    --hash=sha256:41a09886e4d55df25bdcb9b5c9674bccfab723ff43e0a86a1b7b236be8e57b16
     # via -r requirements.txt
 syrupy==4.6.1 \
     --hash=sha256:203e52f9cb9fa749cf683f29bd68f02c16c3bc7e7e5fe8f2fc59bdfe488ce133 \
