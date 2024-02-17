@@ -501,9 +501,9 @@ prometheus-client==0.20.0 \
     # via
     #   -r requirements.txt
     #   prometheus-fastapi-instrumentator
-prometheus-fastapi-instrumentator==5.11.2 \
-    --hash=sha256:9d8d0df8de7d6a73ae387121629dbf32fe022cdfc63e8bacd51f4b8ff21059ea \
-    --hash=sha256:c84ae3dc98bebb44f29d0af0c17c9f0782c2fb964ef83353664d9858a632cf81
+prometheus-fastapi-instrumentator==6.1.0 \
+    --hash=sha256:1820d7a90389ce100f7d1285495ead388818ae0882e761c1f3e6e62a410bdf13 \
+    --hash=sha256:2279ac1cf5b9566a4c3a07f78c9c5ee19648ed90976ab87d73d672abc1bfa017
     # via -r requirements.txt
 pycodestyle==2.11.1 \
     --hash=sha256:41ba0e7afc9752dfb53ced5489e89f8186be00e599e712660695b7a75ff2663f \
