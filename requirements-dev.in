@@ -1,7 +1,7 @@
 -r requirements.txt
 -r requirements-test.txt
 
-black==23.12.1
+black==24.2.0
 flake8==6.1.0
 pycodestyle==2.11.1
 pre-commit==3.6.1
