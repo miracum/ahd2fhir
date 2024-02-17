@@ -37,9 +37,9 @@ aiokafka==0.10.0 \
     --hash=sha256:fafc95bdaed9e1810fcd80b02ac117e51c72681ffe50353e5d61e2170609e1fc \
     --hash=sha256:ffc30e4c6bfcb00356a002f623c93a51d8336ca67687ea069dd11822da07379c
     # via -r requirements.in
-anyio==3.7.1 \
-    --hash=sha256:44a3c9aba0f5defa43261a8b3efb97891f2bd7d804e0e1f56419befa1adfc780 \
-    --hash=sha256:91dee416e570e92c64041bd18b900d1d6fa78dff7048769ce5ac5ddad004fbb5
+anyio==4.2.0 \
+    --hash=sha256:745843b39e829e108e518c489b31dc757de7d2131d53fac32bd8df268227bfee \
+    --hash=sha256:e1875bb4b4e2de1669f4bc7869b6d3f54231cdced71605e6e64c9be77e3be50f
     # via starlette
 async-timeout==4.0.3 \
     --hash=sha256:4640d96be84d82d02ed59ea2b7105a0f7b33abe8703703cd0ab0bf87c427522f \
