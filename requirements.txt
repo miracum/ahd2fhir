@@ -173,7 +173,7 @@ fastapi==0.109.2 \
     # via
     #   -r requirements.in
     #   prometheus-fastapi-instrumentator
-fhir-resources==6.5.0 \
+fhir-resources==7.1.0 \
     --hash=sha256:1d02ff2547e5b6323543c8ce9916e0c9e5536847b3b2171acb1f51a86efba16e \
     --hash=sha256:515a6cb3eadc61597fec0cb273b1ff943f76f44d2c8efefa5218f001087a95d3
     # via -r requirements.in
@@ -378,3 +378,6 @@ uvicorn==0.27.1 \
     --hash=sha256:3d9a267296243532db80c83a959a3400502165ade2c1338dea4e67915fd4745a \
     --hash=sha256:5c89da2f3895767472a35556e539fd59f7edbe9b1e9c0e1c99eebeadc61838e4
     # via -r requirements.in
+fhir.resources==7.1.0 \
+    --hash=sha256:4d37c3aadb3afbabad28ca7701b87323680468a13f6a6426bb6c282d4efd5c62 \
+    --hash=sha256:fae2d43c03dacf85a9f9fbce3b62148f3166fe297471cd43b74d91abbf69f818
