@@ -164,7 +164,7 @@ email-validator==2.1.1 \
     --hash=sha256:200a70680ba08904be6d1eef729205cc0d687634399a5924d842533efb824b84 \
     --hash=sha256:97d882d174e2a65732fb43bfce81a3a834cbc1bde8bf419e30ef5ea976370a05
     # via pydantic
-fhir-resources==6.5.0 \
+fhir-resources==7.1.0 \
     --hash=sha256:1d02ff2547e5b6323543c8ce9916e0c9e5536847b3b2171acb1f51a86efba16e \
     --hash=sha256:515a6cb3eadc61597fec0cb273b1ff943f76f44d2c8efefa5218f001087a95d3
     # via -r requirements.in
@@ -471,3 +471,6 @@ urllib3==2.2.2 \
     # via
     #   requests
     #   types-requests
+fhir.resources==7.1.0 \
+    --hash=sha256:4d37c3aadb3afbabad28ca7701b87323680468a13f6a6426bb6c282d4efd5c62 \
+    --hash=sha256:fae2d43c03dacf85a9f9fbce3b62148f3166fe297471cd43b74d91abbf69f818
