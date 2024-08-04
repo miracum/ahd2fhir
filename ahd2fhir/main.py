@@ -3,7 +3,6 @@ import os
 from functools import lru_cache
 from typing import Any, Dict, Union
 
-import pydantic
 import structlog
 from averbis import Client, Pipeline
 from fastapi import Depends, FastAPI, status
@@ -11,7 +10,6 @@ from fastapi.encoders import jsonable_encoder
 from fhir.resources.R4B.bundle import Bundle
 from fhir.resources.R4B.documentreference import DocumentReference
 from prometheus_fastapi_instrumentator import Instrumentator
-from pydantic import ValidationError
 from starlette.responses import JSONResponse
 
 from ahd2fhir import config
@@ -105,7 +103,7 @@ async def analyze_document(
             resource = Bundle.validate(payload)
         if payload["resourceType"] == "DocumentReference":
             resource = DocumentReference.validate(payload)
-    except:
+    except ValueError:
         return JSONResponse(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             content="The input resources are likely malformed",
