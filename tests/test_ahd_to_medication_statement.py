@@ -65,6 +65,8 @@ def test_fhir_medication_v6():
         annotation_v6, get_empty_document_reference()
     )
 
+    assert statement_v6 is not None
+
     assert statement_v6.json()
     assert statement_v6.status is not None
     assert statement_v6.medicationReference is None
