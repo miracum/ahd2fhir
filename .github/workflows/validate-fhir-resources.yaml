@@ -28,6 +28,6 @@ jobs:
       - name: Validate generated FHIR resources
         run: |
           set -e
-          for fhir_file in tests/__snapshots__/**/*.fhir.json; do 
-            fhir validate --verbose --fail "$fhir_file"; 
+          for fhir_file in tests/__snapshots__/**/*.fhir.json; do
+            fhir validate --verbose --fail "$fhir_file";
           done

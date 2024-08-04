@@ -1,7 +1,5 @@
 import datetime
 import json
-import os
-from unittest import mock
 
 from fhir.resources.R4B.attachment import Attachment
 from fhir.resources.R4B.documentreference import (
