@@ -4,7 +4,10 @@ import os
 from unittest import mock
 
 from fhir.resources.R4B.attachment import Attachment
-from fhir.resources.R4B.documentreference import DocumentReference, DocumentReferenceContent
+from fhir.resources.R4B.documentreference import (
+    DocumentReference,
+    DocumentReferenceContent,
+)
 from fhir.resources.R4B.fhirtypes import DateTime
 from fhir.resources.R4B.reference import Reference
 
@@ -32,38 +35,10 @@ def get_empty_document_reference():
     return doc_ref
 
 
-@mock.patch.dict(os.environ, {"ahd_version": "5.0"})
 def test_fhir_discharge_list():
-    annotations_without_discharge = get_example_payload(
-        "tests/resources/ahd/payload_1_v5.json"
-    )
     annotations_with_discharge = get_example_payload(
         "tests/resources/ahd/payload_3.json"
     )
-
-    lists_without_discharge = get_fhir_list(
-        annotations_without_discharge, get_empty_document_reference()
-    )
-
-    assert lists_without_discharge is not None
-
-    discharge_list = lists_without_discharge["DISCHARGE"]
-    assert discharge_list is not None
-    assert discharge_list.json()
-    assert discharge_list.meta is not None
-    assert discharge_list.emptyReason.text == "No discharge entries in document found."
-
-    admission_list = lists_without_discharge["ADMISSION"]
-    assert admission_list is not None
-    assert admission_list.json()
-    assert admission_list.meta is not None
-    assert admission_list.emptyReason.text == "No admission entries in document found."
-
-    inpatient_list = lists_without_discharge["INPATIENT"]
-    assert inpatient_list is not None
-    assert inpatient_list.json()
-    assert inpatient_list.meta is not None
-    assert inpatient_list.emptyReason.text == "No inpatient entries in document found."
 
     lists_with_discharge = get_fhir_list(
         annotations_with_discharge, get_empty_document_reference()

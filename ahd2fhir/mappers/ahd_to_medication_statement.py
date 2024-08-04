@@ -1,4 +1,5 @@
 from hashlib import sha256
+import re
 from typing import Union
 
 from fhir.resources.R4B.documentreference import DocumentReference
@@ -7,14 +8,18 @@ from fhir.resources.R4B.fhirprimitiveextension import FHIRPrimitiveExtension
 from fhir.resources.R4B.fhirtypes import DateTime
 from fhir.resources.R4B.identifier import Identifier
 from fhir.resources.R4B.medicationstatement import MedicationStatement
+from fhir.resources.R4B.codeableconcept import CodeableConcept
+from fhir.resources.R4B.coding import Coding
 from fhir.resources.R4B.meta import Meta
 from fhir.resources.R4B.period import Period
 from fhir.resources.R4B.quantity import Quantity
 from fhir.resources.R4B.reference import Reference
 from fhir.resources.R4B.timing import Timing, TimingRepeat
+from slugify import slugify
 from structlog import get_logger
 
-from ahd2fhir.mappers.ahd_to_medication import get_medication_from_annotation
+from ahd2fhir.mappers.ahd_to_medication import FHIR_SYSTEMS, get_medication_from_annotation
+from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
 log = get_logger()
 
@@ -64,80 +69,87 @@ def get_fhir_medication_statement(val, document_reference: DocumentReference):
 
 def get_medication_statement_from_annotation(
     annotation, document_reference: DocumentReference
-):
-    results = []
-    for drug in annotation["drugs"]:
-        if drug is None or "ingredient" not in drug or drug["ingredient"] is None:
-            continue
-        if annotation["status"] == "NEGATED" or annotation["status"] == "FAMILY":
-            log.warning("annotation status is NEGATED or FAMILY. Ignoring.")
-            continue
+) -> MedicationStatement | None:
+    annotation_type_lowercase = annotation['type'].replace('.', '-').lower()
+    identifier_system = f"{FHIR_SYSTEMS.ahd_to_fhir_base_url}/identifiers/{annotation_type_lowercase}"
 
-        medication_statement = MedicationStatement.construct(
-            status=STATUS_MAPPING.get(annotation["status"], "unknown")
+    if annotation["status"] == "NEGATED" or annotation["status"] == "FAMILY":
+        log.warning("annotation status is NEGATED or FAMILY. Ignoring.")
+        return None
+
+    atc_codes = annotation.get("atcCodes", [])
+
+    if atc_codes is None or len(atc_codes) == 0:
+        log.warn("No ATC code set for medication. Not mapping")
+        return None
+    
+    drugs = annotation["drugs"]
+
+    if len(drugs) > 1:
+        log.warning(
+            "More than one drugs entry found. Defaulting to only the first entry."
         )
+        
+    drug = drugs[0]
+    druq_unique_id = slugify(drug["ingredient"]["uniqueID"])
 
-        medication = get_medication_from_annotation(annotation)
-
-        if not medication:
-            log.warning("Failed to resolve medication from annotation")
-            continue
-
-        medication_reference = Reference.construct()
-        medication_reference.type = f"{medication.resource_type}"
-        medication_reference.identifier = medication.identifier[0]
-        medication_reference.reference = f"{medication.resource_type}/{medication.id}"
-        medication_statement.medicationReference = medication_reference
-
-        medication_statement.subject = document_reference.subject
-        medication_statement.context = (
+    medication_statement = MedicationStatement.construct(
+            status=STATUS_MAPPING.get(annotation["status"], "unknown"),
+            medicationCodeableConcept=CodeableConcept.construct()
+        )
+    
+    medication_statement.meta = Meta.construct()
+    medication_statement.meta.profile = [MEDICATION_STATEMENT_PROFILE]
+    
+    medication_statement.subject = document_reference.subject
+    medication_statement.context = (
             document_reference.context.encounter[0]
             if document_reference.context is not None
             else None
         )
-
-        medication_identifier_value = (
-            medication.identifier[0].value
-            if medication.identifier is not None
-            else None
-        )
-
-        document_identifier_value = (
+    document_identifier_value = (
             document_reference.identifier[0].value
             if document_reference.identifier is not None
             else None
         )
-
-        statement_identifier = Identifier.construct()
-        statement_identifier.system = (
-            "https://fhir.miracum.org/nlp/identifiers/"
-            + f"{annotation['type'].replace('.', '-').lower()}"
-        )
-        statement_identifier.value = (
-            f"{medication_identifier_value}"
+    
+    statement_identifier = Identifier.construct()
+    statement_identifier.system = identifier_system
+    statement_identifier.value = (
+            f"{druq_unique_id}"
             + f"_{document_identifier_value}"
             + f"_{annotation['id']}"
         )
+    
+    medication_statement.identifier = [statement_identifier]
+    medication_statement.id = sha256_of_identifier(statement_identifier)
 
-        medication_statement.identifier = [statement_identifier]
+    medication_statement.effectiveDateTime__ext = DATA_ABSENT_EXTENSION_UNKNOWN
+    medication_statement.dateAsserted = document_reference.date
 
-        medication_statement.id = sha256(
-            f"{statement_identifier.system}"
-            f"|{statement_identifier.value}".encode("utf-8")
-        ).hexdigest()
+    dosage = get_medication_dosage_from_annotation(annotation)
+    if dosage is not None:
+        medication_statement.dosage = [dosage]
 
-        medication_statement.effectiveDateTime__ext = DATA_ABSENT_EXTENSION_UNKNOWN
+    codings = []
+    for atc_code in atc_codes:
+        coding = Coding.construct()
+        coding.system = FHIR_SYSTEMS.atc
+        coding.code = atc_code["conceptID"]
+        coding.display = atc_code["dictCanon"]
 
-        medication_statement.dateAsserted = document_reference.date
+        year_match = re.search(r"_(\d{4})$", atc_code["source"])
+        if year_match:
+            year = year_match.group(1)
+            coding.version = year
+        else:
+            log.warn(f"Unable to extract version from atcCode source: {atc_code["source"]}")
 
-        dosage = get_medication_dosage_from_annotation(annotation)
-        if dosage is not None:
-            medication_statement.dosage = [dosage]
+        codings.append(coding)
 
-        medication_statement.meta = Meta.construct()
-        medication_statement.meta.profile = [MEDICATION_STATEMENT_PROFILE]
-        results.append({"statement": medication_statement, "medication": medication})
-    return results
+    medication_statement.medicationCodeableConcept.coding = codings
+
+    return medication_statement
 
 
 def get_medication_interval_from_annotation(

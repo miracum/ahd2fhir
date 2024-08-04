@@ -14,6 +14,7 @@ from ahd2fhir import config
 from ahd2fhir.mappers.ahd_to_medication_statement import (
     get_medication_statement_from_annotation,
 )
+from ahd2fhir.utils.const import AHD_TYPE_MEDICATION
 
 log = get_logger()
 
@@ -46,7 +47,7 @@ LIST_MED_CODE_SYSTEM = "http://terminology.hl7.org/CodeSystem/list-example-use-c
 def get_medication_statement_reference(annotation, document_reference):
     medication_statement = get_medication_statement_from_annotation(
         annotation, document_reference
-    )[0]["statement"]
+    )
     medication_reference = Reference.construct()
     medication_reference.type = f"{medication_statement.resource_type}"
     medication_reference.identifier = medication_statement.identifier[0]
@@ -96,7 +97,7 @@ def get_medication_list_from_document_reference(
     med_entries: dict[str, list] = {"ADMISSION": [], "DISCHARGE": [], "INPATIENT": []}
 
     for annotation in annotation_results:
-        if annotation["type"] != "de.averbis.types.health.Medication":
+        if annotation["type"] != AHD_TYPE_MEDICATION:
             continue
 
         status = annotation.get("status")

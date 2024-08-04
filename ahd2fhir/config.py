@@ -38,8 +38,8 @@ class KafkaProducerSettings(BaseSettings):
 class KafkaSettings(BaseSettings):
     input_topic: str = "fhir.documents"
     output_topic: str = "fhir.nlp-results"
-    consumer : KafkaConsumerSettings = KafkaConsumerSettings()
-    producer : KafkaProducerSettings = KafkaProducerSettings()
+    consumer: KafkaConsumerSettings = KafkaConsumerSettings()
+    producer: KafkaProducerSettings = KafkaProducerSettings()
 
     # Kafka-related settings
     bootstrap_servers: str = "localhost:9094"
@@ -58,7 +58,7 @@ class KafkaSettings(BaseSettings):
     # For using SASL without SSL certificates the *file args need to be None.
     # Otherwise AIOKafkaClient will try to parse them even if they
     # consist of an empty string.
-    @model_validator(mode='before')
+    @model_validator(mode="before")
     def parse_to_none(cls, v):
         return None if v in ["", "None", 0, False] else v
 
@@ -106,6 +106,11 @@ class FhirSystemSettings(BaseSettings):
         "https://www.medizininformatik-initiative.de/fhir/core/"
         + "modul-medikation/StructureDefinition/medikationsliste"
     )
+    medication_profile: str = (
+        "https://www.medizininformatik-initiative.de/"
+        + "fhir/core/modul-medikation/StructureDefinition/Medication"
+    )
+    ahd_to_fhir_base_url: str = "https://fhir.miracum.org/ahd2fhir"
 
     class Config:
         env_prefix = "fhir_systems_"

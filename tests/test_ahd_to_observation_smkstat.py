@@ -4,7 +4,7 @@ from ahd2fhir.mappers.ahd_to_observation_smkstat import AHD_TYPE, get_fhir_resou
 from tests.utils import map_resources
 
 AHD_PAYLOADS_EXPECTED_NUMBER_OF_CONDITIONS = [
-    ("payload_1_v5.json", 3),
+    ("payload_1.json", 3),
     ("payload_2.json", 0),
 ]
 

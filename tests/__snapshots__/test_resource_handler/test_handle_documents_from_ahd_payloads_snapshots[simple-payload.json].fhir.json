@@ -142,10 +142,10 @@
       }
     },
     {
-      "fullUrl": "Condition/3f44478409636c82429a4fbd262e4795e9168828637387e0ddbb2f824c562103",
+      "fullUrl": "Condition/a4c8029dece201be159d482fafeb8fb78d8e69f94eef395cd2207a22679da775",
       "resource": {
         "resourceType": "Condition",
-        "id": "3f44478409636c82429a4fbd262e4795e9168828637387e0ddbb2f824c562103",
+        "id": "a4c8029dece201be159d482fafeb8fb78d8e69f94eef395cd2207a22679da775",
         "meta": {
           "profile": [
             "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
@@ -154,14 +154,14 @@
         "identifier": [
           {
             "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
-            "value": "empty-document_7-16_ICD10GM_2023-R52.9"
+            "value": "empty-document_7-16_ICD10GM_2024-R52.9"
           }
         ],
         "code": {
           "coding": [
             {
               "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
-              "version": "2023",
+              "version": "2024",
               "code": "R52.9",
               "display": "Schmerz, nicht näher bezeichnet",
               "userSelected": false
@@ -176,64 +176,18 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Condition/3f44478409636c82429a4fbd262e4795e9168828637387e0ddbb2f824c562103"
+        "url": "Condition/a4c8029dece201be159d482fafeb8fb78d8e69f94eef395cd2207a22679da775"
       }
     },
     {
-      "fullUrl": "Condition/76475ba97badabdfaee4f61e15d1ee8df120ecd79ee40d052ad8981b80821e20",
-      "resource": {
-        "resourceType": "Condition",
-        "id": "76475ba97badabdfaee4f61e15d1ee8df120ecd79ee40d052ad8981b80821e20",
-        "meta": {
-          "profile": [
-            "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
-          ]
-        },
-        "identifier": [
-          {
-            "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-diagnosis",
-            "value": "empty-document_33-41_ICD10GM_2023-E14.90"
-          }
-        ],
-        "clinicalStatus": {
-          "coding": [
-            {
-              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
-              "code": "active"
-            }
-          ]
-        },
-        "code": {
-          "coding": [
-            {
-              "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
-              "version": "2023",
-              "code": "E14.90",
-              "display": "Nicht näher bezeichneter Diabetes mellitus: Ohne Komplikationen: Nicht als entgleist bezeichnet",
-              "userSelected": false
-            }
-          ]
-        },
-        "subject": {
-          "reference": "Patient/Test",
-          "type": "Patient"
-        },
-        "recordedDate": "2000-01-01T00:00:00+00:00"
-      },
-      "request": {
-        "method": "PUT",
-        "url": "Condition/76475ba97badabdfaee4f61e15d1ee8df120ecd79ee40d052ad8981b80821e20"
-      }
-    },
-    {
-      "fullUrl": "Device/e3747a0df03c110d3ac4cd424f3a912172c176e0d9aeece83f751ceec28ab38c",
+      "fullUrl": "Device/38d8dd6fbd36daa51e8ad0ba42cbbd900de7d4583f29bc0d332b0c90a4b1b583",
       "resource": {
         "resourceType": "Device",
-        "id": "e3747a0df03c110d3ac4cd424f3a912172c176e0d9aeece83f751ceec28ab38c",
+        "id": "38d8dd6fbd36daa51e8ad0ba42cbbd900de7d4583f29bc0d332b0c90a4b1b583",
         "identifier": [
           {
             "system": "https://fhir.miracum.org/nlp/identifiers/averbis-health-discovery-device-id",
-            "value": "ahd-v6.20.0"
+            "value": "ahd-v7.4.0"
           }
         ],
         "status": "active",
@@ -246,63 +200,20 @@
         ],
         "version": [
           {
-            "value": "6.20.0"
+            "value": "7.4.0"
           }
         ]
       },
       "request": {
         "method": "PUT",
-        "url": "Device/e3747a0df03c110d3ac4cd424f3a912172c176e0d9aeece83f751ceec28ab38c"
+        "url": "Device/38d8dd6fbd36daa51e8ad0ba42cbbd900de7d4583f29bc0d332b0c90a4b1b583"
       }
     },
     {
-      "fullUrl": "Medication/2d4345ad749eccd23ce60d2a7757d247547c47db96953c163cb37f07a9d41aea",
-      "resource": {
-        "resourceType": "Medication",
-        "id": "2d4345ad749eccd23ce60d2a7757d247547c47db96953c163cb37f07a9d41aea",
-        "meta": {
-          "profile": [
-            "https://www.medizininformatik-initiative.de/fhir/core/modul-medikation/StructureDefinition/Medication"
-          ]
-        },
-        "identifier": [
-          {
-            "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-medication",
-            "value": "Acetylsalicylsäure_20.0mg"
-          }
-        ],
-        "code": {
-          "coding": [
-            {
-              "system": "http://fhir.de/CodeSystem/bfarm/atc",
-              "code": "104201",
-              "display": "Acetylsalicylsäure"
-            }
-          ]
-        },
-        "ingredient": [
-          {
-            "itemCodeableConcept": {
-              "coding": [
-                {
-                  "system": "http://fhir.de/CodeSystem/bfarm/atc",
-                  "display": "Acetylsalicylsäure"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      "request": {
-        "method": "PUT",
-        "url": "Medication/2d4345ad749eccd23ce60d2a7757d247547c47db96953c163cb37f07a9d41aea"
-      }
-    },
-    {
-      "fullUrl": "MedicationStatement/ae67cb92966045e4f61037cdfb96d5930c52ac909df9753ea6c834bec2003b89",
+      "fullUrl": "MedicationStatement/8fe008d55ef25c3fa7fb39b7f2e9437e4931e4f3ca403fc4237b7952e5418cd1",
       "resource": {
         "resourceType": "MedicationStatement",
-        "id": "ae67cb92966045e4f61037cdfb96d5930c52ac909df9753ea6c834bec2003b89",
+        "id": "8fe008d55ef25c3fa7fb39b7f2e9437e4931e4f3ca403fc4237b7952e5418cd1",
         "meta": {
           "profile": [
             "https://www.medizininformatik-initiative.de/fhir/core/modul-medikation/StructureDefinition/MedicationStatement"
@@ -310,18 +221,20 @@
         },
         "identifier": [
           {
-            "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-medication",
-            "value": "Acetylsalicylsäure_20.0mg_None_2218"
+            "system": "https://fhir.miracum.org/ahd2fhir/identifiers/de-averbis-types-health-medication",
+            "value": "abdamed-202404-104201_None_1729"
           }
         ],
         "status": "unknown",
-        "medicationReference": {
-          "reference": "Medication/2d4345ad749eccd23ce60d2a7757d247547c47db96953c163cb37f07a9d41aea",
-          "type": "Medication",
-          "identifier": {
-            "system": "https://fhir.miracum.org/nlp/identifiers/de-averbis-types-health-medication",
-            "value": "Acetylsalicylsäure_20.0mg"
-          }
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://fhir.de/CodeSystem/bfarm/atc",
+              "version": "2024",
+              "code": "N02BA01",
+              "display": "Acetylsalicylsäure"
+            }
+          ]
         },
         "subject": {
           "reference": "Patient/Test",
@@ -355,7 +268,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "MedicationStatement/ae67cb92966045e4f61037cdfb96d5930c52ac909df9753ea6c834bec2003b89"
+        "url": "MedicationStatement/8fe008d55ef25c3fa7fb39b7f2e9437e4931e4f3ca403fc4237b7952e5418cd1"
       }
     },
     {
@@ -385,7 +298,7 @@
         "date": "2000-01-01T00:00:00+00:00",
         "author": [
           {
-            "reference": "Device/e3747a0df03c110d3ac4cd424f3a912172c176e0d9aeece83f751ceec28ab38c",
+            "reference": "Device/38d8dd6fbd36daa51e8ad0ba42cbbd900de7d4583f29bc0d332b0c90a4b1b583",
             "type": "Device"
           }
         ],
@@ -409,18 +322,7 @@
             "title": "Condition",
             "entry": [
               {
-                "reference": "Condition/3f44478409636c82429a4fbd262e4795e9168828637387e0ddbb2f824c562103"
-              },
-              {
-                "reference": "Condition/76475ba97badabdfaee4f61e15d1ee8df120ecd79ee40d052ad8981b80821e20"
-              }
-            ]
-          },
-          {
-            "title": "Medication",
-            "entry": [
-              {
-                "reference": "Medication/2d4345ad749eccd23ce60d2a7757d247547c47db96953c163cb37f07a9d41aea"
+                "reference": "Condition/a4c8029dece201be159d482fafeb8fb78d8e69f94eef395cd2207a22679da775"
               }
             ]
           },
@@ -428,7 +330,7 @@
             "title": "MedicationStatement",
             "entry": [
               {
-                "reference": "MedicationStatement/ae67cb92966045e4f61037cdfb96d5930c52ac909df9753ea6c834bec2003b89"
+                "reference": "MedicationStatement/8fe008d55ef25c3fa7fb39b7f2e9437e4931e4f3ca403fc4237b7952e5418cd1"
               }
             ]
           }
