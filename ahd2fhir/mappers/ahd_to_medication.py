@@ -1,10 +1,10 @@
-from fhir.resources.codeableconcept import CodeableConcept
-from fhir.resources.coding import Coding
-from fhir.resources.identifier import Identifier
-from fhir.resources.medication import Medication, MedicationIngredient
-from fhir.resources.meta import Meta
-from fhir.resources.quantity import Quantity
-from fhir.resources.ratio import Ratio
+from fhir.resources.R4B.codeableconcept import CodeableConcept
+from fhir.resources.R4B.coding import Coding
+from fhir.resources.R4B.identifier import Identifier
+from fhir.resources.R4B.medication import Medication, MedicationIngredient
+from fhir.resources.R4B.meta import Meta
+from fhir.resources.R4B.quantity import Quantity
+from fhir.resources.R4B.ratio import Ratio
 from structlog import get_logger
 
 from ahd2fhir import config

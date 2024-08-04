@@ -1,7 +1,8 @@
 from os import path
 
 from aiokafka.helpers import create_ssl_context
-from pydantic import BaseSettings, root_validator, validator
+from pydantic import model_validator
+from pydantic_settings import BaseSettings
 
 TLS_ROOT_DIR = "/opt/kafka-certs/"
 
@@ -37,8 +38,8 @@ class KafkaProducerSettings(BaseSettings):
 class KafkaSettings(BaseSettings):
     input_topic: str = "fhir.documents"
     output_topic: str = "fhir.nlp-results"
-    consumer = KafkaConsumerSettings()
-    producer = KafkaProducerSettings()
+    consumer : KafkaConsumerSettings = KafkaConsumerSettings()
+    producer : KafkaProducerSettings = KafkaProducerSettings()
 
     # Kafka-related settings
     bootstrap_servers: str = "localhost:9094"
@@ -57,7 +58,7 @@ class KafkaSettings(BaseSettings):
     # For using SASL without SSL certificates the *file args need to be None.
     # Otherwise AIOKafkaClient will try to parse them even if they
     # consist of an empty string.
-    @validator("ssl_cafile", "ssl_certfile", "ssl_keyfile")
+    @model_validator(mode='before')
     def parse_to_none(cls, v):
         return None if v in ["", "None", 0, False] else v
 
@@ -137,7 +138,7 @@ class Settings(BaseSettings):
     # FHIR systems
     fhir_systems: FhirSystemSettings = FhirSystemSettings()
 
-    @root_validator(skip_on_failure=True)
+    @model_validator(mode="after")
     @classmethod
     def check_ahd_auth(cls, values):
         if values["ahd_api_token"] == "":

@@ -3,12 +3,12 @@ import os
 import uuid
 from typing import List
 
-from fhir.resources.codeableconcept import CodeableConcept
-from fhir.resources.coding import Coding
-from fhir.resources.documentreference import DocumentReference
-from fhir.resources.fhirtypes import DateTime, String
-from fhir.resources.meta import Meta
-from fhir.resources.observation import Observation
+from fhir.resources.R4B.codeableconcept import CodeableConcept
+from fhir.resources.R4B.coding import Coding
+from fhir.resources.R4B.documentreference import DocumentReference
+from fhir.resources.R4B.fhirtypes import DateTime, String
+from fhir.resources.R4B.meta import Meta
+from fhir.resources.R4B.observation import Observation
 from structlog import get_logger
 
 from ahd2fhir import config

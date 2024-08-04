@@ -7,11 +7,11 @@ import os
 import pytest
 import requests
 from confluent_kafka import Consumer, Producer
-from fhir.resources.attachment import Attachment
-from fhir.resources.bundle import Bundle
-from fhir.resources.documentreference import DocumentReference, DocumentReferenceContent
-from fhir.resources.fhirtypes import DateTime
-from fhir.resources.reference import Reference
+from fhir.resources.R4B.attachment import Attachment
+from fhir.resources.R4B.bundle import Bundle
+from fhir.resources.R4B.documentreference import DocumentReference, DocumentReferenceContent
+from fhir.resources.R4B.fhirtypes import DateTime
+from fhir.resources.R4B.reference import Reference
 from fhirclient import server
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry

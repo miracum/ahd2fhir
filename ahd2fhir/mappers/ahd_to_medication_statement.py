@@ -1,17 +1,17 @@
 from hashlib import sha256
 from typing import Union
 
-from fhir.resources.documentreference import DocumentReference
-from fhir.resources.dosage import Dosage, DosageDoseAndRate
-from fhir.resources.fhirprimitiveextension import FHIRPrimitiveExtension
-from fhir.resources.fhirtypes import DateTime
-from fhir.resources.identifier import Identifier
-from fhir.resources.medicationstatement import MedicationStatement
-from fhir.resources.meta import Meta
-from fhir.resources.period import Period
-from fhir.resources.quantity import Quantity
-from fhir.resources.reference import Reference
-from fhir.resources.timing import Timing, TimingRepeat
+from fhir.resources.R4B.documentreference import DocumentReference
+from fhir.resources.R4B.dosage import Dosage, DosageDoseAndRate
+from fhir.resources.R4B.fhirprimitiveextension import FHIRPrimitiveExtension
+from fhir.resources.R4B.fhirtypes import DateTime
+from fhir.resources.R4B.identifier import Identifier
+from fhir.resources.R4B.medicationstatement import MedicationStatement
+from fhir.resources.R4B.meta import Meta
+from fhir.resources.R4B.period import Period
+from fhir.resources.R4B.quantity import Quantity
+from fhir.resources.R4B.reference import Reference
+from fhir.resources.R4B.timing import Timing, TimingRepeat
 from structlog import get_logger
 
 from ahd2fhir.mappers.ahd_to_medication import get_medication_from_annotation

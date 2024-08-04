@@ -3,10 +3,10 @@ import json
 import os
 from unittest import mock
 
-from fhir.resources.attachment import Attachment
-from fhir.resources.documentreference import DocumentReference, DocumentReferenceContent
-from fhir.resources.fhirtypes import DateTime
-from fhir.resources.reference import Reference
+from fhir.resources.R4B.attachment import Attachment
+from fhir.resources.R4B.documentreference import DocumentReference, DocumentReferenceContent
+from fhir.resources.R4B.fhirtypes import DateTime
+from fhir.resources.R4B.reference import Reference
 
 from ahd2fhir.mappers.ahd_to_list import get_fhir_list
 

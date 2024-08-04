@@ -1,13 +1,13 @@
 from hashlib import sha256
 
-from fhir.resources.codeableconcept import CodeableConcept
-from fhir.resources.coding import Coding
-from fhir.resources.documentreference import DocumentReference
-from fhir.resources.fhirprimitiveextension import FHIRPrimitiveExtension
-from fhir.resources.identifier import Identifier
-from fhir.resources.list import List
-from fhir.resources.meta import Meta
-from fhir.resources.reference import Reference
+from fhir.resources.R4B.codeableconcept import CodeableConcept
+from fhir.resources.R4B.coding import Coding
+from fhir.resources.R4B.documentreference import DocumentReference
+from fhir.resources.R4B.fhirprimitiveextension import FHIRPrimitiveExtension
+from fhir.resources.R4B.identifier import Identifier
+from fhir.resources.R4B.list import List
+from fhir.resources.R4B.meta import Meta
+from fhir.resources.R4B.reference import Reference
 from structlog import get_logger
 
 from ahd2fhir import config

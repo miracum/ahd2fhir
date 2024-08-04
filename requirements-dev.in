@@ -1,8 +1,9 @@
--r requirements.txt
--r requirements-test.txt
+-r requirements.in
+-r requirements-test.in
 
 black==24.4.2
 flake8==7.0.0
 pycodestyle==2.11.1
 pre-commit==3.7.1
 flake8-bugbear==24.4.26
+pip-tools==7.4.1

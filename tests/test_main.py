@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 import pytest
 from fastapi.testclient import TestClient
-from fhir.resources.bundle import Bundle
+from fhir.resources.R4B.bundle import Bundle
 
 from ahd2fhir import main
 from ahd2fhir.config import Settings

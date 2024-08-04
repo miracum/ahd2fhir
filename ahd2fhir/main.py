@@ -7,8 +7,8 @@ import structlog
 from averbis import Client, Pipeline
 from fastapi import Depends, FastAPI, status
 from fastapi.encoders import jsonable_encoder
-from fhir.resources.bundle import Bundle
-from fhir.resources.documentreference import DocumentReference
+from fhir.resources.R4B.bundle import Bundle
+from fhir.resources.R4B.documentreference import DocumentReference
 from prometheus_fastapi_instrumentator import Instrumentator
 from starlette.responses import JSONResponse
 

@@ -3,8 +3,8 @@ import json
 import aiokafka
 import structlog
 from aiokafka.structs import ConsumerRecord
-from fhir.resources.bundle import Bundle
-from fhir.resources.documentreference import DocumentReference
+from fhir.resources.R4B.bundle import Bundle
+from fhir.resources.R4B.documentreference import DocumentReference
 
 from ahd2fhir import config
 from ahd2fhir.utils.resource_handler import ResourceHandler, TransientError

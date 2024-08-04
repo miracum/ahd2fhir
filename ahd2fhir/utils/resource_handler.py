@@ -7,14 +7,14 @@ from typing import List, Tuple
 import structlog
 import tenacity
 from averbis import Pipeline
-from fhir.resources.bundle import Bundle
-from fhir.resources.codeableconcept import CodeableConcept
-from fhir.resources.composition import Composition, CompositionSection
-from fhir.resources.documentreference import DocumentReference
-from fhir.resources.fhirtypes import DateTime
-from fhir.resources.identifier import Identifier
-from fhir.resources.reference import Reference
-from fhir.resources.resource import Resource
+from fhir.resources.R4B.bundle import Bundle
+from fhir.resources.R4B.codeableconcept import CodeableConcept
+from fhir.resources.R4B.composition import Composition, CompositionSection
+from fhir.resources.R4B.documentreference import DocumentReference
+from fhir.resources.R4B.fhirtypes import DateTime
+from fhir.resources.R4B.identifier import Identifier
+from fhir.resources.R4B.reference import Reference
+from fhir.resources.R4B.resource import Resource
 from prometheus_client import Counter, Histogram, Summary
 from tenacity.after import after_log
 

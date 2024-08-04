@@ -178,8 +178,8 @@ pip install git+https://github.com/miracum/ahd2fhir@master
 
 ```python
 import json
-from fhir.resources.documentreference import DocumentReference
-from fhir.resources.reference import Reference
+from fhir.resources.R4B.documentreference import DocumentReference
+from fhir.resources.R4B.reference import Reference
 from ahd2fhir.mappers import ahd_to_medication, ahd_to_condition
 
 with open('tests/resources/ahd/payload_1.json') as json_resource:
