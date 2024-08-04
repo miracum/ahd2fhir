@@ -1,6 +1,6 @@
 from hashlib import sha256
 
-from fhir.resources.identifier import Identifier
+from fhir.resources.R4B.identifier import Identifier
 
 
 def sha256_of_identifier(identifier: Identifier) -> str:

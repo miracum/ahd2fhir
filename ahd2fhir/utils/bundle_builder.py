@@ -1,8 +1,8 @@
 import uuid
 from typing import List
 
-from fhir.resources.bundle import Bundle, BundleEntry, BundleEntryRequest
-from fhir.resources.resource import Resource
+from fhir.resources.R4B.bundle import Bundle, BundleEntry, BundleEntryRequest
+from fhir.resources.R4B.resource import Resource
 
 
 class BundleBuilder:

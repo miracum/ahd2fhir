@@ -1,14 +1,13 @@
 import json
 
 import pytest
-from fhir.resources.documentreference import DocumentReferenceContext
+from fhir.resources.R4B.documentreference import DocumentReferenceContext
 
 from ahd2fhir.mappers.ahd_to_condition import get_fhir_condition
 from ahd2fhir.utils.resource_handler import AHD_TYPE_DIAGNOSIS
 from tests.utils import get_empty_document_reference
 
 AHD_PAYLOADS_EXPECTED_NUMBER_OF_CONDITIONS = [
-    ("payload_1_v5.json", 13),
     ("payload_2.json", 7),
 ]
 

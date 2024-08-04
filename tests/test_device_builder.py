@@ -5,7 +5,7 @@ from ahd2fhir.utils.resource_handler import AHD_TYPE_DOCUMENT_ANNOTATION
 
 
 def test_build_sets_version_identifier_and_id():
-    with open("tests/resources/ahd/payload_1_v5.json") as file:
+    with open("tests/resources/ahd/payload_1.json") as file:
         ahd_payload = json.load(file)
 
     annotation = [
@@ -17,7 +17,7 @@ def test_build_sets_version_identifier_and_id():
     assert device.json()
 
     assert len(device.version) == 1
-    assert device.version[0].value == "5.29.0"
+    assert device.version[0].value == "7.4.0"
 
     assert len(device.identifier) == 1
     assert device.id is not None

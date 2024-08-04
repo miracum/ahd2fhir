@@ -1,4 +1,4 @@
-from fhir.resources.resource import Resource
+from fhir.resources.R4B.resource import Resource
 
 from ahd2fhir.utils.bundle_builder import BundleBuilder
 

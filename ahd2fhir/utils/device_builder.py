@@ -1,8 +1,8 @@
 import hashlib
 
 import structlog
-from fhir.resources.device import Device, DeviceDeviceName, DeviceVersion
-from fhir.resources.identifier import Identifier
+from fhir.resources.R4B.device import Device, DeviceDeviceName, DeviceVersion
+from fhir.resources.R4B.identifier import Identifier
 
 log = structlog.get_logger()
 
