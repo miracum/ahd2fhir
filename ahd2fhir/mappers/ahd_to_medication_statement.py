@@ -1,5 +1,4 @@
 import re
-from hashlib import sha256
 from typing import Union
 
 from fhir.resources.R4B.codeableconcept import CodeableConcept
@@ -13,15 +12,11 @@ from fhir.resources.R4B.medicationstatement import MedicationStatement
 from fhir.resources.R4B.meta import Meta
 from fhir.resources.R4B.period import Period
 from fhir.resources.R4B.quantity import Quantity
-from fhir.resources.R4B.reference import Reference
 from fhir.resources.R4B.timing import Timing, TimingRepeat
 from slugify import slugify
 from structlog import get_logger
 
-from ahd2fhir.mappers.ahd_to_medication import (
-    FHIR_SYSTEMS,
-    get_medication_from_annotation,
-)
+from ahd2fhir import config
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
 log = get_logger()
@@ -59,6 +54,8 @@ DATA_ABSENT_EXTENSION_UNKNOWN = FHIRPrimitiveExtension(
         ]
     }
 )
+
+FHIR_SYSTEMS = config.FhirSystemSettings()
 
 
 def get_fhir_medication_statement(val, document_reference: DocumentReference):

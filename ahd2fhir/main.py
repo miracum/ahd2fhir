@@ -3,9 +3,11 @@ import os
 from functools import lru_cache
 from typing import Any, Dict, Union
 
+from pydantic import ValidationError
+import pydantic
 import structlog
 from averbis import Client, Pipeline
-from fastapi import Body, Depends, FastAPI, status
+from fastapi import Depends, FastAPI, status
 from fastapi.encoders import jsonable_encoder
 from fhir.resources.R4B.bundle import Bundle
 from fhir.resources.R4B.documentreference import DocumentReference
@@ -97,10 +99,16 @@ async def analyze_document(
     resource_handler: ResourceHandler = Depends(get_resource_handler),
 ):
     resource = None
-    if payload["resourceType"] == "Bundle":
-        resource = Bundle.validate(payload)
-    if payload["resourceType"] == "DocumentReference":
-        resource = DocumentReference.validate(payload)
+    try:
+        if payload["resourceType"] == "Bundle":
+            resource = Bundle.validate(payload)
+        if payload["resourceType"] == "DocumentReference":
+            resource = DocumentReference.validate(payload)
+    except:
+        return JSONResponse(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            content="The input resources are likely malformed",
+        )
 
     result = await analyze_resource(resource, resource_handler)
 

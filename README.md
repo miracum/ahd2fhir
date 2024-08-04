@@ -180,14 +180,10 @@ pip install git+https://github.com/miracum/ahd2fhir@master
 import json
 from fhir.resources.R4B.documentreference import DocumentReference
 from fhir.resources.R4B.reference import Reference
-from ahd2fhir.mappers import ahd_to_medication, ahd_to_condition
+from ahd2fhir.mappers import ahd_to_condition
 
 with open('tests/resources/ahd/payload_1.json') as json_resource:
     ahd_payload = json.load(json_resource)
-
-# Get medications directly from from payload dictionary
-medications = ahd_to_medication.get_fhir_medication(ahd_payload)
-
 
 # Create Patient reference and DocumentReference
 pat = FHIRReference(**{'reference': f'Patient/f1234'})

@@ -28,8 +28,6 @@ SIDE_MAPPING: dict[str, tuple[str, str]] = {
     "BOTH": ("51440002", "Right and left"),
 }
 
-FHIR_SYSTEMS = config.FhirSystemSettings()
-
 EXTRACT_YEAR_FROM_ICD_REGEX = r"ICD.*_(?P<version>\d{4})"
 
 
