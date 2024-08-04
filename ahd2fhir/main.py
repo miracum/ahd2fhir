@@ -3,7 +3,6 @@ import os
 from functools import lru_cache
 from typing import Any, Dict, Union
 
-from pydantic import ValidationError
 import pydantic
 import structlog
 from averbis import Client, Pipeline
@@ -12,6 +11,7 @@ from fastapi.encoders import jsonable_encoder
 from fhir.resources.R4B.bundle import Bundle
 from fhir.resources.R4B.documentreference import DocumentReference
 from prometheus_fastapi_instrumentator import Instrumentator
+from pydantic import ValidationError
 from starlette.responses import JSONResponse
 
 from ahd2fhir import config
@@ -94,7 +94,8 @@ async def health():
 
 @app.post("/fhir/$analyze-document")
 async def analyze_document(
-    # directly using Union[DocumentReference, Bundle] fails in the latest fhir.resources/pydantic
+    # directly using Union[DocumentReference, Bundle]
+    # fails in the latest fhir.resources/pydantic
     payload: Dict[Any, Any],
     resource_handler: ResourceHandler = Depends(get_resource_handler),
 ):

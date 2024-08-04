@@ -145,8 +145,8 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def check_ahd_auth(self):
-        if self.ahd_api_token == "":
-            if self.ahd_username == "" or self.ahd_password == "":
+        if self.ahd_api_token == "":  # nosec CWE-259
+            if self.ahd_username == "" or self.ahd_password == "":  # nosec CWE-259
                 raise ValueError(
                     "If ahd_api_token is unset, both ahd_username "
                     + "and ahd_password need to be specified."

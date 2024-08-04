@@ -48,6 +48,10 @@ def get_medication_statement_reference(annotation, document_reference):
     medication_statement = get_medication_statement_from_annotation(
         annotation, document_reference
     )
+
+    if medication_statement is None:
+        return None
+
     medication_reference = Reference.construct()
     medication_reference.type = f"{medication_statement.resource_type}"
     medication_reference.identifier = medication_statement.identifier[0]
@@ -110,8 +114,14 @@ def get_medication_list_from_document_reference(
             )
             continue
 
+        medication_statement_reference = get_medication_statement_reference(
+            annotation, document_reference
+        )
+        if medication_statement_reference is None:
+            continue
+
         med_entry = {
-            "item": get_medication_statement_reference(annotation, document_reference),
+            "item": medication_statement_reference,
         }
 
         # lst-3 "An entry date can only be used if the mode of the list is "working""
