@@ -1,7 +1,6 @@
 import json
 
 import pytest
-
 from fhir.resources.R4B.documentreference import DocumentReferenceContext
 
 from ahd2fhir.mappers.ahd_to_condition import get_fhir_condition

@@ -1,14 +1,15 @@
 import re
+
 from fhir.resources.R4B.codeableconcept import CodeableConcept
 from fhir.resources.R4B.coding import Coding
+from fhir.resources.R4B.fhirprimitiveextension import FHIRPrimitiveExtension
 from fhir.resources.R4B.identifier import Identifier
 from fhir.resources.R4B.medication import Medication, MedicationIngredient
 from fhir.resources.R4B.meta import Meta
 from fhir.resources.R4B.quantity import Quantity
 from fhir.resources.R4B.ratio import Ratio
-from fhir.resources.R4B.fhirprimitiveextension import FHIRPrimitiveExtension
-from structlog import get_logger
 from slugify import slugify
+from structlog import get_logger
 
 from ahd2fhir import config
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
@@ -28,6 +29,7 @@ DATA_ABSENT_EXTENSION_UNSUPPORTED = FHIRPrimitiveExtension(
     }
 )
 
+
 # TODO: this needs refactoring to make sure it's actually compatible with the MII Medication Profiles
 #       disabled as of now.
 def get_medication_from_annotation(annotation: dict) -> Medication | None:
@@ -36,9 +38,11 @@ def get_medication_from_annotation(annotation: dict) -> Medication | None:
     # Medication Meta
     medication.meta = Meta.construct()
     medication.meta.profile = [FHIR_SYSTEMS.medication_profile]
-    
-    annotation_type_lowercase = annotation['type'].replace('.', '-').lower()
-    medication_identifier_system = f"{FHIR_SYSTEMS.ahd_to_fhir_base_url}/identifiers/{annotation_type_lowercase}"
+
+    annotation_type_lowercase = annotation["type"].replace(".", "-").lower()
+    medication_identifier_system = (
+        f"{FHIR_SYSTEMS.ahd_to_fhir_base_url}/identifiers/{annotation_type_lowercase}"
+    )
 
     # Medication Code
     atc_codes = annotation.get("atcCodes", [])
@@ -46,23 +50,23 @@ def get_medication_from_annotation(annotation: dict) -> Medication | None:
     if len(atc_codes) == 0:
         log.warn("No ATC code set for medication. Not mapping")
         return None
-    
+
     drugs = annotation["drugs"]
 
     if len(drugs) > 1:
         log.warning(
             "More than one drugs entry found. Defaulting to only the first entry."
         )
-        
+
     drug = drugs[0]
-    
+
     identifier = Identifier()
     identifier.system = medication_identifier_system
     identifier.value = slugify(drug["ingredient"]["uniqueID"])
     medication.identifier = [identifier]
 
     medication.id = sha256_of_identifier(identifier)
-    
+
     medication_code = CodeableConcept.construct()
     medication_code.coding = []
 
@@ -77,7 +81,9 @@ def get_medication_from_annotation(annotation: dict) -> Medication | None:
             year = year_match.group(1)
             coding.version = year
         else:
-            log.warn(f"Unable to extract version from atcCode source: {atc_code["source"]}")
+            log.warn(
+                f"Unable to extract version from atcCode source: {atc_code['source']}"
+            )
 
         medication_code.coding.append(coding)
 

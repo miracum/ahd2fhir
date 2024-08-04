@@ -1,15 +1,15 @@
-from hashlib import sha256
 import re
+from hashlib import sha256
 from typing import Union
 
+from fhir.resources.R4B.codeableconcept import CodeableConcept
+from fhir.resources.R4B.coding import Coding
 from fhir.resources.R4B.documentreference import DocumentReference
 from fhir.resources.R4B.dosage import Dosage, DosageDoseAndRate
 from fhir.resources.R4B.fhirprimitiveextension import FHIRPrimitiveExtension
 from fhir.resources.R4B.fhirtypes import DateTime
 from fhir.resources.R4B.identifier import Identifier
 from fhir.resources.R4B.medicationstatement import MedicationStatement
-from fhir.resources.R4B.codeableconcept import CodeableConcept
-from fhir.resources.R4B.coding import Coding
 from fhir.resources.R4B.meta import Meta
 from fhir.resources.R4B.period import Period
 from fhir.resources.R4B.quantity import Quantity
@@ -18,7 +18,10 @@ from fhir.resources.R4B.timing import Timing, TimingRepeat
 from slugify import slugify
 from structlog import get_logger
 
-from ahd2fhir.mappers.ahd_to_medication import FHIR_SYSTEMS, get_medication_from_annotation
+from ahd2fhir.mappers.ahd_to_medication import (
+    FHIR_SYSTEMS,
+    get_medication_from_annotation,
+)
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
 
 log = get_logger()
@@ -70,8 +73,10 @@ def get_fhir_medication_statement(val, document_reference: DocumentReference):
 def get_medication_statement_from_annotation(
     annotation, document_reference: DocumentReference
 ) -> MedicationStatement | None:
-    annotation_type_lowercase = annotation['type'].replace('.', '-').lower()
-    identifier_system = f"{FHIR_SYSTEMS.ahd_to_fhir_base_url}/identifiers/{annotation_type_lowercase}"
+    annotation_type_lowercase = annotation["type"].replace(".", "-").lower()
+    identifier_system = (
+        f"{FHIR_SYSTEMS.ahd_to_fhir_base_url}/identifiers/{annotation_type_lowercase}"
+    )
 
     if annotation["status"] == "NEGATED" or annotation["status"] == "FAMILY":
         log.warning("annotation status is NEGATED or FAMILY. Ignoring.")
@@ -82,45 +87,43 @@ def get_medication_statement_from_annotation(
     if atc_codes is None or len(atc_codes) == 0:
         log.warn("No ATC code set for medication. Not mapping")
         return None
-    
+
     drugs = annotation["drugs"]
 
     if len(drugs) > 1:
         log.warning(
             "More than one drugs entry found. Defaulting to only the first entry."
         )
-        
+
     drug = drugs[0]
     druq_unique_id = slugify(drug["ingredient"]["uniqueID"])
 
     medication_statement = MedicationStatement.construct(
-            status=STATUS_MAPPING.get(annotation["status"], "unknown"),
-            medicationCodeableConcept=CodeableConcept.construct()
-        )
-    
+        status=STATUS_MAPPING.get(annotation["status"], "unknown"),
+        medicationCodeableConcept=CodeableConcept.construct(),
+    )
+
     medication_statement.meta = Meta.construct()
     medication_statement.meta.profile = [MEDICATION_STATEMENT_PROFILE]
-    
+
     medication_statement.subject = document_reference.subject
     medication_statement.context = (
-            document_reference.context.encounter[0]
-            if document_reference.context is not None
-            else None
-        )
+        document_reference.context.encounter[0]
+        if document_reference.context is not None
+        else None
+    )
     document_identifier_value = (
-            document_reference.identifier[0].value
-            if document_reference.identifier is not None
-            else None
-        )
-    
+        document_reference.identifier[0].value
+        if document_reference.identifier is not None
+        else None
+    )
+
     statement_identifier = Identifier.construct()
     statement_identifier.system = identifier_system
     statement_identifier.value = (
-            f"{druq_unique_id}"
-            + f"_{document_identifier_value}"
-            + f"_{annotation['id']}"
-        )
-    
+        f"{druq_unique_id}" + f"_{document_identifier_value}" + f"_{annotation['id']}"
+    )
+
     medication_statement.identifier = [statement_identifier]
     medication_statement.id = sha256_of_identifier(statement_identifier)
 
@@ -143,7 +146,9 @@ def get_medication_statement_from_annotation(
             year = year_match.group(1)
             coding.version = year
         else:
-            log.warn(f"Unable to extract version from atcCode source: {atc_code["source"]}")
+            log.warn(
+                f"Unable to extract version from atcCode source: {atc_code['source']}"
+            )
 
         codings.append(coding)
 

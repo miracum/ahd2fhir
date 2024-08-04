@@ -9,7 +9,10 @@ import requests
 from confluent_kafka import Consumer, Producer
 from fhir.resources.R4B.attachment import Attachment
 from fhir.resources.R4B.bundle import Bundle
-from fhir.resources.R4B.documentreference import DocumentReference, DocumentReferenceContent
+from fhir.resources.R4B.documentreference import (
+    DocumentReference,
+    DocumentReferenceContent,
+)
 from fhir.resources.R4B.fhirtypes import DateTime
 from fhir.resources.R4B.reference import Reference
 from fhirclient import server

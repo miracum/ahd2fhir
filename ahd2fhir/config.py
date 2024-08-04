@@ -144,12 +144,11 @@ class Settings(BaseSettings):
     fhir_systems: FhirSystemSettings = FhirSystemSettings()
 
     @model_validator(mode="after")
-    @classmethod
-    def check_ahd_auth(cls, values):
-        if values["ahd_api_token"] == "":
-            if values["ahd_username"] == "" or values["ahd_password"] == "":
+    def check_ahd_auth(self):
+        if self.ahd_api_token == "":
+            if self.ahd_username == "" or self.ahd_password == "":
                 raise ValueError(
                     "If ahd_api_token is unset, both ahd_username "
                     + "and ahd_password need to be specified."
                 )
-        return values
+        return self
