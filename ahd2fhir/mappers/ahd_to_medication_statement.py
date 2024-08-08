@@ -127,10 +127,6 @@ def get_medication_statement_from_annotation(
     medication_statement.effectiveDateTime__ext = DATA_ABSENT_EXTENSION_UNKNOWN
     medication_statement.dateAsserted = document_reference.date
 
-    dosage = get_medication_dosage_from_annotation(annotation)
-    if dosage is not None:
-        medication_statement.dosage = [dosage]
-
     codings = []
     for atc_code in atc_codes:
         coding = Coding.construct()
