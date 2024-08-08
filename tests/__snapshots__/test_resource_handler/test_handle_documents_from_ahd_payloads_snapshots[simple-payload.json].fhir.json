@@ -248,23 +248,7 @@
             }
           ]
         },
-        "dateAsserted": "2000-01-01T00:00:00+00:00",
-        "dosage": [
-          {
-            "text": "20mg Aspirin",
-            "asNeededBoolean": false,
-            "doseAndRate": [
-              {
-                "doseQuantity": {
-                  "value": 20.0,
-                  "unit": "mg",
-                  "system": "http://unitsofmeasure.org",
-                  "code": "mg"
-                }
-              }
-            ]
-          }
-        ]
+        "dateAsserted": "2000-01-01T00:00:00+00:00"
       },
       "request": {
         "method": "PUT",
