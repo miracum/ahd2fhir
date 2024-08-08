@@ -63,7 +63,7 @@ services:
         max-file: "3"
 
   kafka:
-    image: docker.io/bitnami/kafka:3.7.0@sha256:36b1a565c4f007b5b6aab8ed1b2afa5d2439d255ab67ee0cf17c48e64b6f56b1
+    image: docker.io/bitnami/kafka:3.8.0@sha256:7184837473019f79d011bae6a4474f6623d61c87094183b7ce826e86f3301d5f
     profiles:
       - kafka
     restart: unless-stopped
@@ -89,7 +89,7 @@ services:
       - 9094:9094
 
   akhq:
-    image: tchiotludo/akhq:0.25.0@sha256:942807a2291f25b22047f8f56287e93cf9a43bf76f67a0eeca7e1eecc911c54c
+    image: tchiotludo/akhq:0.25.1@sha256:cfaef8f419c4e4b78c583597d6428b63166e90eeb194af890264d68051a22180
     profiles:
       - kafka
     environment:
@@ -105,7 +105,7 @@ services:
       - kafka
 
   kafka-data-loader:
-    image: confluentinc/cp-kafkacat:7.1.12@sha256:372168153cc7ca0c6ac1a4e5345709e67c4e0c78badc2a4abcffd1e4e62d0204
+    image: confluentinc/cp-kafkacat:7.1.13@sha256:db089d066fe5d96001e5a4771df9fd6432fcaa496ff40ff7c87e704e904beb98
     profiles:
       - kafka
     entrypoint: ["/bin/bash", "-c"]
