@@ -189,14 +189,16 @@ def get_medication_dosage_from_annotation(annotation) -> Dosage:
 
     dosage.text = drug["coveredText"]
 
-    dose_and_rate = DosageDoseAndRate.construct()
-    quantity = Quantity.construct()
+    quantity_value = drug["strength"]["value"]
+    quantity_value = round(quantity_value, 5)
 
-    quantity.value = drug["strength"]["value"]
+    quantity = Quantity.construct()
+    quantity.value = quantity_value
     quantity.unit = drug["strength"]["unit"]
     quantity.code = drug["strength"]["unit"]
     quantity.system = "http://unitsofmeasure.org"
 
+    dose_and_rate = DosageDoseAndRate.construct()
     dose_and_rate.doseQuantity = quantity
     dosage.doseAndRate = [dose_and_rate]
 
