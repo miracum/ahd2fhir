@@ -78,7 +78,7 @@ def test_fhir_medication_v6():
 def test_get_medication_dosage_from_annotation_should_round_quantity_value():
     annotation = {
         "type": "de.averbis.types.health.Medication",
-        "coveredText": "antibiotische Therapie mit Piperacillin 4x4g i.v. sowie 4x500mg",
+        "coveredText": "Therapie mit Piperacillin 4x4g i.v. sowie 4x500mg",
         "id": 82560,
         "administrations": ["i.v."],
         "drugs": [
