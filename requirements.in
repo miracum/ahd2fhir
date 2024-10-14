@@ -3,7 +3,7 @@ fastapi==0.111.0
 prometheus-fastapi-instrumentator==7.0.0
 structlog==24.2.0
 averbis-python-api==0.11.0
-tenacity==8.3.0
+tenacity==9.0.0
 aiokafka==0.10.0
 uvicorn==0.30.1
 pydantic-settings==2.4.0
