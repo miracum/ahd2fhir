@@ -1,19 +1,20 @@
 from hashlib import sha256
 
-from fhir.resources.codeableconcept import CodeableConcept
-from fhir.resources.coding import Coding
-from fhir.resources.documentreference import DocumentReference
-from fhir.resources.fhirprimitiveextension import FHIRPrimitiveExtension
-from fhir.resources.identifier import Identifier
-from fhir.resources.list import List
-from fhir.resources.meta import Meta
-from fhir.resources.reference import Reference
+from fhir.resources.R4B.codeableconcept import CodeableConcept
+from fhir.resources.R4B.coding import Coding
+from fhir.resources.R4B.documentreference import DocumentReference
+from fhir.resources.R4B.fhirprimitiveextension import FHIRPrimitiveExtension
+from fhir.resources.R4B.identifier import Identifier
+from fhir.resources.R4B.list import List
+from fhir.resources.R4B.meta import Meta
+from fhir.resources.R4B.reference import Reference
 from structlog import get_logger
 
 from ahd2fhir import config
 from ahd2fhir.mappers.ahd_to_medication_statement import (
     get_medication_statement_from_annotation,
 )
+from ahd2fhir.utils.const import AHD_TYPE_MEDICATION
 
 log = get_logger()
 
@@ -46,7 +47,11 @@ LIST_MED_CODE_SYSTEM = "http://terminology.hl7.org/CodeSystem/list-example-use-c
 def get_medication_statement_reference(annotation, document_reference):
     medication_statement = get_medication_statement_from_annotation(
         annotation, document_reference
-    )[0]["statement"]
+    )
+
+    if medication_statement is None:
+        return None
+
     medication_reference = Reference.construct()
     medication_reference.type = f"{medication_statement.resource_type}"
     medication_reference.identifier = medication_statement.identifier[0]
@@ -96,7 +101,7 @@ def get_medication_list_from_document_reference(
     med_entries: dict[str, list] = {"ADMISSION": [], "DISCHARGE": [], "INPATIENT": []}
 
     for annotation in annotation_results:
-        if annotation["type"] != "de.averbis.types.health.Medication":
+        if annotation["type"] != AHD_TYPE_MEDICATION:
             continue
 
         status = annotation.get("status")
@@ -109,8 +114,14 @@ def get_medication_list_from_document_reference(
             )
             continue
 
+        medication_statement_reference = get_medication_statement_reference(
+            annotation, document_reference
+        )
+        if medication_statement_reference is None:
+            continue
+
         med_entry = {
-            "item": get_medication_statement_reference(annotation, document_reference),
+            "item": medication_statement_reference,
         }
 
         # lst-3 "An entry date can only be used if the mode of the list is "working""

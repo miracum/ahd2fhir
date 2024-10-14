@@ -1,4 +1,4 @@
-from fhir.resources.documentreference import DocumentReference
+from fhir.resources.R4B.documentreference import DocumentReference
 
 from ahd2fhir.mappers import ahd_to_observation_kidney_stone as ks
 from ahd2fhir.mappers import ahd_to_observation_smkstat as smk

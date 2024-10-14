@@ -2,11 +2,11 @@ import base64
 import json
 
 import pytest
-from fhir.resources.attachment import Attachment
-from fhir.resources.bundle import Bundle, BundleEntry
-from fhir.resources.composition import Composition
-from fhir.resources.documentreference import DocumentReferenceContent
-from fhir.resources.fhirtypes import DateTime
+from fhir.resources.R4B.attachment import Attachment
+from fhir.resources.R4B.bundle import Bundle, BundleEntry
+from fhir.resources.R4B.composition import Composition
+from fhir.resources.R4B.documentreference import DocumentReferenceContent
+from fhir.resources.R4B.fhirtypes import DateTime
 from syrupy.extensions.single_file import SingleFileSnapshotExtension, WriteMode
 
 from ahd2fhir.utils.resource_handler import ResourceHandler

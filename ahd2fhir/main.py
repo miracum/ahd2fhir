@@ -1,14 +1,14 @@
 import asyncio
 import os
 from functools import lru_cache
-from typing import Union
+from typing import Any, Dict, Union
 
 import structlog
 from averbis import Client, Pipeline
 from fastapi import Depends, FastAPI, status
 from fastapi.encoders import jsonable_encoder
-from fhir.resources.bundle import Bundle
-from fhir.resources.documentreference import DocumentReference
+from fhir.resources.R4B.bundle import Bundle
+from fhir.resources.R4B.documentreference import DocumentReference
 from prometheus_fastapi_instrumentator import Instrumentator
 from starlette.responses import JSONResponse
 
@@ -92,10 +92,24 @@ async def health():
 
 @app.post("/fhir/$analyze-document")
 async def analyze_document(
-    payload: Union[Bundle, DocumentReference],
+    # directly using Union[DocumentReference, Bundle]
+    # fails in the latest fhir.resources/pydantic
+    payload: Dict[Any, Any],
     resource_handler: ResourceHandler = Depends(get_resource_handler),
 ):
-    result = await analyze_resource(payload, resource_handler)
+    resource = None
+    try:
+        if payload["resourceType"] == "Bundle":
+            resource = Bundle.validate(payload)
+        if payload["resourceType"] == "DocumentReference":
+            resource = DocumentReference.validate(payload)
+    except ValueError:
+        return JSONResponse(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            content="The input resources are likely malformed",
+        )
+
+    result = await analyze_resource(resource, resource_handler)
 
     return JSONResponse(
         status_code=status.HTTP_200_OK,

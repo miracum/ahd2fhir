@@ -1,28 +1,26 @@
 import datetime
 import json
-import os
-from unittest import mock
+from decimal import Decimal
 
-from fhir.resources.attachment import Attachment
-from fhir.resources.documentreference import DocumentReference, DocumentReferenceContent
-from fhir.resources.fhirtypes import DateTime
-from fhir.resources.period import Period
-from fhir.resources.reference import Reference
+from fhir.resources.R4B.attachment import Attachment
+from fhir.resources.R4B.documentreference import (
+    DocumentReference,
+    DocumentReferenceContent,
+)
+from fhir.resources.R4B.fhirtypes import DateTime
+from fhir.resources.R4B.period import Period
+from fhir.resources.R4B.reference import Reference
 
 from ahd2fhir.mappers.ahd_to_medication_statement import (
     get_fhir_medication_statement,
+    get_medication_dosage_from_annotation,
     get_medication_interval_from_annotation,
 )
 from ahd2fhir.utils.resource_handler import AHD_TYPE_MEDICATION
 
 
-def get_example_payload_v5():
-    with open("tests/resources/ahd/payload_1_v5.json") as file:
-        return json.load(file)
-
-
 def get_example_payload_v6():
-    with open("tests/resources/ahd/payload_1_v6.json") as file:
+    with open("tests/resources/ahd/payload_1.json") as file:
         return json.load(file)
 
 
@@ -60,41 +58,79 @@ def test_get_medication_intverval_from_annotation_for_date_interval():
     assert isinstance(get_medication_interval_from_annotation(annotation), Period)
 
 
-@mock.patch.dict(os.environ, {"ahd_version": "5.0"})
-def test_fhir_medication_v5():
-    annotation = [
-        a for a in get_example_payload_v5() if a["type"] == AHD_TYPE_MEDICATION
-    ][0]
-
-    result = get_fhir_medication_statement(annotation, get_empty_document_reference())
-
-    medication = result[0]["medication"]
-    assert medication.json()
-    assert medication.ingredient is not None
-    assert medication.meta is not None
-
-    statement = result[0]["statement"]
-    assert statement.json()
-    assert statement.status is not None
-    assert statement.medicationReference is not None
-
-
-@mock.patch.dict(os.environ, {"ahd_version": "6.0"})
 def test_fhir_medication_v6():
     annotation_v6 = [
         a for a in get_example_payload_v6() if a["type"] == AHD_TYPE_MEDICATION
     ][0]
 
-    result_v6 = get_fhir_medication_statement(
+    statement_v6 = get_fhir_medication_statement(
         annotation_v6, get_empty_document_reference()
     )
 
-    medication_v6 = result_v6[0]["medication"]
-    assert medication_v6.json()
-    assert medication_v6.ingredient is not None
-    assert medication_v6.meta is not None
+    assert statement_v6 is not None
 
-    statement_v6 = result_v6[0]["statement"]
     assert statement_v6.json()
     assert statement_v6.status is not None
-    assert statement_v6.medicationReference is not None
+    assert statement_v6.medicationReference is None
+    assert statement_v6.medicationCodeableConcept is not None
+
+
+def test_get_medication_dosage_from_annotation_should_round_quantity_value():
+    annotation = {
+        "type": "de.averbis.types.health.Medication",
+        "coveredText": "Therapie mit Piperacillin 4x4g i.v. sowie 4x500mg",
+        "id": 82560,
+        "administrations": ["i.v."],
+        "drugs": [
+            {
+                "begin": 3055,
+                "end": 3099,
+                "type": "de.averbis.types.health.Drug",
+                "coveredText": "antibiotische Therapie mit Piperacillin 4x4g",
+                "id": 82561,
+                "ingredient": {
+                    "begin": 3055,
+                    "end": 3077,
+                    "type": "de.averbis.types.health.Ingredient",
+                    "coveredText": "antibiotische Therapie",
+                    "id": 82562,
+                    "matchedTerm": "antibiotische Therapie",
+                    "dictCanon": "Antibakterielle Mittel",
+                    "conceptID": "255631004",
+                    "source": "SNOMED-DrugClasses-DE_2023-11",
+                    "uniqueID": "SNOMED-DrugClasses-DE_2023-11:255631004",
+                },
+                "strength": {
+                    "begin": 3097,
+                    "end": 3099,
+                    "type": "de.averbis.types.health.Strength",
+                    "coveredText": "4g",
+                    "id": 82563,
+                    "unit": "g",
+                    "normalizedUnit": "kg",
+                    "normalizedValue": 0.004,
+                    "value": 1.111111111111,
+                    "dimension": "[M]",
+                },
+            }
+        ],
+        "atcCodes": [
+            {
+                "begin": 3055,
+                "end": 3099,
+                "type": "de.averbis.types.health.ATCCode",
+                "coveredText": "antibiotische Therapie mit Piperacillin 4x4g",
+                "id": 82574,
+                "dictCanon": "ANTIBIOTIKA ZUR SYSTEMISCHEN ANWENDUNG",
+                "conceptID": "J01",
+                "source": "ATCA_2024",
+            }
+        ],
+    }
+
+    dosage = get_medication_dosage_from_annotation(annotation)
+
+    assert len(dosage.doseAndRate) == 1
+    assert dosage.doseAndRate[0].doseQuantity.system == "http://unitsofmeasure.org"
+    assert dosage.doseAndRate[0].doseQuantity.unit == "g"
+    assert dosage.doseAndRate[0].doseQuantity.value == Decimal("1.11111")

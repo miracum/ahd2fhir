@@ -1,6 +1,6 @@
 services:
   health-discovery-hd:
-    image: registry.averbis.com/health-discovery/health-discovery:7.0.0-beta-4@sha256:221fd45d6a0daefede6af7853fb831c0636c8edac069fac9bd3c78f3fcc1ba1b
+    image: registry.averbis.com/health-discovery/health-discovery:7.4.0@sha256:31b2f3cf0b4897ee25361f2da24fba0bb21a57a26b2c76b66af1baddebb14b2f
     ports:
       - "${PRODUCT_BIND_ADDR:-0.0.0.0}:${PRODUCT_HTTP_PORT:-9999}:8080"
     environment:
@@ -42,7 +42,7 @@ services:
       - MYSQL_PASSWORD=getaccess
 
   solr:
-    image: registry.averbis.com/solr/solr:9.2.0@sha256:8e0853306e72697252c6ee7190e04629b52860da5ea257314036f0197cce1277
+    image: registry.averbis.com/solr/solr:9.4.0@sha256:8f06706c7846366b4eb2bd8eb0d521a3771f03e606588034b6a297a592069328
     environment:
       - SOLR_MAX_MEM=512m
       - TEXTANALYSIS_URL=http://${PLATFORM_HOSTNAME:-health-discovery-hd}:${PLATFORM_PORT:-8080}/health-discovery/rest

@@ -1,13 +1,13 @@
 import datetime
 import re
 
-from fhir.resources.codeableconcept import CodeableConcept
-from fhir.resources.coding import Coding
-from fhir.resources.condition import Condition
-from fhir.resources.documentreference import DocumentReference
-from fhir.resources.fhirtypes import DateTime
-from fhir.resources.identifier import Identifier
-from fhir.resources.meta import Meta
+from fhir.resources.R4B.codeableconcept import CodeableConcept
+from fhir.resources.R4B.coding import Coding
+from fhir.resources.R4B.condition import Condition
+from fhir.resources.R4B.documentreference import DocumentReference
+from fhir.resources.R4B.fhirtypes import DateTime
+from fhir.resources.R4B.identifier import Identifier
+from fhir.resources.R4B.meta import Meta
 from structlog import get_logger
 
 from ahd2fhir import config
@@ -27,8 +27,6 @@ SIDE_MAPPING: dict[str, tuple[str, str]] = {
     "RIGHT": ("24028007", "Right"),
     "BOTH": ("51440002", "Right and left"),
 }
-
-FHIR_SYSTEMS = config.FhirSystemSettings()
 
 EXTRACT_YEAR_FROM_ICD_REGEX = r"ICD.*_(?P<version>\d{4})"
 

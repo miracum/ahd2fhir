@@ -7,19 +7,24 @@ from typing import List, Tuple
 import structlog
 import tenacity
 from averbis import Pipeline
-from fhir.resources.bundle import Bundle
-from fhir.resources.codeableconcept import CodeableConcept
-from fhir.resources.composition import Composition, CompositionSection
-from fhir.resources.documentreference import DocumentReference
-from fhir.resources.fhirtypes import DateTime
-from fhir.resources.identifier import Identifier
-from fhir.resources.reference import Reference
-from fhir.resources.resource import Resource
+from fhir.resources.R4B.bundle import Bundle
+from fhir.resources.R4B.codeableconcept import CodeableConcept
+from fhir.resources.R4B.composition import Composition, CompositionSection
+from fhir.resources.R4B.documentreference import DocumentReference
+from fhir.resources.R4B.fhirtypes import DateTime
+from fhir.resources.R4B.identifier import Identifier
+from fhir.resources.R4B.reference import Reference
+from fhir.resources.R4B.resource import Resource
 from prometheus_client import Counter, Histogram, Summary
 from tenacity.after import after_log
 
 from ahd2fhir.mappers import ahd_to_condition, ahd_to_list, ahd_to_medication_statement
 from ahd2fhir.utils.bundle_builder import BundleBuilder
+from ahd2fhir.utils.const import (
+    AHD_TYPE_DIAGNOSIS,
+    AHD_TYPE_DOCUMENT_ANNOTATION,
+    AHD_TYPE_MEDICATION,
+)
 from ahd2fhir.utils.custom_mappers import custom_mappers, mapper_functions
 from ahd2fhir.utils.device_builder import build_device
 from ahd2fhir.utils.fhir_utils import sha256_of_identifier
@@ -66,9 +71,6 @@ DISCHARGE_SUMMARY_CONCEPT = CodeableConcept(
     }
 )
 
-AHD_TYPE_DOCUMENT_ANNOTATION = "de.averbis.types.health.DocumentAnnotation"
-AHD_TYPE_MEDICATION = "de.averbis.types.health.Medication"
-AHD_TYPE_DIAGNOSIS = "de.averbis.types.health.Diagnosis"
 
 log = structlog.get_logger()
 
@@ -258,7 +260,7 @@ class ResourceHandler:
             if inpatient_list is not None:
                 total_results.append(inpatient_list)
 
-        medication_statement_lists = []
+        medication_statement_list = []
         for val in averbis_result:
             if val["type"] == AHD_TYPE_DIAGNOSIS:
                 mapped_condition = ahd_to_condition.get_fhir_condition(
@@ -277,28 +279,21 @@ class ResourceHandler:
                     val, document_reference
                 )
                 if statement is not None:
-                    medication_statement_lists.append(statement)
+                    medication_statement_list.append(statement)
 
             # if custom_mappers_enabled
             if os.getenv("CUSTOM_MAPPERS_ENABLED", "False").lower() in ["true", "1"]:
                 total_results.extend(custom_mappers(val, document_reference))
 
-        medication_results = []
         medication_statement_results = []
-        for medication_statement_list in medication_statement_lists:
-            for medication_statement_dict in medication_statement_list:
-                medication_results.append(medication_statement_dict["medication"])
-                medication_statement_results.append(
-                    medication_statement_dict["statement"]
-                )
+        for medication_statement in medication_statement_list:
+            medication_statement_results.append(medication_statement)
 
         # de-duplicate any Medication and MedicationStatement resources
-        medication_resources_unique = {m.id: m for m in medication_results}.values()
         medication_statements_unique = {
             m.id: m for m in medication_statement_results
         }.values()
 
-        total_results.extend(medication_resources_unique)
         total_results.extend(medication_statements_unique)
 
         return total_results
