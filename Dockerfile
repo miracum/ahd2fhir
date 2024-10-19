@@ -1,4 +1,4 @@
-FROM docker.io/library/python:3.11.9-slim@sha256:8fb099199b9f2d70342674bd9dbccd3ed03a258f26bbd1d556822c6dfc60c317 AS build
+FROM docker.io/library/python:3.11.10-slim@sha256:5148c0e4bbb64271bca1d3322360ebf4bfb7564507ae32dd639322e4952a6b16 AS build
 WORKDIR /opt/ahd2fhir
 
 COPY requirements.txt .
