@@ -304,9 +304,9 @@ lxml==4.9.4 \
     --hash=sha256:fd814847901df6e8de13ce69b84c31fc9b3fb591224d6762d0b256d510cbf382 \
     --hash=sha256:fdb325b7fba1e2c40b9b1db407f85642e32404131c08480dd652110fc908561b
     # via dkpro-cassis
-more-itertools==8.14.0 \
-    --hash=sha256:1bc4f91ee5b1b31ac7ceacc17c09befe6a40a503907baf9c839c229b5095cfd2 \
-    --hash=sha256:c09443cd3d5438b8dafccd867a6bc1cb0894389e90cb53d227456b0b0bccb750
+more-itertools==10.5.0 \
+    --hash=sha256:037b0d3203ce90cca8ab1defbbdac29d5f993fc20131f3664dc8d6acfa872aef \
+    --hash=sha256:5482bfef7849c25dc3c6dd53a6173ae4795da2a41a80faea6700d9f5846c5da6
     # via dkpro-cassis
 packaging==24.1 \
     --hash=sha256:026ed72c8ed3fcce5bf8950572258698927fd1dbda10a5e981cdf0ac37f4f002 \
