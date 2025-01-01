@@ -190,7 +190,7 @@ fastapi==0.115.2 \
     --hash=sha256:3995739e0b09fa12f984bce8fa9ae197b35d433750d3d312422d846e283697ee \
     --hash=sha256:61704c71286579cc5a598763905928f24ee98bfcc07aabe84cfefb98812bbc86
     # via -r requirements.in
-fhir-resources==7.1.0 \
+fhir-resources==8.0.0 \
     --hash=sha256:4d37c3aadb3afbabad28ca7701b87323680468a13f6a6426bb6c282d4efd5c62 \
     --hash=sha256:fae2d43c03dacf85a9f9fbce3b62148f3166fe297471cd43b74d91abbf69f818
     # via -r requirements.in
@@ -488,3 +488,6 @@ uvicorn==0.32.0 \
     --hash=sha256:60b8f3a5ac027dcd31448f411ced12b5ef452c646f76f02f8cc3f25d8d26fd82 \
     --hash=sha256:f78b36b143c16f54ccdb8190d0a26b5f1901fe5a3c777e1ab29f26391af8551e
     # via -r requirements.in
+fhir.resources==8.0.0 \
+    --hash=sha256:84dac3af31eaf90d5b0386cac21d26c50e6fb1526d68b88a2c42d112978e9cf9 \
+    --hash=sha256:9c46d6d79c6d6629c3bea6f244bcc6e8e0e4d15757a675f19d9d1c05c9ab2199
