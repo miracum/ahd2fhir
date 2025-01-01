@@ -1,4 +1,4 @@
-fhir.resources==7.1.0
+fhir.resources==8.0.0
 fastapi==0.115.2
 prometheus-fastapi-instrumentator==7.0.0
 structlog==24.4.0
