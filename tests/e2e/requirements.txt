@@ -508,6 +508,6 @@ urllib3==2.2.3 \
     # via
     #   requests
     #   types-requests
-fhir.resources==7.1.0 \
-    --hash=sha256:4d37c3aadb3afbabad28ca7701b87323680468a13f6a6426bb6c282d4efd5c62 \
-    --hash=sha256:fae2d43c03dacf85a9f9fbce3b62148f3166fe297471cd43b74d91abbf69f818
+fhir.resources==8.0.0 \
+    --hash=sha256:84dac3af31eaf90d5b0386cac21d26c50e6fb1526d68b88a2c42d112978e9cf9 \
+    --hash=sha256:9c46d6d79c6d6629c3bea6f244bcc6e8e0e4d15757a675f19d9d1c05c9ab2199
