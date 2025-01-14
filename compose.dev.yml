@@ -31,7 +31,7 @@ services:
       start_period: 1m
 
   database:
-    image: docker.io/library/mariadb:11.5.2@sha256:4a1de8fa2a929944373d7421105500ff6f889ce90dcb883fbb2fdb070e4d427e
+    image: docker.io/library/mariadb:11.6.2@sha256:a9547599cd87d7242435aea6fda22a9d83e2c06d16c658ef70d2868b3d3f6a80
     command: --max_allowed_packet=1g --innodb_buffer_pool_size=512m --innodb_log_buffer_size=256m --innodb_log_file_size=256m
     environment:
       # kics-scan ignore-line
@@ -63,7 +63,7 @@ services:
         max-file: "3"
 
   kafka:
-    image: docker.io/bitnami/kafka:3.8.0@sha256:bf8d03af193918f3d2dff806e02b1f236e31bc7aa36718e10dec7a8c42231511
+    image: docker.io/bitnami/kafka:3.9.0@sha256:0d7e32a43174974cdd545ccdd6c4d28bb7f738faa8cd2ec9f12fa5df6131c994
     profiles:
       - kafka
     restart: unless-stopped
@@ -105,7 +105,7 @@ services:
       - kafka
 
   kafka-data-loader:
-    image: confluentinc/cp-kafkacat:7.1.14@sha256:85ef7339cc27b33660d48c6bc3fd7e63317fd359f7f6b1bdc10f091db486b061
+    image: confluentinc/cp-kafkacat:7.1.15@sha256:273c2022aee0cfc0a181acf1801912c45b0e1fb62785711ab2ca64065d072fc7
     profiles:
       - kafka
     entrypoint: ["/bin/bash", "-c"]
